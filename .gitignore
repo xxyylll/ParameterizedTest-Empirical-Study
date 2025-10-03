@@ -1,4 +1,5 @@
 releases/
 selected_releases/
 parser_result/
+trend_result/
 *.log
