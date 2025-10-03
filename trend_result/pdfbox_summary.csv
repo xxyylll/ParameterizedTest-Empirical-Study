@@ -1,0 +1,13 @@
+project,release,date,total_tests,parameterized_tests,param_share,methodsource,csvsource,csvfilesource,valuesource,enumsource,argumentssource,json_path
+pdfbox,1.8.16,2018-10-01,170,0,0.0,0,0,0,0,0,0,parser_result/pdfbox/1.8.16/output.json
+pdfbox,2.0.15,2019-04-08,406,0,0.0,0,0,0,0,0,0,parser_result/pdfbox/2.0.15/output.json
+pdfbox,2.0.18,2019-12-20,430,0,0.0,0,0,0,0,0,0,parser_result/pdfbox/2.0.18/output.json
+pdfbox,2.0.21,2020-08-17,485,0,0.0,0,0,0,0,0,0,parser_result/pdfbox/2.0.21/output.json
+pdfbox,2.0.24,2021-06-07,545,0,0.0,0,0,0,0,0,0,parser_result/pdfbox/2.0.24/output.json
+pdfbox,2.0.25,2021-12-13,552,0,0.0,0,0,0,0,0,0,parser_result/pdfbox/2.0.25/output.json
+pdfbox,2.0.27,2022-09-26,566,0,0.0,0,0,0,0,0,0,parser_result/pdfbox/2.0.27/output.json
+pdfbox,2.0.28,2023-04-10,566,0,0.0,0,0,0,0,0,0,parser_result/pdfbox/2.0.28/output.json
+pdfbox,3.0.1,2023-11-27,1042,59,0.056622,56,1,0,2,0,0,parser_result/pdfbox/3.0.1/output.json
+pdfbox,2.0.32,2024-07-21,579,0,0.0,0,0,0,0,0,0,parser_result/pdfbox/2.0.32/output.json
+pdfbox,3.0.4,2025-01-20,1134,59,0.052028,56,1,0,2,0,0,parser_result/pdfbox/3.0.4/output.json
+pdfbox,2.0.35,2025-09-29,596,0,0.0,0,0,0,0,0,0,parser_result/pdfbox/2.0.35/output.json

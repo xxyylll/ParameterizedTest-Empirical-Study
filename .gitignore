@@ -1,0 +1,4 @@
+releases/
+selected_releases/
+parser_result/
+*.log
