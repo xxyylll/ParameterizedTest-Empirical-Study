@@ -68,11 +68,71 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 
 | `category_logit.py` | `category_logit_results.csv` — category 逻辑回归（N=168） | ✅ |
 | `dataset_stats.py` | `dataset_stats.csv` — 论文 Table 1 | 需 `PT_PARSER_SSK` |
 | `parser_validation/` | 200 条 parser 人工验证样本（PT/非 PT 各 100，含源码） | ✅ |
+| `pdar/` | **PDAR 的完整流水线**，见下节 | 需全量 git 克隆 |
 
 数据：`merged_data_218.csv`、`pdar_summary_ssk.csv`。
 
 > **`rq1_bins.py` 是所有 RQ1 分组口径的唯一来源。** 这些常量曾散在五个脚本里，
 > 年龄分档有三套互不相同的版本，导致同一张表的不同图给出不同的 n。新增分析一律从它导入。
+
+#### `rq1/pdar/` — PDAR
+
+**PDAR = 改过 PT 的开发者 / 改过测试代码的开发者**（×100，单位 %）。
+是**开发者比例，不是提交比例**；两个计数都按 author email 去重并转小写。
+分母用「碰过测试的人」而非「所有提交者」，使比例回答「在碰测试的人里有多少碰过 PT」，
+不被只改生产代码的贡献者稀释。采纳者中位数 **14.52%**（n=106）。
+另报 `core_pdar`：分子换成**新增或删除**过 PT 注解的人（Layer 3 判定）。
+
+| 文件 | 作用 |
+|---|---|
+| `find_pt_developers.py` | 逐项目、逐提交的三层检测，产出 `{project}_commits.csv` |
+| `calculate_pdar.py` | 把提交表汇总成项目级 PDAR |
+| `batch_pdar.sh` | 整张清单：clone 全量 → 分析 → **立刻删除** |
+| `pdar_repo_map.csv` | **仓库名的唯一来源**（117 项目 → git URL） |
+| `pt_projects_ssk.txt` | 项目清单（117 个；最终结果 115 个，少的两个是设计上排除的 `Commons-HttpClient` / `Lucene-Core`） |
+
+**三层检测**（逐提交判 `modifiedPT`）：
+
+1. **JUnit 5 hunk** —— diff 里定位 `@ParameterizedTest`，检查它**前一行**
+   （可能是 `@MethodSource`/`@ValueSource` 被改）与**后续行**直到下一个
+   `@Test`/`@ParameterizedTest`/新 hunk；其间有 `+`/`-` 即判定。
+2. **JUnit 4 文件** —— 若 Layer 1 未命中，对 diff 里每个改动的 `.java`
+   用 `git show commit:file` 看是否含 `@RunWith(Parameterized`。
+3. **Pickaxe** —— `git log --all -G @ParameterizedTest`（及 JUnit 4 版）找出
+   **新增/删除** PT 注解的提交，同时置 `is_core`。
+
+**必须是全量克隆。** `git log --all` 与 `git diff-tree` 在 `--depth 1` 的浅克隆上
+只能看到 1 个提交，PDAR 会算成 0。`PT_SSD/apache-projects/` 里的是浅克隆
+（本研究其余部分不需要历史），**不能用于 PDAR**；脚本会检查 `.git/shallow`
+并直接报错而不是给出错误数字。117 个项目的全量克隆合计几十 GB，
+所以 `batch_pdar.sh` 一次只落地一个仓库、分析完即删。
+
+> **已知局限：diff 上下文行数。** Layer 1 是在 diff **文本**上做的，因此它能看到
+> 多少周围代码完全由 git 的上下文行数决定。`git diff-tree` 默认给 3 行，于是
+> 同一个 PT 方法内部的改动只要离注解超过 3 行，就不与注解同处一个 hunk ——
+> Layer 1 看不到，只能靠 Layer 2/3 兜。论文报告的数字用的就是这个默认口径。
+>
+> 注意影响方向并不单一：`check_touched_test` 是在 diff 的**所有行**（含上下文行）
+> 上找 `@Test`，所以上下文调大时**分母也会变大**；同时 Layer 1 的前向扫描
+> 只在 `@Test`/`@ParameterizedTest`/新 hunk 处停止，上下文调大后 hunk 合并，
+> 扫描可能越过 PT 方法末尾进入下一个无注解的方法 —— 这会引入**假阳性**。
+> 因此 PDAR 是升是降需要实测，不能先验断定。
+>
+> `--context N` 即为此而设：结果写到 `result_U{N}/`，与论文口径的 `result/` 并存：
+> ```bash
+> ./batch_pdar.sh --context 25 --projects sens_sample.txt
+> python3 calculate_pdar.py --context 25
+> ```
+
+> **`pdar_repo_map.csv` 是仓库名的唯一来源。** 此前有两套互相冲突的来源：
+> `projects.txt` 的解析用了 `url.rstrip('.git')` —— 这是 bug，`rstrip` 剥的是
+> **字符集合** `{'.','g','i','t'}` 而非字面后缀，于是 `ambari`→`ambar`、
+> `pig`→`p`、`poi`→`po`、`thrift`→`thrif`，42 个项目的名字被剥坏；
+> `asf_domain_mapping.csv` 的 `matched_machine` 列则含明显错配
+> （Commons-Chain / Commons-HttpClient / Commons-OGNL 三个不同项目全都指向
+> `commons-weaver`）。该 bug 只影响「定位仓库」这一步，定位失败会直接退出、
+> 不会去分析错的仓库，**已发表的数字未受污染**（115 个项目全有结果、无一为 0，
+> 汇总步骤移植后逐行比对完全一致），但已修正。
 
 ### `rq2_1/` — parameter source 的总体分布
 
