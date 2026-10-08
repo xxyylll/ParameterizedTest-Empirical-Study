@@ -17,6 +17,9 @@ parameter construction 代码里」。这个脚本把 PT 的 helper 聚合拆成
 
 输出 provider_dup_metrics.csv
 """
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
+from paths import SSD, METRICS_DIR, APACHE_PROJECTS, DUP_RESULT, FINAL  # noqa: E402
 import csv
 import os
 import sys
@@ -29,9 +32,6 @@ from build_test_metrics_unified import (  # noqa: E402
     resolve_helper_entry, PROJECTS,
 )
 from build_test_dup_metrics import parse_ccfinder_result, dup_span, DUP_ROOT  # noqa: E402
-import sys as _sys, os as _os
-_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
-from paths import SSD, METRICS_DIR, APACHE_PROJECTS, DUP_RESULT, FINAL  # noqa: E402
 
 
 OUT_CSV = _os.path.join(METRICS_DIR, 'provider_dup_metrics.csv')

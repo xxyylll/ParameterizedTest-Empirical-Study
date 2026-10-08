@@ -10,13 +10,21 @@
 ## 快速开始
 
 ```bash
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env && $EDITOR .env    # 按需改路径
+cp .env.example .env && $EDITOR .env    # 按需改路径；只核对数字的话可跳过
 source .env
 
 python paths.py                          # 检查哪些数据源可用
 cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 106
 ```
+
+> **`requirements.txt` 的 pandas 上限是必需的，不是保守。** pandas 3.0 移除了
+> statsmodels 0.14.x 依赖的内部 API，装上 pandas 3 后 `rq1/category_logit.py`
+> 会在 import 阶段就抛 `TypeError`。请照 `requirements.txt` 装，不要 `--upgrade`。
+>
+> 从原始数据重算 RQ3.1 指标还需要 tree-sitter：
+> `pip install -r requirements-recompute.txt`。
 
 `paths.py` 会列出每个数据源的解析结果与存在状态。**只依赖本目录内数据的脚本**
 （下表标 ✅ 自足）不需要任何配置即可运行。
@@ -106,6 +114,11 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 
 | `amortization/` | helper 复用带来的摊销效应 |
 
 `pt_stats.py` 是四者共用的统计工具。
+
+`amortization/amortization_metrics.csv`（118,744 行 × 44 列，30 MB，Git 内约 4 MB）
+**随包提供**：它是 `analyze_amortization.py` 与 `plot_amortization.py` 唯一缺的输入，
+排除它会让这两个脚本在干净 clone 里直接跑不了，而代价只有 4 MB。
+要从原始数据重建它，用 `build_amortization_dataset.py`（需 `PT_METRICS`）。
 
 > 这四个目录原先命名为 `rq3_2` ~ `rq3_5`，**但它们全部属于 RQ3.2**，已按分析对象重命名。
 

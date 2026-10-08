@@ -37,6 +37,7 @@ def rq1_projects():
 
 
 def main():
+    require(SSK, 'RQ2.1 的 source 分布')   # 必须在任何 listdir 之前
     keep = rq1_projects()
     j4 = j5 = multi = 0
     j4_proj, j5_proj = set(), set()
@@ -64,7 +65,6 @@ def main():
                 src_cnt[k] += 1
                 src_proj[k].add(proj)
 
-    require(SSK, 'RQ2.1 的 source 分布')
     out = os.path.join(HERE, 'rq2_1_source_distribution_ssk.csv')
     with open(out, 'w', newline='') as f:
         w = csv.writer(f)

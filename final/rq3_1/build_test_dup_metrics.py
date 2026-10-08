@@ -29,15 +29,15 @@ helper resolution is identical to the loc/cc/cctr pipeline -- the same
 project source tree, the same test-source-only filter, the same
 name+arity-based overload disambiguation.
 """
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
+from paths import SSD, METRICS_DIR, APACHE_PROJECTS, DUP_RESULT, FINAL  # noqa: E402
 import csv
 import os
 import sys
 from collections import defaultdict
 
 from build_test_metrics_unified import (
-import sys as _sys, os as _os
-_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
-from paths import SSD, METRICS_DIR, APACHE_PROJECTS, DUP_RESULT, FINAL  # noqa: E402
 
     PROJECTS, SKIP_PREFIXES, TS_PARSER, make_projects,
     build_source_class_sets, classify_declaring_class,

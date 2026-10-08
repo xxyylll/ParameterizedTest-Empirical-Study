@@ -1,7 +1,14 @@
 # Python 3.11+
-pandas>=2.0
-numpy>=1.24
+#
+# pandas 上限是必需的，不是保守：pandas 3.0 移除了 statsmodels 0.14.x 依赖的
+# 内部 API（`deprecate_kwarg`），装上 pandas 3 后 rq1/category_logit.py 会在
+# import 阶段就抛 TypeError。statsmodels 0.14.5 是撰稿时的最新版，尚未适配 3.0。
+pandas>=2.0,<3.0
+numpy>=1.24,<3.0
 scipy>=1.10
-statsmodels>=0.14
+statsmodels>=0.14,<0.15
 matplotlib>=3.7
 openpyxl>=3.1        # 仅用于读取 .xlsx 形式的人工标注表
+
+# 重算 RQ3.1 指标还需要 tree-sitter，见 requirements-recompute.txt；
+# 核对已有结果表不需要装。

@@ -1,0 +1,10 @@
+# 仅在「从原始数据重算 RQ3.1 指标」时需要，核对已有结果表不需要装。
+#
+#   pip install -r requirements.txt -r requirements-recompute.txt
+#
+# 用到它的脚本：rq3_1/build_test_metrics_unified.py（LOC / CC / CCTR）
+#               rq3_1/build_test_dup_metrics.py
+#               rq3_1/build_provider_dup_metrics.py
+# 这三个还需要 PT_SSD 指向源码快照，耗时以小时计。
+tree_sitter>=0.21
+tree_sitter_java>=0.21

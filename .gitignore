@@ -7,9 +7,6 @@ selected_releases/
 trend_result/
 temp_project/
 
-# 可由脚本重算的大中间表
-final/rq3_2/amortization/amortization_metrics.csv
-
 # ---- 运行时与本地配置 ----
 .env
 *.log
@@ -23,3 +20,7 @@ venv/
 .DS_Store
 ._*
 .idea/
+
+# 脚本运行日志（每次跑都会新生成，不入库）
+final/*/logs/
+logs/

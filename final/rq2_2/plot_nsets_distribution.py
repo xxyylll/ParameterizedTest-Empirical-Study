@@ -150,10 +150,10 @@ fig.legend(handles, labels, frameon=False, fontsize=9, ncol=6, loc='upper left',
 
 fig.subplots_adjust(top=0.825, bottom=0.095, left=0.075, right=0.985)
 for ext in ('png', 'pdf'):
-    fig.savefig(os.path.join(HERE, f'full/nsets_distribution.{ext}'), dpi=200, facecolor=SURFACE)
+    fig.savefig(os.path.join(HERE, f'nsets_distribution.{ext}'), dpi=200, facecolor=SURFACE)
 print('wrote nsets_distribution.png / .pdf')
 
-with open(os.path.join(HERE, 'full/nsets_summary.csv'), 'w', newline='') as f:
+with open(os.path.join(HERE, 'nsets_summary.csv'), 'w', newline='') as f:
     w = csv.writer(f); w.writerow(['source', 'rows', 'usable', 'median', 'mean', 'p90', 'max'])
     for name, vals in data:
         w.writerow([name, rows_of[name], len(vals), statistics.median(vals),

@@ -21,7 +21,7 @@ from matplotlib.colors import BoundaryNorm, ListedColormap
 from matplotlib.patches import Patch
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from heatmap_unified_44projects import METRICS, METRIC_LABELS, mann_whitney_u  # noqa: E402
+from rq3_metrics import METRICS, METRIC_LABELS, mann_whitney_u  # noqa: E402
 
 # --- CLI：数据源 / JUnit 过滤 / CCTR 口径 / 输出前缀 -------------------------
 import argparse as _ap

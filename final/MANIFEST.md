@@ -122,6 +122,7 @@ JUnit5 内部：MethodSource 63.0%｜ValueSource 18.6%｜EnumSource 9.9%｜CsvSo
 | `rq3_bh_correction.py` | 上表的生成脚本 |
 | `build_test_metrics_unified.py` / `build_test_dup_metrics.py` / `build_provider_dup_metrics.py` | 指标与重复率的计算脚本 |
 | `plot_rq3_forest.py` / `plot_rq3_heatmap_portrait.py` | 森林图与竖版热力图 |
+| `rq3_metrics.py` | **METRICS / METRIC_LABELS / mann_whitney_u 的唯一定义处。** 原先住在 `heatmap_unified_44projects.py`（旧横向热图，已被 portrait 版取代）里，而那个模块无 `__main__` 保护 —— 只是 import 就会重画图。抽出后 forest / heatmap / BH 三个脚本统一导入，六张 BH 结果表字节级不变 |
 
 **分析集合**：179,133 个测试（PT 8,299 / 非 PT 170,834），46 个项目，对照组**仅 JUnit5**。
 
@@ -133,12 +134,37 @@ JUnit5 内部：MethodSource 63.0%｜ValueSource 18.6%｜EnumSource 9.9%｜CsvSo
 
 ---
 
+## corpus/
+
+| 文件 | 说明 |
+|---|---|
+| `corpus_174.csv` | RQ1/RQ2 主语料，174 行，含 `size_grp`/`age_grp`/`domain_grp` 三列 |
+| `rq3_candidates_47.txt` | RQ3 候选 47 个（构建成功、有 AAA trace） |
+| `rq3_excluded.txt` | 其中排除的 `hive`（trace 不完整） |
+| `rq3_corpus_46.txt` | RQ3 实际语料 46 个 |
+
+263 → 218 → 174 的收窄链条、以及 4 个项目未被纳入的已知缺口（合计 3,180 测试、
+205 PT、全为 JUnit 4，故只影响 RQ1 的 CAR：60.9% → 60.7%），见 `corpus/README.md`。
+
+## tools/
+
+| 文件 | 说明 |
+|---|---|
+| `test-parser-1.0-SNAPSHOT-jar-with-dependencies.jar` | 轻量 parser，2025-12-11 构建。**源码已遗失**，只剩 fat jar |
+| `test-parser.jar.sha256` | 上述 jar 的校验和，供复现者确认同一二进制 |
+| `README.md` | 两个 parser 的调用方式；深度 parser 钉在 `v1.3.2` / `46a90c6` |
+
+深度 parser（`Codegass/Javalang-analyzing-cli`）是第三方开源工具，**未 vendor 进本包** ——
+复制他人仓库会造成来源与许可的混乱，只钉版本与 commit。
+
 ## 其它
 
 | 文件 | 说明 |
 |---|---|
 | `METHOD_complete.md` | 完整 Method + Threats（11 条） |
 | `project_name_map.json` | ssk 目录名 ↔ RQ1 显示名。跨数据源 join 必须用它，否则会静默漏匹配 |
+| `requirements.txt` | **pandas 必须 <3.0**：pandas 3.0 移除了 statsmodels 0.14.x 依赖的内部 API，装上后 `category_logit.py` 在 import 阶段即崩 |
+| `requirements-recompute.txt` | 只有重算 RQ3.1 指标才需要（tree-sitter） |
 
 ---
 

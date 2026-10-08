@@ -21,50 +21,11 @@ import os
 import sys
 from collections import defaultdict
 
-# 指标清单与 Mann-Whitney 实现从 heatmap_unified_44projects.py 原样复制过来。
-# 不直接 import 的原因：那个模块没有 `if __name__ == "__main__"` 保护，
-# 一导入就会重跑绘图并覆盖已有的图（plot_rq3_forest.py 也有这个副作用）。
-# 本脚本只做统计、不该产生任何图文件，所以宁可复制这个纯函数。
-import math
-
-METRICS = ['self_loc', 'self_cc', 'self_cctr', 'self_dupPerc',
-           'helper_loc_sum', 'helper_cc_sum', 'helper_cctr_sum', 'helper_dupPerc',
-           'total_loc', 'total_cc', 'total_cctr', 'total_dupPerc']
-METRIC_LABELS = ['LOC (test)', 'CC (test)', 'CCTR (test)', 'DUP% (test)',
-                 'LOC (helpers)', 'CC (helpers)', 'CCTR (helpers)', 'DUP% (helpers)',
-                 'LOC (total)', 'CC (total)', 'CCTR (total)', 'DUP% (total)']
-
-
-def mann_whitney_u(group1, group2):
-    n1, n2 = len(group1), len(group2)
-    N = n1 + n2
-    combined = [(x, 1) for x in group1] + [(x, 2) for x in group2]
-    combined.sort(key=lambda t: t[0])
-    ranks = [0.0] * N
-    i = 0
-    tie_term_sum = 0
-    while i < N:
-        j = i
-        while j + 1 < N and combined[j + 1][0] == combined[i][0]:
-            j += 1
-        tie_size = j - i + 1
-        avg_rank = (i + 1 + j + 1) / 2.0
-        for k in range(i, j + 1):
-            ranks[k] = avg_rank
-        if tie_size > 1:
-            tie_term_sum += tie_size ** 3 - tie_size
-        i = j + 1
-    R1 = sum(r for r, (val, grp) in zip(ranks, combined) if grp == 1)
-    U1 = R1 - n1 * (n1 + 1) / 2.0
-    mean_U = n1 * n2 / 2.0
-    sigma_U = math.sqrt((n1 * n2 / 12.0) * ((N + 1) - tie_term_sum / (N * (N - 1))))
-    if sigma_U == 0:
-        z = 0.0
-    else:
-        z = (U1 - 0.5 - mean_U) / sigma_U if U1 > mean_U else ((U1 + 0.5 - mean_U) / sigma_U if U1 < mean_U else 0.0)
-    p = max(0.0, min(1.0, 2 * (1 - 0.5 * (1 + math.erf(abs(z) / math.sqrt(2))))))
-    cliffs_delta = (2 * U1) / (n1 * n2) - 1
-    return cliffs_delta, p
+# 指标清单与 Mann-Whitney 实现统一来自 rq3_metrics —— 唯一定义处。
+# 此前这里原样复制了一份，因为当时它们住在 heatmap_unified_44projects.py 里，
+# 而那个模块没有 `__main__` 保护，一 import 就会重跑绘图并覆盖已有的图。
+# 现已抽到 rq3_metrics.py（无副作用），复制的那份随之删除。
+from rq3_metrics import METRICS, METRIC_LABELS, mann_whitney_u
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))

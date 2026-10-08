@@ -1,0 +1,8 @@
+source,rows,usable,median,mean,p90,max
+MethodSource,5508,4450,3.0,13.2,14,960
+ValueSource,1537,1531,2,3.4,6,55
+EnumSource,843,825,3,4.9,9,60
+CsvSource,366,366,5.0,10.0,20,481
+CsvFileSource,48,48,487.5,522.4,1536,3072
+ArgumentsSource / FieldSource,66,56,10.0,31.1,121,121
+ALL,8368,7276,3.0,13.6,13,3072
