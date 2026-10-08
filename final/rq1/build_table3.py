@@ -91,7 +91,7 @@ def main():
     print(f"{'Factor':8}{'Metric':6}{'Scope':16}{'H':>7}{'p':>8}{'k':>3}")
     for t in tests:
         print(f'{t[0]:8}{t[1]:6}{t[2]:16}{t[3]:>7}{t[4]:>8}{t[5]:>3}')
-    print('\nwrote', os.path.relpath(out, ROOT))
+    print('\nwrote', os.path.basename(out))
 
 
 if __name__ == '__main__':
