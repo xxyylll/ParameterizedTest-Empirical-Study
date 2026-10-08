@@ -1,0 +1,17 @@
+measure,metric,n_total,H,df,p_raw
+LOC,reader_total_loc,5388,367.0285,4,0.000000
+LOC,maintainer_total_loc,5388,166.1518,4,0.000000
+LOC,amortization_loc,5388,844.8503,4,0.000000
+LOC,private_loc_share,5388,146.6920,4,0.000000
+CC,reader_total_cc,5388,523.1896,4,0.000000
+CC,maintainer_total_cc,5388,136.4035,4,0.000000
+CC,amortization_cc,5388,819.8182,4,0.000000
+CC,private_cc_share,5388,142.2776,4,0.000000
+CCTR,reader_total_cctr,5388,235.5884,4,0.000000
+CCTR,maintainer_total_cctr,5388,162.3195,4,0.000000
+CCTR,amortization_cctr,3970,596.7267,4,0.000000
+CCTR,private_cctr_share,3970,20.1663,4,0.000463
+CCTR_EQ,reader_total_cctr_eq,5388,235.6810,4,0.000000
+CCTR_EQ,maintainer_total_cctr_eq,5388,162.8306,4,0.000000
+CCTR_EQ,amortization_cctr_eq,3970,596.5701,4,0.000000
+CCTR_EQ,private_cctr_eq_share,3970,20.1652,4,0.000463

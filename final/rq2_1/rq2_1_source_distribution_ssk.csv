@@ -1,0 +1,17 @@
+category,n,pct_of_group,n_projects,pct_of_projects_in_group
+JUnit4 @Parameters,8451,48.75,41,
+JUnit5 (all sources),8884,51.25,77,
+
+-- within JUnit5 --,,,,
+MethodSource,5598,63.01,66,85.7
+ValueSource,1654,18.62,59,76.6
+EnumSource,881,9.92,33,42.9
+CsvSource,390,4.39,35,45.5
+Unknown,248,2.79,3,3.9
+CsvFileSource,53,0.60,6,7.8
+FieldSource,38,0.43,3,3.9
+ArgumentsSource,32,0.36,8,10.4
+NullSource,19,0.21,6,7.8
+EmptySource,6,0.07,2,2.6
+NullAndEmptySource,5,0.06,3,3.9
+multi-source tests,40,0.45,,

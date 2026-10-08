@@ -1,0 +1,11 @@
+field,manual,auto,n,agree
+construction,Dynamic,Dynamic,3456,yes
+construction,Literal,Literal,2039,yes
+construction,__SUMMARY__,,5495,po=1.0000;kappa=1.0000
+dependency,EXTERNAL,EXTERNAL,7,yes
+dependency,L0,L0,3395,yes
+dependency,L1,L1,365,yes
+dependency,L2,L2,503,yes
+dependency,L3,L3,510,yes
+dependency,L4,L4,678,yes
+dependency,__SUMMARY__,,5458,po=1.0000;kappa=1.0000

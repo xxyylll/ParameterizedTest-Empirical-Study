@@ -1,0 +1,7 @@
+source,n_ok,n_all,L0,L1,L2,L3,L4,Production,External,File
+MethodSource,5448,5508,3395,365,503,510,675,0,0,0
+ValueSource,1531,1537,1506,15,2,5,3,0,0,0
+EnumSource,834,843,0,120,2,247,13,437,15,0
+CsvSource,366,366,366,0,0,0,0,0,0,0
+CsvFileSource,48,48,0,0,0,0,0,0,0,48
+ArgumentsSource / FieldSource,59,66,24,21,0,5,9,0,0,0

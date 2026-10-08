@@ -1,0 +1,106 @@
+dimension,group,scope,metric,n,median,q1,q3,mean
+enum_structure,Data-carrying,main-body,LOC,578,23.0000,12.0000,37.0000,27.0398
+enum_structure,Label-based,main-body,LOC,232,20.0000,13.0000,31.2500,26.4181
+location_group,production,main-body,LOC,417,20.0000,11.0000,34.0000,26.3573
+location_group,production_generated,main-body,LOC,11,29.0000,21.5000,37.5000,27.9091
+location_group,test,main-body,LOC,382,24.0000,14.0000,35.0000,27.3822
+names_mode_group,ALL,main-body,LOC,433,18.0000,11.0000,32.0000,24.3303
+names_mode_group,SUBSET,main-body,LOC,377,27.0000,18.0000,39.0000,29.7692
+enum_structure,Data-carrying,helper,LOC,578,13.0000,0.0000,32.0000,39.8893
+enum_structure,Label-based,helper,LOC,232,71.5000,29.0000,252.0000,225.3103
+location_group,production,helper,LOC,417,32.0000,8.0000,130.0000,138.1703
+location_group,production_generated,helper,LOC,11,57.0000,5.0000,133.5000,72.5455
+location_group,test,helper,LOC,382,13.0000,0.0000,29.0000,44.2749
+names_mode_group,ALL,helper,LOC,433,29.0000,7.0000,122.0000,120.8984
+names_mode_group,SUBSET,helper,LOC,377,13.0000,0.0000,36.0000,60.9523
+enum_structure,Data-carrying,total,LOC,578,43.0000,25.0000,69.0000,66.9291
+enum_structure,Label-based,total,LOC,232,102.5000,44.0000,271.0000,251.7284
+location_group,production,total,LOC,417,63.0000,30.0000,146.0000,164.5276
+location_group,production_generated,total,LOC,11,81.0000,21.5000,167.0000,100.4545
+location_group,test,total,LOC,382,42.0000,28.0000,64.0000,71.6571
+names_mode_group,ALL,total,LOC,433,54.0000,29.0000,140.0000,145.2286
+names_mode_group,SUBSET,total,LOC,377,45.0000,28.0000,74.0000,90.7215
+enum_structure,Data-carrying,main-body,CC,578,1.0000,1.0000,1.0000,1.3824
+enum_structure,Label-based,main-body,CC,232,1.0000,1.0000,2.0000,2.0819
+location_group,production,main-body,CC,417,1.0000,1.0000,2.0000,1.7602
+location_group,production_generated,main-body,CC,11,2.0000,1.0000,2.5000,1.9091
+location_group,test,main-body,CC,382,1.0000,1.0000,1.0000,1.3796
+names_mode_group,ALL,main-body,CC,433,1.0000,1.0000,2.0000,1.7460
+names_mode_group,SUBSET,main-body,CC,377,1.0000,1.0000,1.0000,1.3952
+enum_structure,Data-carrying,helper,CC,578,2.0000,0.0000,5.0000,7.1488
+enum_structure,Label-based,helper,CC,232,15.0000,6.0000,46.0000,45.5776
+location_group,production,helper,CC,417,5.0000,1.0000,20.0000,26.4029
+location_group,production_generated,helper,CC,11,7.0000,0.5000,22.5000,12.9091
+location_group,test,helper,CC,382,2.0000,0.0000,6.0000,9.3037
+names_mode_group,ALL,helper,CC,433,6.0000,1.0000,17.0000,23.7321
+names_mode_group,SUBSET,helper,CC,377,2.0000,0.0000,5.0000,11.7507
+enum_structure,Data-carrying,total,CC,578,3.0000,2.0000,6.0000,8.5311
+enum_structure,Label-based,total,CC,232,16.0000,7.0000,48.2500,47.6595
+location_group,production,total,CC,417,6.0000,3.0000,22.0000,28.1631
+location_group,production_generated,total,CC,11,8.0000,2.0000,25.0000,14.8182
+location_group,test,total,CC,382,3.0000,1.0000,7.0000,10.6832
+names_mode_group,ALL,total,CC,433,7.0000,3.0000,20.0000,25.4781
+names_mode_group,SUBSET,total,CC,377,3.0000,1.0000,7.0000,13.1459
+enum_structure,Data-carrying,main-body,CCTR,578,6.0000,3.0000,12.0000,8.8979
+enum_structure,Label-based,main-body,CCTR,232,4.0000,3.0000,6.0000,6.9397
+location_group,production,main-body,CCTR,417,5.0000,3.0000,9.0000,7.2974
+location_group,production_generated,main-body,CCTR,11,5.0000,4.5000,8.5000,6.7273
+location_group,test,main-body,CCTR,382,6.0000,3.0000,11.7500,9.5183
+names_mode_group,ALL,main-body,CCTR,433,5.0000,3.0000,8.0000,7.1755
+names_mode_group,SUBSET,main-body,CCTR,377,6.0000,3.0000,12.0000,9.6711
+enum_structure,Data-carrying,helper,CCTR,578,1.0000,0.0000,4.0000,6.9498
+enum_structure,Label-based,helper,CCTR,232,9.0000,1.0000,42.7500,41.2069
+location_group,production,helper,CCTR,417,4.0000,0.0000,18.0000,25.3693
+location_group,production_generated,helper,CCTR,11,6.0000,0.5000,17.5000,11.7273
+location_group,test,helper,CCTR,382,1.0000,0.0000,3.0000,7.5105
+names_mode_group,ALL,helper,CCTR,433,2.0000,0.0000,15.0000,21.0647
+names_mode_group,SUBSET,helper,CCTR,377,1.0000,0.0000,4.0000,11.8196
+enum_structure,Data-carrying,total,CCTR,578,9.0000,5.0000,16.0000,15.8478
+enum_structure,Label-based,total,CCTR,232,16.0000,7.0000,52.2500,48.1466
+location_group,production,total,CCTR,417,11.0000,7.0000,26.0000,32.6667
+location_group,production_generated,total,CCTR,11,15.0000,6.5000,23.0000,18.4545
+location_group,test,total,CCTR,382,9.0000,5.0000,16.0000,17.0288
+names_mode_group,ALL,total,CCTR,433,11.0000,6.0000,23.0000,28.2402
+names_mode_group,SUBSET,total,CCTR,377,10.0000,6.0000,17.0000,21.4907
+enum_structure,Data-carrying,main-body,DUP%,578,0.9767,0.5785,1.0000,0.7459
+enum_structure,Label-based,main-body,DUP%,232,0.8446,0.3355,1.0000,0.6632
+location_group,production,main-body,DUP%,417,0.8108,0.2500,1.0000,0.6317
+location_group,production_generated,main-body,DUP%,11,0.7547,0.6599,0.8673,0.7475
+location_group,test,main-body,DUP%,382,1.0000,0.7626,1.0000,0.8202
+names_mode_group,ALL,main-body,DUP%,433,0.8182,0.2000,1.0000,0.6262
+names_mode_group,SUBSET,main-body,DUP%,377,1.0000,0.7500,1.0000,0.8325
+enum_structure,Data-carrying,helper,DUP%,578,0.0000,0.0000,0.1200,0.1027
+enum_structure,Label-based,helper,DUP%,232,0.0000,0.0000,0.1677,0.1373
+location_group,production,helper,DUP%,417,0.0000,0.0000,0.2135,0.1533
+location_group,production_generated,helper,DUP%,11,0.0000,0.0000,0.1302,0.1778
+location_group,test,helper,DUP%,382,0.0000,0.0000,0.0652,0.0664
+names_mode_group,ALL,helper,DUP%,433,0.0000,0.0000,0.1910,0.1367
+names_mode_group,SUBSET,helper,DUP%,377,0.0000,0.0000,0.1000,0.0849
+enum_structure,Data-carrying,total,DUP%,578,0.6364,0.2697,0.8082,0.5568
+enum_structure,Label-based,total,DUP%,232,0.2122,0.0637,0.2874,0.2691
+location_group,production,total,DUP%,417,0.2708,0.0877,0.6867,0.3753
+location_group,production_generated,total,DUP%,11,0.3500,0.2593,0.6905,0.4790
+location_group,test,total,DUP%,382,0.6674,0.2697,0.8396,0.5825
+names_mode_group,ALL,total,DUP%,433,0.2564,0.0736,0.6346,0.3599
+names_mode_group,SUBSET,total,DUP%,377,0.6887,0.2742,0.8710,0.6060
+enum_structure,Data-carrying,main-body,DUP lines,578,21.5000,8.0000,39.0000,25.5294
+enum_structure,Label-based,main-body,DUP lines,232,14.0000,8.0000,31.0000,21.3707
+location_group,production,main-body,DUP lines,417,13.0000,6.0000,33.0000,21.2302
+location_group,production_generated,main-body,DUP lines,11,18.0000,15.0000,40.0000,25.4545
+location_group,test,main-body,DUP lines,382,23.0000,10.0000,39.0000,27.6990
+names_mode_group,ALL,main-body,DUP lines,433,12.0000,3.0000,30.0000,19.3995
+names_mode_group,SUBSET,main-body,DUP lines,377,27.0000,14.0000,41.0000,30.0106
+enum_structure,Data-carrying,helper,DUP lines,578,0.0000,0.0000,3.0000,7.3114
+enum_structure,Label-based,helper,DUP lines,232,0.0000,0.0000,11.0000,18.5862
+location_group,production,helper,DUP lines,417,0.0000,0.0000,12.0000,14.2854
+location_group,production_generated,helper,DUP lines,11,0.0000,0.0000,9.0000,7.1818
+location_group,test,helper,DUP lines,382,0.0000,0.0000,3.0000,6.5497
+names_mode_group,ALL,helper,DUP lines,433,0.0000,0.0000,9.0000,15.0716
+names_mode_group,SUBSET,helper,DUP lines,377,0.0000,0.0000,3.0000,5.3369
+enum_structure,Data-carrying,total,DUP lines,578,27.0000,13.0000,45.7500,32.8408
+enum_structure,Label-based,total,DUP lines,232,22.0000,10.0000,41.2500,39.9569
+location_group,production,total,DUP lines,417,25.0000,9.0000,46.0000,35.5156
+location_group,production_generated,total,DUP lines,11,19.0000,17.5000,46.0000,32.6364
+location_group,test,total,DUP lines,382,25.0000,16.0000,42.0000,34.2487
+names_mode_group,ALL,total,DUP lines,433,21.0000,8.0000,42.0000,34.4711
+names_mode_group,SUBSET,total,DUP lines,377,29.0000,19.0000,47.0000,35.3475

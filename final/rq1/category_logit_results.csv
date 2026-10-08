@@ -1,0 +1,5 @@
+# N,168,excluded_no_category,6,reference_group,41,pseudo_r2,0.0038,llr_p,0.8343
+variable,n_projects,OR,ci_low,ci_high,p,sig
+library,73,0.868,0.430,1.754,0.6931,
+big-data,39,1.240,0.538,2.858,0.6142,
+network-server,26,0.834,0.339,2.053,0.6932,

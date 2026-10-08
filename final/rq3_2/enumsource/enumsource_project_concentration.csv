@@ -1,0 +1,13 @@
+dimension,group,n,projects,top_project,top_project_n,top_project_share
+enum_structure,Data-carrying,578,22,jena,244,0.4221
+enum_structure,Label-based,232,15,hudi,106,0.4569
+location_group,production,417,25,hudi,128,0.3070
+location_group,production_generated,11,1,ozone,11,1.0000
+location_group,test,382,14,jena,244,0.6387
+names_mode_group,ALL,433,21,hudi,94,0.2171
+names_mode_group,SUBSET,377,18,jena,242,0.6419
+dependency,L1,120,10,hadoop,36,0.3000
+dependency,L2,2,1,logging-log4j2,2,1.0000
+dependency,L3,247,2,jena,244,0.9879
+dependency,L4,13,3,hudi,10,0.7692
+dependency,Production,428,25,hudi,128,0.2991

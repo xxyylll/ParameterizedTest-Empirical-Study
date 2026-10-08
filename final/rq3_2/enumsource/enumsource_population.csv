@@ -1,0 +1,13 @@
+dimension,group,n,projects
+enum_structure,Data-carrying,578,22
+enum_structure,Label-based,232,15
+location_group,production,417,25
+location_group,production_generated,11,1
+location_group,test,382,14
+names_mode_group,ALL,433,21
+names_mode_group,SUBSET,377,18
+dependency,L1,120,10
+dependency,L2,2,1
+dependency,L3,247,2
+dependency,L4,13,3
+dependency,Production,428,25

@@ -1,0 +1,316 @@
+scope,metric,comparison,n_b,n_a,median_b,median_a,cliffs_delta,magnitude,p_raw,p_holm,p_bh
+main-body,LOC,CsvSource vs ValueSource,361,1456,22.0000,16.0000,0.2269,small,0.000000,0.000000,0.000000
+main-body,LOC,EnumSource vs ValueSource,828,1456,23.0000,16.0000,0.1683,small,0.000000,0.000000,0.000000
+main-body,LOC,CsvFileSource vs ValueSource,48,1456,6.0000,16.0000,-0.7665,large,0.000000,0.000000,0.000000
+main-body,LOC,MethodSource vs ValueSource,5411,1456,15.0000,16.0000,-0.0704,negligible,0.000036,0.000359,0.000063
+main-body,LOC,ArgumentsSource vs ValueSource,25,1456,12.0000,16.0000,-0.1942,small,0.095347,0.381388,0.111238
+main-body,LOC,FieldSource vs ValueSource,35,1456,9.0000,16.0000,-0.3834,medium,0.000103,0.000926,0.000166
+main-body,LOC,EnumSource vs CsvSource,828,361,23.0000,22.0000,-0.0329,negligible,0.366996,0.727108,0.366996
+main-body,LOC,CsvFileSource vs CsvSource,48,361,6.0000,22.0000,-0.9000,large,0.000000,0.000000,0.000000
+main-body,LOC,MethodSource vs CsvSource,5411,361,15.0000,22.0000,-0.2837,small,0.000000,0.000000,0.000000
+main-body,LOC,ArgumentsSource vs CsvSource,25,361,12.0000,22.0000,-0.4567,medium,0.000133,0.001063,0.000199
+main-body,LOC,FieldSource vs CsvSource,35,361,9.0000,22.0000,-0.5606,large,0.000000,0.000001,0.000000
+main-body,LOC,CsvFileSource vs EnumSource,48,828,6.0000,23.0000,-0.8116,large,0.000000,0.000000,0.000000
+main-body,LOC,MethodSource vs EnumSource,5411,828,15.0000,23.0000,-0.2237,small,0.000000,0.000000,0.000000
+main-body,LOC,ArgumentsSource vs EnumSource,25,828,12.0000,23.0000,-0.3653,medium,0.001837,0.011648,0.002411
+main-body,LOC,FieldSource vs EnumSource,35,828,9.0000,23.0000,-0.4878,large,0.000001,0.000011,0.000002
+main-body,LOC,MethodSource vs CsvFileSource,5411,48,15.0000,6.0000,0.6762,large,0.000000,0.000000,0.000000
+main-body,LOC,ArgumentsSource vs CsvFileSource,25,48,12.0000,6.0000,0.7083,large,0.000000,0.000004,0.000001
+main-body,LOC,FieldSource vs CsvFileSource,35,48,9.0000,6.0000,0.3536,medium,0.004799,0.023996,0.005928
+main-body,LOC,ArgumentsSource vs MethodSource,25,5411,12.0000,15.0000,-0.1051,negligible,0.363554,0.727108,0.366996
+main-body,LOC,FieldSource vs MethodSource,35,5411,9.0000,15.0000,-0.3076,small,0.001664,0.011648,0.002330
+main-body,LOC,FieldSource vs ArgumentsSource,35,25,9.0000,12.0000,-0.2457,small,0.107280,0.381388,0.118573
+helper,LOC,CsvSource vs ValueSource,361,1456,3.0000,14.0000,-0.2017,small,0.000000,0.000000,0.000000
+helper,LOC,EnumSource vs ValueSource,828,1456,17.0000,14.0000,0.0307,negligible,0.216402,1.000000,0.267321
+helper,LOC,CsvFileSource vs ValueSource,48,1456,16.0000,14.0000,0.0213,negligible,0.798671,1.000000,0.838604
+helper,LOC,MethodSource vs ValueSource,5411,1456,53.0000,14.0000,0.3463,medium,0.000000,0.000000,0.000000
+helper,LOC,ArgumentsSource vs ValueSource,25,1456,30.0000,14.0000,0.1365,negligible,0.233173,1.000000,0.272035
+helper,LOC,FieldSource vs ValueSource,35,1456,0.0000,14.0000,-0.3648,medium,0.000166,0.001663,0.000291
+helper,LOC,EnumSource vs CsvSource,828,361,17.0000,3.0000,0.2514,small,0.000000,0.000000,0.000000
+helper,LOC,CsvFileSource vs CsvSource,48,361,16.0000,3.0000,0.3117,small,0.000273,0.002461,0.000442
+helper,LOC,MethodSource vs CsvSource,5411,361,53.0000,3.0000,0.5819,large,0.000000,0.000000,0.000000
+helper,LOC,ArgumentsSource vs CsvSource,25,361,30.0000,3.0000,0.4348,medium,0.000151,0.001656,0.000287
+helper,LOC,FieldSource vs CsvSource,35,361,0.0000,3.0000,-0.1807,small,0.062033,0.434233,0.086847
+helper,LOC,CsvFileSource vs EnumSource,48,828,16.0000,17.0000,-0.0122,negligible,0.886147,1.000000,0.886147
+helper,LOC,MethodSource vs EnumSource,5411,828,53.0000,17.0000,0.3535,medium,0.000000,0.000000,0.000000
+helper,LOC,ArgumentsSource vs EnumSource,25,828,30.0000,17.0000,0.1502,small,0.197340,1.000000,0.259008
+helper,LOC,FieldSource vs EnumSource,35,828,0.0000,17.0000,-0.4309,medium,0.000013,0.000170,0.000031
+helper,LOC,MethodSource vs CsvFileSource,5411,48,53.0000,16.0000,0.4625,medium,0.000000,0.000000,0.000000
+helper,LOC,ArgumentsSource vs CsvFileSource,25,48,30.0000,16.0000,0.1233,negligible,0.388210,1.000000,0.429075
+helper,LOC,FieldSource vs CsvFileSource,35,48,0.0000,16.0000,-0.5381,large,0.000022,0.000268,0.000047
+helper,LOC,ArgumentsSource vs MethodSource,25,5411,30.0000,53.0000,-0.2888,small,0.012596,0.100767,0.018894
+helper,LOC,FieldSource vs MethodSource,35,5411,0.0000,53.0000,-0.7497,large,0.000000,0.000000,0.000000
+helper,LOC,FieldSource vs ArgumentsSource,35,25,0.0000,30.0000,-0.6640,large,0.000008,0.000116,0.000022
+total,LOC,CsvSource vs ValueSource,361,1456,32.0000,41.0000,-0.0552,negligible,0.103705,0.414819,0.120989
+total,LOC,EnumSource vs ValueSource,828,1456,48.0000,41.0000,0.1083,negligible,0.000016,0.000180,0.000031
+total,LOC,CsvFileSource vs ValueSource,48,1456,25.5000,41.0000,-0.2572,small,0.002398,0.021583,0.003874
+total,LOC,MethodSource vs ValueSource,5411,1456,72.0000,41.0000,0.2700,small,0.000000,0.000000,0.000000
+total,LOC,ArgumentsSource vs ValueSource,25,1456,40.0000,41.0000,0.0229,negligible,0.844063,0.844063,0.844063
+total,LOC,FieldSource vs ValueSource,35,1456,9.0000,41.0000,-0.4757,large,0.000001,0.000021,0.000004
+total,LOC,EnumSource vs CsvSource,828,361,48.0000,32.0000,0.2230,small,0.000000,0.000000,0.000000
+total,LOC,CsvFileSource vs CsvSource,48,361,25.5000,32.0000,-0.2176,small,0.014270,0.097657,0.018729
+total,LOC,MethodSource vs CsvSource,5411,361,72.0000,32.0000,0.3896,medium,0.000000,0.000000,0.000000
+total,LOC,ArgumentsSource vs CsvSource,25,361,40.0000,32.0000,0.1310,negligible,0.273629,0.695110,0.287311
+total,LOC,FieldSource vs CsvSource,35,361,9.0000,32.0000,-0.4846,large,0.000002,0.000028,0.000005
+total,LOC,CsvFileSource vs EnumSource,48,828,25.5000,48.0000,-0.3869,medium,0.000006,0.000077,0.000014
+total,LOC,MethodSource vs EnumSource,5411,828,72.0000,48.0000,0.1939,small,0.000000,0.000000,0.000000
+total,LOC,ArgumentsSource vs EnumSource,25,828,40.0000,48.0000,-0.1403,negligible,0.231703,0.695110,0.256093
+total,LOC,FieldSource vs EnumSource,35,828,9.0000,48.0000,-0.5594,large,0.000000,0.000000,0.000000
+total,LOC,MethodSource vs CsvFileSource,5411,48,72.0000,25.5000,0.5565,large,0.000000,0.000000,0.000000
+total,LOC,ArgumentsSource vs CsvFileSource,25,48,40.0000,25.5000,0.2683,small,0.059952,0.299761,0.074059
+total,LOC,FieldSource vs CsvFileSource,35,48,9.0000,25.5000,-0.3161,small,0.013951,0.097657,0.018729
+total,LOC,ArgumentsSource vs MethodSource,25,5411,40.0000,72.0000,-0.3231,small,0.005245,0.041958,0.007867
+total,LOC,FieldSource vs MethodSource,35,5411,9.0000,72.0000,-0.6801,large,0.000000,0.000000,0.000000
+total,LOC,FieldSource vs ArgumentsSource,35,25,9.0000,40.0000,-0.5246,large,0.000580,0.005804,0.001016
+main-body,CC,CsvSource vs ValueSource,361,1456,1.0000,1.0000,0.0733,negligible,0.011565,0.080956,0.016191
+main-body,CC,EnumSource vs ValueSource,828,1456,1.0000,1.0000,-0.0860,negligible,0.000031,0.000598,0.000220
+main-body,CC,CsvFileSource vs ValueSource,48,1456,1.0000,1.0000,-0.2755,small,0.000113,0.002028,0.000591
+main-body,CC,MethodSource vs ValueSource,5411,1456,1.0000,1.0000,-0.0289,negligible,0.039706,0.192718,0.046323
+main-body,CC,ArgumentsSource vs ValueSource,25,1456,1.0000,1.0000,-0.3179,small,0.001232,0.016019,0.002875
+main-body,CC,FieldSource vs ValueSource,35,1456,1.0000,1.0000,-0.2552,small,0.002214,0.024355,0.004227
+main-body,CC,EnumSource vs CsvSource,828,361,1.0000,1.0000,-0.1510,small,0.000000,0.000006,0.000006
+main-body,CC,CsvFileSource vs CsvSource,48,361,1.0000,1.0000,-0.3298,small,0.000015,0.000300,0.000158
+main-body,CC,MethodSource vs CsvSource,5411,361,1.0000,1.0000,-0.0969,negligible,0.000170,0.002891,0.000714
+main-body,CC,ArgumentsSource vs CsvSource,25,361,1.0000,1.0000,-0.3684,medium,0.000381,0.006102,0.001301
+main-body,CC,FieldSource vs CsvSource,35,361,1.0000,1.0000,-0.3118,small,0.000434,0.006506,0.001301
+main-body,CC,CsvFileSource vs EnumSource,48,828,1.0000,1.0000,-0.1793,small,0.005560,0.050039,0.008981
+main-body,CC,MethodSource vs EnumSource,5411,828,1.0000,1.0000,0.0546,negligible,0.001737,0.020840,0.003647
+main-body,CC,ArgumentsSource vs EnumSource,25,828,1.0000,1.0000,-0.2204,small,0.013132,0.080956,0.017236
+main-body,CC,FieldSource vs EnumSource,35,828,1.0000,1.0000,-0.1564,small,0.038544,0.192718,0.046323
+main-body,CC,MethodSource vs CsvFileSource,5411,48,1.0000,1.0000,0.2345,small,0.000581,0.008128,0.001524
+main-body,CC,ArgumentsSource vs CsvFileSource,25,48,1.0000,1.0000,-0.0442,negligible,0.489879,0.979758,0.514373
+main-body,CC,FieldSource vs CsvFileSource,35,48,1.0000,1.0000,0.0286,negligible,0.671805,0.979758,0.671805
+main-body,CC,ArgumentsSource vs MethodSource,25,5411,1.0000,1.0000,-0.2748,small,0.003572,0.035717,0.006250
+main-body,CC,FieldSource vs MethodSource,35,5411,1.0000,1.0000,-0.2130,small,0.007591,0.060727,0.011386
+main-body,CC,FieldSource vs ArgumentsSource,35,25,1.0000,1.0000,0.0743,negligible,0.316268,0.948804,0.349559
+helper,CC,CsvSource vs ValueSource,361,1456,1.0000,3.0000,-0.1880,small,0.000000,0.000000,0.000000
+helper,CC,EnumSource vs ValueSource,828,1456,2.0000,3.0000,0.0164,negligible,0.507017,1.000000,0.532368
+helper,CC,CsvFileSource vs ValueSource,48,1456,5.0000,3.0000,0.1532,small,0.065755,0.377188,0.081227
+helper,CC,MethodSource vs ValueSource,5411,1456,8.0000,3.0000,0.3089,small,0.000000,0.000000,0.000000
+helper,CC,ArgumentsSource vs ValueSource,25,1456,6.0000,3.0000,0.1703,small,0.136660,0.409979,0.151045
+helper,CC,FieldSource vs ValueSource,35,1456,0.0000,3.0000,-0.3573,medium,0.000224,0.002243,0.000393
+helper,CC,EnumSource vs CsvSource,828,361,2.0000,1.0000,0.2168,small,0.000000,0.000000,0.000000
+helper,CC,CsvFileSource vs CsvSource,48,361,5.0000,1.0000,0.4047,medium,0.000002,0.000032,0.000006
+helper,CC,MethodSource vs CsvSource,5411,361,8.0000,1.0000,0.5236,large,0.000000,0.000000,0.000000
+helper,CC,ArgumentsSource vs CsvSource,25,361,6.0000,1.0000,0.4474,medium,0.000095,0.001043,0.000181
+helper,CC,FieldSource vs CsvSource,35,361,0.0000,1.0000,-0.1835,small,0.057862,0.377188,0.075944
+helper,CC,CsvFileSource vs EnumSource,48,828,5.0000,2.0000,0.1810,small,0.033259,0.266072,0.049888
+helper,CC,MethodSource vs EnumSource,5411,828,8.0000,2.0000,0.3231,small,0.000000,0.000000,0.000000
+helper,CC,ArgumentsSource vs EnumSource,25,828,6.0000,2.0000,0.2241,small,0.053884,0.377188,0.075438
+helper,CC,FieldSource vs EnumSource,35,828,0.0000,2.0000,-0.4142,medium,0.000027,0.000321,0.000056
+helper,CC,MethodSource vs CsvFileSource,5411,48,8.0000,5.0000,0.2018,small,0.015601,0.140412,0.025202
+helper,CC,ArgumentsSource vs CsvFileSource,25,48,6.0000,5.0000,0.0167,negligible,0.910992,1.000000,0.910992
+helper,CC,FieldSource vs CsvFileSource,35,48,0.0000,5.0000,-0.6333,large,0.000001,0.000009,0.000002
+helper,CC,ArgumentsSource vs MethodSource,25,5411,6.0000,8.0000,-0.1923,small,0.095663,0.382652,0.111607
+helper,CC,FieldSource vs MethodSource,35,5411,0.0000,8.0000,-0.7107,large,0.000000,0.000000,0.000000
+helper,CC,FieldSource vs ArgumentsSource,35,25,0.0000,6.0000,-0.6686,large,0.000007,0.000092,0.000017
+total,CC,CsvSource vs ValueSource,361,1456,3.0000,4.0000,-0.1367,negligible,0.000047,0.000609,0.000109
+total,CC,EnumSource vs ValueSource,828,1456,4.0000,4.0000,-0.0025,negligible,0.921139,1.000000,0.921139
+total,CC,CsvFileSource vs ValueSource,48,1456,6.0000,4.0000,0.1078,negligible,0.199328,0.797313,0.232550
+total,CC,MethodSource vs ValueSource,5411,1456,10.0000,4.0000,0.2955,small,0.000000,0.000000,0.000000
+total,CC,ArgumentsSource vs ValueSource,25,1456,7.0000,4.0000,0.1154,negligible,0.317559,0.952678,0.350987
+total,CC,FieldSource vs ValueSource,35,1456,1.0000,4.0000,-0.4078,medium,0.000030,0.000424,0.000079
+total,CC,EnumSource vs CsvSource,828,361,4.0000,3.0000,0.1348,negligible,0.000190,0.002278,0.000399
+total,CC,CsvFileSource vs CsvSource,48,361,6.0000,3.0000,0.2940,small,0.000788,0.008668,0.001504
+total,CC,MethodSource vs CsvSource,5411,361,10.0000,3.0000,0.4574,medium,0.000000,0.000000,0.000000
+total,CC,ArgumentsSource vs CsvSource,25,361,7.0000,3.0000,0.3100,small,0.008471,0.067771,0.012707
+total,CC,FieldSource vs CsvSource,35,361,1.0000,3.0000,-0.3043,small,0.002371,0.023707,0.004149
+total,CC,CsvFileSource vs EnumSource,48,828,6.0000,4.0000,0.1489,small,0.080873,0.485238,0.106146
+total,CC,MethodSource vs EnumSource,5411,828,10.0000,4.0000,0.3258,small,0.000000,0.000000,0.000000
+total,CC,ArgumentsSource vs EnumSource,25,828,7.0000,4.0000,0.1737,small,0.136335,0.681674,0.168414
+total,CC,FieldSource vs EnumSource,35,828,1.0000,4.0000,-0.4408,medium,0.000008,0.000135,0.000030
+total,CC,MethodSource vs CsvFileSource,5411,48,10.0000,6.0000,0.2510,small,0.002664,0.023979,0.004304
+total,CC,ArgumentsSource vs CsvFileSource,25,48,7.0000,6.0000,-0.0175,negligible,0.906299,1.000000,0.921139
+total,CC,FieldSource vs CsvFileSource,35,48,1.0000,6.0000,-0.6167,large,0.000001,0.000021,0.000005
+total,CC,ArgumentsSource vs MethodSource,25,5411,7.0000,10.0000,-0.2609,small,0.023956,0.167692,0.033538
+total,CC,FieldSource vs MethodSource,35,5411,1.0000,10.0000,-0.7168,large,0.000000,0.000000,0.000000
+total,CC,FieldSource vs ArgumentsSource,35,25,1.0000,7.0000,-0.6446,large,0.000016,0.000233,0.000047
+main-body,CCTR,CsvSource vs ValueSource,361,1456,5.0000,5.0000,-0.0205,negligible,0.542870,1.000000,0.606493
+main-body,CCTR,EnumSource vs ValueSource,828,1456,5.0000,5.0000,0.0671,negligible,0.007128,0.085533,0.014968
+main-body,CCTR,CsvFileSource vs ValueSource,48,1456,3.0000,5.0000,-0.4979,large,0.000000,0.000000,0.000000
+main-body,CCTR,MethodSource vs ValueSource,5411,1456,4.0000,5.0000,-0.1042,negligible,0.000000,0.000000,0.000000
+main-body,CCTR,ArgumentsSource vs ValueSource,25,1456,4.0000,5.0000,-0.1200,negligible,0.298744,1.000000,0.418241
+main-body,CCTR,FieldSource vs ValueSource,35,1456,5.0000,5.0000,0.0587,negligible,0.548731,1.000000,0.606493
+main-body,CCTR,EnumSource vs CsvSource,828,361,5.0000,5.0000,0.0844,negligible,0.019549,0.215044,0.037322
+main-body,CCTR,CsvFileSource vs CsvSource,48,361,3.0000,5.0000,-0.5137,large,0.000000,0.000000,0.000000
+main-body,CCTR,MethodSource vs CsvSource,5411,361,4.0000,5.0000,-0.0911,negligible,0.003342,0.043441,0.007797
+main-body,CCTR,ArgumentsSource vs CsvSource,25,361,4.0000,5.0000,-0.1001,negligible,0.397873,1.000000,0.491490
+main-body,CCTR,FieldSource vs CsvSource,35,361,5.0000,5.0000,0.0928,negligible,0.359388,1.000000,0.471697
+main-body,CCTR,CsvFileSource vs EnumSource,48,828,3.0000,5.0000,-0.5248,large,0.000000,0.000000,0.000000
+main-body,CCTR,MethodSource vs EnumSource,5411,828,4.0000,5.0000,-0.1630,small,0.000000,0.000000,0.000000
+main-body,CCTR,ArgumentsSource vs EnumSource,25,828,4.0000,5.0000,-0.1949,small,0.094187,0.847684,0.152148
+main-body,CCTR,FieldSource vs EnumSource,35,828,5.0000,5.0000,-0.0111,negligible,0.910618,1.000000,0.914339
+main-body,CCTR,MethodSource vs CsvFileSource,5411,48,4.0000,3.0000,0.3569,medium,0.000016,0.000240,0.000048
+main-body,CCTR,ArgumentsSource vs CsvFileSource,25,48,4.0000,3.0000,0.4692,medium,0.000232,0.003251,0.000610
+main-body,CCTR,FieldSource vs CsvFileSource,35,48,5.0000,3.0000,0.7405,large,0.000000,0.000000,0.000000
+main-body,CCTR,ArgumentsSource vs MethodSource,25,5411,4.0000,4.0000,-0.0123,negligible,0.914339,1.000000,0.914339
+main-body,CCTR,FieldSource vs MethodSource,35,5411,5.0000,4.0000,0.1868,small,0.053643,0.536434,0.093876
+main-body,CCTR,FieldSource vs ArgumentsSource,35,25,5.0000,4.0000,0.2194,small,0.142892,1.000000,0.214338
+helper,CCTR,CsvSource vs ValueSource,361,1456,0.0000,1.0000,-0.1734,small,0.000000,0.000001,0.000000
+helper,CCTR,EnumSource vs ValueSource,828,1456,1.0000,1.0000,-0.0368,negligible,0.129144,0.774867,0.169502
+helper,CCTR,CsvFileSource vs ValueSource,48,1456,3.0000,1.0000,-0.0561,negligible,0.491857,1.000000,0.573833
+helper,CCTR,MethodSource vs ValueSource,5411,1456,7.0000,1.0000,0.1998,small,0.000000,0.000000,0.000000
+helper,CCTR,ArgumentsSource vs ValueSource,25,1456,3.0000,1.0000,0.0657,negligible,0.558196,1.000000,0.616953
+helper,CCTR,FieldSource vs ValueSource,35,1456,0.0000,1.0000,-0.3592,medium,0.000151,0.001965,0.000353
+helper,CCTR,EnumSource vs CsvSource,828,361,1.0000,0.0000,0.1432,negligible,0.000039,0.000580,0.000116
+helper,CCTR,CsvFileSource vs CsvSource,48,361,3.0000,0.0000,0.1730,small,0.035266,0.282127,0.052899
+helper,CCTR,MethodSource vs CsvSource,5411,361,7.0000,0.0000,0.3715,medium,0.000000,0.000000,0.000000
+helper,CCTR,ArgumentsSource vs CsvSource,25,361,3.0000,0.0000,0.2779,small,0.011906,0.119064,0.020836
+helper,CCTR,FieldSource vs CsvSource,35,361,0.0000,0.0000,-0.2100,small,0.022558,0.203019,0.036439
+helper,CCTR,CsvFileSource vs EnumSource,48,828,3.0000,1.0000,0.0212,negligible,0.799403,1.000000,0.799403
+helper,CCTR,MethodSource vs EnumSource,5411,828,7.0000,1.0000,0.2481,small,0.000000,0.000000,0.000000
+helper,CCTR,ArgumentsSource vs EnumSource,25,828,3.0000,1.0000,0.1179,negligible,0.300381,1.000000,0.371058
+helper,CCTR,FieldSource vs EnumSource,35,828,0.0000,1.0000,-0.3744,medium,0.000099,0.001391,0.000261
+helper,CCTR,MethodSource vs CsvFileSource,5411,48,7.0000,3.0000,0.3071,small,0.000211,0.002321,0.000403
+helper,CCTR,ArgumentsSource vs CsvFileSource,25,48,3.0000,3.0000,-0.0383,negligible,0.788912,1.000000,0.799403
+helper,CCTR,FieldSource vs CsvFileSource,35,48,0.0000,3.0000,-0.4512,medium,0.000186,0.002230,0.000390
+helper,CCTR,ArgumentsSource vs MethodSource,25,5411,3.0000,7.0000,-0.2205,small,0.054315,0.380207,0.076041
+helper,CCTR,FieldSource vs MethodSource,35,5411,0.0000,7.0000,-0.5264,large,0.000000,0.000001,0.000000
+helper,CCTR,FieldSource vs ArgumentsSource,35,25,0.0000,3.0000,-0.6114,large,0.000020,0.000312,0.000068
+total,CCTR,CsvSource vs ValueSource,361,1456,7.0000,10.0000,-0.1791,small,0.000000,0.000002,0.000000
+total,CCTR,EnumSource vs ValueSource,828,1456,11.0000,10.0000,0.0148,negligible,0.555018,1.000000,0.582769
+total,CCTR,CsvFileSource vs ValueSource,48,1456,6.0000,10.0000,-0.3871,medium,0.000005,0.000066,0.000012
+total,CCTR,MethodSource vs ValueSource,5411,1456,15.0000,10.0000,0.1665,small,0.000000,0.000000,0.000000
+total,CCTR,ArgumentsSource vs ValueSource,25,1456,7.0000,10.0000,-0.1272,negligible,0.274201,1.000000,0.338719
+total,CCTR,FieldSource vs ValueSource,35,1456,5.0000,10.0000,-0.2483,small,0.011783,0.106049,0.018329
+total,CCTR,EnumSource vs CsvSource,828,361,11.0000,7.0000,0.2094,small,0.000000,0.000000,0.000000
+total,CCTR,CsvFileSource vs CsvSource,48,361,6.0000,7.0000,-0.1880,small,0.033245,0.232714,0.046543
+total,CCTR,MethodSource vs CsvSource,5411,361,15.0000,7.0000,0.3403,medium,0.000000,0.000000,0.000000
+total,CCTR,ArgumentsSource vs CsvSource,25,361,7.0000,7.0000,0.1111,negligible,0.350534,1.000000,0.408956
+total,CCTR,FieldSource vs CsvSource,35,361,5.0000,7.0000,-0.0827,negligible,0.416811,1.000000,0.460685
+total,CCTR,CsvFileSource vs EnumSource,48,828,6.0000,11.0000,-0.4614,medium,0.000000,0.000001,0.000000
+total,CCTR,MethodSource vs EnumSource,5411,828,15.0000,11.0000,0.1607,small,0.000000,0.000000,0.000000
+total,CCTR,ArgumentsSource vs EnumSource,25,828,7.0000,11.0000,-0.1933,small,0.098862,0.593171,0.129756
+total,CCTR,FieldSource vs EnumSource,35,828,5.0000,11.0000,-0.3165,small,0.001472,0.017661,0.003091
+total,CCTR,MethodSource vs CsvFileSource,5411,48,15.0000,6.0000,0.5473,large,0.000000,0.000000,0.000000
+total,CCTR,ArgumentsSource vs CsvFileSource,25,48,7.0000,6.0000,0.3908,medium,0.005684,0.056838,0.009947
+total,CCTR,FieldSource vs CsvFileSource,35,48,5.0000,6.0000,0.0387,negligible,0.764771,1.000000,0.764771
+total,CCTR,ArgumentsSource vs MethodSource,25,5411,7.0000,15.0000,-0.3254,small,0.004902,0.053921,0.009358
+total,CCTR,FieldSource vs MethodSource,35,5411,5.0000,15.0000,-0.4027,medium,0.000038,0.000500,0.000090
+total,CCTR,FieldSource vs ArgumentsSource,35,25,5.0000,7.0000,-0.3794,medium,0.012220,0.106049,0.018329
+main-body,DUP%,CsvSource vs ValueSource,361,1456,0.5676,0.7778,-0.1563,small,0.000003,0.000046,0.000011
+main-body,DUP%,EnumSource vs ValueSource,828,1456,0.9231,0.7778,0.1214,negligible,0.000001,0.000012,0.000003
+main-body,DUP%,CsvFileSource vs ValueSource,48,1456,1.0000,0.7778,0.2751,small,0.000880,0.009685,0.001681
+main-body,DUP%,MethodSource vs ValueSource,5411,1456,0.8966,0.7778,0.0901,negligible,0.000000,0.000001,0.000000
+main-body,DUP%,ArgumentsSource vs ValueSource,25,1456,0.0000,0.7778,-0.3396,medium,0.002872,0.025852,0.004640
+main-body,DUP%,FieldSource vs ValueSource,35,1456,0.6154,0.7778,-0.1864,small,0.053838,0.247496,0.062811
+main-body,DUP%,EnumSource vs CsvSource,828,361,0.9231,0.5676,0.2672,small,0.000000,0.000000,0.000000
+main-body,DUP%,CsvFileSource vs CsvSource,48,361,1.0000,0.5676,0.4032,medium,0.000004,0.000064,0.000014
+main-body,DUP%,MethodSource vs CsvSource,5411,361,0.8966,0.5676,0.2361,small,0.000000,0.000000,0.000000
+main-body,DUP%,ArgumentsSource vs CsvSource,25,361,0.0000,0.5676,-0.2318,small,0.049499,0.247496,0.061146
+main-body,DUP%,FieldSource vs CsvSource,35,361,0.6154,0.5676,-0.0259,negligible,0.798664,0.798664,0.798664
+main-body,DUP%,CsvFileSource vs EnumSource,48,828,1.0000,0.9231,0.1702,small,0.037052,0.222310,0.048630
+main-body,DUP%,MethodSource vs EnumSource,5411,828,0.8966,0.9231,-0.0274,negligible,0.184133,0.552399,0.196482
+main-body,DUP%,ArgumentsSource vs EnumSource,25,828,0.0000,0.9231,-0.4000,medium,0.000359,0.004922,0.000838
+main-body,DUP%,FieldSource vs EnumSource,35,828,0.6154,0.9231,-0.3098,small,0.001179,0.011794,0.002064
+main-body,DUP%,MethodSource vs CsvFileSource,5411,48,0.8966,1.0000,-0.1891,small,0.018170,0.127192,0.025438
+main-body,DUP%,ArgumentsSource vs CsvFileSource,25,48,0.0000,1.0000,-0.4700,medium,0.000352,0.004922,0.000838
+main-body,DUP%,FieldSource vs CsvFileSource,35,48,0.6154,1.0000,-0.4500,medium,0.000248,0.003724,0.000745
+main-body,DUP%,ArgumentsSource vs MethodSource,25,5411,0.0000,0.8966,-0.3802,medium,0.000597,0.007163,0.001253
+main-body,DUP%,FieldSource vs MethodSource,35,5411,0.6154,0.8966,-0.2732,small,0.003562,0.028497,0.005343
+main-body,DUP%,FieldSource vs ArgumentsSource,35,25,0.6154,0.0000,0.1954,small,0.187126,0.552399,0.196482
+helper,DUP%,CsvSource vs ValueSource,361,1456,0.0000,0.0000,-0.1002,negligible,0.000465,0.007441,0.001628
+helper,DUP%,EnumSource vs ValueSource,828,1456,0.0000,0.0000,0.0052,negligible,0.810473,1.000000,0.810473
+helper,DUP%,CsvFileSource vs ValueSource,48,1456,0.0000,0.0000,-0.2017,small,0.005392,0.075492,0.013119
+helper,DUP%,MethodSource vs ValueSource,5411,1456,0.1818,0.0000,0.4570,medium,0.000000,0.000000,0.000000
+helper,DUP%,ArgumentsSource vs ValueSource,25,1456,0.0000,0.0000,-0.2549,small,0.010728,0.106928,0.017329
+helper,DUP%,FieldSource vs ValueSource,35,1456,0.0000,0.0000,0.0911,negligible,0.284140,1.000000,0.321455
+helper,DUP%,EnumSource vs CsvSource,828,361,0.0000,0.0000,0.1021,negligible,0.000769,0.011538,0.002308
+helper,DUP%,CsvFileSource vs CsvSource,48,361,0.0000,0.0000,-0.0963,negligible,0.142943,0.775319,0.176577
+helper,DUP%,MethodSource vs CsvSource,5411,361,0.1818,0.0000,0.5212,large,0.000000,0.000000,0.000000
+helper,DUP%,ArgumentsSource vs CsvSource,25,361,0.0000,0.0000,-0.1351,negligible,0.129220,0.775319,0.169601
+helper,DUP%,FieldSource vs CsvSource,35,361,0.0000,0.0000,0.1660,small,0.034292,0.240044,0.048009
+helper,DUP%,CsvFileSource vs EnumSource,48,828,0.0000,0.0000,-0.2002,small,0.006166,0.080152,0.013119
+helper,DUP%,MethodSource vs EnumSource,5411,828,0.1818,0.0000,0.4517,medium,0.000000,0.000000,0.000000
+helper,DUP%,ArgumentsSource vs EnumSource,25,828,0.0000,0.0000,-0.2561,small,0.010693,0.106928,0.017329
+helper,DUP%,FieldSource vs EnumSource,35,828,0.0000,0.0000,0.0907,negligible,0.290841,1.000000,0.321455
+helper,DUP%,MethodSource vs CsvFileSource,5411,48,0.1818,0.0000,0.6218,large,0.000000,0.000000,0.000000
+helper,DUP%,ArgumentsSource vs CsvFileSource,25,48,0.0000,0.0000,-0.0317,negligible,0.718966,1.000000,0.754914
+helper,DUP%,FieldSource vs CsvFileSource,35,48,0.0000,0.0000,0.2524,small,0.009298,0.102278,0.017329
+helper,DUP%,ArgumentsSource vs MethodSource,25,5411,0.0000,0.1818,-0.6859,large,0.000000,0.000000,0.000000
+helper,DUP%,FieldSource vs MethodSource,35,5411,0.0000,0.1818,-0.2661,small,0.006247,0.080152,0.013119
+helper,DUP%,FieldSource vs ArgumentsSource,35,25,0.0000,0.0000,0.2800,small,0.018655,0.149239,0.027982
+total,DUP%,CsvSource vs ValueSource,361,1456,0.3514,0.3377,0.0165,negligible,0.626883,1.000000,0.692870
+total,DUP%,EnumSource vs ValueSource,828,1456,0.4615,0.3377,0.0821,negligible,0.001069,0.014970,0.002807
+total,DUP%,CsvFileSource vs ValueSource,48,1456,0.0929,0.3377,-0.2574,small,0.002337,0.030385,0.005150
+total,DUP%,MethodSource vs ValueSource,5411,1456,0.3684,0.3377,0.0171,negligible,0.316342,1.000000,0.415199
+total,DUP%,ArgumentsSource vs ValueSource,25,1456,0.0000,0.3377,-0.4613,medium,0.000073,0.001267,0.000306
+total,DUP%,FieldSource vs ValueSource,35,1456,0.5000,0.3377,0.0913,negligible,0.354646,1.000000,0.438092
+total,DUP%,EnumSource vs CsvSource,828,361,0.4615,0.3514,0.0462,negligible,0.203663,1.000000,0.295601
+total,DUP%,CsvFileSource vs CsvSource,48,361,0.0929,0.3514,-0.2682,small,0.002452,0.030385,0.005150
+total,DUP%,MethodSource vs CsvSource,5411,361,0.3684,0.3514,-0.0123,negligible,0.694059,1.000000,0.728762
+total,DUP%,ArgumentsSource vs CsvSource,25,361,0.0000,0.3514,-0.4334,medium,0.000273,0.004092,0.000818
+total,DUP%,FieldSource vs CsvSource,35,361,0.5000,0.3514,0.0621,negligible,0.542680,1.000000,0.633127
+total,DUP%,CsvFileSource vs EnumSource,48,828,0.0929,0.4615,-0.3753,medium,0.000012,0.000238,0.000125
+total,DUP%,MethodSource vs EnumSource,5411,828,0.3684,0.4615,-0.0837,negligible,0.000102,0.001635,0.000358
+total,DUP%,ArgumentsSource vs EnumSource,25,828,0.0000,0.4615,-0.5226,large,0.000008,0.000171,0.000125
+total,DUP%,FieldSource vs EnumSource,35,828,0.5000,0.4615,0.0316,negligible,0.751177,1.000000,0.751177
+total,DUP%,MethodSource vs CsvFileSource,5411,48,0.3684,0.0929,0.3327,medium,0.000070,0.001267,0.000306
+total,DUP%,ArgumentsSource vs CsvFileSource,25,48,0.0000,0.0929,-0.2975,small,0.035241,0.317170,0.056928
+total,DUP%,FieldSource vs CsvFileSource,35,48,0.5000,0.0929,0.3333,medium,0.009356,0.093563,0.016374
+total,DUP%,ArgumentsSource vs MethodSource,25,5411,0.0000,0.3684,-0.4804,large,0.000033,0.000629,0.000232
+total,DUP%,FieldSource vs MethodSource,35,5411,0.5000,0.3684,0.1224,negligible,0.211143,1.000000,0.295601
+total,DUP%,FieldSource vs ArgumentsSource,35,25,0.5000,0.0000,0.4126,medium,0.005557,0.061124,0.010608
+main-body,DUP lines,CsvSource vs ValueSource,361,1456,12.0000,11.0000,-0.0186,negligible,0.582714,1.000000,0.654571
+main-body,DUP lines,EnumSource vs ValueSource,828,1456,19.0000,11.0000,0.1898,small,0.000000,0.000000,0.000000
+main-body,DUP lines,CsvFileSource vs ValueSource,48,1456,6.0000,11.0000,-0.4121,medium,0.000001,0.000017,0.000004
+main-body,DUP lines,MethodSource vs ValueSource,5411,1456,11.0000,11.0000,-0.0058,negligible,0.734544,1.000000,0.771271
+main-body,DUP lines,ArgumentsSource vs ValueSource,25,1456,0.0000,11.0000,-0.5204,large,0.000007,0.000105,0.000018
+main-body,DUP lines,FieldSource vs ValueSource,35,1456,5.0000,11.0000,-0.2856,small,0.003752,0.030018,0.005628
+main-body,DUP lines,EnumSource vs CsvSource,828,361,19.0000,12.0000,0.1929,small,0.000000,0.000002,0.000000
+main-body,DUP lines,CsvFileSource vs CsvSource,48,361,6.0000,12.0000,-0.3066,small,0.000523,0.005232,0.000916
+main-body,DUP lines,MethodSource vs CsvSource,5411,361,11.0000,12.0000,0.0168,negligible,0.592231,1.000000,0.654571
+main-body,DUP lines,ArgumentsSource vs CsvSource,25,361,0.0000,12.0000,-0.4660,medium,0.000087,0.000955,0.000166
+main-body,DUP lines,FieldSource vs CsvSource,35,361,5.0000,12.0000,-0.2210,small,0.029910,0.179461,0.039257
+main-body,DUP lines,CsvFileSource vs EnumSource,48,828,6.0000,19.0000,-0.5583,large,0.000000,0.000000,0.000000
+main-body,DUP lines,MethodSource vs EnumSource,5411,828,11.0000,19.0000,-0.1928,small,0.000000,0.000000,0.000000
+main-body,DUP lines,ArgumentsSource vs EnumSource,25,828,0.0000,19.0000,-0.6215,large,0.000000,0.000002,0.000000
+main-body,DUP lines,FieldSource vs EnumSource,35,828,5.0000,19.0000,-0.4243,medium,0.000020,0.000241,0.000042
+main-body,DUP lines,MethodSource vs CsvFileSource,5411,48,11.0000,6.0000,0.4053,medium,0.000001,0.000018,0.000004
+main-body,DUP lines,ArgumentsSource vs CsvFileSource,25,48,0.0000,6.0000,-0.3225,small,0.020836,0.145853,0.029171
+main-body,DUP lines,FieldSource vs CsvFileSource,35,48,5.0000,6.0000,-0.0208,negligible,0.872867,1.000000,0.872867
+main-body,DUP lines,ArgumentsSource vs MethodSource,25,5411,0.0000,11.0000,-0.5171,large,0.000008,0.000105,0.000018
+main-body,DUP lines,FieldSource vs MethodSource,35,5411,5.0000,11.0000,-0.2892,small,0.003067,0.027599,0.004954
+main-body,DUP lines,FieldSource vs ArgumentsSource,35,25,5.0000,0.0000,0.2640,small,0.075508,0.377539,0.093274
+helper,DUP lines,CsvSource vs ValueSource,361,1456,0.0000,0.0000,-0.1193,negligible,0.000031,0.000460,0.000092
+helper,DUP lines,EnumSource vs ValueSource,828,1456,0.0000,0.0000,-0.0051,negligible,0.812993,1.000000,0.898571
+helper,DUP lines,CsvFileSource vs ValueSource,48,1456,0.0000,0.0000,-0.2360,small,0.001128,0.014664,0.002632
+helper,DUP lines,MethodSource vs ValueSource,5411,1456,10.0000,0.0000,0.4494,medium,0.000000,0.000000,0.000000
+helper,DUP lines,ArgumentsSource vs ValueSource,25,1456,0.0000,0.0000,-0.2446,small,0.014356,0.157920,0.027408
+helper,DUP lines,FieldSource vs ValueSource,35,1456,0.0000,0.0000,-0.0138,negligible,0.871443,1.000000,0.915015
+helper,DUP lines,EnumSource vs CsvSource,828,361,0.0000,0.0000,0.1149,negligible,0.000153,0.002139,0.000401
+helper,DUP lines,CsvFileSource vs CsvSource,48,361,0.0000,0.0000,-0.1086,negligible,0.098713,0.690991,0.138198
+helper,DUP lines,MethodSource vs CsvSource,5411,361,10.0000,0.0000,0.5566,large,0.000000,0.000000,0.000000
+helper,DUP lines,ArgumentsSource vs CsvSource,25,361,0.0000,0.0000,-0.1224,negligible,0.169067,0.914764,0.208847
+helper,DUP lines,FieldSource vs CsvSource,35,361,0.0000,0.0000,0.1122,negligible,0.152461,0.914764,0.200105
+helper,DUP lines,CsvFileSource vs EnumSource,48,828,0.0000,0.0000,-0.2302,small,0.001627,0.019530,0.003418
+helper,DUP lines,MethodSource vs EnumSource,5411,828,10.0000,0.0000,0.4545,medium,0.000000,0.000000,0.000000
+helper,DUP lines,ArgumentsSource vs EnumSource,25,828,0.0000,0.0000,-0.2392,small,0.017102,0.171024,0.029929
+helper,DUP lines,FieldSource vs EnumSource,35,828,0.0000,0.0000,-0.0050,negligible,0.954139,1.000000,0.954139
+helper,DUP lines,MethodSource vs CsvFileSource,5411,48,10.0000,0.0000,0.6764,large,0.000000,0.000000,0.000000
+helper,DUP lines,ArgumentsSource vs CsvFileSource,25,48,0.0000,0.0000,-0.0250,negligible,0.777910,1.000000,0.898571
+helper,DUP lines,FieldSource vs CsvFileSource,35,48,0.0000,0.0000,0.2250,small,0.020443,0.183983,0.033023
+helper,DUP lines,ArgumentsSource vs MethodSource,25,5411,0.0000,10.0000,-0.6635,large,0.000000,0.000000,0.000000
+helper,DUP lines,FieldSource vs MethodSource,35,5411,0.0000,10.0000,-0.4785,large,0.000001,0.000014,0.000003
+helper,DUP lines,FieldSource vs ArgumentsSource,35,25,0.0000,0.0000,0.2389,small,0.044957,0.359656,0.067435
+total,DUP lines,CsvSource vs ValueSource,361,1456,15.0000,15.0000,-0.0635,negligible,0.061365,0.306826,0.075804
+total,DUP lines,EnumSource vs ValueSource,828,1456,25.0000,15.0000,0.1970,small,0.000000,0.000000,0.000000
+total,DUP lines,CsvFileSource vs ValueSource,48,1456,6.0000,15.0000,-0.4911,large,0.000000,0.000000,0.000000
+total,DUP lines,MethodSource vs ValueSource,5411,1456,28.0000,15.0000,0.2860,small,0.000000,0.000000,0.000000
+total,DUP lines,ArgumentsSource vs ValueSource,25,1456,0.0000,15.0000,-0.5271,large,0.000006,0.000059,0.000010
+total,DUP lines,FieldSource vs ValueSource,35,1456,8.0000,15.0000,-0.2380,small,0.015904,0.095427,0.020875
+total,DUP lines,EnumSource vs CsvSource,828,361,25.0000,15.0000,0.2485,small,0.000000,0.000000,0.000000
+total,DUP lines,CsvFileSource vs CsvSource,48,361,6.0000,15.0000,-0.3705,medium,0.000029,0.000261,0.000047
+total,DUP lines,MethodSource vs CsvSource,5411,361,28.0000,15.0000,0.3312,medium,0.000000,0.000000,0.000000
+total,DUP lines,ArgumentsSource vs CsvSource,25,361,0.0000,15.0000,-0.4731,medium,0.000072,0.000575,0.000108
+total,DUP lines,FieldSource vs CsvSource,35,361,8.0000,15.0000,-0.1630,small,0.110332,0.379333,0.121946
+total,DUP lines,CsvFileSource vs EnumSource,48,828,6.0000,25.0000,-0.6642,large,0.000000,0.000000,0.000000
+total,DUP lines,MethodSource vs EnumSource,5411,828,28.0000,25.0000,0.1035,negligible,0.000002,0.000018,0.000003
+total,DUP lines,ArgumentsSource vs EnumSource,25,828,0.0000,25.0000,-0.6509,large,0.000000,0.000000,0.000000
+total,DUP lines,FieldSource vs EnumSource,35,828,8.0000,25.0000,-0.3687,medium,0.000215,0.001507,0.000301
+total,DUP lines,MethodSource vs CsvFileSource,5411,48,28.0000,6.0000,0.7226,large,0.000000,0.000000,0.000000
+total,DUP lines,ArgumentsSource vs CsvFileSource,25,48,0.0000,6.0000,-0.1933,small,0.166639,0.379333,0.174971
+total,DUP lines,FieldSource vs CsvFileSource,35,48,8.0000,6.0000,0.1232,negligible,0.334234,0.379333,0.334234
+total,DUP lines,ArgumentsSource vs MethodSource,25,5411,0.0000,28.0000,-0.7064,large,0.000000,0.000000,0.000000
+total,DUP lines,FieldSource vs MethodSource,35,5411,8.0000,28.0000,-0.4632,medium,0.000002,0.000025,0.000004
+total,DUP lines,FieldSource vs ArgumentsSource,35,25,8.0000,0.0000,0.2491,small,0.094833,0.379333,0.110639

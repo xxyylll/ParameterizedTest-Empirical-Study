@@ -1,0 +1,11 @@
+project,test_class,test_name,issue,action,detail
+flink,org.apache.flink.formats.avro.AvroFormatFactoryTest,testSeDeSchema,ambiguous_duplicate,kept_first_row,2 rows
+commons-io,org.apache.commons.io.RandomAccessFileModeTest,testValueOf,identical_duplicate,deduplicated,2 rows
+commons-io,org.apache.commons.io.build.AbstractOriginTest,testGetRandomAccessFile,pt_nonpt_overload,kept_pt_row,
+commons-io,org.apache.commons.io.build.ByteArrayOriginTest,testGetRandomAccessFile,pt_nonpt_overload,kept_pt_row,
+commons-io,org.apache.commons.io.build.ChannelOriginTest,testGetRandomAccessFile,pt_nonpt_overload,kept_pt_row,
+commons-io,org.apache.commons.io.build.CharSequenceOriginTest,testGetRandomAccessFile,pt_nonpt_overload,kept_pt_row,
+commons-io,org.apache.commons.io.build.InputStreamOriginTest,testGetRandomAccessFile,pt_nonpt_overload,kept_pt_row,
+commons-io,org.apache.commons.io.build.OutputStreamOriginTest,testGetRandomAccessFile,pt_nonpt_overload,kept_pt_row,
+commons-io,org.apache.commons.io.build.ReaderOriginTest,testGetRandomAccessFile,pt_nonpt_overload,kept_pt_row,
+commons-io,org.apache.commons.io.build.WriterStreamOriginTest,testGetRandomAccessFile,pt_nonpt_overload,kept_pt_row,

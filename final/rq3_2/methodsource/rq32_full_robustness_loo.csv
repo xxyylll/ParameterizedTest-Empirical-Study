@@ -1,0 +1,25 @@
+comparison,scope,metric,delta_full,delta_min_loo,delta_max_loo,min_when_dropping,max_when_dropping,sign_stable
+Dynamic vs Literal,main-body,LOC,-0.0821,-0.1479,-0.0331,druid,commons-numbers,yes
+L4 vs L0,main-body,LOC,0.1405,-0.0239,0.2212,druid,uima-uimaj,no
+Dynamic vs Literal,helper,LOC,0.1986,0.1534,0.3122,druid,hadoop,yes
+L4 vs L0,helper,LOC,0.3686,0.1839,0.4592,druid,hadoop,yes
+Dynamic vs Literal,total,LOC,0.1425,0.0897,0.2477,druid,hadoop,yes
+L4 vs L0,total,LOC,0.3356,0.1391,0.4269,druid,hadoop,yes
+Dynamic vs Literal,main-body,CC,-0.0469,-0.0561,-0.0130,commons-io,orc,yes
+L4 vs L0,main-body,CC,-0.0900,-0.1162,-0.0468,flink,uima-uimaj,yes
+Dynamic vs Literal,helper,CC,0.2253,0.1815,0.3222,druid,hadoop,yes
+L4 vs L0,helper,CC,0.3852,0.2127,0.4699,druid,uima-uimaj,yes
+Dynamic vs Literal,total,CC,0.2133,0.1682,0.3067,druid,hadoop,yes
+L4 vs L0,total,CC,0.3541,0.1713,0.4509,druid,uima-uimaj,yes
+Dynamic vs Literal,main-body,CCTR,-0.1623,-0.1851,-0.1197,hudi,druid,yes
+L4 vs L0,main-body,CCTR,-0.1875,-0.2244,-0.0017,hadoop,druid,yes
+Dynamic vs Literal,helper,CCTR,0.1795,0.1393,0.3181,druid,hadoop,yes
+L4 vs L0,helper,CCTR,0.2740,0.0780,0.3838,druid,uima-uimaj,yes
+Dynamic vs Literal,total,CCTR,0.1015,0.0563,0.2260,druid,hadoop,yes
+L4 vs L0,total,CCTR,0.2390,0.0473,0.3359,druid,uima-uimaj,yes
+Dynamic vs Literal,main-body,DUP%,0.0199,-0.0222,0.0595,commons-numbers,hadoop,no
+L4 vs L0,main-body,DUP%,0.1860,0.1112,0.2418,druid,hadoop,yes
+Dynamic vs Literal,helper,DUP%,-0.0938,-0.1784,-0.0517,commons-numbers,hadoop,yes
+L4 vs L0,helper,DUP%,-0.3232,-0.3561,-0.2646,hudi,druid,yes
+Dynamic vs Literal,total,DUP%,-0.1899,-0.2792,-0.1499,commons-numbers,druid,yes
+L4 vs L0,total,DUP%,-0.3679,-0.4157,-0.2535,hudi,druid,yes

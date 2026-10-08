@@ -1,5 +1,25 @@
+# ---- 大体积数据：不进 Git，走 DOI 归档 ----
+parser_result/                 # 旧 clone 的 parser 产物，624 MB，已废弃
+parser_result_ssk/             # 轻量 parser 的逐项目 JSON，~1.5 GB
+archive/                       # 废弃产物，77 MB，仅供回溯
 releases/
 selected_releases/
-parser_result/
 trend_result/
+temp_project/
+
+# 可由脚本重算的大中间表
+final/rq3_2/amortization/amortization_metrics.csv
+
+# ---- 运行时与本地配置 ----
+.env
 *.log
+api_keys.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ---- 系统文件 ----
+.DS_Store
+._*
+.idea/

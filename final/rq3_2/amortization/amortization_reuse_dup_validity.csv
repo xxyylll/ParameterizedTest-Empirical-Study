@@ -1,0 +1,15 @@
+x,y,n,spearman_rho,p_raw,scope
+amortization_cctr,helper_dupPerc,91514,-0.2688,0.000000,all tests with >=1 helper
+amortization_loc,helper_dupPerc,117331,-0.2068,0.000000,all tests with >=1 helper
+amortization_cctr,total_dupPerc,91514,-0.2477,0.000000,all tests with >=1 helper
+private_cctr_share,helper_dupPerc,91514,0.0817,0.000000,all tests with >=1 helper
+reuse decile 1,helper_dupPerc,9151,,,weighted reuse 1.0-2.0 (median 2.0) -> median dup 0.2462
+reuse decile 2,helper_dupPerc,9151,,,weighted reuse 4.0-5.0 (median 4.0) -> median dup 0.1818
+reuse decile 3,helper_dupPerc,9151,,,weighted reuse 7.0-9.0 (median 8.0) -> median dup 0.1395
+reuse decile 4,helper_dupPerc,9151,,,weighted reuse 12.0-16.0 (median 14.0) -> median dup 0.1667
+reuse decile 5,helper_dupPerc,9151,,,weighted reuse 22.0-29.0 (median 25.7) -> median dup 0.1176
+reuse decile 6,helper_dupPerc,9151,,,weighted reuse 41.8-59.0 (median 49.0) -> median dup 0.0476
+reuse decile 7,helper_dupPerc,9151,,,weighted reuse 80.0-124.9 (median 101.0) -> median dup 0.0000
+reuse decile 8,helper_dupPerc,9151,,,weighted reuse 207.8-313.8 (median 260.8) -> median dup 0.0068
+reuse decile 9,helper_dupPerc,9151,,,weighted reuse 491.8-765.0 (median 640.0) -> median dup 0.0200
+reuse decile 10,helper_dupPerc,9155,,,weighted reuse 1281.5-2550.5 (median 1643.5) -> median dup 0.0000

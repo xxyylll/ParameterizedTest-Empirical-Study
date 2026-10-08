@@ -1,0 +1,33 @@
+dimension,contrast,measure,n_a,n_b,delta_reader,magnitude_reader,p_reader,p_reader_bh,delta_maintainer,magnitude_maintainer,p_maintainer,p_maintainer_bh,delta_shrinks,crosses_to_negligible,delta_amortization,magnitude_amortization,p_amortization,delta_private_share,magnitude_private_share,p_private_share
+construction,Dynamic vs Literal,LOC,3373,2015,0.1455,negligible,0.000000,0.000000,-0.0270,negligible,0.096887,0.103346,yes,no,0.1388,negligible,0.000000,-0.0107,negligible,0.413333
+construction,Dynamic vs Literal,CC,3373,2015,0.2162,small,0.000000,0.000000,0.0109,negligible,0.501903,0.518094,yes,yes,0.1486,small,0.000000,-0.0108,negligible,0.407007
+construction,Dynamic vs Literal,CCTR,3373,2015,0.1027,negligible,0.000000,0.000000,-0.1207,negligible,0.000000,0.000000,no,no,0.0823,negligible,0.000026,0.0213,negligible,0.073270
+construction,Dynamic vs Literal,CCTR_EQ,3373,2015,0.1028,negligible,0.000000,0.000000,-0.1206,negligible,0.000000,0.000000,no,no,0.0823,negligible,0.000026,0.0213,negligible,0.073289
+dependency,L2 vs L0,LOC,480,3383,0.3962,medium,0.000000,0.000000,0.2164,small,0.000000,0.000000,yes,no,0.6148,large,0.000000,-0.1892,small,0.000000
+dependency,L2 vs L0,CC,480,3383,0.4829,large,0.000000,0.000000,-0.1627,small,0.000000,0.000000,yes,no,0.6243,large,0.000000,-0.1876,small,0.000000
+dependency,L2 vs L0,CCTR,480,3383,0.3448,medium,0.000000,0.000000,-0.2054,small,0.000000,0.000000,yes,no,0.6115,large,0.000000,-0.0524,negligible,0.004380
+dependency,L2 vs L0,CCTR_EQ,480,3383,0.3448,medium,0.000000,0.000000,-0.2052,small,0.000000,0.000000,yes,no,0.6114,large,0.000000,-0.0524,negligible,0.004380
+dependency,L3 vs L0,LOC,502,3383,0.1312,negligible,0.000002,0.000003,-0.1946,small,0.000000,0.000000,no,no,0.2058,small,0.000000,-0.1103,negligible,0.000001
+dependency,L3 vs L0,CC,502,3383,0.2972,small,0.000000,0.000000,-0.0509,negligible,0.065332,0.077430,yes,yes,0.2082,small,0.000000,-0.1062,negligible,0.000003
+dependency,L3 vs L0,CCTR,502,3383,0.1161,negligible,0.000026,0.000037,-0.1998,small,0.000000,0.000000,no,no,0.0454,negligible,0.129492,-0.0206,negligible,0.262119
+dependency,L3 vs L0,CCTR_EQ,502,3383,0.1159,negligible,0.000027,0.000037,-0.2011,small,0.000000,0.000000,no,no,0.0459,negligible,0.125062,-0.0206,negligible,0.261912
+dependency,L4 vs L0,LOC,670,3383,0.3421,medium,0.000000,0.000000,0.0517,negligible,0.034295,0.042209,yes,yes,0.4627,medium,0.000000,-0.1492,small,0.000000
+dependency,L4 vs L0,CC,670,3383,0.3610,medium,0.000000,0.000000,-0.1303,negligible,0.000000,0.000000,yes,yes,0.4434,medium,0.000000,-0.1460,negligible,0.000000
+dependency,L4 vs L0,CCTR,670,3383,0.2442,small,0.000000,0.000000,-0.2193,small,0.000000,0.000000,yes,no,0.3288,small,0.000000,-0.0274,negligible,0.104616
+dependency,L4 vs L0,CCTR_EQ,670,3383,0.2442,small,0.000000,0.000000,-0.2194,small,0.000000,0.000000,yes,no,0.3287,small,0.000000,-0.0274,negligible,0.104616
+dependency,L1 vs L0,LOC,353,3383,0.1696,small,0.000000,0.000000,0.2122,small,0.000000,0.000000,no,no,-0.1236,negligible,0.000125,0.0627,negligible,0.019927
+dependency,L1 vs L0,CC,353,3383,0.1656,small,0.000000,0.000000,0.2541,small,0.000000,0.000000,no,no,-0.0962,negligible,0.002838,0.0650,negligible,0.015904
+dependency,L1 vs L0,CCTR,353,3383,0.0190,negligible,0.555252,0.598634,0.0560,negligible,0.082971,0.092621,no,no,-0.2422,small,0.000000,0.0573,negligible,0.012596
+dependency,L1 vs L0,CCTR_EQ,353,3383,0.0187,negligible,0.561219,0.598634,0.0558,negligible,0.083938,0.092621,no,no,-0.2422,small,0.000000,0.0573,negligible,0.012608
+family,provider vs inline,LOC,5415,1178,-0.0012,negligible,0.948984,0.948984,-0.0659,negligible,0.000382,0.000509,no,no,-0.1388,negligible,0.000000,0.1327,negligible,0.000000
+family,provider vs inline,CC,5415,1178,0.0048,negligible,0.794086,0.819702,0.0093,negligible,0.614818,0.614818,no,no,-0.1356,negligible,0.000000,0.1323,negligible,0.000000
+family,provider vs inline,CCTR,5415,1178,-0.0152,negligible,0.413514,0.476758,-0.0922,negligible,0.000001,0.000001,no,no,-0.0069,negligible,0.736081,0.0159,negligible,0.194635
+family,provider vs inline,CCTR_EQ,5415,1178,-0.0151,negligible,0.417163,0.476758,-0.0919,negligible,0.000001,0.000001,no,no,-0.0068,negligible,0.737604,0.0160,negligible,0.193931
+family,provider vs type,LOC,5415,629,0.0384,negligible,0.114452,0.140864,-0.0805,negligible,0.000938,0.001200,no,no,-0.0028,negligible,0.908964,0.1451,negligible,0.000000
+family,provider vs type,CC,5415,629,0.1342,negligible,0.000000,0.000000,0.1639,small,0.000000,0.000000,no,no,0.0027,negligible,0.911243,0.1434,negligible,0.000000
+family,provider vs type,CCTR,5415,629,0.0629,negligible,0.009694,0.012608,-0.1097,negligible,0.000006,0.000009,no,no,0.0796,negligible,0.003463,0.0358,negligible,0.028987
+family,provider vs type,CCTR_EQ,5415,629,0.0627,negligible,0.009850,0.012608,-0.1100,negligible,0.000006,0.000009,no,no,0.0797,negligible,0.003430,0.0358,negligible,0.028989
+category,pt vs nonpt (JUnit 5 only),LOC,7345,100088,0.3326,medium,0.000000,0.000000,0.3822,medium,0.000000,0.000000,no,no,-0.1684,small,0.000000,0.1565,small,0.000000
+category,pt vs nonpt (JUnit 5 only),CC,7345,100088,0.2705,small,0.000000,0.000000,0.4411,medium,0.000000,0.000000,no,no,-0.1610,small,0.000000,0.1558,small,0.000000
+category,pt vs nonpt (JUnit 5 only),CCTR,7345,100088,0.2991,small,0.000000,0.000000,0.3618,medium,0.000000,0.000000,no,no,-0.1250,negligible,0.000000,0.0610,negligible,0.000000
+category,pt vs nonpt (JUnit 5 only),CCTR_EQ,7345,100088,0.2286,small,0.000000,0.000000,0.1947,small,0.000000,0.000000,yes,no,-0.1249,negligible,0.000000,0.0610,negligible,0.000000

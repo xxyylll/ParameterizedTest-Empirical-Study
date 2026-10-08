@@ -1,0 +1,5 @@
+Method Source Analysis Started at 2026-10-08 15:49:08.917042
+================================================================================
+174 个项目口径；PT 合计 17335  (JUnit4 8451 / JUnit5 8884)
+JUnit5 内部 top: {'MethodSource': 5598, 'ValueSource': 1654, 'EnumSource': 881, 'CsvSource': 390, 'Unknown': 248}
+wrote rq2_1_source_distribution_ssk.csv

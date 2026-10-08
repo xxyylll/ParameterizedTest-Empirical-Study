@@ -1,0 +1,12 @@
+group,kind,n,projects
+ValueSource,source,1456,39
+CsvSource,source,361,25
+EnumSource,source,828,28
+CsvFileSource,source,48,3
+MethodSource,source,5411,45
+ArgumentsSource,source,25,6
+FieldSource,source,35,2
+inline,family,1817,43
+type,family,828,28
+file,family,48,3
+provider,family,5471,45

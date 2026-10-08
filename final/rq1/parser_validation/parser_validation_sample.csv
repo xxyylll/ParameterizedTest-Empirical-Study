@@ -1,0 +1,2697 @@
+item_id,project,test_name,file_path,junit,annotations,parser_label,manual_label,agree,notes,source_code
+PV-001,commons-lang,testHoursOfDayWithCalendar,/Volumes/SSK Drive/apache-projects/commons-lang/src/test/java/org/apache/commons/lang3/time/DateUtilsFragmentTest.java,junit5,Test,nonPT,,,,"@Test
+void testHoursOfDayWithCalendar() {
+    long testResult = DateUtils.getFragmentInHours(aCalendar, Calendar.DATE);
+    final long expectedValue = hours;
+    assertEquals(expectedValue, testResult);
+    testResult = DateUtils.getFragmentInHours(aCalendar, Calendar.DAY_OF_YEAR);
+    assertEquals(expectedValue, testResult);
+}"
+PV-002,flink,testTimesRangeNonStrictOptional2,/Volumes/SSK Drive/apache-projects/flink/flink-libraries/flink-cep/src/test/java/org/apache/flink/cep/nfa/TimesRangeITCase.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testTimesRangeNonStrictOptional2() throws Exception {
+    List<StreamRecord<Event>> inputEvents = new ArrayList<>();
+    inputEvents.add(new StreamRecord<>(ConsecutiveData.startEvent, 1));
+    inputEvents.add(new StreamRecord<>(new Event(23, ""f"", 1.0), 2));
+    inputEvents.add(new StreamRecord<>(ConsecutiveData.middleEvent1, 3));
+    inputEvents.add(new StreamRecord<>(new Event(23, ""f"", 1.0), 4));
+    inputEvents.add(new StreamRecord<>(ConsecutiveData.middleEvent2, 5));
+    inputEvents.add(new StreamRecord<>(ConsecutiveData.middleEvent3, 6));
+    inputEvents.add(new StreamRecord<>(ConsecutiveData.end, 7));
+    Pattern<Event, ?> pattern = Pattern.<Event>begin(""start"").where(SimpleCondition.of(value -> value.getName().equals(""c""))).followedByAny(""middle"").where(SimpleCondition.of(value -> value.getName().equals(""a""))).times(2, 3, time).allowCombinations().optional().followedBy(""end1"").where(SimpleCondition.of(value -> value.getName().equals(""b"")));
+    NFA<Event> nfa = compile(pattern, false);
+    List<List<Event>> resultingPatterns = feedNFA(inputEvents, nfa);
+    List<List<Event>> expectedPatterns = Lists.<List<Event>>newArrayList(Lists.newArrayList(ConsecutiveData.startEvent, ConsecutiveData.middleEvent1, ConsecutiveData.middleEvent2, ConsecutiveData.middleEvent3, ConsecutiveData.end), Lists.newArrayList(ConsecutiveData.startEvent, ConsecutiveData.middleEvent1, ConsecutiveData.middleEvent2, ConsecutiveData.end), Lists.newArrayList(ConsecutiveData.startEvent, ConsecutiveData.middleEvent2, ConsecutiveData.middleEvent3, ConsecutiveData.end), Lists.newArrayLi"
+PV-003,iceberg,testIncompatibleTypesToVariant,/Volumes/SSK Drive/apache-projects/iceberg/api/src/test/java/org/apache/iceberg/types/TestReadabilityChecks.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""incompatibleTypesToVariant"")
+public void testIncompatibleTypesToVariant(Type from) {
+    Schema fromSchema = new Schema(required(3, ""from_field"", from));
+    List<String> errors = CheckCompatibility.writeCompatibilityErrors(new Schema(required(3, ""to_field"", Types.VariantType.get())), fromSchema);
+    assertThat(errors).hasSize(1);
+    assertThat(errors.get(0)).as(""Should complain that other type to variant is not allowed"").contains(""cannot be read as a variant"");
+}"
+PV-004,commons-numbers,testDoubleLowerMedian4Internal,/Volumes/SSK Drive/apache-projects/commons-numbers/commons-numbers-arrays/src/test/java/org/apache/commons/numbers/arrays/SortingTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(value = { ""testDoubleSort4Internal"" })
+void testDoubleLowerMedian4Internal(double[] values, int[] indices) {
+    final int a = indices[0];
+    final int b = indices[1];
+    final int c = indices[2];
+    final int d = indices[3];
+    assertMedian(values, x -> {
+        Sorting.lowerMedian4(x, a, b, c, d);
+        return b;
+    }, true, false, indices);
+}"
+PV-005,calcite,testMakeZeroForNestedType,/Volumes/SSK Drive/apache-projects/calcite/core/src/test/java/org/apache/calcite/rex/RexBuilderTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"/**
+ * Test case for
+ * <a href=""https://issues.apache.org/jira/browse/CALCITE-6938"">[CALCITE-6938]
+ * Support zero value creation of nested data types</a>.
+ */
+@ParameterizedTest
+@MethodSource(""testData4testMakeZeroForNestedType"")
+void testMakeZeroForNestedType(RelDataType type, RexNode expected) {
+    final RelDataTypeFactory typeFactory = new SqlTypeFactoryImpl(RelDataTypeSystem.DEFAULT);
+    final RexBuilder rexBuilder = new RexBuilder(typeFactory);
+    assertThat(rexBuilder.makeZeroRexNode(type), is(equalTo(expected)));
+}"
+PV-006,commons-bcel,testStackMap,/Volumes/SSK Drive/apache-projects/commons-bcel/src/test/java/org/apache/bcel/util/BCELifierTest.java,junit5,ParameterizedTest;ValueSource,PT,,,,"@ParameterizedTest
+@ValueSource(strings = { ""StackMapExample"", ""StackMapExample2"" })
+void testStackMap(final String className) throws Exception {
+    testJavapCompare(className);
+    final File workDir = new File(""target"");
+    assertEquals(""Hello World"" + EOL, exec(workDir, getAppJava(), ""-cp"", CLASSPATH, className, ""Hello""));
+}"
+PV-007,jena,parse_urn_uuid_22,/Volumes/SSK Drive/apache-projects/jena/jena-core/src/test/java/org/apache/jena/irix/TestIRIxJenaSystem.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"// RFC 8141 allows ""query string"" where it must must be ?=<one+ char> or ?+<one+ char>
+@Test
+public void parse_urn_uuid_22() {
+    parse_uuid_8141(""urn:uuid:"" + testUUID + ""?=ab/?cd"");
+}"
+PV-008,causeway,decodeNULL,/Volumes/SSK Drive/apache-projects/causeway/core/mmtest/src/test/java/org/apache/causeway/core/metamodel/facets/value/ValueSemanticsProviderAbstractTestCase.java,junit5,ParameterizedTest;EnumSource,PT,,,,"@ParameterizedTest
+@EnumSource(Format.class)
+final void decodeNULL(final Format format) throws Exception {
+    if (!isValueSemanticsProviderSetup())
+        return;
+    final Object newValue = getValueSerializer().destring(format, ValueSerializerDefault.ENCODED_NULL);
+    assertNull(newValue);
+}"
+PV-009,iotdb,testGroupBySlidingWindowWithMultiFunction,/Volumes/SSK Drive/apache-projects/iotdb/iotdb-core/datanode/src/test/java/org/apache/iotdb/db/queryengine/execution/operator/AlignedSeriesAggregationScanOperatorTest.java,junit4,Test,nonPT,,,,"@Test
+public void testGroupBySlidingWindowWithMultiFunction() throws Exception {
+    int[] timeColumn = new int[] { 0, 20, 30, 50, 60, 80, 90, 110, 120, 140 };
+    int[][] result = new int[][] { { 20000, 20020, 20030, 20050, 20060, 20080, 20090, 20110, 20120, 20140 }, { 20019, 20029, 20049, 20059, 20079, 20089, 20109, 20119, 20139, 20148 }, { 20019, 20029, 20049, 20059, 20079, 20089, 20109, 20119, 20139, 20148 }, { 20000, 20020, 20030, 20050, 20060, 20080, 20090, 20110, 20120, 20140 } };
+    List<TAggregationType> aggregationTypes = new ArrayList<>();
+    aggregationTypes.add(TAggregationType.FIRST_VALUE);
+    aggregationTypes.add(TAggregationType.LAST_VALUE);
+    aggregationTypes.add(TAggregationType.MAX_VALUE);
+    aggregationTypes.add(TAggregationType.MIN_VALUE);
+    GroupByTimeParameter groupByTimeParameter = new GroupByTimeParameter(0, 149, new TimeDuration(0, 50), new TimeDuration(0, 30), true);
+    List<TreeAggregator> aggregators = new ArrayList<>();
+    List<InputLocation[]> inputLocations = Collections.singletonList(new InputLocation[] { new InputLocation(0, 1) });
+    AccumulatorFactory.createBuiltinAccumulators(aggregationTypes, TSDataType.INT32, Collections.emptyList(), Collections.emptyMap(), true).forEach(o -> aggregators.add(new TreeAggregator(o, AggregationStep.SINGLE, inputLocations)));
+    AlignedSeriesAggregationScanOperator seriesAggregationScanOperator = initAlignedSeriesAggregationScanOperator(aggregators, null, true, groupByTimeParameter);
+    int count = 0;
+    while (seriesAggregationScanOperator.hasNext()) {
+        TsBlock resultTsBlock = seriesA"
+PV-010,hudi,testMorBootstrap,/Volumes/SSK Drive/apache-projects/hudi/hudi-common/src/test/java/org/apache/hudi/common/table/read/TestFileGroupReaderSchemaHandler.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""testMorParams"")
+public void testMorBootstrap(RecordMergeMode mergeMode, boolean hasPrecombine, boolean isProjectionCompatible, boolean mergeUseRecordPosition, boolean supportsParquetRowIndex, boolean hasBuiltInDelete) throws IOException {
+    super.testMorBootstrap(mergeMode, hasPrecombine, isProjectionCompatible, mergeUseRecordPosition, supportsParquetRowIndex, hasBuiltInDelete);
+}"
+PV-011,hive,testAddPartitions,/Volumes/SSK Drive/apache-projects/hive/standalone-metastore/metastore-server/src/test/java/org/apache/hadoop/hive/metastore/client/TestAddPartitions.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"// Tests for int add_partitions(List<Partition> partitions) method
+@Test
+public void testAddPartitions() throws Exception {
+    Table table = createTable();
+    List<Partition> partitions = new ArrayList<>();
+    Partition partition1 = buildPartition(Lists.newArrayList(""2017""), getYearPartCol(), 1);
+    Partition partition2 = buildPartition(Lists.newArrayList(""2016""), getYearPartCol(), 2);
+    Partition partition3 = buildPartition(Lists.newArrayList(""2015""), getYearPartCol(), 3);
+    partitions.add(partition1);
+    partitions.add(partition2);
+    partitions.add(partition3);
+    int numberOfCreatedParts = client.add_partitions(partitions);
+    Assert.assertEquals(3, numberOfCreatedParts);
+    verifyPartition(table, ""year=2017"", Lists.newArrayList(""2017""), 1);
+    verifyPartition(table, ""year=2016"", Lists.newArrayList(""2016""), 2);
+    verifyPartition(table, ""year=2015"", Lists.newArrayList(""2015""), 3);
+}"
+PV-012,geode,testExecutionOnAllNodes_NoLastResult,/Volumes/SSK Drive/apache-projects/geode/geode-core/src/distributedTest/java/org/apache/geode/internal/cache/execute/PRFunctionExecutionWithResultSenderDUnitTest.java,junit4,Test,nonPT,,,,"/**
+ * Test execution on all datastores with function that doesn't send last result. FunctionException
+ * is expected in this case
+ */
+@Test
+public void testExecutionOnAllNodes_NoLastResult() throws Exception {
+    VM datastore0 = getHost(0).getVM(0);
+    VM datastore1 = getHost(0).getVM(1);
+    VM datastore2 = getHost(0).getVM(2);
+    VM datastore3 = getHost(0).getVM(3);
+    datastore0.invoke(() -> {
+        createPartitionedRegion(regionName, 10, 0, 17);
+        FunctionService.registerFunction(new TestFunction(true, TEST_FUNCTION_NO_LASTRESULT));
+    });
+    datastore1.invoke(() -> {
+        createPartitionedRegion(regionName, 10, 0, 17);
+        FunctionService.registerFunction(new TestFunction(true, TEST_FUNCTION_NO_LASTRESULT));
+    });
+    datastore2.invoke(() -> {
+        createPartitionedRegion(regionName, 10, 0, 17);
+        FunctionService.registerFunction(new TestFunction(true, TEST_FUNCTION_NO_LASTRESULT));
+    });
+    datastore3.invoke(() -> {
+        createPartitionedRegion(regionName, 10, 0, 17);
+        FunctionService.registerFunction(new TestFunction(true, TEST_FUNCTION_NO_LASTRESULT));
+    });
+    datastore3.invoke(() -> {
+        PartitionedRegion pr = getPartitionedRegion(regionName);
+        Collection<String> stringKeys = new HashSet<>();
+        for (int i = pr.getTotalNumberOfBuckets() * 3; i > 0; i--) {
+            stringKeys.add(STRING_KEY + i);
+        }
+        int valueIndex = 0;
+        for (String key : stringKeys) {
+            int value = valueIndex++;
+            pr.put(key, value);
+        }
+        // Assert there is data in each bucket"
+PV-013,beam,testReadLinesWithDefaultDelimiterOnSplittingSourceAndSlowReadChannel,/Volumes/SSK Drive/apache-projects/beam/sdks/java/core/src/test/java/org/apache/beam/sdk/io/TextIOReadTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testReadLinesWithDefaultDelimiterOnSplittingSourceAndSlowReadChannel() throws Exception {
+    Path path = tempFolder.newFile().toPath();
+    Files.write(path, line.getBytes(UTF_8));
+    Metadata metadata = FileSystems.matchSingleFileSpec(path.toString());
+    FileBasedSource<String> source = getTextSource(path.toString(), null, 0).createForSubrangeOfFile(metadata, 0, metadata.sizeBytes());
+    PipelineOptions options = PipelineOptionsFactory.create();
+    // Check every possible split positions.
+    for (int i = 0; i < line.length(); ++i) {
+        double fraction = i * 1.0 / line.length();
+        FileBasedReader<String> reader = source.createSingleFileReader(options);
+        // Use a slow read channel to read the content byte by byte. This can simulate the scenario
+        // of a certain character (in our case CR) occurring at the end of the read buffer.
+        reader.startReading(new SlowReadChannel(source));
+        // In order to get a successful split, we need to read at least one record before calling
+        // splitAtFraction().
+        List<String> totalItems = SourceTestUtils.readNItemsFromStartedReader(reader, 1);
+        BoundedSource<String> residual = reader.splitAtFraction(fraction);
+        List<String> primaryItems = SourceTestUtils.readFromStartedReader(reader);
+        totalItems.addAll(primaryItems);
+        if (residual != null) {
+            List<String> residualItems = SourceTestUtils.readFromSource(residual, options);
+            totalItems.addAll(residualItems);
+        }
+        assertEquals(expected, totalItems);
+    }
+}"
+PV-014,flink,testKeepLastRowWithoutGenerateUpdateBeforeAndWithGenerateInsert,/Volumes/SSK Drive/apache-projects/flink/flink-table/flink-table-runtime/src/test/java/org/apache/flink/table/runtime/operators/deduplicate/RowTimeMiniBatchLatestChangeDeduplicateFunctionTest.java,junit5,Test,nonPT,,,,"@Test
+void testKeepLastRowWithoutGenerateUpdateBeforeAndWithGenerateInsert() throws Exception {
+    OneInputStreamOperatorTestHarness<RowData, RowData> testHarness = createTestHarness(false, true, true);
+    testHarness.open();
+    testHarness.processElement(insertRecord(""book"", 10, 1L));
+    testHarness.processElement(insertRecord(""book"", 11, 2L));
+    testHarness.processElement(insertRecord(""book"", 13, 1L));
+    // output is empty because bundle not trigger yet.
+    assertThat(testHarness.getOutput()).isEmpty();
+    // bundle trigger emit.
+    testHarness.processElement(insertRecord(""book"", 12, 1L));
+    List<Object> expectedOutput = new ArrayList<>();
+    expectedOutput.add(insertRecord(""book"", 11, 2L));
+    assertor.assertOutputEqualsSorted(""output wrong."", expectedOutput, testHarness.getOutput());
+    testHarness.processElement(insertRecord(""book"", 14, 3L));
+    testHarness.processElement(insertRecord(""book"", 15, 1L));
+    // watermark trigger emit.
+    testHarness.processWatermark(new Watermark(3L));
+    expectedOutput.add(updateAfterRecord(""book"", 14, 3L));
+    expectedOutput.add(new Watermark(3L));
+    testHarness.close();
+    assertor.assertOutputEqualsSorted(""output wrong."", expectedOutput, testHarness.getOutput());
+}"
+PV-015,logging-log4j2,testUntrimmedValues,/Volumes/SSK Drive/apache-projects/logging-log4j2/log4j-1.2-api/src/test/java/org/apache/log4j/config/PropertiesConfigurationTest.java,junit5,Test,nonPT,,,,"@Test
+void testUntrimmedValues() throws Exception {
+    try {
+        final Configuration config = getConfiguration(""config-1.2/log4j-untrimmed"");
+        final LoggerConfig rootLogger = config.getRootLogger();
+        assertEquals(Level.DEBUG, rootLogger.getLevel());
+        final Appender appender = config.getAppender(""Console"");
+        assertInstanceOf(ConsoleAppender.class, appender);
+        final Layout<? extends Serializable> layout = appender.getLayout();
+        assertInstanceOf(PatternLayout.class, layout);
+        assertEquals(""%v1Level - %m%n"", ((PatternLayout) layout).getConversionPattern());
+        final Filter filter = ((Filterable) appender).getFilter();
+        assertInstanceOf(DenyAllFilter.class, filter);
+        config.start();
+        config.stop();
+    } catch (NoClassDefFoundError e) {
+        fail(e.getMessage());
+    }
+}"
+PV-016,wicket,regexp,/Volumes/SSK Drive/apache-projects/wicket/wicket-core-tests/src/test/java/org/apache/wicket/core/util/string/JavaScriptStripperTest.java,junit5,Test,nonPT,,,,"/**
+ */
+@Test
+void regexp() {
+    String s = new JavaScriptStripper().stripCommentsAndWhitespace(""    t = jQuery.trim(t).replace( /^\\/\\//i, \""\"" );"");
+    assertEquals("" t = jQuery.trim(t).replace( /^\\/\\//i, \""\"" );"", s);
+}"
+PV-017,camel,shouldTransformFromStringToBytesModel,/Volumes/SSK Drive/apache-projects/camel/core/camel-core/src/test/java/org/apache/camel/processor/transformer/ByteArrayDataTypeTransformerTest.java,junit5,Test,nonPT,,,,"@Test
+void shouldTransformFromStringToBytesModel() throws Exception {
+    Exchange exchange = new DefaultExchange(camelContext);
+    exchange.getMessage().setHeader(""file"", ""test1.txt"");
+    exchange.getMessage().setBody(""Test1"");
+    transformer.transform(exchange.getMessage(), DataType.ANY, DataType.ANY);
+    Assertions.assertTrue(exchange.getMessage().hasHeaders());
+    assertBinaryBody(exchange, ""test1.txt"", ""Test1"");
+}"
+PV-018,druid,testSelectWithFilterLookupExtractionFn,/Volumes/SSK Drive/apache-projects/druid/processing/src/test/java/org/apache/druid/query/scan/ScanQueryRunnerTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testSelectWithFilterLookupExtractionFn() {
+    Map<String, String> extractionMap = new HashMap<>();
+    extractionMap.put(""total_market"", ""replaced"");
+    MapLookupExtractor mapLookupExtractor = new MapLookupExtractor(extractionMap, false);
+    LookupExtractionFn lookupExtractionFn = new LookupExtractionFn(mapLookupExtractor, false, null, true, true);
+    ScanQuery query = newTestQuery().intervals(I_0112_0114).filters(new SelectorDimFilter(QueryRunnerTestHelper.MARKET_DIMENSION, ""replaced"", lookupExtractionFn)).columns(QueryRunnerTestHelper.QUALITY_DIMENSION, QueryRunnerTestHelper.INDEX_METRIC).build();
+    Iterable<ScanResultValue> results = runner.run(QueryPlus.wrap(query)).toList();
+    Iterable<ScanResultValue> resultsOptimize = TOOL_CHEST.postMergeQueryDecoration(TOOL_CHEST.mergeResults(TOOL_CHEST.preMergeQueryDecoration(runner))).run(QueryPlus.wrap(query)).toList();
+    final List<List<Map<String, Object>>> events = toEvents(new String[] { null, null, QueryRunnerTestHelper.QUALITY_DIMENSION + "":STRING"", null, null, QueryRunnerTestHelper.INDEX_METRIC + "":DOUBLE"" }, // filtered values with day granularity
+    new String[] { ""2011-01-12T00:00:00.000Z\ttotal_market\tmezzanine\tpreferred\tmpreferred\t1000.000000"", ""2011-01-12T00:00:00.000Z\ttotal_market\tpremium\tpreferred\tppreferred\t1000.000000"" }, new String[] { ""2011-01-13T00:00:00.000Z\ttotal_market\tmezzanine\tpreferred\tmpreferred\t1040.945505"", ""2011-01-13T00:00:00.000Z\ttotal_market\tpremium\tpreferred\tppreferred\t1689.012875"" });
+    List<ScanResultValue> expectedResults = toExpected(event"
+PV-019,causeway,forList,/Volumes/SSK Drive/apache-projects/causeway/viewers/restfulobjects/applib/src/test/java/org/apache/causeway/viewer/restfulobjects/applib/JsonRepresentationTest_isArray_isMap_isValue.java,junit5,Test,nonPT,,,,"@Test
+public void forList() throws IOException {
+    jsonRepresentation = new JsonRepresentation(readJson(""list.json""));
+    assertThat(jsonRepresentation.isArray(), is(true));
+    assertThat(jsonRepresentation.isMap(), is(false));
+    assertThat(jsonRepresentation.isValue(), is(false));
+}"
+PV-020,hadoop,testSnappyCompress,/Volumes/SSK Drive/apache-projects/hadoop/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-nativetask/src/test/java/org/apache/hadoop/mapred/nativetask/compresstest/CompressTest.java,junit5,Test,nonPT,,,,"@Test
+public void testSnappyCompress() throws Exception {
+    final String snappyCodec = ""org.apache.hadoop.io.compress.SnappyCodec"";
+    nativeConf.set(MRJobConfig.MAP_OUTPUT_COMPRESS_CODEC, snappyCodec);
+    final String nativeOutputPath = TestConstants.NATIVETASK_COMPRESS_TEST_NATIVE_OUTPUTDIR + ""/snappy"";
+    final Job job = CompressMapper.getCompressJob(""nativesnappy"", nativeConf, TestConstants.NATIVETASK_COMPRESS_TEST_INPUTDIR, nativeOutputPath);
+    assertThat(job.waitForCompletion(true)).isTrue();
+    hadoopConf.set(MRJobConfig.MAP_OUTPUT_COMPRESS_CODEC, snappyCodec);
+    final String hadoopOutputPath = TestConstants.NATIVETASK_COMPRESS_TEST_NORMAL_OUTPUTDIR + ""/snappy"";
+    final Job hadoopjob = CompressMapper.getCompressJob(""hadoopsnappy"", hadoopConf, TestConstants.NATIVETASK_COMPRESS_TEST_INPUTDIR, hadoopOutputPath);
+    assertThat(hadoopjob.waitForCompletion(true)).isTrue();
+    final boolean compareRet = ResultVerifier.verify(nativeOutputPath, hadoopOutputPath);
+    assertThat(compareRet).withFailMessage(""file compare result: if they are the same ,then return true"").isTrue();
+    ResultVerifier.verifyCounters(hadoopjob, job);
+}"
+PV-021,iceberg,testListDirRecursivelyNotInclude,/Volumes/SSK Drive/apache-projects/iceberg/core/src/test/java/org/apache/iceberg/util/TestFileSystemWalker.java,junit5,ParameterizedTest;ValueSource,PT,,,,"@ParameterizedTest
+@ValueSource(booleans = { true, false })
+public void testListDirRecursivelyNotInclude(boolean useHadoop) {
+    List<String> foundFiles = Lists.newArrayList();
+    String path = basePath + ""/normal_dir"";
+    listFilesRecursively(path, useHadoop, specs, foundFiles);
+    assertThat(foundFiles).hasSize(2);
+    assertThat(foundFiles).contains(Paths.get(""file://"", basePath, ""normal_dir/file2.txt"").toString());
+    assertThat(foundFiles).contains(Paths.get(""file://"", basePath, ""normal_dir/dep1/file3.txt"").toString());
+    assertThat(foundFiles).doesNotContain(Paths.get(""file://"", basePath, ""normal_dir_1/file4.txt"").toString());
+}"
+PV-022,druid,testNoopTask,/Volumes/SSK Drive/apache-projects/druid/indexing-service/src/test/java/org/apache/druid/indexing/overlord/TaskLifecycleTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testNoopTask() {
+    final TaskStatus status = runTask(NoopTask.create());
+    Assert.assertEquals(""statusCode"", TaskState.SUCCESS, status.getStatusCode());
+    Assert.assertEquals(taskLocation, status.getLocation());
+    Assert.assertEquals(""num segments published"", 0, mdc.getPublished().size());
+    Assert.assertEquals(""num segments nuked"", 0, mdc.getNuked().size());
+}"
+PV-023,cxf,testSAML11,/Volumes/SSK Drive/apache-projects/cxf/systests/rs-security/src/test/java/org/apache/cxf/systest/jaxrs/security/oauth2/grants/JAXRSOAuth2Test.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"//
+// Some negative tests for authentication
+//
+@Test
+public void testSAML11() throws Exception {
+    String address = ""https://localhost:"" + port + ""/oauth2-auth/token"";
+    WebClient wc = createWebClient(address);
+    String audienceURI = ""https://localhost:"" + port + ""/oauth2-auth/token"";
+    String assertion = OAuth2TestUtils.createToken(audienceURI, false, true);
+    String encodedAssertion = Base64UrlUtility.encode(assertion);
+    Map<String, String> extraParams = new HashMap<>();
+    extraParams.put(Constants.CLIENT_AUTH_ASSERTION_TYPE, Constants.CLIENT_AUTH_SAML2_BEARER);
+    extraParams.put(Constants.CLIENT_AUTH_ASSERTION_PARAM, encodedAssertion);
+    try {
+        OAuthClientUtils.getAccessToken(wc, new CustomGrant(), extraParams);
+        fail(""Failure expected on a SAML 1.1 Assertion"");
+    } catch (OAuthServiceException ex) {
+        // expected
+    }
+}"
+PV-024,qpid-broker-j,contentTypesConversion,/Volumes/SSK Drive/apache-projects/qpid-broker-j/broker-plugins/amqp-msg-conv-0-8-to-1-0/src/test/java/org/apache/qpid/server/protocol/converter/v0_8_v1_0/PropertyConverter_0_8_to_1_0Test.java,junit5,ParameterizedTest;CsvSource,PT,,,,"@ParameterizedTest
+@CsvSource({ ""test-content-type,test-content-type"", ""application/java-object-stream,application/x-java-serialized-object"" })
+void contentTypesConversion(final String contentType, final String expectedContentType) {
+    final BasicContentHeaderProperties basicContentHeaderProperties = new BasicContentHeaderProperties();
+    basicContentHeaderProperties.setContentType(contentType);
+    final AMQMessage message = createTestMessage(basicContentHeaderProperties);
+    final Message_1_0 convertedMessage = _messageConverter.convert(message, _namedAddressSpace);
+    final Properties properties = convertedMessage.getPropertiesSection().getValue();
+    assertEquals(expectedContentType, properties.getContentType().toString(), ""Unexpected content type"");
+}"
+PV-025,flink,testPartitioning,/Volumes/SSK Drive/apache-projects/flink/flink-datastream/src/test/java/org/apache/flink/datastream/impl/stream/KeyedPartitionStreamImplTest.java,junit5,Test,nonPT,,,,"@Test
+void testPartitioning() throws Exception {
+    ExecutionEnvironmentImpl env = StreamTestUtils.getEnv();
+    KeyedPartitionStream<Integer, Integer> stream = createKeyedStream(env);
+    stream.keyBy((data) -> 1).process(new NoOpOneInputStreamProcessFunction());
+    stream.shuffle().process(new NoOpOneInputStreamProcessFunction());
+    stream.broadcast().connectAndProcess(new NonKeyedPartitionStreamImpl<>(env, new TestingTransformation<>(""t2"", Types.LONG, 1)), new StreamTestUtils.NoOpTwoInputBroadcastStreamProcessFunction());
+    List<Transformation<?>> transformations = env.getTransformations();
+    Transformation<?> keyedTransform = transformations.get(0).getInputs().get(0);
+    assertThat(keyedTransform).isInstanceOf(PartitionTransformation.class);
+    Transformation<?> shuffleTransform = transformations.get(1).getInputs().get(0);
+    assertThat(shuffleTransform).isInstanceOf(PartitionTransformation.class);
+    assertThat(transformations.get(2).getParallelism()).isOne();
+}"
+PV-026,commons-codec,testLanguageGuessing,/Volumes/SSK Drive/apache-projects/commons-codec/src/test/java/org/apache/commons/codec/language/bm/LanguageGuessingTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""data"")
+void testLanguageGuessing(final String name, final String language) {
+    final Languages.LanguageSet guesses = this.lang.guessLanguages(name);
+    assertTrue(guesses.contains(language), ""language predicted for name '"" + name + ""' is wrong: "" + guesses + "" should contain '"" + language + ""'"");
+}"
+PV-027,sis,testNormalizedCRS,/Volumes/SSK Drive/apache-projects/sis/endorsed/src/org.apache.sis.referencing/test/org/apache/sis/referencing/internal/shared/DefinitionVerifierTest.java,junit5,Test,nonPT,,,,"/**
+ * Tests with a CRS which is conform to the authoritative definition.
+ *
+ * @throws FactoryException if an error occurred while querying the authority factory.
+ */
+@Test
+public void testNormalizedCRS() throws FactoryException {
+    final DefaultGeographicCRS crs = HardCodedCRS.WGS84;
+    assertNull(DefinitionVerifier.withAuthority(crs, null, false, null), ""No replacement without EPSG code."");
+    final DefinitionVerifier ver = DefinitionVerifier.withAuthority(crs, null, true, null);
+    assertNotNull(ver, ""Should replace by normalized CRS"");
+    assertNotSame(crs, ver.recommendation, ""Should replace by normalized CRS"");
+    assertSame(CommonCRS.WGS84.normalizedGeographic(), ver.recommendation, ""Should replace by normalized CRS"");
+    assertNull(ver.warning(true), ""Should be silent."");
+}"
+PV-028,commons-collections,testInternalState_CursorNextNextPreviousAddIndex1ByList,/Volumes/SSK Drive/apache-projects/commons-collections/src/test/java/org/apache/commons/collections4/list/CursorableLinkedListTest.java,junit5,Test;SuppressWarnings,nonPT,,,,"@Test
+@SuppressWarnings(""unchecked"")
+void testInternalState_CursorNextNextPreviousAddIndex1ByList() {
+    list.add((E) ""A"");
+    list.add((E) ""B"");
+    list.add((E) ""C"");
+    final CursorableLinkedList.Cursor<E> c1 = list.cursor();
+    assertEquals(""A"", c1.next());
+    assertEquals(""B"", c1.next());
+    assertEquals(""B"", c1.previous());
+    list.add(1, (E) ""Z"");
+    assertTrue(c1.nextIndexValid);
+    assertEquals(1, c1.nextIndex);
+    assertEquals(""B"", c1.current.value);
+    assertEquals(""Z"", c1.next.value);
+    assertEquals(""[A, Z, B, C]"", list.toString());
+    // works ok
+    c1.remove();
+    assertEquals(""[A, Z, C]"", list.toString());
+    assertThrows(IllegalStateException.class, () -> c1.remove());
+}"
+PV-029,beam,testStorageApiErrorsWriteBeamRow,/Volumes/SSK Drive/apache-projects/beam/sdks/java/io/google-cloud-platform/src/test/java/org/apache/beam/sdk/io/gcp/bigquery/BigQueryIOWriteTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testStorageApiErrorsWriteBeamRow() throws Exception {
+    assumeTrue(useStorageApi);
+    final Method method = useStorageApiApproximate ? Method.STORAGE_API_AT_LEAST_ONCE : Method.STORAGE_WRITE_API;
+    final int failFrom = 10;
+    final String shouldFailName = ""failme"";
+    List<SchemaPojo> goodRows = Lists.newArrayList(new SchemaPojo(""a"", 1), new SchemaPojo(""b"", 2), new SchemaPojo(""c"", 10), new SchemaPojo(""d"", 11), new SchemaPojo(shouldFailName, 1));
+    String nameField = ""name"";
+    String numberField = ""number"";
+    Function<TableRow, Boolean> shouldFailRow = (Function<TableRow, Boolean> & Serializable) tr -> shouldFailName.equals(tr.get(nameField)) || (Integer.valueOf((String) tr.get(numberField)) >= failFrom);
+    fakeDatasetService.setShouldFailRow(shouldFailRow);
+    SerializableFunction<SchemaPojo, TableRow> formatRecordOnFailureFunction = input -> {
+        TableRow failedTableRow = new TableRow().set(""testFailureFunctionField"", ""testValue"");
+        failedTableRow.set(""originalName"", input.name);
+        failedTableRow.set(""originalNumber"", input.number);
+        return failedTableRow;
+    };
+    WriteResult result = p.apply(Create.of(goodRows)).apply(BigQueryIO.<SchemaPojo>write().to(""project-id:dataset-id.table"").withMethod(method).useBeamSchema().withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED).withFailedInsertRetryPolicy(InsertRetryPolicy.retryTransientErrors()).withPropagateSuccessfulStorageApiWrites(true).withTestServices(fakeBqServices).withFormatRecordOnFailureFunction(formatRecordOnFailureFunction).withoutVali"
+PV-030,directory-studio,testCreateConnectionStartTlsEncryptionSaslGssapiNativeTgtAuthConfOK,/Volumes/SSK Drive/apache-projects/directory-studio/tests/test.integration.ui/src/main/java/org/apache/directory/studio/test/integration/ui/NewConnectionWizardTest.java,junit5,ParameterizedTest;LdapServersSource,PT,,,,"@ParameterizedTest
+@LdapServersSource(except = LdapServerType.ApacheDS, reason = ""Missing OSGi import: org.apache.directory.server.kerberos.shared.store.PrincipalStoreEntryModifier cannot be found by org.apache.directory.server.protocol.shared_2.0.0.AM26"")
+public void testCreateConnectionStartTlsEncryptionSaslGssapiNativeTgtAuthConfOK(TestLdapServer server) throws Exception {
+    TestFixture.skipIfKdcServerIsNotAvailable();
+    // obtain native TGT
+    String[] cmd = { ""/bin/sh"", ""-c"", ""echo secret | /usr/bin/kinit hnelson"" };
+    Process process = Runtime.getRuntime().exec(cmd);
+    int exitCode = process.waitFor();
+    assertEquals(0, exitCode);
+    setConnectionParameters(server, EncryptionMethod.START_TLS);
+    wizardBot.selectGssApiAuthentication();
+    wizardBot.selectQualityOfProtection(SaslQoP.AUTH_CONF);
+    wizardBot.selectProtectionStrength(SaslSecurityStrength.HIGH);
+    wizardBot.selectUseNativeTgt();
+    wizardBot.selectUseNativeSystemConfiguration();
+    String result = wizardBot.clickCheckAuthenticationButton();
+    assertNull(result, ""Expected OK"");
+    finishAndAssertConnection(server, EncryptionMethod.START_TLS, AuthenticationMethod.SASL_GSSAPI, """", """");
+}"
+PV-031,hbase,testScanWithLimitGreaterThanActualCount,/Volumes/SSK Drive/apache-projects/hbase/hbase-server/src/test/java/org/apache/hadoop/hbase/client/TestScannersFromClientSide2.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testScanWithLimitGreaterThanActualCount() throws Exception {
+    // from first region to last region
+    testScan(1, true, 998, false, 1000);
+    testScan(123, true, 345, true, 200);
+    testScan(234, true, 456, false, 200);
+    testScan(345, false, 567, true, 200);
+    testScan(456, false, 678, false, 200);
+}"
+PV-032,cxf,getTeacherTest,/Volumes/SSK Drive/apache-projects/cxf/systests/ws-transfer/src/test/java/org/apache/cxf/systest/ws/transfer/GetTest.java,junit4,Test,nonPT,,,,"@Test
+public void getTeacherTest() {
+    Resource client = TestUtils.createResourceClient(teacherRef);
+    GetResponse response = client.get(new Get());
+    Element representation = (Element) response.getRepresentation().getAny();
+    NodeList children = representation.getChildNodes();
+    for (int i = 0; i < children.getLength(); i++) {
+        Element child = (Element) children.item(i);
+        if (""name"".equals(child.getLocalName())) {
+            Assert.assertEquals(""Bob"", child.getTextContent());
+        } else if (""surname"".equals(child.getLocalName())) {
+            Assert.assertEquals(""Stuart"", child.getTextContent());
+        } else if (""address"".equals(child.getLocalName())) {
+            Assert.assertEquals(""Street 526"", child.getTextContent());
+        }
+    }
+}"
+PV-033,druid,testIdentifierWithNonzeroPartition,/Volumes/SSK Drive/apache-projects/druid/processing/src/test/java/org/apache/druid/timeline/DataSegmentTest.java,junit4,Test,nonPT,,,,"@Test
+public void testIdentifierWithNonzeroPartition() {
+    final DataSegment segment = DataSegment.builder().dataSource(""foo"").interval(Intervals.of(""2012-01-01/2012-01-02"")).version(DateTimes.of(""2012-01-01T11:22:33.444Z"").toString()).shardSpec(getShardSpec(7)).size(0).build();
+    Assert.assertEquals(""foo_2012-01-01T00:00:00.000Z_2012-01-02T00:00:00.000Z_2012-01-01T11:22:33.444Z_7"", segment.getId().toString());
+}"
+PV-034,commons-rng,testIntArray2Int,/Volumes/SSK Drive/apache-projects/commons-rng/commons-rng-simple/src/test/java/org/apache/commons/rng/simple/internal/ConversionsTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(value = { ""getIntLengths"" })
+void testIntArray2Int(int ints) {
+    final int[] seed = ThreadLocalRandom.current().ints(ints).toArray();
+    // xor all the bytes
+    int expected = 0;
+    for (final int i : seed) {
+        expected ^= i;
+    }
+    Assertions.assertEquals(expected, Conversions.intArray2Int(seed));
+}"
+PV-035,hadoop,testAMSimulatorWithNodeLabels,/Volumes/SSK Drive/apache-projects/hadoop/hadoop-tools/hadoop-sls/src/test/java/org/apache/hadoop/yarn/sls/appmaster/TestAMSimulator.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""params"")
+public void testAMSimulatorWithNodeLabels(Class<?> pSlsScheduler, Class<?> pScheduler) throws Exception {
+    initTestAMSimulator(pSlsScheduler, pScheduler);
+    if (scheduler.equals(CapacityScheduler.class)) {
+        // add label to the cluster
+        RMAdminCLI rmAdminCLI = new RMAdminCLI(conf);
+        String[] args = { ""-addToClusterNodeLabels"", ""label1"" };
+        rmAdminCLI.run(args);
+        MockAMSimulator app = new MockAMSimulator();
+        String appId = ""app1"";
+        String queue = ""default"";
+        List<ContainerSimulator> containers = new ArrayList<>();
+        HashMap<ApplicationId, AMSimulator> map = new HashMap<>();
+        UserName mockUser = mock(UserName.class);
+        when(mockUser.getValue()).thenReturn(""user1"");
+        AMDefinitionRumen amDef = AMDefinitionRumen.Builder.create().withUser(mockUser).withQueue(queue).withJobId(appId).withJobStartTime(0).withJobFinishTime(1000000L).withAmResource(SLSConfiguration.getAMContainerResource(conf)).withTaskContainers(containers).withLabelExpression(""label1"").build();
+        app.init(amDef, rm, null, true, 0, 1000, map);
+        app.firstStep();
+        verifySchedulerMetrics(appId);
+        ConcurrentMap<ApplicationId, RMApp> rmApps = rm.getRMContext().getRMApps();
+        Assertions.assertEquals(1, rmApps.size());
+        RMApp rmApp = rmApps.get(app.appId);
+        Assertions.assertNotNull(rmApp);
+        Assertions.assertEquals(""label1"", rmApp.getAmNodeLabelExpression());
+    }
+}"
+PV-036,beam,testCreateTable_invalidTableType,/Volumes/SSK Drive/apache-projects/beam/sdks/java/extensions/sql/src/test/java/org/apache/beam/sdk/extensions/sql/meta/store/InMemoryMetaStoreTest.java,junit4,Test,nonPT,,,,"@Test(expected = IllegalArgumentException.class)
+public void testCreateTable_invalidTableType() throws Exception {
+    Table table = mockTable(""person"", ""invalid"");
+    store.createTable(table);
+}"
+PV-037,beam,testDynamicDestinationsViaSinkWithoutSharding,/Volumes/SSK Drive/apache-projects/beam/sdks/java/extensions/avro/src/test/java/org/apache/beam/sdk/extensions/avro/io/AvroIOTest.java,junit4,Test;Category;RunWith(Parameterized.class),PT,,,,"@Test
+@Category(NeedsRunner.class)
+public void testDynamicDestinationsViaSinkWithoutSharding() throws Exception {
+    testDynamicDestinationsUnwindowedWithSharding(WriteMethod.AVROIO_SINK_WITH_SCHEMA, Sharding.WITHOUT_SHARDING);
+}"
+PV-038,commons-math,testBadFunction,/Volumes/SSK Drive/apache-projects/commons-math/commons-math-legacy/src/test/java/org/apache/commons/math4/legacy/optim/univariate/MultiStartUnivariateOptimizerTest.java,junit4,Test,nonPT,,,,"@Test
+public void testBadFunction() {
+    UnivariateFunction f = new UnivariateFunction() {
+
+        @Override
+        public double value(double x) {
+            if (x < 0) {
+                throw new LocalException();
+            }
+            return 0;
+        }
+    };
+    UnivariateOptimizer underlying = new BrentOptimizer(1e-9, 1e-14);
+    UniformRandomProvider g = RandomSource.TWO_CMRES.create(4312000053L);
+    MultiStartUnivariateOptimizer optimizer = new MultiStartUnivariateOptimizer(underlying, 5, g);
+    try {
+        optimizer.optimize(new MaxEval(300), new UnivariateObjectiveFunction(f), GoalType.MINIMIZE, new SearchInterval(-0.3, -0.2));
+        Assert.fail();
+    } catch (LocalException e) {
+        // Expected.
+    }
+    // Ensure that the exception was thrown because no optimum was found.
+    Assert.assertNull(optimizer.getOptima()[0]);
+}"
+PV-039,druid,testGroupByExpressionArrayFnArg,/Volumes/SSK Drive/apache-projects/druid/processing/src/test/java/org/apache/druid/query/MultiValuedDimensionTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testGroupByExpressionArrayFnArg() {
+    GroupByQuery query = GroupByQuery.builder().setDataSource(""xx"").setQuerySegmentSpec(new LegacySegmentSpec(""1970/3000"")).setGranularity(Granularities.ALL).setDimensions(new DefaultDimensionSpec(""tt"", ""tt"")).setVirtualColumns(new ExpressionVirtualColumn(""tt"", ""array_to_string(map(tags -> concat('foo', tags), tags), ', ')"", ColumnType.STRING, TestExprMacroTable.INSTANCE)).setAggregatorSpecs(new CountAggregatorFactory(""count"")).setContext(context).build();
+    Sequence<ResultRow> result = helper.runQueryOnSegmentsObjs(ImmutableList.of(new QueryableIndexSegment(queryableIndex, SegmentId.dummy(""sid1"")), new IncrementalIndexSegment(incrementalIndex, SegmentId.dummy(""sid2""))), query);
+    List<ResultRow> expectedResults = Arrays.asList(GroupByQueryRunnerTestHelper.createExpectedRow(query, ""1970"", ""tt"", ""foo"", ""count"", 2L), GroupByQueryRunnerTestHelper.createExpectedRow(query, ""1970"", ""tt"", ""foot1, foot2, foot3"", ""count"", 2L), GroupByQueryRunnerTestHelper.createExpectedRow(query, ""1970"", ""tt"", ""foot3, foot4, foot5"", ""count"", 2L), GroupByQueryRunnerTestHelper.createExpectedRow(query, ""1970"", ""tt"", ""foot5, foot6, foot7"", ""count"", 2L));
+    TestHelper.assertExpectedObjects(expectedResults, result.toList(), ""expr-array-fn"");
+}"
+PV-040,creadur-rat,listIssuesTest,/Volumes/SSK Drive/apache-projects/creadur-rat/apache-rat-core/src/test/java/org/apache/rat/config/results/ClaimValidatorTest.java,junit5,Test,nonPT,,,,"@Test
+public void listIssuesTest() {
+    ClaimStatistic statistic = new ClaimStatistic();
+    List<String> required = getRequiredCounters().stream().map(ClaimStatistic.Counter::name).collect(Collectors.toList());
+    int value = 5;
+    for (ClaimStatistic.Counter counter : ClaimStatistic.Counter.values()) {
+        List<String> expected = new ArrayList<>(required);
+        expected.remove(counter.name());
+        ClaimValidator validator = new ClaimValidator();
+        validator.setMax(counter, value);
+        statistic.incCounter(counter, value);
+        Collection<String> actual = validator.listIssues(statistic);
+        assertEquals(expected, actual);
+        statistic.incCounter(counter, 1);
+        expected.add(counter.name());
+        expected.sort(String::compareTo);
+        actual = validator.listIssues(statistic);
+        assertEquals(expected, actual);
+        statistic.incCounter(counter, -1 - value);
+    }
+}"
+PV-041,storm,sizeOfRankingsShouldNotGrowBeyondTopN,/Volumes/SSK Drive/apache-projects/storm/examples/storm-starter/test/jvm/org/apache/storm/starter/tools/RankingsTest.java,unknown,Test,nonPT,,,,"@Test(dataProvider = ""rankingsGrowData"")
+public void sizeOfRankingsShouldNotGrowBeyondTopN(int topN, List<Rankable> rankables) {
+    // sanity check of the provided test data
+    assertThat(rankables.size()).overridingErrorMessage(""The supplied test data is not correct: the number of rankables <%d> should be greater than <%d>"", rankables.size(), topN).isGreaterThan(topN);
+    // given
+    Rankings rankings = new Rankings(topN);
+    // when
+    for (Rankable r : rankables) {
+        rankings.updateWith(r);
+    }
+    // then
+    assertThat(rankings.size()).isLessThanOrEqualTo(rankings.maxSize());
+}"
+PV-042,camel,shouldHandleMissingSourceFile,/Volumes/SSK Drive/apache-projects/camel/dsl/camel-jbang/camel-jbang-plugin-kubernetes/src/test/java/org/apache/camel/dsl/jbang/core/commands/kubernetes/KubernetesRunTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""runtimeProvider"")
+public void shouldHandleMissingSourceFile(RuntimeType rt) throws Exception {
+    KubernetesRun command = createCommand(List.of(""mickey-mouse.groovy""), ""--disable-auto=true"", ""--output=yaml"", ""--runtime="" + rt.runtime());
+    int exit = command.doCall();
+    Assertions.assertEquals(1, exit);
+    Assertions.assertTrue(printer.getOutput().contains(""ERROR: Project export failed!""));
+}"
+PV-043,druid,test_commitSegmentsAndMetadata_isAtomic,/Volumes/SSK Drive/apache-projects/druid/server/src/test/java/org/apache/druid/metadata/IndexerSQLMetadataStorageCoordinatorTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void test_commitSegmentsAndMetadata_isAtomic() {
+    final String dataSource = defaultSegment.getDataSource();
+    Assert.assertNull(coordinator.retrieveDataSourceMetadata(dataSource));
+    // Create an instance which fails to insert segments but updates metadata successfully
+    final AtomicBoolean isMetadataUpdated = new AtomicBoolean(false);
+    final IndexerSQLMetadataStorageCoordinator storageCoordinator = new IndexerSQLMetadataStorageCoordinator(transactionFactory, mapper, derbyConnectorRule.metadataTablesConfigSupplier().get(), derbyConnector, segmentSchemaManager, CentralizedDatasourceSchemaConfig.create()) {
+
+        @Override
+        protected Set<DataSegment> insertSegments(SegmentMetadataTransaction transaction, Set<DataSegment> segments, SegmentSchemaMapping segmentSchemaMapping) {
+            throw new RuntimeException(""Fail segment insert"");
+        }
+
+        @Override
+        protected SegmentPublishResult updateDataSourceMetadataInTransaction(SegmentMetadataTransaction transaction, String supervisorId, String dataSource, DataSourceMetadata startMetadata, DataSourceMetadata endMetadata) throws IOException {
+            isMetadataUpdated.set(true);
+            return super.updateDataSourceMetadataInTransaction(transaction, supervisorId, dataSource, startMetadata, endMetadata);
+        }
+    };
+    MatcherAssert.assertThat(Assert.assertThrows(RuntimeException.class, () -> storageCoordinator.commitSegmentsAndMetadata(Set.of(defaultSegment), SUPERVISOR_ID, new ObjectMetadata(null), new ObjectMetadata(Map.of(""foo"", ""baz"")), null)), ExceptionMatcher."
+PV-044,hop,testXmlConfiguration,/Volumes/SSK Drive/apache-projects/hop/plugins/transforms/xml/src/test/java/org/apache/hop/pipeline/transforms/xml/getxmldata/GetXmlDataMetaTest.java,junit5,Test,nonPT,,,,"@Test
+void testXmlConfiguration() {
+    // Test XML-related settings
+    meta.setXmlField(""xml_content"");
+    assertEquals(""xml_content"", meta.getXmlField());
+    meta.setInFields(true);
+    assertTrue(meta.isInFields());
+    meta.setAFile(true);
+    assertTrue(meta.isAFile());
+    meta.setLoopXPath(""/root/item"");
+    assertEquals(""/root/item"", meta.getLoopXPath());
+    meta.setEncoding(""ISO-8859-1"");
+    assertEquals(""ISO-8859-1"", meta.getEncoding());
+    meta.setPrunePath(""/root/prune"");
+    assertEquals(""/root/prune"", meta.getPrunePath());
+}"
+PV-045,ozone,testLockResourceParallel,/Volumes/SSK Drive/apache-projects/ozone/hadoop-ozone/common/src/test/java/org/apache/hadoop/ozone/om/lock/TestOzoneManagerLock.java,junit5,ParameterizedTest;ValueSource,PT,,,,"@ParameterizedTest
+@ValueSource(booleans = { true, false })
+void testLockResourceParallel(boolean fullResourceLock) throws Exception {
+    OzoneManagerLock lock = new OzoneManagerLock(new OzoneConfiguration());
+    for (Resource resource : Stream.of(LeveledResource.values(), FlatResource.values()).flatMap(Arrays::stream).collect(Collectors.toList())) {
+        final String[] resourceName = generateResourceName(resource);
+        if (fullResourceLock) {
+            lock.acquireResourceWriteLock(resource);
+        } else {
+            lock.acquireWriteLock(resource, resourceName);
+        }
+        AtomicBoolean gotLock = new AtomicBoolean(false);
+        new Thread(() -> {
+            if (fullResourceLock) {
+                lock.acquireResourceWriteLock(resource);
+            } else {
+                lock.acquireWriteLock(resource, resourceName);
+            }
+            gotLock.set(true);
+            if (fullResourceLock) {
+                lock.releaseResourceWriteLock(resource);
+            } else {
+                lock.releaseWriteLock(resource, resourceName);
+            }
+        }).start();
+        // Let's give some time for the new thread to run
+        Thread.sleep(100);
+        // Since the new thread is trying to get lock on same resource,
+        // it will wait.
+        assertFalse(gotLock.get());
+        if (fullResourceLock) {
+            lock.releaseResourceWriteLock(resource);
+        } else {
+            lock.releaseWriteLock(resource, resourceName);
+        }
+        // Since we have released the lock, the new thread should have the lock
+        // now.
+ "
+PV-046,opennlp,readOverlapFilter,/Volumes/SSK Drive/apache-projects/opennlp/opennlp-core/opennlp-formats/src/test/java/opennlp/tools/formats/brat/BratNameSampleStreamTest.java,junit5,Test,nonPT,,,,"@Test
+void readOverlapFilter() throws IOException {
+    BratNameSampleStream stream = createNameSampleWith(""overlapping"", Collections.singleton(""Person""));
+    int count = 0;
+    NameSample sample = stream.read();
+    while (sample != null) {
+        count++;
+        sample = stream.read();
+    }
+    assertEquals(8, count);
+}"
+PV-047,hive,testInitializeCatalogWithProperties,/Volumes/SSK Drive/apache-projects/hive/iceberg/iceberg-catalog/src/test/java/org/apache/iceberg/hive/TestHiveCatalog.java,junit5,Test,nonPT,,,,"@Test
+public void testInitializeCatalogWithProperties() {
+    Map<String, String> properties = Maps.newHashMap();
+    properties.put(""uri"", ""thrift://examplehost:9083"");
+    properties.put(""warehouse"", ""/user/hive/testwarehouse"");
+    HiveCatalog hiveCatalog = new HiveCatalog();
+    hiveCatalog.initialize(""hive"", properties);
+    assertThat(hiveCatalog.getConf().get(""hive.metastore.uris"")).isEqualTo(""thrift://examplehost:9083"");
+    assertThat(hiveCatalog.getConf().get(""hive.metastore.warehouse.dir"")).isEqualTo(""/user/hive/testwarehouse"");
+}"
+PV-048,opennlp,testNaiveBayes,/Volumes/SSK Drive/apache-projects/opennlp/opennlp-core/opennlp-ml/opennlp-ml-bayes/src/test/java/opennlp/tools/ml/naivebayes/NaiveBayesSerializedCorrectnessTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""provideLabelsWithContext"")
+void testNaiveBayes(String label, String[] context) throws IOException {
+    NaiveBayesModel model1 = (NaiveBayesModel) new NaiveBayesTrainer().trainModel(testDataIndexer);
+    NaiveBayesModel model2 = persistedModel(model1);
+    Event event = new Event(label, context);
+    testModelOutcome(model1, model2, event);
+}"
+PV-049,nifi,invalidWhenAccountIdIsMissing,/Volumes/SSK Drive/apache-projects/nifi/nifi-extension-bundles/nifi-box-bundle/nifi-box-services/src/test/java/org/apache/nifi/box/controllerservices/JsonConfigBasedBoxClientServiceTestRunnerTest.java,junit5,Test,nonPT,,,,"@Test
+void invalidWhenAccountIdIsMissing() {
+    testRunner.setProperty(testSubject, JsonConfigBasedBoxClientService.APP_CONFIG_JSON, ""{}"");
+    // App Actor is Impersonated User by default.
+    testRunner.assertNotValid(testSubject);
+}"
+PV-050,druid,testUnion3,/Volumes/SSK Drive/apache-projects/druid/processing/src/test/java/org/apache/druid/extendedset/intset/ImmutableConciseSetTest.java,junit4,Test,nonPT,,,,"/**
+ * Set 1: zero fill, one fill
+ * Set 2: zero fill, one fill with flipped bit 62
+ * <p/>
+ * Testing merge
+ */
+@Test
+public void testUnion3() {
+    List<Integer> expected = new ArrayList<>();
+    ConciseSet set1 = new ConciseSet();
+    for (int i = 62; i < 10001; i++) {
+        set1.add(i);
+    }
+    ConciseSet set2 = new ConciseSet();
+    for (int i = 63; i < 10002; i++) {
+        set2.add(i);
+    }
+    List<ImmutableConciseSet> sets = Arrays.asList(ImmutableConciseSet.newImmutableFromMutable(set1), ImmutableConciseSet.newImmutableFromMutable(set2));
+    for (int i = 62; i < 10002; i++) {
+        expected.add(i);
+    }
+    verifyUnion(expected, sets);
+}"
+PV-051,flink,testShutdownDiscardsCheckpoints,/Volumes/SSK Drive/apache-projects/flink/flink-runtime/src/test/java/org/apache/flink/runtime/checkpoint/ZooKeeperCompletedCheckpointStoreITCase.java,junit5,Test,nonPT,,,,"/**
+ * Tests that shutdown discards all checkpoints.
+ */
+@Test
+void testShutdownDiscardsCheckpoints() throws Exception {
+    CuratorFramework client = getZooKeeperClient();
+    SharedStateRegistry sharedStateRegistry = new SharedStateRegistryImpl();
+    CompletedCheckpointStore store = createRecoveredCompletedCheckpointStore(1);
+    TestCompletedCheckpoint checkpoint = createCheckpoint(0, sharedStateRegistry);
+    store.addCheckpointAndSubsumeOldestOne(checkpoint, new CheckpointsCleaner(), () -> {
+    });
+    assertThat(store.getNumberOfRetainedCheckpoints()).isOne();
+    assertThat(client.checkExists().forPath(CHECKPOINT_PATH + checkpointStoreUtil.checkpointIDToName(checkpoint.getCheckpointID()))).isNotNull();
+    store.shutdown(JobStatus.FINISHED, new CheckpointsCleaner());
+    assertThat(store.getNumberOfRetainedCheckpoints()).isZero();
+    assertThat(client.checkExists().forPath(CHECKPOINT_PATH + checkpointStoreUtil.checkpointIDToName(checkpoint.getCheckpointID()))).isNull();
+    sharedStateRegistry.close();
+    assertThat(createRecoveredCompletedCheckpointStore(1).getNumberOfRetainedCheckpoints()).isZero();
+}"
+PV-052,geode,testQueriesOnLocalRegion,/Volumes/SSK Drive/apache-projects/geode/geode-core/src/integrationTest/java/org/apache/geode/cache/query/functional/SelectToDateJUnitTest.java,junit4,Test,nonPT,,,,"/**
+ * Test on Local Region data
+ */
+@Test
+public void testQueriesOnLocalRegion() throws Exception {
+    Cache cache = CacheUtils.getCache();
+    createLocalRegion();
+    assertNotNull(cache.getRegion(regionName));
+    assertEquals(numElem * 2, cache.getRegion(regionName).size());
+    executeQueryTest(cache, toDateQueries, toDateExpectedResults);
+}"
+PV-053,zookeeper,testRemoveAllPersistentRecursiveWatchers,/Volumes/SSK Drive/apache-projects/zookeeper/zookeeper-server/src/test/java/org/apache/zookeeper/RemoveWatchesTest.java,junit5,ParameterizedTest;ValueSource;Timeout,PT,,,,"/**
+ * Test verifies removing all watcher with WatcherType.PersistentRecursive.
+ *
+ * <p>All other watchers shouldn't be removed
+ */
+@ParameterizedTest
+@ValueSource(booleans = { true, false })
+@Timeout(value = 90)
+public void testRemoveAllPersistentRecursiveWatchers(boolean useAsync) throws InterruptedException, KeeperException {
+    zk1.create(""/node1"", null, Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+    BlockingDeque<WatchedEvent> recursiveEvents1 = new LinkedBlockingDeque<>();
+    BlockingDeque<WatchedEvent> recursiveEvents2 = new LinkedBlockingDeque<>();
+    Watcher recursiveWatcher1 = recursiveEvents1::add;
+    Watcher recursiveWatcher2 = recursiveEvents2::add;
+    zk2.addWatch(""/node1"", recursiveWatcher1, AddWatchMode.PERSISTENT_RECURSIVE);
+    zk2.addWatch(""/node1"", recursiveWatcher2, AddWatchMode.PERSISTENT_RECURSIVE);
+    BlockingDeque<WatchedEvent> dataEvents = new LinkedBlockingDeque<>();
+    BlockingDeque<WatchedEvent> childrenEvents = new LinkedBlockingDeque<>();
+    BlockingDeque<WatchedEvent> persistentEvents = new LinkedBlockingDeque<>();
+    zk2.getData(""/node1"", dataEvents::add, null);
+    zk2.getChildren(""/node1"", childrenEvents::add);
+    zk2.addWatch(""/node1"", persistentEvents::add, AddWatchMode.PERSISTENT);
+    removeWatches(zk2, ""/node1"", recursiveWatcher1, WatcherType.PersistentRecursive, false, Code.OK, useAsync);
+    removeWatches(zk2, ""/node1"", recursiveWatcher2, WatcherType.PersistentRecursive, false, Code.OK, useAsync);
+    removeWatches(zk2, ""/node1"", recursiveWatcher1, WatcherType.Data, false, Code.NOWATCHER, useAsync);
+    removeWatches(zk"
+PV-054,cassandra,testAwait,/Volumes/SSK Drive/apache-projects/cassandra/test/unit/org/apache/cassandra/repair/autorepair/AutoRepairParameterizedTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testAwait() throws Exception {
+    AutoRepair.RepairProgressListener listener = new AutoRepair.RepairProgressListener(repairType);
+    listener.progress(""test"", new ProgressEvent(ProgressEventType.COMPLETE, 0, 0, ""test""));
+    listener.await(new DurationSpec.IntSecondsBound(""12h""));
+}"
+PV-055,mina-sshd,fullURIEncoding,/Volumes/SSK Drive/apache-projects/mina-sshd/sshd-sftp/src/test/java/org/apache/sshd/sftp/client/fs/SftpFileSystemURITest.java,junit5,MethodSource;ParameterizedTest,PT,,,,"@MethodSource(""parameters"")
+@ParameterizedTest(name = ""host={0}, port={1}, user={2}, password={3}, params={4}"")
+public void fullURIEncoding(String host, int port, String username, String password, Map<String, ?> params) {
+    initSftpFileSystemURITest(host, port, username, password, params);
+    URI uri = SftpFileSystemProvider.createFileSystemURI(host, port, username, password, params);
+    assertEquals(SftpConstants.SFTP_SUBSYSTEM_NAME, uri.getScheme(), ""Mismatched scheme"");
+    assertEquals(host, uri.getHost(), ""Mismatched host"");
+    assertEquals(port, uri.getPort(), ""Mismatched port"");
+    BasicCredentialsProvider credentials = SftpFileSystemProvider.parseCredentials(uri);
+    assertNotNull(credentials, ""No credentials provided"");
+    assertEquals(username, credentials.getUsername(), ""Mismatched user"");
+    assertEquals(password, credentials.getPassword(), ""Mismatched password"");
+    Map<String, ?> uriParams = SftpFileSystemProvider.parseURIParameters(uri);
+    assertMapEquals(getCurrentTestName(), params, uriParams, (v1, v2) -> Objects.equals(v1.toString(), v2.toString()));
+}"
+PV-056,hive,testDropDatabaseWithTableCascade,/Volumes/SSK Drive/apache-projects/hive/standalone-metastore/metastore-server/src/test/java/org/apache/hadoop/hive/metastore/client/TestDatabases.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testDropDatabaseWithTableCascade() throws Exception {
+    Database database = testDatabases[0];
+    Table testTable = new TableBuilder().setDbName(database.getName()).setTableName(""test_table"").addCol(""test_col"", ""int"").create(client, metaStore.getConf());
+    client.dropDatabase(database.getName(), true, true, true);
+    Assert.assertFalse(""The directory should be removed"", metaStore.isPathExists(new Path(database.getLocationUri())));
+}"
+PV-057,commons-rng,testJump,/Volumes/SSK Drive/apache-projects/commons-rng/commons-rng-core/src/test/java/org/apache/commons/rng/core/source32/AbstractLXMTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(value = ""getReferenceData"")
+final void testJump(int[] seed, int[] expected) {
+    final int[] expectedAfter = createExpectedSequence(seed, expected.length, false);
+    RandomAssert.assertJumpEquals(expected, expectedAfter, create(seed));
+}"
+PV-058,ignite,dropUpdate,/Volumes/SSK Drive/apache-projects/ignite/modules/indexing/src/test/java/org/apache/ignite/internal/processors/query/stat/StatisticsConfigurationTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"/**
+ * Check drop statistics.
+ * 1. Create statistic for a table;
+ * 2. Check statistics on all nodes of the cluster;
+ * 3. Drop stat for one column;
+ * 4. Check that statistic is dropped for specified column on all nodes of the cluster;
+ * 5. Re-create statistics;
+ * 6. Check statistics on all nodes of the cluster;
+ */
+@Test
+public void dropUpdate() throws Exception {
+    startGrids(3);
+    grid(0).cluster().state(ClusterState.ACTIVE);
+    createSmallTable(null);
+    // 1. Create statistic for a table;
+    collectStatistics(StatisticsType.GLOBAL, SMALL_TARGET);
+    // 2. Check statistics on all nodes of the cluster;
+    waitForStats(SCHEMA, ""SMALL"", TIMEOUT, checkTotalRows, checkColumStats);
+    // 3. Drop stat for one column;
+    statisticsMgr(0).dropStatistics(new StatisticsTarget(""PUBLIC"", ""SMALL"", ""A""));
+    // 4. Check that statistic is dropped for specified column on all nodes of the cluster;
+    waitForStats(SCHEMA, ""SMALL"", TIMEOUT, (stats) -> stats.forEach(s -> assertNull(s.columnStatistics(""A""))));
+    // 5. Re-create statistics;
+    collectStatistics(StatisticsType.GLOBAL, new StatisticsTarget(SCHEMA, ""SMALL"", ""A""));
+    // 6. Check statistics on all nodes of the cluster;
+    waitForStats(SCHEMA, ""SMALL"", TIMEOUT, checkTotalRows, checkColumStats);
+}"
+PV-059,solr,testCollectionDeletion,/Volumes/SSK Drive/apache-projects/solr/solr/solrj/src/test/org/apache/solr/common/cloud/TestCloudCollectionsListeners.java,junit4,Test,nonPT,,,,"@Test
+public void testCollectionDeletion() throws Exception {
+    CloudSolrClient client = cluster.getSolrClient();
+    CollectionAdminRequest.createCollection(""testcollection1"", ""config"", 4, 1).processAndWait(client, MAX_WAIT_TIMEOUT);
+    cluster.waitForActiveCollection(""testcollection1"", 4, 4);
+    CollectionAdminRequest.createCollection(""testcollection2"", ""config"", 4, 1).processAndWait(client, MAX_WAIT_TIMEOUT);
+    cluster.waitForActiveCollection(""testcollection2"", 4, 4);
+    Map<Integer, Set<String>> oldResults = new HashMap<>();
+    Map<Integer, Set<String>> newResults = new HashMap<>();
+    CloudCollectionsListener watcher1 = (oldCollections, newCollections) -> {
+        log.info(""New set of collections: {}, {}"", oldCollections, newCollections);
+        oldResults.put(1, oldCollections);
+        newResults.put(1, newCollections);
+    };
+    ZkStateReader.from(client).registerCloudCollectionsListener(watcher1);
+    CloudCollectionsListener watcher2 = (oldCollections, newCollections) -> {
+        log.info(""New set of collections: {}, {}"", oldCollections, newCollections);
+        oldResults.put(2, oldCollections);
+        newResults.put(2, newCollections);
+    };
+    ZkStateReader.from(client).registerCloudCollectionsListener(watcher2);
+    assertEquals(""CloudCollectionsListener has old collection with size > 0 after registration"", 0, oldResults.get(1).size());
+    assertEquals(""CloudCollectionsListener has old collection with size > 0 after registration"", 0, oldResults.get(2).size());
+    assertTrue(""CloudCollectionsListener not notified of all collections after regis"
+PV-060,bookkeeper,testExpandShrinkAndClear,/Volumes/SSK Drive/apache-projects/bookkeeper/bookkeeper-server/src/test/java/org/apache/bookkeeper/util/collections/ConcurrentLongLongPairHashMapTest.java,junit4,Test,nonPT,,,,"@Test
+public void testExpandShrinkAndClear() {
+    ConcurrentLongLongPairHashMap map = ConcurrentLongLongPairHashMap.newBuilder().expectedItems(2).concurrencyLevel(1).autoShrink(true).mapIdleFactor(0.25f).build();
+    final long initCapacity = map.capacity();
+    assertTrue(map.put(1, 1, 11, 11));
+    assertTrue(map.put(2, 2, 22, 22));
+    assertTrue(map.put(3, 3, 33, 33));
+    // expand hashmap
+    assertTrue(map.capacity() == 8);
+    assertTrue(map.remove(1, 1, 11, 11));
+    // not shrink
+    assertTrue(map.capacity() == 8);
+    assertTrue(map.remove(2, 2, 22, 22));
+    // shrink hashmap
+    assertTrue(map.capacity() == 4);
+    assertTrue(map.remove(3, 3, 33, 33));
+    // Will not shrink the hashmap again because shrink capacity is less than initCapacity
+    // current capacity is equal than the initial capacity
+    assertTrue(map.capacity() == initCapacity);
+    map.clear();
+    // after clear, because current capacity is equal than the initial capacity, so not shrinkToInitCapacity
+    assertTrue(map.capacity() == initCapacity);
+}"
+PV-061,pulsar,testPulsarExceptionWithParameters,/Volumes/SSK Drive/apache-projects/pulsar/pulsar-common/src/test/java/org/apache/pulsar/exception/PulsarExceptionTest.java,unknown,Test,nonPT,,,,"@Test
+public void testPulsarExceptionWithParameters() {
+    String key = ""123"";
+    String value = ""abc"";
+    PulsarExceptionSample testException = new PulsarExceptionSample(""key={}, value={}"", key, value);
+    assertThat(testException.getMessage()).isEqualTo(""key=123, value=abc"");
+}"
+PV-062,hbase,testAtomicBulkLoad,/Volumes/SSK Drive/apache-projects/hbase/hbase-server/src/test/java/org/apache/hadoop/hbase/regionserver/TestHRegionServerBulkLoad.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"/**
+ * Atomic bulk load.
+ */
+@Test
+public void testAtomicBulkLoad() throws Exception {
+    TableName TABLE_NAME = TableName.valueOf(""atomicBulkLoad"");
+    int millisToRun = 30000;
+    int numScanners = 50;
+    // Set createWALDir to true and use default values for other options.
+    UTIL.startMiniCluster(StartTestingClusterOption.builder().createWALDir(true).build());
+    try {
+        WAL log = UTIL.getHBaseCluster().getRegionServer(0).getWAL(null);
+        FindBulkHBaseListener listener = new FindBulkHBaseListener();
+        log.registerWALActionsListener(listener);
+        runAtomicBulkloadTest(TABLE_NAME, millisToRun, numScanners);
+        assertThat(listener.isFound(), is(true));
+    } finally {
+        UTIL.shutdownMiniCluster();
+    }
+}"
+PV-063,beam,testSplitForQueue,/Volumes/SSK Drive/apache-projects/beam/sdks/java/io/jms/src/test/java/org/apache/beam/sdk/io/jms/JmsIOTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testSplitForQueue() throws Exception {
+    JmsIO.Read read = JmsIO.read().withQueue(QUEUE);
+    PipelineOptions pipelineOptions = PipelineOptionsFactory.create();
+    int desiredNumSplits = 5;
+    JmsIO.UnboundedJmsSource initialSource = new JmsIO.UnboundedJmsSource(read);
+    List<JmsIO.UnboundedJmsSource> splits = initialSource.split(desiredNumSplits, pipelineOptions);
+    // in the case of a queue, we have concurrent consumers by default, so the initial number
+    // splits is equal to the desired number of splits
+    assertEquals(desiredNumSplits, splits.size());
+}"
+PV-064,jena,leftjoin_J12,/Volumes/SSK Drive/apache-projects/jena/jena-arq/src/test/java/org/apache/jena/sparql/engine/join/AbstractTestLeftJoin.java,junit5,Test,nonPT,,,,"// Not the right join key - should still work albeit less efficiently.
+@Test
+public void leftjoin_J12() {
+    testJoin(""z"", tableD1(), tableD2(), tableD3());
+}"
+PV-065,geode,readExternalThrowsIfIdentityIsTooShort,/Volumes/SSK Drive/apache-projects/geode/geode-core/src/test/java/org/apache/geode/internal/cache/tier/sockets/ClientProxyMembershipIDTest.java,junit4,Test,nonPT,,,,"@Test
+public void readExternalThrowsIfIdentityIsTooShort() throws IOException {
+    final ClientProxyMembershipID clientProxyMembershipID = new ClientProxyMembershipID();
+    final ByteArrayOutputStream dos = new ByteArrayOutputStream();
+    final ObjectOutputStream out = new ObjectOutputStream(dos);
+    out.writeShort(-1);
+    out.write(new byte[0]);
+    out.writeInt(0);
+    out.close();
+    final byte[] bytes = dos.toByteArray();
+    final ObjectInput in = new ObjectInputStream(new ByteArrayDataInput(bytes));
+    assertThatThrownBy(() -> clientProxyMembershipID.readExternal(in)).isInstanceOf(IOException.class).hasMessageContaining(""identity length is too small"");
+}"
+PV-066,hop,testSetInternalEntryCurrentDirectoryWithoutFilename,/Volumes/SSK Drive/apache-projects/hop/engine/src/test/java/org/apache/hop/pipeline/PipelineMetaTest.java,junit4,Test,nonPT,,,,"@Test
+public void testSetInternalEntryCurrentDirectoryWithoutFilename() {
+    PipelineMeta pipelineMetaTest = new PipelineMeta();
+    variables.setVariable(Const.INTERNAL_VARIABLE_ENTRY_CURRENT_FOLDER, ""Original value defined at run execution"");
+    variables.setVariable(Const.INTERNAL_VARIABLE_PIPELINE_FILENAME_DIRECTORY, ""file:///C:/SomeFilenameDirectory"");
+    pipelineMetaTest.setInternalEntryCurrentDirectory(variables);
+    assertEquals(""Original value defined at run execution"", variables.getVariable(Const.INTERNAL_VARIABLE_ENTRY_CURRENT_FOLDER));
+}"
+PV-067,activemq,testSendDuplicateFromStoreToDLQScenario,/Volumes/SSK Drive/apache-projects/activemq/activemq-unit-tests/src/test/java/org/apache/activemq/broker/policy/SendDuplicateFromStoreToDLQTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testSendDuplicateFromStoreToDLQScenario() throws Exception {
+    applyPolicy(sendDuplicateFromStoreToDLQEnabled, useCacheEnabled, auditEnabled, optimizedDispatch);
+    boolean sendExpected = (sendDuplicateFromStoreToDLQEnabled != null ? sendDuplicateFromStoreToDLQEnabled : new PolicyEntry().isSendDuplicateFromStoreToDLQ());
+    doProcessSendDuplicateFromStoreToDLQ(sendExpected);
+}"
+PV-068,hbase,testCreateSSLContextWithCustomProtocol,/Volumes/SSK Drive/apache-projects/hbase/hbase-common/src/test/java/org/apache/hadoop/hbase/io/crypto/tls/TestX509Util.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testCreateSSLContextWithCustomProtocol() throws Exception {
+    final String protocol = ""TLSv1.1"";
+    conf.set(X509Util.TLS_CONFIG_PROTOCOL, protocol);
+    ByteBufAllocator byteBufAllocatorMock = mock(ByteBufAllocator.class);
+    SslContext sslContext = X509Util.createSslContextForServer(conf);
+    assertEquals(Collections.singletonList(protocol), Arrays.asList(sslContext.newEngine(byteBufAllocatorMock).getEnabledProtocols()));
+}"
+PV-069,drill,testHasChangedDefinedAndNullModificationTime,/Volumes/SSK Drive/apache-projects/drill/metastore/metastore-api/src/test/java/org/apache/drill/metastore/components/tables/TestMetastoreTableInfo.java,junit4,Test,nonPT,,,,"@Test
+public void testHasChangedDefinedAndNullModificationTime() {
+    TableMetadataUnit unit = TableMetadataUnit.builder().lastModifiedTime(System.currentTimeMillis()).build();
+    MetastoreTableInfo metadata = MetastoreTableInfo.of(TableInfo.UNKNOWN_TABLE_INFO, unit, 1);
+    assertTrue(metadata.hasChanged(true, null));
+}"
+PV-070,pinot,testOrderedStringSet,/Volumes/SSK Drive/apache-projects/pinot/pinot-core/src/test/java/org/apache/pinot/core/common/ObjectSerDeUtilsTest.java,unknown,Test,nonPT,,,,"@Test
+public void testOrderedStringSet() {
+    for (int i = 0; i < NUM_ITERATIONS; i++) {
+        int size = RANDOM.nextInt(100);
+        ObjectLinkedOpenHashSet<String> expected = new ObjectLinkedOpenHashSet<>(size);
+        for (int j = 0; j < size; j++) {
+            expected.add(RandomStringUtils.random(RANDOM.nextInt(20)));
+        }
+        byte[] bytes = ObjectSerDeUtils.serialize(expected);
+        ObjectLinkedOpenHashSet<String> actual = ObjectSerDeUtils.deserialize(bytes, ObjectSerDeUtils.ObjectType.OrderedStringSet);
+        for (int j = 0; j < size; j++) {
+            assertEquals(actual.get(j), expected.get(j), ERROR_MESSAGE);
+        }
+    }
+}"
+PV-071,druid,testUnivariateMathFunctions,/Volumes/SSK Drive/apache-projects/druid/processing/src/test/java/org/apache/druid/math/expr/VectorExprResultConsistencyTest.java,junit5,Test,nonPT,,,,"@Test
+public void testUnivariateMathFunctions() {
+    final List<String> functions = List.of(""abs"", ""acos"", ""asin"", ""atan"", ""cbrt"", ""ceil"", ""cos"", ""cosh"", ""cot"", ""exp"", ""expm1"", ""floor"", ""getExponent"", ""log"", ""log10"", ""log1p"", ""nextUp"", ""rint"", ""signum"", ""sin"", ""sinh"", ""sqrt"", ""tan"", ""tanh"", ""toDegrees"", ""toRadians"", ""ulp"", ""bitwiseComplement"", ""bitwiseConvertDoubleToLongBits"", ""bitwiseConvertLongBitsToDouble"");
+    final List<String> templates = List.of(""%s(l1)"", ""%s(d1)"", ""%s(pi())"", ""%s(null)"", ""%s(missing)"");
+    testFunctions(types, templates, functions);
+}"
+PV-072,mina-sshd,fromName,/Volumes/SSK Drive/apache-projects/mina-sshd/sshd-common/src/test/java/org/apache/sshd/common/util/io/der/ASN1ClassTest.java,junit5,MethodSource;ParameterizedTest,PT,,,,"@MethodSource(""parameters"")
+@ParameterizedTest(name = ""{0}"")
+public void fromName(ASN1Class expected) {
+    initASN1ClassTest(expected);
+    String name = expected.name();
+    for (int index = 1, count = name.length(); index <= count; index++) {
+        assertSame(expected, ASN1Class.fromName(name), name);
+        name = shuffleCase(name);
+    }
+}"
+PV-073,activemq,test,/Volumes/SSK Drive/apache-projects/activemq/activemq-unit-tests/src/test/java/org/apache/activemq/bugs/AMQ5266Test.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void test() throws Exception {
+    //,activemq3,activemq4,activemq5,activemq6,activemq7,activemq8,activemq9"";
+    String activemqQueues = ""activemq,activemq2"";
+    int consumerWaitForConsumption = 5 * 60 * 1000;
+    ExportQueuePublisher publisher = null;
+    ExportQueueConsumer consumer = null;
+    LOG.info(""Publisher will publish "" + (publisherMessagesPerThread * publisherThreadCount) + "" messages to each queue specified."");
+    LOG.info(""\nBuilding Publisher..."");
+    publisher = new ExportQueuePublisher(activemqURL, activemqQueues, publisherMessagesPerThread, publisherThreadCount);
+    LOG.info(""Building Consumer..."");
+    consumer = new ExportQueueConsumer(activemqURL, activemqQueues, consumerThreadsPerQueue, consumerBatchSize, publisherMessagesPerThread * publisherThreadCount);
+    LOG.info(""Starting Publisher..."");
+    publisher.start();
+    LOG.info(""Starting Consumer..."");
+    consumer.start();
+    int distinctPublishedCount = 0;
+    LOG.info(""Waiting For Publisher Completion..."");
+    publisher.waitForCompletion();
+    List<String> publishedIds = publisher.getIDs();
+    distinctPublishedCount = new TreeSet<String>(publishedIds).size();
+    LOG.info(""Publisher Complete. Published: "" + publishedIds.size() + "", Distinct IDs Published: "" + distinctPublishedCount);
+    long endWait = System.currentTimeMillis() + consumerWaitForConsumption;
+    while (!consumer.completed() && System.currentTimeMillis() < endWait) {
+        try {
+            int secs = (int) (endWait - System.currentTimeMillis()) / 1000;
+            LOG.info(""Waiting For Consumer Completion. "
+PV-074,hbase,testCheckAndMutateWithByteBuffEncode,/Volumes/SSK Drive/apache-projects/hbase/hbase-server/src/test/java/org/apache/hadoop/hbase/client/TestCheckAndMutateWithByteBuff.java,junit4,Test,nonPT,,,,"@Test
+public void testCheckAndMutateWithByteBuffEncode() throws Exception {
+    // Tests for HBASE-26777.
+    // As most HBase.getRegion() calls have been factored out from HBase, you'd need to revert
+    // both HBASE-26777, and the HBase.get() replacements from HBASE-26036 for this test to fail
+    testCheckAndMutateWithByteBuff(TableName.valueOf(name.getMethodName()), DataBlockEncoding.FAST_DIFF);
+}"
+PV-075,hudi,testHFileReadCompatibility,/Volumes/SSK Drive/apache-projects/hudi/hudi-io/src/test/java/org/apache/hudi/io/hfile/TestHFileReadCompatibility.java,junit5,ParameterizedTest;CsvSource,PT,,,,"@ParameterizedTest
+@CsvSource({ ""/hfile/hudi-generated.hfile,/hfile/hbase-generated.hfile"", ""/hfile/hbase-generated.hfile,/hfile/hudi-generated.hfile"" })
+void testHFileReadCompatibility(String hudiFilePath, String hbaseFilePath) throws Exception {
+    try (HFileReader hudiReader = createHFileReaderFromResource(hudiFilePath);
+        org.apache.hadoop.hbase.io.hfile.HFile.Reader hbaseReader = createHBaseHFileReaderFromResource(hbaseFilePath)) {
+        // Validate number of entries.
+        Assertions.assertEquals(5, hudiReader.getNumKeyValueEntries());
+        Assertions.assertEquals(5, hbaseReader.getEntries());
+        // Validate data block content.
+        hudiReader.seekTo();
+        HFileScanner scanner = hbaseReader.getScanner(true, true);
+        scanner.seekTo();
+        int i = 0;
+        do {
+            org.apache.hudi.io.hfile.KeyValue keyValue = hudiReader.getKeyValue().get();
+            Cell cell = scanner.getCell();
+            // Ensure Hudi record is correct.
+            Assertions.assertEquals(TEST_RECORDS.get(i).key, keyValue.getKey().getContentInString());
+            byte[] value = Arrays.copyOfRange(keyValue.getBytes(), keyValue.getValueOffset(), keyValue.getValueOffset() + keyValue.getValueLength());
+            Assertions.assertArrayEquals(value, TEST_RECORDS.get(i).value.getBytes());
+            // Ensure Hbase record is correct.
+            byte[] key = Arrays.copyOfRange(cell.getRowArray(), cell.getRowOffset(), cell.getRowOffset() + cell.getRowLength());
+            Assertions.assertArrayEquals(TEST_RECORDS.get(i).key.getBytes(), key);
+         "
+PV-076,camel,requestValidationWithRequiredPathAndQueryParameter,/Volumes/SSK Drive/apache-projects/camel/components/camel-rest-openapi/src/test/java/org/apache/camel/component/rest/openapi/RestOpenApiRequestValidationTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""petStoreVersions"")
+void requestValidationWithRequiredPathAndQueryParameter(String petStoreVersion) {
+    Map<String, Object> headers = Map.of(""petStoreVersion"", petStoreVersion, ""petId"", 10, ""api_key"", ""foo"");
+    String result = template.requestBodyAndHeaders(""direct:validateDelete"", null, headers, String.class);
+    assertEquals(""Pet deleted"", result);
+}"
+PV-077,cloudstack,verifyResourceLimitsForAccountAndStorageTestCountOnlyRunningVmsInResourceLimitationIsFalseCallsVmResourceLimitCheck,/Volumes/SSK Drive/apache-projects/cloudstack/server/src/test/java/com/cloud/vm/UserVmManagerImplTest.java,junit4,Test,nonPT,,,,"@Test
+public void verifyResourceLimitsForAccountAndStorageTestCountOnlyRunningVmsInResourceLimitationIsFalseCallsVmResourceLimitCheck() throws ResourceAllocationException {
+    LinkedList<VolumeVO> volumeVoList = new LinkedList<VolumeVO>();
+    Mockito.doReturn(false).when(userVmManagerImpl).countOnlyRunningVmsInResourceLimitation();
+    userVmManagerImpl.verifyResourceLimitsForAccountAndStorage(accountMock, userVmVoMock, serviceOfferingVoMock, volumeVoList, virtualMachineTemplateMock);
+    Mockito.verify(resourceLimitMgr).checkVmResourceLimit(Mockito.any(), Mockito.anyBoolean(), Mockito.any(), Mockito.any());
+    Mockito.verify(resourceLimitMgr).checkResourceLimit(accountMock, Resource.ResourceType.volume, 0l);
+    Mockito.verify(resourceLimitMgr).checkResourceLimit(accountMock, Resource.ResourceType.primary_storage, 0l);
+}"
+PV-078,cayenne,testMultipleOrderingInSelectClauseCAY_1074,/Volumes/SSK Drive/apache-projects/cayenne/cayenne/src/test/java/org/apache/cayenne/access/DataContextOrderingIT.java,junit4,Test,nonPT,,,,"@Test
+public void testMultipleOrderingInSelectClauseCAY_1074() throws Exception {
+    Calendar c = Calendar.getInstance();
+    Artist a1 = context.newObject(Artist.class);
+    a1.setArtistName(""2"");
+    a1.setDateOfBirth(c.getTime());
+    c.add(Calendar.DAY_OF_MONTH, -1);
+    Artist a2 = context.newObject(Artist.class);
+    a2.setArtistName(""3"");
+    a2.setDateOfBirth(c.getTime());
+    c.add(Calendar.DAY_OF_MONTH, -1);
+    Artist a3 = context.newObject(Artist.class);
+    a3.setArtistName(""3"");
+    a3.setDateOfBirth(c.getTime());
+    Painting p1 = context.newObject(Painting.class);
+    p1.setEstimatedPrice(new BigDecimal(1));
+    p1.setPaintingTitle(""Y"");
+    a1.addToPaintingArray(p1);
+    Painting p2 = context.newObject(Painting.class);
+    p2.setEstimatedPrice(new BigDecimal(2));
+    p2.setPaintingTitle(""X"");
+    a2.addToPaintingArray(p2);
+    context.commitChanges();
+    ObjectSelect<Artist> query1 = ObjectSelect.query(Artist.class).// per CAY-1074, adding a to-many join to expression messes up the ordering
+    and(Artist.PAINTING_ARRAY.ne((List<Painting>) null)).orderBy(Artist.ARTIST_NAME.desc(), (Artist.DATE_OF_BIRTH.desc()));
+    List<Artist> list1 = query1.select(context);
+    assertEquals(2, list1.size());
+}"
+PV-079,cassandra,testSkipEarlyTerminationPartitions,/Volumes/SSK Drive/apache-projects/cassandra/test/distributed/org/apache/cassandra/distributed/test/ShortReadProtectionTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"/**
+ * A regression test to prove that we can no longer rely on {@code !singleResultCounter.isDone()} to abort ranged
+ * partition SRP early if a per partition limit is set.
+ * <p>
+ * See CASSANDRA-13911.
+ * <p>
+ * Replaces Python dtest {@code consistency_test.py:TestConsistency.test_13911_partitions_srp()}.
+ */
+@Test
+public void testSkipEarlyTerminationPartitions() {
+    tester.createTable(""CREATE TABLE %s (pk int, ck int, PRIMARY KEY (pk, ck))"").toNode1(""INSERT INTO %s (pk, ck) VALUES (0, 0) USING TIMESTAMP 0"", ""INSERT INTO %s (pk, ck) VALUES (0, 1) USING TIMESTAMP 0"", ""DELETE FROM %s USING TIMESTAMP 42 WHERE pk = 2 AND ck IN  (0, 1)"").toNode2(""INSERT INTO %s (pk, ck) VALUES (0, 2) USING TIMESTAMP 0"", ""INSERT INTO %s (pk, ck) VALUES (0, 3) USING TIMESTAMP 0"", ""INSERT INTO %s (pk, ck) VALUES (2, 0) USING TIMESTAMP 0"", ""INSERT INTO %s (pk, ck) VALUES (2, 1) USING TIMESTAMP 0"", ""INSERT INTO %s (pk, ck) VALUES (4, 0) USING TIMESTAMP 0"", ""INSERT INTO %s (pk, ck) VALUES (4, 1) USING TIMESTAMP 0"").assertRows(""SELECT pk, ck FROM %s PER PARTITION LIMIT 2 LIMIT 4"", row(0, 0), row(0, 1), row(4, 0), row(4, 1));
+}"
+PV-080,hbase,testCheckAndMutateBatch2,/Volumes/SSK Drive/apache-projects/hbase/hbase-server/src/test/java/org/apache/hadoop/hbase/client/TestAsyncTable.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testCheckAndMutateBatch2() throws Throwable {
+    AsyncTable<?> table = getTable.get();
+    byte[] row2 = Bytes.toBytes(Bytes.toString(row) + ""2"");
+    byte[] row3 = Bytes.toBytes(Bytes.toString(row) + ""3"");
+    byte[] row4 = Bytes.toBytes(Bytes.toString(row) + ""4"");
+    table.putAll(Arrays.asList(new Put(row).addColumn(FAMILY, Bytes.toBytes(""A""), Bytes.toBytes(""a"")), new Put(row2).addColumn(FAMILY, Bytes.toBytes(""B""), Bytes.toBytes(""b"")), new Put(row3).addColumn(FAMILY, Bytes.toBytes(""C""), 100, Bytes.toBytes(""c"")), new Put(row4).addColumn(FAMILY, Bytes.toBytes(""D""), 100, Bytes.toBytes(""d"")))).get();
+    // Test for ifNotExists()
+    CheckAndMutate checkAndMutate1 = CheckAndMutate.newBuilder(row).ifNotExists(FAMILY, Bytes.toBytes(""B"")).build(new Put(row).addColumn(FAMILY, Bytes.toBytes(""A""), Bytes.toBytes(""e"")));
+    CheckAndMutate checkAndMutate2 = CheckAndMutate.newBuilder(row2).ifNotExists(FAMILY, Bytes.toBytes(""B"")).build(new Put(row2).addColumn(FAMILY, Bytes.toBytes(""B""), Bytes.toBytes(""f"")));
+    List<CheckAndMutateResult> results = table.checkAndMutateAll(Arrays.asList(checkAndMutate1, checkAndMutate2)).get();
+    assertTrue(results.get(0).isSuccess());
+    assertNull(results.get(0).getResult());
+    assertFalse(results.get(1).isSuccess());
+    assertNull(results.get(1).getResult());
+    Result result = table.get(new Get(row).addColumn(FAMILY, Bytes.toBytes(""A""))).get();
+    assertEquals(""e"", Bytes.toString(result.getValue(FAMILY, Bytes.toBytes(""A""))));
+    result = table.get(new Get(row2).addColumn(FAMILY, Bytes.toBytes(""B""))).get();
+    assertEqua"
+PV-081,nifi,testJSONArray,/Volumes/SSK Drive/apache-projects/nifi/nifi-commons/nifi-json-utils/src/test/java/org/apache/nifi/processor/TestJsonValidator.java,junit5,Test,nonPT,,,,"@Test
+public void testJSONArray() throws JsonProcessingException {
+    String msg = MAPPER.writeValueAsString(Arrays.asList(""one"", ""two"", ""three""));
+    ValidationResult validationResult = validator.validate(JSON_PROPERTY, msg, context);
+    assertTrue(validationResult.isValid());
+}"
+PV-082,geode,missingDiskStoreCanBeRevoked,/Volumes/SSK Drive/apache-projects/geode/geode-core/src/distributedTest/java/org/apache/geode/internal/cache/partitioned/PersistentPartitionedRegionDistributedTest.java,junit4,Test,nonPT,,,,"@Test
+public void missingDiskStoreCanBeRevoked() throws Exception {
+    vm0.invoke(() -> createPartitionedRegion(1, -1, 113, true));
+    vm1.invoke(() -> createPartitionedRegion(1, -1, 113, true));
+    int numBuckets = 50;
+    vm0.invoke(() -> createData(0, numBuckets, ""a""));
+    Set<Integer> bucketsOnVM0 = vm0.invoke(this::getBucketList);
+    Set<Integer> bucketsOnVM1 = vm1.invoke(this::getBucketList);
+    assertThat(bucketsOnVM1).isEqualTo(bucketsOnVM0);
+    vm0.invoke(() -> getCache().close());
+    vm1.invoke(() -> createData(0, numBuckets, ""b""));
+    vm1.invoke(() -> getCache().close());
+    AsyncInvocation<Void> createPartitionedRegionOnVM0 = vm0.invokeAsync(() -> createPartitionedRegion(1, -1, 113, true));
+    // Note: Make sure that vm0 is waiting for vm1 to recover
+    // If VM(0) recovers early, that is a problem, because vm1 has newer data
+    createPartitionedRegionOnVM0.join(SECONDS.toMillis(1));
+    assertThat(createPartitionedRegionOnVM0.isAlive()).isTrue();
+    vm2.invoke(() -> {
+        DistributedSystemConfig config = defineDistributedSystem(getSystem(), """");
+        AdminDistributedSystem adminDS = getDistributedSystem(config);
+        adminDS.connect();
+        try {
+            adminDS.waitToBeConnected(MINUTES.toMillis(2));
+            await().until(() -> {
+                Set<PersistentID> missingIds = adminDS.getMissingPersistentMembers();
+                if (missingIds.size() != 1) {
+                    return false;
+                }
+                for (PersistentID missingId : missingIds) {
+                    adminDS.revokePersistentMember(missin"
+PV-083,opennlp,testCompatibilitySingleContinue,/Volumes/SSK Drive/apache-projects/opennlp/opennlp-core/opennlp-runtime/src/test/java/opennlp/tools/namefind/BioCodecTest.java,junit5,Test,nonPT,,,,"@Test
+void testCompatibilitySingleContinue() {
+    Assertions.assertFalse(codec.areOutcomesCompatible(new String[] { A_CONTINUE }));
+    Assertions.assertFalse(codec.areOutcomesCompatible(new String[] { B_START, A_CONTINUE }));
+}"
+PV-084,ignite,testEmptyMessage,/Volumes/SSK Drive/apache-projects/ignite/modules/core/src/test/java/org/apache/ignite/internal/codegen/MessageProcessorTest.java,junit4,Test,nonPT,,,,"/**
+ */
+@Test
+public void testEmptyMessage() {
+    Compilation compilation = compile(""EmptyMessage.java"");
+    assertThat(compilation).succeeded();
+    assertTrue(compilation.generatedSourceFiles().isEmpty());
+}"
+PV-085,iceberg,testEstimateFixedWidth,/Volumes/SSK Drive/apache-projects/iceberg/orc/src/test/java/org/apache/iceberg/orc/TestEstimateOrcAvgWidthVisitor.java,junit5,Test,nonPT,,,,"@Test
+public void testEstimateFixedWidth() {
+    Schema fixedSchema = new Schema(FIXED_FIELD);
+    TypeDescription fixedOrcSchema = ORCSchemaUtil.convert(fixedSchema);
+    long estimateLength = getEstimateLength(fixedOrcSchema);
+    assertThat(estimateLength).as(""Estimated average length of fixed must be 128."").isEqualTo(128);
+}"
+PV-086,hadoop,testCompletedJobWithDiagnostics,/Volumes/SSK Drive/apache-projects/hadoop/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-hs/src/test/java/org/apache/hadoop/mapreduce/v2/hs/TestJobHistoryEntities.java,junit5,MethodSource;ParameterizedTest;Timeout,PT,,,,"@MethodSource(""data"")
+@ParameterizedTest
+@Timeout(value = 30)
+public void testCompletedJobWithDiagnostics(boolean paramLoadTasks) throws Exception {
+    initTestJobHistoryEntities(paramLoadTasks);
+    final String jobError = ""Job Diagnostics"";
+    JobInfo jobInfo = spy(new JobInfo());
+    when(jobInfo.getErrorInfo()).thenReturn(jobError);
+    when(jobInfo.getJobStatus()).thenReturn(JobState.FAILED.toString());
+    when(jobInfo.getAMInfos()).thenReturn(Collections.<JobHistoryParser.AMInfo>emptyList());
+    final JobHistoryParser mockParser = mock(JobHistoryParser.class);
+    when(mockParser.parse()).thenReturn(jobInfo);
+    HistoryFileInfo info = mock(HistoryFileInfo.class);
+    when(info.getConfFile()).thenReturn(fullConfPath);
+    when(info.getHistoryFile()).thenReturn(fullHistoryPath);
+    CompletedJob job = new CompletedJob(conf, jobId, fullHistoryPath, loadTasks, ""user"", info, jobAclsManager) {
+
+        @Override
+        protected JobHistoryParser createJobHistoryParser(Path historyFileAbsolute) throws IOException {
+            return mockParser;
+        }
+    };
+    assertEquals(jobError, job.getReport().getDiagnostics());
+}"
+PV-087,drill,testSingleColumn,/Volumes/SSK Drive/apache-projects/drill/contrib/storage-elasticsearch/src/test/java/org/apache/drill/exec/store/elasticsearch/ElasticSearchQueryTest.java,junit4,Test,nonPT,,,,"@Test
+public void testSingleColumn() throws Exception {
+    testBuilder().sqlQuery(""select full_name from elastic.`employee` order by employee_id limit 3"").ordered().baselineColumns(""full_name"").baselineValues(""Sheri Nowmer"").baselineValues(""Derrick Whelply"").baselineValues(""Michael Spence"").go();
+}"
+PV-088,druid,testBenchmark,/Volumes/SSK Drive/apache-projects/druid/server/src/test/java/org/apache/druid/server/coordinator/CostBalancerStrategyBenchmark.java,junit4,Test;BenchmarkOptions;RunWith(Parameterized.class),PT,,,,"@Test
+@BenchmarkOptions(warmupRounds = 10, benchmarkRounds = 1000)
+public void testBenchmark() {
+    DataSegment segment = DataSegment.builder().dataSource(""testds"").version(""1000"").interval(interval1).size(100L).build();
+    Iterator<ServerHolder> candidates = strategy.findServersToLoadSegment(segment, serverHolderList);
+    selected = candidates.hasNext() ? candidates.next() : null;
+}"
+PV-089,iceberg,testCatalogRefreshedTokenIsUsed,/Volumes/SSK Drive/apache-projects/iceberg/core/src/test/java/org/apache/iceberg/rest/TestRESTCatalog.java,junit5,ParameterizedTest;ValueSource,PT,,,,"@ParameterizedTest
+@ValueSource(strings = { ""v1/oauth/tokens"", ""https://auth-server.com/token"" })
+public void testCatalogRefreshedTokenIsUsed(String oauth2ServerUri) {
+    Map<String, String> emptyHeaders = ImmutableMap.of();
+    Map<String, String> catalogHeaders = ImmutableMap.of(""Authorization"", ""Bearer client-credentials-token:sub=catalog"");
+    RESTCatalogAdapter adapter = Mockito.spy(new RESTCatalogAdapter(backendCatalog));
+    Answer<OAuthTokenResponse> addOneSecondExpiration = invocation -> {
+        OAuthTokenResponse response = (OAuthTokenResponse) invocation.callRealMethod();
+        return OAuthTokenResponse.builder().withToken(response.token()).withTokenType(response.tokenType()).withIssuedTokenType(response.issuedTokenType()).addScopes(response.scopes()).setExpirationInSeconds(1).build();
+    };
+    Mockito.doAnswer(addOneSecondExpiration).when(adapter).postForm(eq(oauth2ServerUri), anyMap(), eq(OAuthTokenResponse.class), anyMap(), any());
+    Map<String, String> contextCredentials = ImmutableMap.of();
+    SessionCatalog.SessionContext context = new SessionCatalog.SessionContext(UUID.randomUUID().toString(), ""user"", contextCredentials, ImmutableMap.of());
+    RESTCatalog catalog = new RESTCatalog(context, (config) -> adapter);
+    catalog.initialize(""prod"", ImmutableMap.of(CatalogProperties.URI, ""ignored"", ""credential"", ""catalog:secret"", OAuth2Properties.OAUTH2_SERVER_URI, oauth2ServerUri));
+    Awaitility.await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {
+        // use the exchanged catalog token
+        assertThat(catalog.tableExists(TBL)).isFalse();"
+PV-090,ignite,testInt,/Volumes/SSK Drive/apache-projects/ignite/modules/core/src/test/java/org/apache/ignite/internal/util/io/GridUnsafeDataInputOutputByteOrderSelfTest.java,junit4,Test,nonPT,,,,"/**
+ * @throws Exception If failed.
+ */
+@Test
+public void testInt() throws Exception {
+    int val = RND.nextInt();
+    out.writeInt(val);
+    assertEquals(val, getIntByByteLE(out.internalArray()));
+    assertEquals(val, in.readInt());
+}"
+PV-091,camel,testMarshalAndUnmarshalAuthor,/Volumes/SSK Drive/apache-projects/camel/components/camel-cbor/src/test/java/org/apache/camel/component/cbor/SpringCBORDataFormatTest.java,junit5,Test,nonPT,,,,"@Test
+void testMarshalAndUnmarshalAuthor() throws Exception {
+    Author auth = new Author();
+    auth.setName(""Don"");
+    auth.setSurname(""Winslow"");
+    MockEndpoint mock = getMockEndpoint(""mock:reverse-auth"");
+    mock.expectedMessageCount(1);
+    mock.message(0).body().isInstanceOf(Author.class);
+    Object marshalled = template.requestBody(""direct:in-auth"", auth);
+    template.sendBody(""direct:back-auth"", marshalled);
+    Author authReturned = mock.getExchanges().get(0).getIn().getBody(Author.class);
+    assertEquals(""Don"", authReturned.getName());
+    assertEquals(""Winslow"", authReturned.getSurname());
+    mock.assertIsSatisfied();
+}"
+PV-092,deltaspike,testSuccessfulAmbiguousLookup,/Volumes/SSK Drive/apache-projects/deltaspike/deltaspike/core/impl/obsolete/src/test/java/org/apache/deltaspike/test/core/impl/resourceloader/ClasspathResourceTest.java,junit4,Test,nonPT,,,,"@Test
+public void testSuccessfulAmbiguousLookup(@InjectableResource(location = ""META-INF/beans.xml"") List<InputStream> inputStreams) {
+    //the count is different on as7 compared to the standalone setup
+    Assert.assertTrue(inputStreams.size() > 1);
+}"
+PV-093,hive,testPartitionTransform,/Volumes/SSK Drive/apache-projects/hive/iceberg/iceberg-handler/src/test/java/org/apache/iceberg/mr/hive/TestHiveIcebergStorageHandlerNoScan.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testPartitionTransform() {
+    Schema schema = new Schema(optional(1, ""id"", Types.LongType.get()), optional(2, ""year_field"", Types.DateType.get()), optional(3, ""month_field"", Types.TimestampType.withZone()), optional(4, ""day_field"", Types.TimestampType.withoutZone()), optional(5, ""hour_field"", Types.TimestampType.withoutZone()), optional(6, ""truncate_field"", Types.StringType.get()), optional(7, ""bucket_field"", Types.StringType.get()), optional(8, ""identity_field"", Types.StringType.get()));
+    PartitionSpec spec = PartitionSpec.builderFor(schema).year(""year_field"").month(""month_field"").day(""day_field"").hour(""hour_field"").truncate(""truncate_field"", 2).bucket(""bucket_field"", 2).identity(""identity_field"").build();
+    TableIdentifier identifier = TableIdentifier.of(""default"", ""part_test"");
+    shell.executeStatement(""CREATE EXTERNAL TABLE "" + identifier + "" PARTITIONED BY SPEC (year(year_field), month(month_field), day(day_field), hour(hour_field), "" + ""truncate(2, truncate_field), bucket(2, bucket_field), identity_field)"" + "" STORED BY ICEBERG "" + testTables.locationForCreateTableSQL(identifier) + "" TBLPROPERTIES ('"" + InputFormatConfig.TABLE_SCHEMA + ""'='"" + SchemaParser.toJson(schema) + ""', "" + ""'"" + InputFormatConfig.CATALOG_NAME + ""'='"" + testTables.catalogName() + ""')"");
+    Table table = testTables.loadTable(identifier);
+    Assert.assertEquals(spec, table.spec());
+}"
+PV-094,ozone,testVirtualHostStyleWithInvalidInputs,/Volumes/SSK Drive/apache-projects/ozone/hadoop-ozone/s3gateway/src/test/java/org/apache/hadoop/ozone/s3/TestVirtualHostStyleFilter.java,junit5,ParameterizedTest;CsvSource,PT,,,,"@ParameterizedTest
+@CsvSource(value = { ""mybucket.myhost:9999,No matching domain"", ""mybucketlocalhost:9878,invalid format"" })
+public void testVirtualHostStyleWithInvalidInputs(String hostAddress, String expectErrorMessage) throws Exception {
+    VirtualHostStyleFilter virtualHostStyleFilter = new VirtualHostStyleFilter();
+    virtualHostStyleFilter.setConfiguration(conf);
+    ContainerRequest containerRequest = createContainerRequest(hostAddress, null, null, true);
+    InvalidRequestException exception = assertThrows(InvalidRequestException.class, () -> virtualHostStyleFilter.filter(containerRequest));
+    assertThat(exception).hasMessageContaining(expectErrorMessage);
+}"
+PV-095,jena,tuple_4,/Volumes/SSK Drive/apache-projects/jena/jena-base/src/test/java/org/apache/jena/atlas/lib/tuple/TestTuple.java,junit5,Test,nonPT,,,,"@Test
+public void tuple_4() {
+    Tuple<Integer> tuple = TupleFactory.create4(9, 8, 7, 6);
+    assertEquals(4, tuple.len());
+    check(tuple);
+}"
+PV-096,hadoop,testGetLabelsMappingEmpty,/Volumes/SSK Drive/apache-projects/hadoop/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-router/src/test/java/org/apache/hadoop/yarn/server/router/subcluster/fair/TestYarnFederationWithFairScheduler.java,junit5,Test,nonPT,,,,"@Test
+public void testGetLabelsMappingEmpty() throws Exception {
+    LabelsToNodesInfo labelsToNodesInfo = TestFederationSubCluster.performGetCalls(ROUTER_WEB_ADDRESS, RM_WEB_SERVICE_PATH + LABEL_MAPPINGS, LabelsToNodesInfo.class, null, null);
+    assertNotNull(labelsToNodesInfo);
+}"
+PV-097,doris,testSerializeAlterViewInfo,/Volumes/SSK Drive/apache-projects/doris/fe/fe-core/src/test/java/org/apache/doris/persist/GlobalVarPersistInfoTest.java,junit4,Test,nonPT,,,,"@Test
+public void testSerializeAlterViewInfo() throws IOException {
+    // 1. Write objects to file
+    File file = new File(fileName);
+    file.createNewFile();
+    DataOutputStream out = new DataOutputStream(new FileOutputStream(file));
+    SessionVariable sessionVariable = VariableMgr.newSessionVariable();
+    List<String> varNames = Lists.newArrayList();
+    varNames.add(""exec_mem_limit"");
+    varNames.add(""default_rowset_type"");
+    GlobalVarPersistInfo info = new GlobalVarPersistInfo(sessionVariable, varNames);
+    info.write(out);
+    out.flush();
+    out.close();
+    // 2. Read objects from file
+    DataInputStream in = new DataInputStream(new FileInputStream(file));
+    GlobalVarPersistInfo newInfo = GlobalVarPersistInfo.read(in);
+    System.out.println(newInfo.getPersistJsonString());
+    in.close();
+}"
+PV-098,iceberg,testPartitioningAndScaleUp,/Volumes/SSK Drive/apache-projects/iceberg/flink/v1.20/flink/src/test/java/org/apache/iceberg/flink/sink/shuffle/TestSketchUtil.java,junit5,ParameterizedTest;ValueSource,PT,,,,"@ParameterizedTest
+@ValueSource(ints = { 4, 6 })
+public void testPartitioningAndScaleUp(int numPartitions) {
+    // Range bounds are calculated based on 4 partitions
+    SortKey[] rangeBounds = new SortKey[] { CHAR_KEYS.get(""c""), CHAR_KEYS.get(""j""), CHAR_KEYS.get(""m"") };
+    // <= c
+    assertPartition(0, CHAR_KEYS.get(""a""), numPartitions, rangeBounds);
+    assertPartition(0, CHAR_KEYS.get(""c""), numPartitions, rangeBounds);
+    // > c && <= j
+    assertPartition(1, CHAR_KEYS.get(""d""), numPartitions, rangeBounds);
+    assertPartition(1, CHAR_KEYS.get(""i""), numPartitions, rangeBounds);
+    assertPartition(1, CHAR_KEYS.get(""j""), numPartitions, rangeBounds);
+    // > j && <= m
+    assertPartition(2, CHAR_KEYS.get(""k""), numPartitions, rangeBounds);
+    assertPartition(2, CHAR_KEYS.get(""l""), numPartitions, rangeBounds);
+    assertPartition(2, CHAR_KEYS.get(""m""), numPartitions, rangeBounds);
+    // > m
+    assertPartition(3, CHAR_KEYS.get(""n""), numPartitions, rangeBounds);
+    assertPartition(3, CHAR_KEYS.get(""z""), numPartitions, rangeBounds);
+}"
+PV-099,jena,testVincentyFormula_Distance8,/Volumes/SSK Drive/apache-projects/jena/jena-geosparql/src/test/java/org/apache/jena/geosparql/implementation/great_circle/GreatCircleDistanceTest.java,junit4,Ignore;Test,nonPT,,,,"/**
+ * Test of vincentyFormula method, test values from issue JENA-1915.
+ */
+@Ignore
+@Test
+public void testVincentyFormula_Distance8() {
+    double lat1 = 41.2572;
+    double lon1 = -95.9656;
+    double lat2 = -33.8646;
+    double lon2 = 151.2099;
+    double expResult = 14184.1430;
+    // Adjustment to kilometres.
+    double result = GreatCircleDistance.vincentyFormula(lat1, lon1, lat2, lon2) / 1000;
+    assertEquals(expResult, result, 0.3);
+}"
+PV-100,druid,aggregateCompatibilityTest,/Volumes/SSK Drive/apache-projects/druid/extensions-core/stats/src/test/java/org/apache/druid/query/aggregation/variance/VarianceObjectVectorAggregatorTest.java,junit4,Test,nonPT,,,,"@Test
+public void aggregateCompatibilityTest() {
+    this.resetSelectorObjectVectorWithObjects();
+    target.aggregate(buf, POSITION, START_ROW, VALUES.length);
+    VarianceAggregatorCollector collector = VarianceBufferAggregator.getVarianceCollector(buf, POSITION);
+    Assert.assertEquals(4, collector.count);
+    Assert.assertEquals(217.67, collector.sum, EPSILON);
+    Assert.assertEquals(7565.211675, collector.nvariance, EPSILON);
+}"
+PV-101,jena,testOWL2ProfilesDataRanges,/Volumes/SSK Drive/apache-projects/jena/jena-ontapi/src/test/java/org/apache/jena/ontapi/OntModelOWLSpecsTest.java,junit5,ParameterizedTest;EnumSource,PT,,,,"@ParameterizedTest
+@EnumSource(names = { ""OWL2_EL_MEM"", ""OWL2_EL_MEM_RDFS_INF"", ""OWL2_EL_MEM_TRANS_INF"", ""OWL2_EL_MEM_RULES_INF"", ""OWL2_QL_MEM"", ""OWL2_QL_MEM_RDFS_INF"", ""OWL2_QL_MEM_TRANS_INF"", ""OWL2_QL_MEM_RULES_INF"", ""OWL2_RL_MEM"", ""OWL2_RL_MEM_RDFS_INF"", ""OWL2_RL_MEM_TRANS_INF"", ""OWL2_RL_MEM_RULES_INF"" })
+public void testOWL2ProfilesDataRanges(TestSpec spec) {
+    OntModel data = OntModelFactory.createModel();
+    OntDataRange.Named d1 = data.createDatatype(""d1"");
+    OntDataRange.Named d2 = data.createDatatype(""d2"");
+    OntDataRange d3 = data.createDataRestriction(d1, data.createFacetRestriction(OntFacetRestriction.MaxExclusive.class, data.createTypedLiteral(42)), data.createFacetRestriction(OntFacetRestriction.Pattern.class, data.createTypedLiteral(""42"")));
+    data.createDataUnionOf(d1, d2);
+    data.createDataComplementOf(d2);
+    data.createDataIntersectionOf(d1, d2);
+    data.createDataIntersectionOf(d2, d3);
+    OntModel m = OntModelFactory.createModel(data.getGraph(), spec.inst);
+    Assertions.assertEquals(0, m.ontObjects(OntDataRange.Restriction.class).count());
+    Assertions.assertEquals(0, m.ontObjects(OntDataRange.UnionOf.class).count());
+    Assertions.assertEquals(0, m.ontObjects(OntDataRange.OneOf.class).count());
+    Assertions.assertEquals(0, m.ontObjects(OntDataRange.ComplementOf.class).count());
+    Assertions.assertEquals(2, m.ontObjects(OntDataRange.IntersectionOf.class).count());
+    Assertions.assertEquals(2, m.ontObjects(OntDataRange.Combination.class).count());
+    int expectedNamedDataRanges;
+    if (spec.isRDFS()) {
+        expectedNamedData"
+PV-102,orc,testWriterVersion,/Volumes/SSK Drive/apache-projects/orc/java/core/src/test/org/apache/orc/TestVectorOrcFile.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""data"")
+public void testWriterVersion(Version fileFormat) throws Exception {
+    assumeTrue(fileFormat == OrcFile.Version.V_0_11);
+    // test writer implementation serialization
+    assertEquals(OrcFile.WriterImplementation.ORC_JAVA, OrcFile.WriterImplementation.from(0));
+    assertEquals(OrcFile.WriterImplementation.ORC_CPP, OrcFile.WriterImplementation.from(1));
+    assertEquals(OrcFile.WriterImplementation.PRESTO, OrcFile.WriterImplementation.from(2));
+    assertEquals(OrcFile.WriterImplementation.TRINO, OrcFile.WriterImplementation.from(4));
+    assertEquals(OrcFile.WriterImplementation.CUDF, OrcFile.WriterImplementation.from(5));
+    assertEquals(OrcFile.WriterImplementation.UNKNOWN, OrcFile.WriterImplementation.from(99));
+    // test writer version serialization
+    assertEquals(OrcFile.WriterVersion.FUTURE, OrcFile.WriterVersion.from(OrcFile.WriterImplementation.ORC_JAVA, 99));
+    assertEquals(OrcFile.WriterVersion.ORIGINAL, OrcFile.WriterVersion.from(OrcFile.WriterImplementation.ORC_JAVA, 0));
+    assertEquals(OrcFile.WriterVersion.HIVE_4243, OrcFile.WriterVersion.from(OrcFile.WriterImplementation.ORC_JAVA, 2));
+    assertEquals(OrcFile.WriterVersion.FUTURE, OrcFile.WriterVersion.from(OrcFile.WriterImplementation.ORC_CPP, 99));
+    assertEquals(OrcFile.WriterVersion.ORC_CPP_ORIGINAL, OrcFile.WriterVersion.from(OrcFile.WriterImplementation.ORC_CPP, 6));
+    assertEquals(OrcFile.WriterVersion.PRESTO_ORIGINAL, OrcFile.WriterVersion.from(OrcFile.WriterImplementation.PRESTO, 6));
+    assertEquals(OrcFile.WriterVersion.TRINO_ORIGINAL, Or"
+PV-103,commons-math,testConcatenateSingle,/Volumes/SSK Drive/apache-projects/commons-math/commons-math-legacy-core/src/test/java/org/apache/commons/math4/legacy/core/MathArraysTest.java,junit4,Test,nonPT,,,,"@Test
+public void testConcatenateSingle() {
+    final double[] x = new double[] { 0, 1, 2 };
+    Assert.assertArrayEquals(x, MathArrays.concatenate(x), 0);
+}"
+PV-104,gobblin,testGenerateTagsForPartitions,/Volumes/SSK Drive/apache-projects/gobblin/gobblin-modules/gobblin-kafka-common/src/test/java/org/apache/gobblin/source/extractor/extract/kafka/KafkaExtractorStatsTrackerTest.java,unknown,Test,nonPT,,,,"@Test
+public void testGenerateTagsForPartitions() throws Exception {
+    MultiLongWatermark lowWatermark = new MultiLongWatermark(Arrays.asList(new Long(10), new Long(20)));
+    MultiLongWatermark highWatermark = new MultiLongWatermark(Arrays.asList(new Long(20), new Long(30)));
+    MultiLongWatermark nextWatermark = new MultiLongWatermark(Arrays.asList(new Long(15), new Long(25)));
+    Map<KafkaPartition, Map<String, String>> addtionalTags = ImmutableMap.of(PARTITION0, ImmutableMap.of(""testKey"", ""testValue""));
+    this.workUnitState.removeProp(KafkaUtils.getPartitionPropName(KafkaSource.START_FETCH_EPOCH_TIME, 0));
+    this.workUnitState.removeProp(KafkaUtils.getPartitionPropName(KafkaSource.STOP_FETCH_EPOCH_TIME, 0));
+    KafkaUtils.setPartitionAvgRecordMillis(this.workUnitState, PARTITION0, 0);
+    KafkaExtractorStatsTracker.ExtractorStats extractorStats = this.extractorStatsTracker.getStatsMap().get(kafkaPartitions.get(0));
+    extractorStats.setStartFetchEpochTime(1000);
+    extractorStats.setStopFetchEpochTime(10000);
+    extractorStats.setAvgMillisPerRecord(10.1);
+    Map<KafkaPartition, Map<String, String>> result = extractorStatsTracker.generateTagsForPartitions(lowWatermark, highWatermark, nextWatermark, addtionalTags);
+    // generateTagsForPartitions will set the following in the workUnitState
+    Assert.assertEquals(this.workUnitState.getPropAsLong(KafkaUtils.getPartitionPropName(KafkaSource.START_FETCH_EPOCH_TIME, 0)), extractorStats.getStartFetchEpochTime());
+    Assert.assertEquals(this.workUnitState.getPropAsLong(KafkaUtils.getPartitionPropName(KafkaSource."
+PV-105,hadoop,testReadNumaTopologyFromConfigurations,/Volumes/SSK Drive/apache-projects/hadoop/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/test/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/linux/resources/numa/TestNumaResourceAllocator.java,junit5,Test,nonPT,,,,"@Test
+public void testReadNumaTopologyFromConfigurations() throws Exception {
+    Collection<NumaNodeResource> nodesList = numaResourceAllocator.getNumaNodesList();
+    Collection<NumaNodeResource> expectedNodesList = getExpectedNumaNodesList();
+    assertEquals(expectedNodesList, nodesList);
+}"
+PV-106,hive,testListPartitionsWithAuthByValuesNoDb,/Volumes/SSK Drive/apache-projects/hive/standalone-metastore/metastore-server/src/test/java/org/apache/hadoop/hive/metastore/client/TestListPartitions.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test(expected = NoSuchObjectException.class)
+public void testListPartitionsWithAuthByValuesNoDb() throws Exception {
+    client.dropDatabase(DB_NAME);
+    client.listPartitionsWithAuthInfo(DB_NAME, TABLE_NAME, Lists.newArrayList(""2017"", ""11"", ""27""), (short) -1, """", Lists.newArrayList());
+}"
+PV-107,geode,testGetClassNameWithNull,/Volumes/SSK Drive/apache-projects/geode/geode-common/src/test/java/org/apache/geode/internal/lang/utils/ClassUtilsTest.java,junit4,Test,nonPT,,,,"@Test
+public void testGetClassNameWithNull() {
+    assertNull(ClassUtils.getClassName(null));
+}"
+PV-108,geode,queryWithRegionAsBindParameterShouldNotThrowSecurityExceptionWhenUserHasTheCorrectPrivileges,/Volumes/SSK Drive/apache-projects/geode/geode-core/src/distributedTest/java/org/apache/geode/security/query/QuerySecurityWithBindParameterDistributedTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void queryWithRegionAsBindParameterShouldNotThrowSecurityExceptionWhenUserHasTheCorrectPrivileges() throws Exception {
+    setUpSpecificClient(""dataReaderRegion"");
+    specificUserClient.invoke(() -> {
+        Region region = getClientCache().getRegion(regionName);
+        HashSet<Region> hashSet = new HashSet<>(Collections.singletonList(region));
+        assertQueryResults(getClientCache(), queryString, new Object[] { hashSet }, Arrays.asList(values));
+    });
+}"
+PV-109,camel,successfullyProcessedTest,/Volumes/SSK Drive/apache-projects/camel/components/camel-as2/camel-as2-component/src/test/java/org/apache/camel/component/as2/AS2ServerSecEncryptedSignedIT.java,junit5,ParameterizedTest;EnumSource,PT,,,,"// verify the message types that pass decryption and signature verification
+@ParameterizedTest
+@EnumSource(value = AS2MessageStructure.class, names = { ""SIGNED_ENCRYPTED"", ""ENCRYPTED_COMPRESSED_SIGNED"", ""ENCRYPTED_SIGNED_COMPRESSED"" })
+public void successfullyProcessedTest(AS2MessageStructure messageStructure) throws Exception {
+    HttpCoreContext context = send(messageStructure);
+    verifyOkResponse(context);
+    verifyMdnSuccessDisposition(context);
+}"
+PV-110,hadoop,testContainerCleanedWhileRunning,/Volumes/SSK Drive/apache-projects/hadoop/hadoop-mapreduce-project/hadoop-mapreduce-client/hadoop-mapreduce-client-app/src/test/java/org/apache/hadoop/mapreduce/v2/app/job/impl/TestTaskAttempt.java,junit5,Test,nonPT,,,,"@Test
+public void testContainerCleanedWhileRunning() throws Exception {
+    ApplicationId appId = ApplicationId.newInstance(1, 2);
+    ApplicationAttemptId appAttemptId = ApplicationAttemptId.newInstance(appId, 0);
+    JobId jobId = MRBuilderUtils.newJobId(appId, 1);
+    TaskId taskId = MRBuilderUtils.newTaskId(jobId, 1, TaskType.MAP);
+    TaskAttemptId attemptId = MRBuilderUtils.newTaskAttemptId(taskId, 0);
+    Path jobFile = mock(Path.class);
+    MockEventHandler eventHandler = new MockEventHandler();
+    TaskAttemptListener taListener = mock(TaskAttemptListener.class);
+    when(taListener.getAddress()).thenReturn(new InetSocketAddress(""localhost"", 0));
+    JobConf jobConf = new JobConf();
+    jobConf.setClass(""fs.file.impl"", StubbedFS.class, FileSystem.class);
+    jobConf.setBoolean(""fs.file.impl.disable.cache"", true);
+    jobConf.set(JobConf.MAPRED_MAP_TASK_ENV, """");
+    jobConf.set(MRJobConfig.APPLICATION_ATTEMPT_ID, ""10"");
+    TaskSplitMetaInfo splits = mock(TaskSplitMetaInfo.class);
+    when(splits.getLocations()).thenReturn(new String[] { ""127.0.0.1"" });
+    AppContext appCtx = mock(AppContext.class);
+    ClusterInfo clusterInfo = mock(ClusterInfo.class);
+    Resource resource = mock(Resource.class);
+    when(appCtx.getClusterInfo()).thenReturn(clusterInfo);
+    when(resource.getMemorySize()).thenReturn(1024L);
+    setupTaskAttemptFinishingMonitor(eventHandler, jobConf, appCtx);
+    TaskAttemptImpl taImpl = new MapTaskAttemptImpl(taskId, 1, eventHandler, jobFile, 1, splits, jobConf, taListener, new Token(), new Credentials(), SystemClock.getInstance(), appCtx);
+    "
+PV-111,hadoop,testAppReportNodeLabelRMRestart,/Volumes/SSK Drive/apache-projects/hadoop/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-resourcemanager/src/test/java/org/apache/hadoop/yarn/server/resourcemanager/TestRMRestart.java,junit5,Timeout;ParameterizedTest;MethodSource,PT,,,,"@Timeout(60)
+@ParameterizedTest(name = ""{0}"")
+@MethodSource(""getParameters"")
+public void testAppReportNodeLabelRMRestart(SchedulerType type) throws Exception {
+    initTestRMRestart(type);
+    if (getSchedulerType() != SchedulerType.CAPACITY) {
+        return;
+    }
+    // Create RM
+    YarnConfiguration newConf = new YarnConfiguration(conf);
+    newConf.setBoolean(YarnConfiguration.NODE_LABELS_ENABLED, true);
+    MockRM rm1 = createMockRM(newConf);
+    NodeLabel amLabel = NodeLabel.newInstance(""AMLABEL"");
+    NodeLabel appLabel = NodeLabel.newInstance(""APPLABEL"");
+    List<NodeLabel> labels = new ArrayList<>();
+    labels.add(amLabel);
+    labels.add(appLabel);
+    MemoryRMStateStore memStore = (MemoryRMStateStore) rm1.getRMStateStore();
+    rm1.start();
+    // Add label
+    rm1.getAdminService().addToClusterNodeLabels(AddToClusterNodeLabelsRequest.newInstance(labels));
+    // create app and launch the AM
+    ResourceRequest amResourceRequest = ResourceRequest.newInstance(Priority.newInstance(0), ResourceRequest.ANY, Resource.newInstance(200, 1), 1, true, amLabel.getName());
+    ArrayList resReqs = new ArrayList<>();
+    resReqs.add(amResourceRequest);
+    RMApp app0 = submitApp(rm1, resReqs, appLabel.getName());
+    rm1.killApp(app0.getApplicationId());
+    rm1.waitForState(app0.getApplicationId(), RMAppState.KILLED);
+    // start new RM
+    MockRM rm2 = createMockRM(conf, memStore);
+    rm2.start();
+    assertEquals(1, rm2.getRMContext().getRMApps().size());
+    ApplicationReport appReport = rm2.getClientRMService().getApplicationReport(GetApplicationReportRequest.newIns"
+PV-112,hive,testSchemaInit,/Volumes/SSK Drive/apache-projects/hive/standalone-metastore/metastore-server/src/test/java/org/apache/hadoop/hive/metastore/tools/schematool/TestSchemaToolForMetastore.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"/**
+ * Test schema initialization
+ */
+@Test
+public void testSchemaInit() throws Exception {
+    IMetaStoreSchemaInfo metastoreSchemaInfo = MetaStoreSchemaInfoFactory.get(conf, System.getProperty(""test.tmp.dir"", ""target/tmp""), dbms.getDbType());
+    execute(new SchemaToolTaskInit(), ""-initSchemaTo "" + metastoreSchemaInfo.getHiveSchemaVersion());
+    schemaTool.verifySchemaVersion();
+}"
+PV-113,commons-statistics,testBiased,/Volumes/SSK Drive/apache-projects/commons-statistics/commons-statistics-descriptive/src/test/java/org/apache/commons/statistics/descriptive/LongVarianceTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource
+void testBiased(long[] values, double biased, double unbiased, DoubleTolerance tol) {
+    final LongVariance stat = LongVariance.of(values);
+    // Default is unbiased
+    final double actualUnbiased = stat.getAsDouble();
+    TestUtils.assertEquals(unbiased, actualUnbiased, tol, () -> ""Unbiased: "" + format(values));
+    Assertions.assertSame(stat, stat.setBiased(true));
+    final double acutalBiased = stat.getAsDouble();
+    TestUtils.assertEquals(biased, acutalBiased, tol, () -> ""Biased: "" + format(values));
+    // The mutable state can be switched back and forth
+    Assertions.assertSame(stat, stat.setBiased(false));
+    Assertions.assertEquals(actualUnbiased, stat.getAsDouble(), () -> ""Unbiased: "" + format(values));
+    Assertions.assertSame(stat, stat.setBiased(true));
+    Assertions.assertEquals(acutalBiased, stat.getAsDouble(), () -> ""Biased: "" + format(values));
+}"
+PV-114,hive,testAddPartitionNullLocationInTableToo,/Volumes/SSK Drive/apache-projects/hive/standalone-metastore/metastore-server/src/test/java/org/apache/hadoop/hive/metastore/client/TestAddPartitions.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testAddPartitionNullLocationInTableToo() throws Exception {
+    Table table = createTable(DB_NAME, TABLE_NAME, null);
+    Partition partition = buildPartition(DB_NAME, TABLE_NAME, DEFAULT_YEAR_VALUE, null);
+    client.add_partition(partition);
+    Partition part = client.getPartition(DB_NAME, TABLE_NAME, ""year=2017"");
+    Assert.assertEquals(table.getSd().getLocation() + ""/year=2017"", part.getSd().getLocation());
+    Assert.assertTrue(metaStore.isPathExists(new Path(part.getSd().getLocation())));
+}"
+PV-115,hive,testGetPartitionsByNamesNullDbName,/Volumes/SSK Drive/apache-projects/hive/standalone-metastore/metastore-server/src/test/java/org/apache/hadoop/hive/metastore/client/TestGetPartitions.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testGetPartitionsByNamesNullDbName() throws Exception {
+    try {
+        createTable3PartCols1Part(client);
+        client.getPartitionsByNames(null, TABLE_NAME, Lists.newArrayList(""yyyy=2000/mm=01/dd=02""));
+        fail(""Should have thrown exception"");
+    } catch (NullPointerException | TTransportException | MetaException e) {
+        //TODO: should not throw different exceptions for different HMS deployment types
+    }
+}"
+PV-116,flink,testTumblingTimeWindow,/Volumes/SSK Drive/apache-projects/flink/flink-tests/src/test/java/org/apache/flink/test/checkpointing/EventTimeWindowCheckpointingITCase.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"// ------------------------------------------------------------------------
+@Test
+public void testTumblingTimeWindow() {
+    final int numElementsPerKey = numElementsPerKey();
+    final int windowSize = windowSize();
+    final int numKeys = numKeys();
+    try {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(configuration);
+        env.setParallelism(PARALLELISM);
+        env.enableCheckpointing(100);
+        RestartStrategyUtils.configureFixedDelayRestartStrategy(env, 1, 0L);
+        env.getConfig().setUseSnapshotCompression(true);
+        env.addSource(new FailingSource(new KeyedEventTimeGenerator(numKeys, windowSize), numElementsPerKey)).rebalance().keyBy(x -> x.f0).window(TumblingEventTimeWindows.of(Duration.ofMillis(windowSize))).apply(new RichWindowFunction<Tuple2<Long, IntType>, Tuple4<Long, Long, Long, IntType>, Long, TimeWindow>() {
+
+            private boolean open = false;
+
+            @Override
+            public void open(OpenContext openContext) {
+                assertEquals(PARALLELISM, getRuntimeContext().getTaskInfo().getNumberOfParallelSubtasks());
+                open = true;
+            }
+
+            @Override
+            public void apply(Long l, TimeWindow window, Iterable<Tuple2<Long, IntType>> values, Collector<Tuple4<Long, Long, Long, IntType>> out) {
+                // validate that the function has been opened properly
+                assertTrue(open);
+                int sum = 0;
+                long key = -1;
+                for (Tuple2<Long, IntType> value : values) {
+                    sum += valu"
+PV-117,jena,parse_16,/Volumes/SSK Drive/apache-projects/jena/jena-core/src/test/java/org/apache/jena/irix/TestIRIxJenaSystem.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"// : in first segment in path.
+@Test
+public void parse_16() {
+    good(""http://host/a:b/"");
+}"
+PV-118,tez,testMultipleClientsWithoutSession,/Volumes/SSK Drive/apache-projects/tez/tez-tests/src/test/java/org/apache/tez/test/TestLocalMode.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test(timeout = 10000)
+public void testMultipleClientsWithoutSession() throws TezException, InterruptedException, IOException {
+    TezConfiguration tezConf1 = createConf();
+    TezClient tezClient1 = TezClient.create(""commonName"", tezConf1, false);
+    tezClient1.start();
+    DAG dag1 = createSimpleDAG(""testMultipleClientsWithoutSession"", SleepProcessor.class.getName());
+    DAGClient dagClient1 = tezClient1.submitDAG(dag1);
+    dagClient1.waitForCompletion();
+    assertEquals(DAGStatus.State.SUCCEEDED, dagClient1.getDAGStatus(null).getState());
+    assertEquals(VertexStatus.State.SUCCEEDED, dagClient1.getVertexStatus(SleepProcessor.SLEEP_VERTEX_NAME, null).getState());
+    dagClient1.close();
+    tezClient1.stop();
+    TezConfiguration tezConf2 = createConf();
+    DAG dag2 = createSimpleDAG(""testMultipleClientsWithoutSession_2"", SleepProcessor.class.getName());
+    TezClient tezClient2 = TezClient.create(""commonName"", tezConf2, false);
+    tezClient2.start();
+    DAGClient dagClient2 = tezClient2.submitDAG(dag2);
+    dagClient2.waitForCompletion();
+    assertEquals(DAGStatus.State.SUCCEEDED, dagClient2.getDAGStatus(null).getState());
+    assertEquals(VertexStatus.State.SUCCEEDED, dagClient2.getVertexStatus(SleepProcessor.SLEEP_VERTEX_NAME, null).getState());
+    assertFalse(dagClient1.getExecutionContext().equals(dagClient2.getExecutionContext()));
+    dagClient2.close();
+    tezClient2.stop();
+}"
+PV-119,doris,testFloatGetStringValue,/Volumes/SSK Drive/apache-projects/doris/fe/fe-core/src/test/java/org/apache/doris/analysis/FloatLiteralTest.java,junit5,Test,nonPT,,,,"@Test
+public void testFloatGetStringValue() {
+    Assertions.assertEquals(""0"", new FloatLiteral(0d, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""0"", new FloatLiteral(0.0, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""-0"", new FloatLiteral(-0d, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""1"", new FloatLiteral(1d, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""1"", new FloatLiteral(1.0d, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""-1"", new FloatLiteral(-1d, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""1.554"", new FloatLiteral(1.554d, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""0.338"", new FloatLiteral(0.338d, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""-1"", new FloatLiteral(-1.0d, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""1e+38"", new FloatLiteral(1e38, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""1e-38"", new FloatLiteral(1e-38, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""1000000"", new FloatLiteral(1.0E6).getStringValueForQuery(null));
+    Assertions.assertEquals(""-1000000"", new FloatLiteral(-1.0E6, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""1e+07"", new FloatLiteral(1.0E7, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""-1e+07"", new FloatLiteral(-1.0E7, Type.FLOAT).getStringValueForQuery(null));
+    Assertions.assertEquals(""0.0001"
+PV-120,commons-codec,testCodec200,/Volumes/SSK Drive/apache-projects/commons-codec/src/test/java/org/apache/commons/codec/binary/Base32Test.java,junit5,Test,nonPT,,,,"@Test
+void testCodec200() {
+    // should be allowed
+    final Base32 codec = new Base32(true, (byte) 'W');
+    assertNotNull(codec);
+}"
+PV-121,pinot,testReloadSegmentForceDownload,/Volumes/SSK Drive/apache-projects/pinot/pinot-core/src/test/java/org/apache/pinot/core/data/manager/BaseTableDataManagerTest.java,unknown,Test,nonPT,,,,"@Test
+public void testReloadSegmentForceDownload() throws Exception {
+    File indexDir = createSegment(SegmentVersion.v3, 5);
+    SegmentZKMetadata zkMetadata = makeRawSegment(indexDir, new File(TEMP_DIR, SEGMENT_NAME + TarCompressionUtils.TAR_COMPRESSED_FILE_EXTENSION), false);
+    // Same CRC but force to download.
+    BaseTableDataManager tableDataManager = createTableManager();
+    SegmentMetadataImpl segmentMetadata = new SegmentMetadataImpl(indexDir);
+    assertEquals(Long.parseLong(segmentMetadata.getCrc()), zkMetadata.getCrc());
+    // Remove the local segment dir. Segment reloading fails unless force to download.
+    FileUtils.deleteQuietly(indexDir);
+    try {
+        tableDataManager.reloadSegment(SEGMENT_NAME, new IndexLoadingConfig(), zkMetadata, segmentMetadata, false);
+        fail();
+    } catch (Exception e) {
+        // As expected, segment reloading fails due to missing the local segment dir.
+    }
+    tableDataManager.reloadSegment(SEGMENT_NAME, new IndexLoadingConfig(), zkMetadata, segmentMetadata, true);
+    assertTrue(indexDir.exists());
+    segmentMetadata = new SegmentMetadataImpl(indexDir);
+    assertEquals(Long.parseLong(segmentMetadata.getCrc()), zkMetadata.getCrc());
+    assertEquals(segmentMetadata.getTotalDocs(), 5);
+}"
+PV-122,ant,testValidateWrongComparator,/Volumes/SSK Drive/apache-projects/ant/src/tests/junit/org/apache/tools/ant/types/selectors/ModifiedSelectorTest.java,junit4,Test,nonPT,,,,"/**
+ * Test correct use of comparator names.
+ */
+@Test
+public void testValidateWrongComparator() {
+    String name = ""this-is-not-a-valid-comparator-name"";
+    thrown.expect(BuildException.class);
+    thrown.expectMessage(name + "" is not a legal value for this attribute"");
+    new ModifiedSelector.ComparatorName().setValue(name);
+}"
+PV-123,cassandra,testHeaderOnlyFileFiltering,/Volumes/SSK Drive/apache-projects/cassandra/test/unit/org/apache/cassandra/db/commitlog/CommitLogTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"/**
+ * Since commit log segments can be allocated before they're needed, the commit log file with the highest
+ * id isn't neccesarily the last log that we wrote to. We should remove header only logs on recover so we
+ * can tolerate truncated logs
+ */
+@Test
+public void testHeaderOnlyFileFiltering() throws Exception {
+    Assume.assumeTrue(!DatabaseDescriptor.getEncryptionContext().isEnabled());
+    File directory = new File(Files.createTempDir());
+    CommitLogDescriptor desc1 = new CommitLogDescriptor(CommitLogDescriptor.current_version, 1, null, DatabaseDescriptor.getEncryptionContext());
+    CommitLogDescriptor desc2 = new CommitLogDescriptor(CommitLogDescriptor.current_version, 2, null, DatabaseDescriptor.getEncryptionContext());
+    ByteBuffer buffer;
+    // this has a header and malformed data
+    File file1 = new File(directory, desc1.fileName());
+    buffer = ByteBuffer.allocate(1024);
+    CommitLogDescriptor.writeHeader(buffer, desc1);
+    int pos = buffer.position();
+    CommitLogSegment.writeSyncMarker(desc1.id, buffer, buffer.position(), buffer.position(), buffer.position() + 128);
+    buffer.position(pos + 8);
+    buffer.putInt(5);
+    buffer.putInt(6);
+    try (OutputStream lout = new FileOutputStreamPlus(file1)) {
+        lout.write(buffer.array());
+    }
+    // this has only a header
+    File file2 = new File(directory, desc2.fileName());
+    buffer = ByteBuffer.allocate(1024);
+    CommitLogDescriptor.writeHeader(buffer, desc2);
+    try (OutputStream lout = new FileOutputStreamPlus(file2)) {
+        lout.write(buffer.array());
+    }
+    // one corrupt file an"
+PV-124,bookkeeper,testReadLacNotSameWithMetadataLedgerReplication,/Volumes/SSK Drive/apache-projects/bookkeeper/bookkeeper-server/src/test/java/org/apache/bookkeeper/client/BookieWriteLedgerTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testReadLacNotSameWithMetadataLedgerReplication() throws Exception {
+    lh = bkc.createLedger(3, 3, 2, digestType, ledgerPassword);
+    for (int i = 0; i < 10; ++i) {
+        ByteBuffer entry = ByteBuffer.allocate(4);
+        entry.putInt(rng.nextInt(maxInt));
+        entry.position(0);
+        lh.addEntry(entry.array());
+    }
+    List<BookieId> ensemble = lh.getLedgerMetadata().getAllEnsembles().entrySet().iterator().next().getValue();
+    assertEquals(1, lh.getLedgerMetadata().getAllEnsembles().size());
+    killBookie(ensemble.get(1));
+    try {
+        lh.ensembleChangeLoop(ensemble, Collections.singletonMap(1, ensemble.get(1)));
+    } catch (Exception e) {
+        fail();
+    }
+    LedgerHandle lh1 = bkc.openLedgerNoRecovery(lh.ledgerId, digestType, ledgerPassword);
+    assertEquals(2, lh1.getLedgerMetadata().getAllEnsembles().size());
+    List<BookieId> firstEnsemble = lh1.getLedgerMetadata().getAllEnsembles().firstEntry().getValue();
+    long entryId = lh1.getLedgerMetadata().getAllEnsembles().lastEntry().getKey() - 1;
+    try {
+        lh1.readAsync(entryId, entryId).get();
+        fail();
+    } catch (Exception e) {
+        LOG.info(""Failed to read entry: {} "", entryId, e);
+    }
+    MetadataBookieDriver driver = MetadataDrivers.getBookieDriver(URI.create(baseConf.getMetadataServiceUri()));
+    driver.initialize(baseConf, NullStatsLogger.INSTANCE);
+    // initialize urReplicationManager
+    LedgerManagerFactory mFactory = driver.getLedgerManagerFactory();
+    LedgerUnderreplicationManager underReplicationManager = mFactory.newLedgerUnderreplicati"
+PV-125,flink,testCreateTemporaryTable,/Volumes/SSK Drive/apache-projects/flink/flink-table/flink-sql-parser/src/test/java/org/apache/flink/sql/parser/FlinkSqlParserImplTest.java,junit5,Test,nonPT,,,,"@Test
+void testCreateTemporaryTable() {
+    final String sql = ""create temporary table source_table(\n"" + ""  a int,\n"" + ""  b bigint,\n"" + ""  c string\n"" + "") with (\n"" + ""  'x' = 'y',\n"" + ""  'abc' = 'def'\n"" + "")"";
+    final String expected = ""CREATE TEMPORARY TABLE `SOURCE_TABLE` (\n"" + ""  `A` INTEGER,\n"" + ""  `B` BIGINT,\n"" + ""  `C` STRING\n"" + "")\n"" + ""WITH (\n"" + ""  'x' = 'y',\n"" + ""  'abc' = 'def'\n"" + "")"";
+    sql(sql).ok(expected);
+}"
+PV-126,nifi,testKafkaFailureTooBig,/Volumes/SSK Drive/apache-projects/nifi/nifi-extension-bundles/nifi-kafka-bundle/nifi-kafka-3-integration/src/test/java/org/apache/nifi/kafka/processors/publish/PublishKafkaMultipleFFIT.java,junit5,ParameterizedTest;MethodSource,PT,,,,"/**
+ * Test Kafka client library failure on attempt to send over-sized Kafka record (Kafka limited).
+ */
+@ParameterizedTest
+@MethodSource(""argumentsTransactionality"")
+public void testKafkaFailureTooBig(final Boolean transactionality) throws InitializationException {
+    final TestRunner runner = TestRunners.newTestRunner(PublishKafka.class);
+    runner.setValidateExpressionUsage(false);
+    runner.setProperty(PublishKafka.CONNECTION_SERVICE, addKafkaConnectionService(runner));
+    runner.setProperty(PublishKafka.TOPIC_NAME, getClass().getName());
+    runner.setProperty(PublishKafka.TRANSACTIONS_ENABLED, transactionality.toString());
+    runner.setProperty(PublishKafka.MAX_REQUEST_SIZE, ""3 MB"");
+    runner.enqueue(new byte[MESSAGE_MAX_BYTES * 6 / 5]);
+    runner.run();
+    runner.assertAllFlowFilesTransferred(PublishKafka.REL_FAILURE, 1);
+}"
+PV-127,ignite,testFlowNoConflictsWithClients,/Volumes/SSK Drive/apache-projects/ignite/modules/core/src/test/java/org/apache/ignite/internal/processors/cache/binary/BinaryMetadataUpdatesFlowTest.java,junit4,Test,nonPT,,,,"/**
+ * @throws Exception If failed.
+ */
+@Test
+public void testFlowNoConflictsWithClients() throws Exception {
+    startGridsMultiThreaded(GRID_CNT);
+    if (!tcpDiscovery())
+        return;
+    discoveryHook = new DiscoveryHook() {
+
+        @Override
+        public void beforeDiscovery(DiscoveryCustomMessage customMsg) {
+            if (customMsg instanceof MetadataUpdateProposedMessage) {
+                if (((MetadataUpdateProposedMessage) customMsg).typeId() == BINARY_TYPE_ID)
+                    GridTestUtils.setFieldValue(customMsg, ""typeId"", 1);
+            } else if (customMsg instanceof MetadataUpdateAcceptedMessage) {
+                if (((MetadataUpdateAcceptedMessage) customMsg).typeId() == BINARY_TYPE_ID)
+                    GridTestUtils.setFieldValue(customMsg, ""typeId"", 1);
+            }
+        }
+    };
+    Ignite deafClient = startGrid(GRID_CNT);
+    discoveryHook = null;
+    Ignite regClient = startGrid(GRID_CNT + 1);
+    doTestFlowNoConflicts();
+    awaitPartitionMapExchange();
+    validateCache(deafClient);
+    validateCache(regClient);
+}"
+PV-128,cloudstack,testOtherProperties,/Volumes/SSK Drive/apache-projects/cloudstack/api/src/test/java/org/apache/cloudstack/api/command/user/network/routing/UpdateRoutingFirewallRuleCmdTest.java,junit4,Test,nonPT,,,,"@Test
+public void testOtherProperties() {
+    UpdateRoutingFirewallRuleCmd cmd = new UpdateRoutingFirewallRuleCmd();
+    ReflectionTestUtils.setField(cmd, ""_firewallService"", _firewallService);
+    long id = 1L;
+    long accountId = 2L;
+    long networkId = 3L;
+    FirewallRule firewallRule = Mockito.spy(FirewallRule.class);
+    Mockito.when(firewallRule.getAccountId()).thenReturn(accountId);
+    Mockito.when(firewallRule.getNetworkId()).thenReturn(networkId);
+    Mockito.when(_firewallService.getFirewallRule(id)).thenReturn(firewallRule);
+    ReflectionTestUtils.setField(cmd, ""id"", id);
+    assertEquals(id, (long) cmd.getId());
+    assertEquals(accountId, cmd.getEntityOwnerId());
+    assertEquals(networkId, (long) cmd.getApiResourceId());
+    assertEquals(ApiCommandResourceType.Network, cmd.getApiResourceType());
+    assertEquals(EventTypes.EVENT_ROUTING_IPV4_FIREWALL_RULE_UPDATE, cmd.getEventType());
+    assertEquals(""Updating ipv4 routing firewall rule"", cmd.getEventDescription());
+}"
+PV-129,drill,test3DEarlySchema,/Volumes/SSK Drive/apache-projects/drill/exec/java-exec/src/test/java/org/apache/drill/exec/physical/resultSet/impl/TestResultSetLoaderRepeatedList.java,junit4,Test,nonPT,,,,"// Adapted from TestRepeatedListAccessors.testSchema3DWriterReader
+// That test exercises the low-level schema and writer mechanisms.
+// Here we simply ensure that the 3D case continues to work when
+// wrapped in the Result Set Loader
+@Test
+public void test3DEarlySchema() {
+    final TupleMetadata schema = new SchemaBuilder().add(""id"", MinorType.INT).// Uses a short-hand method to avoid mucking with actual
+    // nested lists.
+    addArray(""cube"", MinorType.VARCHAR, 3).buildSchema();
+    final ResultSetLoaderImpl.ResultSetOptions options = new ResultSetOptionBuilder().readerSchema(schema).build();
+    final ResultSetLoader rsLoader = new ResultSetLoaderImpl(fixture.allocator(), options);
+    rsLoader.startBatch();
+    final RowSetLoader writer = rsLoader.writer();
+    writer.addRow(1, objArray(objArray(strArray(""a"", ""b""), strArray(""c"")), objArray(strArray(""d"", ""e"", ""f""), null), null, objArray())).addRow(2, null).addRow(3, objArray()).addRow(4, objArray(objArray())).addRow(5, singleObjArray(objArray(strArray(""g"", ""h""), strArray(""i""))));
+    final SingleRowSet expected = fixture.rowSetBuilder(schema).addRow(1, objArray(objArray(strArray(""a"", ""b""), strArray(""c"")), objArray(strArray(""d"", ""e"", ""f""), strArray()), objArray(), objArray())).addRow(2, objArray()).addRow(3, objArray()).addRow(4, objArray(objArray())).addRow(5, singleObjArray(objArray(strArray(""g"", ""h""), strArray(""i"")))).build();
+    RowSetUtilities.verify(expected, fixture.wrap(rsLoader.harvest()));
+}"
+PV-130,hbase,testSnapshotFailsOnNonExistantTable,/Volumes/SSK Drive/apache-projects/hbase/hbase-server/src/test/java/org/apache/hadoop/hbase/client/TestSnapshotFromClient.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testSnapshotFailsOnNonExistantTable() throws Exception {
+    Admin admin = UTIL.getAdmin();
+    // make sure we don't fail on listing snapshots
+    SnapshotTestingUtils.assertNoSnapshots(admin);
+    String tableName = ""_not_a_table"";
+    // make sure the table doesn't exist
+    boolean fail = false;
+    do {
+        try {
+            admin.getDescriptor(TableName.valueOf(tableName));
+            fail = true;
+            LOG.error(""Table:"" + tableName + "" already exists, checking a new name"");
+            tableName = tableName + ""!"";
+        } catch (TableNotFoundException e) {
+            fail = false;
+        }
+    } while (fail);
+    // snapshot the non-existant table
+    try {
+        admin.snapshot(""fail"", TableName.valueOf(tableName));
+        fail(""Snapshot succeeded even though there is not table."");
+    } catch (SnapshotCreationException e) {
+        LOG.info(""Correctly failed to snapshot a non-existant table:"" + e.getMessage());
+    }
+}"
+PV-131,hadoop,testDisableAMPreemption,/Volumes/SSK Drive/apache-projects/hadoop/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-resourcemanager/src/test/java/org/apache/hadoop/yarn/server/resourcemanager/scheduler/fair/TestFairSchedulerPreemption.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest(name = ""{0}"")
+@MethodSource(""getParameters"")
+public void testDisableAMPreemption(String name, int mode) throws IOException {
+    initTestFairSchedulerPreemption(name, mode);
+    testDisableAMPreemption(false);
+}"
+PV-132,hive,testGetPartitionEmptyPartName,/Volumes/SSK Drive/apache-projects/hive/standalone-metastore/metastore-server/src/test/java/org/apache/hadoop/hive/metastore/client/TestGetPartitions.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test(expected = MetaException.class)
+public void testGetPartitionEmptyPartName() throws Exception {
+    createTable3PartCols1Part(client);
+    client.getPartition(DB_NAME, TABLE_NAME, """");
+}"
+PV-133,beam,testDatastoreWriterFnWithOneBatch,/Volumes/SSK Drive/apache-projects/beam/sdks/java/io/google-cloud-platform/src/test/java/org/apache/beam/sdk/io/gcp/datastore/DatastoreV1Test.java,junit4,Test,nonPT,,,,"/**
+ * Tests {@link DatastoreWriterFn} with entities less than one batch.
+ */
+@Test
+public void testDatastoreWriterFnWithOneBatch() throws Exception {
+    datastoreWriterFnTest(100);
+    verifyMetricWasSet(""BatchDatastoreWrite"", ""ok"", """", 2);
+}"
+PV-134,uima-uimaj,thatSelectCoveredBySeekNonStrictWorks,/Volumes/SSK Drive/apache-projects/uima-uimaj/uimaj-core/src/test/java/org/apache/uima/cas/impl/SelectFsTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest(name = ""{0}"")
+@MethodSource(""prios"")
+public void thatSelectCoveredBySeekNonStrictWorks(Mode aMode, String[] aPrioTypeNames) throws Exception {
+    setup(aMode, aPrioTypeNames);
+    TypeSystemDescription tsd = getResourceSpecifierFactory().createTypeSystemDescription();
+    tsd.addType(""test.Type1"", """", CAS.TYPE_NAME_ANNOTATION);
+    tsd.addType(""test.Type2"", """", ""test.Type1"");
+    CAS cas = CasCreationUtils.createCas(tsd, null, null, null);
+    Type type1 = cas.getTypeSystem().getType(""test.Type1"");
+    Type type2 = cas.getTypeSystem().getType(""test.Type2"");
+    AnnotationFS[] expected = new AnnotationFS[2];
+    Annotation y = (Annotation) cas.createAnnotation(type2, 9, 35);
+    addToIndexes(expected[1] = cas.createAnnotation(type2, 9, 12), cas.createAnnotation(type1, 6, 26), expected[0] = cas.createAnnotation(type2, 9, 35), cas.createAnnotation(type1, 22, 31), cas.createAnnotation(type2, 67, 74), cas.createAnnotation(type1, 69, 80));
+    assertThat(cas.<Annotation>select(type2).coveredBy(y).includeAnnotationsWithEndBeyondBounds().asList()).containsExactly((Annotation) expected[0], (Annotation) expected[1]);
+    FSIterator<Annotation> it = cas.<Annotation>select(type2).includeAnnotationsWithEndBeyondBounds().coveredBy(y).fsIterator();
+    it.moveTo(expected[1]);
+    assertThat(it.get()).isSameAs(expected[1]);
+}"
+PV-135,hbase,testCreateSSLContextWithClientAuthWANT,/Volumes/SSK Drive/apache-projects/hbase/hbase-common/src/test/java/org/apache/hadoop/hbase/io/crypto/tls/TestX509Util.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testCreateSSLContextWithClientAuthWANT() throws Exception {
+    conf.set(X509Util.HBASE_SERVER_NETTY_TLS_CLIENT_AUTH_MODE, X509Util.ClientAuth.WANT.name());
+    SslContext sslContext = X509Util.createSslContextForServer(conf);
+    ByteBufAllocator byteBufAllocatorMock = mock(ByteBufAllocator.class);
+    assertTrue(sslContext.newEngine(byteBufAllocatorMock).getWantClientAuth());
+}"
+PV-136,commons-functor,testTestMap,/Volumes/SSK Drive/apache-projects/commons-functor/core/src/test/java/org/apache/commons/functor/core/collection/TestIsEmpty.java,junit4,Test,nonPT,,,,"@Test
+public void testTestMap() throws Exception {
+    Map<String, String> map = new HashMap<String, String>();
+    assertTrue(IsEmpty.instance().test(map));
+    map.put(""x"", ""y"");
+    assertTrue(!IsEmpty.instance().test(map));
+}"
+PV-137,hudi,testMORGetLatestFileSliceWithMetadataTable,/Volumes/SSK Drive/apache-projects/hudi/hudi-spark-datasource/hudi-spark/src/test/java/org/apache/hudi/client/functional/TestRemoteFileSystemViewWithMetadataTable.java,junit5,ParameterizedTest;EnumSource,PT,,,,"@ParameterizedTest
+@EnumSource(value = TestCase.class)
+public void testMORGetLatestFileSliceWithMetadataTable(TestCase testCase) throws IOException {
+    if (testCase.useExistingTimelineServer) {
+        initTimelineService();
+    }
+    // This test utilizes the `HoodieBackedTestDelayedTableMetadata` to make sure the
+    // synced file system view is always served.
+    // Create two tables to guarantee the timeline server can properly handle multiple base paths with metadata table enabled
+    String basePathStr1 = initializeTable(""dataset1"");
+    String basePathStr2 = initializeTable(""dataset2"");
+    try (SparkRDDWriteClient writeClient1 = createWriteClient(basePathStr1, ""test_mor_table1"", testCase.reuseTimelineServer, testCase.useExistingTimelineServer ? Option.of(timelineService) : Option.empty());
+        SparkRDDWriteClient writeClient2 = createWriteClient(basePathStr2, ""test_mor_table2"", testCase.reuseTimelineServer, testCase.useExistingTimelineServer ? Option.of(timelineService) : Option.empty())) {
+        for (int i = 0; i < 3; i++) {
+            writeToTable(i, writeClient1);
+        }
+        for (int i = 0; i < 3; i++) {
+            writeToTable(i, writeClient2);
+        }
+        runAssertionsForBasePath(testCase.useExistingTimelineServer, basePathStr1, writeClient1);
+        runAssertionsForBasePath(testCase.useExistingTimelineServer, basePathStr2, writeClient2);
+    }
+}"
+PV-138,kylin,testBatchInsertWithNull,/Volumes/SSK Drive/apache-projects/kylin/src/tool/src/test/java/org/apache/kylin/tool/AuditLogToolTest.java,junit4,Test,nonPT,,,,"@Test
+public void testBatchInsertWithNull() {
+    List<AuditLog> auditLogs = new ArrayList<>();
+    AuditLog auditLog = new AuditLog();
+    auditLog.setId(0);
+    auditLog.setInstance(null);
+    auditLog.setMvcc(null);
+    auditLog.setOperator(null);
+    auditLog.setResPath(null);
+    auditLog.setByteSource(null);
+    auditLog.setTimestamp(null);
+    auditLog.setUnitId(null);
+    auditLogs.add(auditLog);
+    val auditLogStore = (JdbcAuditLogStore) getStore().getAuditLogStore();
+    auditLogStore.batchInsert(auditLogs);
+}"
+PV-139,accumulo,testNamespaceConfiguration,/Volumes/SSK Drive/apache-projects/accumulo/server/base/src/test/java/org/apache/accumulo/server/conf/AccumuloConfigurationIsPropertySetTest.java,junit5,Test,nonPT,,,,"@Test
+public void testNamespaceConfiguration() {
+    var namespaceId = NamespaceId.of(""namespace"");
+    var nsPropKey = NamespacePropKey.of(namespaceId);
+    var setOnParent = Set.of(TABLE_BLOOM_SIZE);
+    var parent = new ConfigurationCopy(setToMap(setOnParent));
+    var setOnNamespace = Set.of(INSTANCE_SECRET);
+    var nsProps = new VersionedProperties(123, Instant.now(), setToMap(setOnNamespace));
+    expect(propStore.get(eq(nsPropKey))).andReturn(nsProps).once();
+    readyMocks(context, propStore);
+    var namespaceConfig = new NamespaceConfiguration(context, namespaceId, parent);
+    var shouldBeSet = new HashSet<Property>();
+    shouldBeSet.addAll(setOnParent);
+    shouldBeSet.addAll(setOnNamespace);
+    assertFalse(shouldBeSet.isEmpty());
+    var shouldNotBeSet = Sets.difference(ALL_PROPERTIES, shouldBeSet);
+    assertFalse(shouldNotBeSet.isEmpty());
+    verifyIsSet(namespaceConfig, shouldBeSet, shouldNotBeSet, inGetProperties(namespaceConfig));
+    // verify using isPropertySet
+    verifyIsSet(namespaceConfig, shouldBeSet, shouldNotBeSet, namespaceConfig::isPropertySet);
+}"
+PV-140,drill,user1_db_u1g1_only_infoSchema,/Volumes/SSK Drive/apache-projects/drill/contrib/storage-hive/core/src/test/java/org/apache/drill/exec/impersonation/hive/TestStorageBasedHiveAuthorization.java,junit4,Test,nonPT,,,,"@Test
+public void user1_db_u1g1_only_infoSchema() throws Exception {
+    try (ClientFixture client = cluster.client(org1Users[1], """")) {
+        fromInfoSchemaHelper(db_u1g1_only, ImmutableList.of(u1g1_student_all_755, u1g1_student_u1_700, u1g1_voter_all_755, u1g1_voter_u1_700), ImmutableList.of(TableType.TABLE, TableType.TABLE, TableType.TABLE, TableType.TABLE), client);
+    }
+}"
+PV-141,hadoop,testDockerKillOnLocalizedContainerNotLaunchedContainerFailure,/Volumes/SSK Drive/apache-projects/hadoop/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/test/java/org/apache/hadoop/yarn/server/nodemanager/containermanager/container/TestContainer.java,junit5,Test,nonPT,,,,"@Test
+public void testDockerKillOnLocalizedContainerNotLaunchedContainerFailure() throws Exception {
+    WrappedContainer wc = null;
+    try {
+        wc = new WrappedContainer(17, 314159265358979L, 4344, ""yak"");
+        wc.setupDockerContainerEnv();
+        wc.initContainer();
+        wc.localizeResources();
+        assertEquals(ContainerState.SCHEDULED, wc.c.getContainerState());
+        wc.killContainer();
+        assertEquals(ContainerState.KILLING, wc.c.getContainerState());
+        wc.containerFailed(ExitCode.FORCE_KILLED.getExitCode());
+        wc.drainDispatcherEvents();
+        assertEquals(ContainerState.EXITED_WITH_FAILURE, wc.c.getContainerState());
+        assertNull(wc.c.getLocalizedResources());
+        verifyDockerContainerCleanupCall(wc);
+        wc.c.handle(new ContainerEvent(wc.c.getContainerId(), ContainerEventType.CONTAINER_RESOURCES_CLEANEDUP));
+        assertEquals(ContainerState.DONE, wc.c.getContainerState());
+        assertEquals(0, metrics.getRunningContainers());
+    } finally {
+        if (wc != null) {
+            wc.finished();
+        }
+    }
+}"
+PV-142,activemq,testUrlConfigurationOpenWireAvailable,/Volumes/SSK Drive/apache-projects/activemq/activemq-unit-tests/src/test/java/org/apache/activemq/transport/auto/AutoTransportConfigureTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testUrlConfigurationOpenWireAvailable() throws Exception {
+    // only open wire is available
+    createBroker(transportType + ""://localhost:0?auto.protocols=default"");
+    ConnectionFactory factory = new ActiveMQConnectionFactory(url);
+    sendMessage(factory.createConnection());
+}"
+PV-143,flink,testSequentialUnsignedIntAccess,/Volumes/SSK Drive/apache-projects/flink/flink-runtime/src/test/java/org/apache/flink/runtime/io/network/buffer/AbstractByteBufTest.java,junit5,Test,nonPT,,,,"@Test
+void testSequentialUnsignedIntAccess() {
+    testSequentialUnsignedIntAccess(true);
+}"
+PV-144,cassandra,testTombstoneMerge,/Volumes/SSK Drive/apache-projects/cassandra/test/unit/org/apache/cassandra/db/rows/UnfilteredRowIteratorsMergeTest.java,junit4,Test,nonPT,,,,"@Test
+public void testTombstoneMerge() {
+    testTombstoneMerge(false, false);
+}"
+PV-145,commons-net,testNullIterable,/Volumes/SSK Drive/apache-projects/commons-net/src/test/java/org/apache/commons/net/nntp/TestThreader.java,junit5,Test,nonPT,,,,"@Test
+public void testNullIterable() {
+    final Threader t = new Threader();
+    final Iterable<Threadable> messages = null;
+    assertNull(t.thread(messages));
+}"
+PV-146,mina-sshd,setMaxDHGroupExchangeKeySizeProgrammatically,/Volumes/SSK Drive/apache-projects/mina-sshd/sshd-common/src/test/java/org/apache/sshd/common/util/security/SecurityUtilsDHGEXGroupKeySizeTest.java,junit5,MethodSource;ParameterizedTest,PT,,,,"@MethodSource(""parameters"")
+@ParameterizedTest(name = ""keySize={0}"")
+public void setMaxDHGroupExchangeKeySizeProgrammatically(int expected) {
+    initSecurityUtilsDHGEXGroupKeySizeTest(expected);
+    SecurityUtils.setMaxDHGroupExchangeKeySize(expected);
+    assertTrue(SecurityUtils.isDHGroupExchangeSupported(), ""DH group not supported for key size="" + expected);
+    assertEquals(expected, SecurityUtils.getMaxDHGroupExchangeKeySize(), ""Mismatched values"");
+}"
+PV-147,commons-geometry,testFinite,/Volumes/SSK Drive/apache-projects/commons-geometry/commons-geometry-spherical/src/test/java/org/apache/commons/geometry/spherical/oned/Point1STest.java,junit5,Test,nonPT,,,,"@Test
+void testFinite() {
+    // act/assert
+    Assertions.assertTrue(Point1S.of(0).isFinite());
+    Assertions.assertTrue(Point1S.of(1).isFinite());
+    Assertions.assertFalse(Point1S.of(Double.POSITIVE_INFINITY).isFinite());
+    Assertions.assertFalse(Point1S.of(Double.NEGATIVE_INFINITY).isFinite());
+    Assertions.assertFalse(Point1S.NaN.isFinite());
+}"
+PV-148,hive,testMetaDataGetExternalTables,/Volumes/SSK Drive/apache-projects/hive/itests/hive-unit/src/test/java/org/apache/hive/jdbc/TestJdbcDriver2.java,junit4,Test,nonPT,,,,"@Test
+public void testMetaDataGetExternalTables() throws SQLException {
+    Statement stmt = con.createStatement();
+    stmt.execute(""set "" + HiveConf.ConfVars.HIVE_SERVER2_TABLE_TYPE_MAPPING.varname + "" = "" + TableTypeMappings.HIVE.toString());
+    stmt.close();
+    ResultSet rs = con.getMetaData().getTables(testDbName, null, null, new String[] { TableType.EXTERNAL_TABLE.toString() });
+    ResultSetMetaData resMeta = rs.getMetaData();
+    assertEquals(10, resMeta.getColumnCount());
+    assertEquals(""TABLE_CAT"", resMeta.getColumnName(1));
+    assertEquals(""TABLE_SCHEM"", resMeta.getColumnName(2));
+    assertEquals(""TABLE_NAME"", resMeta.getColumnName(3));
+    assertEquals(""TABLE_TYPE"", resMeta.getColumnName(4));
+    assertEquals(""REMARKS"", resMeta.getColumnName(5));
+    rs.next();
+    String resultDbName = rs.getString(""TABLE_SCHEM"");
+    assertEquals(resultDbName, testDbName);
+    String resultTableName = rs.getString(""TABLE_NAME"");
+    assertEquals(resultTableName, externalTableName.toLowerCase());
+    String resultTableComment = rs.getString(""REMARKS"");
+    assertTrue(""Missing comment on the table."", resultTableComment.length() > 0);
+    String tableType = rs.getString(""TABLE_TYPE"");
+    assertEquals(TableType.EXTERNAL_TABLE.toString(), tableType);
+    assertFalse(""Unexpected table"", rs.next());
+}"
+PV-149,maven,shouldReturnNullForInvalidGAVScenarios,/Volumes/SSK Drive/apache-projects/maven/impl/maven-cli/src/test/java/org/apache/maven/cling/invoker/mvnup/goals/GAVUtilsTest.java,junit5,ParameterizedTest;MethodSource;DisplayName,PT,,,,"@ParameterizedTest
+@MethodSource(""provideInvalidGAVScenarios"")
+@DisplayName(""should return null for invalid GAV scenarios"")
+void shouldReturnNullForInvalidGAVScenarios(String groupId, String artifactId, String version, String description) throws Exception {
+    String pomXml = PomBuilder.create().groupId(groupId).artifactId(artifactId).version(version).build();
+    Document document = saxBuilder.build(new StringReader(pomXml));
+    UpgradeContext context = createMockContext();
+    GAV gav = GAVUtils.extractGAVWithParentResolution(context, document);
+    assertNull(gav, description);
+}"
+PV-150,nifi,testELScopeValidationProcessorWithInput,/Volumes/SSK Drive/apache-projects/nifi/nifi-mock/src/test/java/org/apache/nifi/util/TestMockPropertyValue.java,junit5,Test,nonPT,,,,"@Test
+public void testELScopeValidationProcessorWithInput() {
+    final DummyProcessorWithInput processor = new DummyProcessorWithInput();
+    final TestRunner runner = TestRunners.newTestRunner(processor);
+    runner.setProperty(DummyProcessorWithInput.PROP_FF_SCOPE, ""${test}"");
+    runner.setProperty(DummyProcessorWithInput.PROP_ENV_SCOPE, ""${test}"");
+    runner.setProperty(DummyProcessorWithInput.PROP_NONE_SCOPE, ""${test}"");
+    // This case is expected to work: we evaluate against a FlowFile and the
+    // property has the expected FlowFile scope
+    processor.setTestCase(FF_SCOPE_WITH_FF);
+    runner.enqueue("""");
+    runner.run();
+    // This case is not expected to work: we evaluate against a FlowFile but the
+    // property is not supposed to support evaluation against a FlowFile
+    processor.setTestCase(ENV_SCOPE_WITH_FF);
+    runner.enqueue("""");
+    assertThrows(AssertionError.class, runner::run);
+    // This case is not expected to work: no EL support on the property
+    processor.setTestCase(NONE_SCOPE_WITH_FF);
+    runner.enqueue("""");
+    assertThrows(AssertionError.class, runner::run);
+    // This case is supposed to fail: there is an incoming connection, there is a
+    // FlowFile available, we have EL scope but we don't evaluate against the FF
+    processor.setTestCase(FF_SCOPE_NO_FF);
+    runner.enqueue("""");
+    assertThrows(AssertionError.class, runner::run);
+    processor.setTestCase(ENV_SCOPE_NO_FF);
+    runner.enqueue("""");
+    runner.run();
+    // This case is not expected to work: no EL support on the property
+    processor.setTestCase(NONE_SCOPE_NO_FF"
+PV-151,hudi,testMORTableWithPartitionEvolutionThrowsException,/Volumes/SSK Drive/apache-projects/hudi/hudi-sync/hudi-hive-sync/src/test/java/org/apache/hudi/hive/TestHiveSyncTool.java,junit5,ParameterizedTest;ValueSource,PT,,,,"@ParameterizedTest
+@ValueSource(strings = { ""hiveql"", ""hms"", ""jdbc"" })
+void testMORTableWithPartitionEvolutionThrowsException(String syncMode) throws Exception {
+    hiveSyncProps.setProperty(HIVE_SYNC_MODE.key(), syncMode);
+    hiveSyncProps.setProperty(HIVE_SYNC_FILTER_PUSHDOWN_ENABLED.key(), ""true"");
+    hiveSyncProps.setProperty(META_SYNC_PARTITION_FIELDS.key(), """");
+    hiveSyncProps.setProperty(RECREATE_HIVE_TABLE_ON_ERROR.key(), ""false"");
+    String instantTime = ""100"";
+    String deltaCommitTime = ""101"";
+    String snapshotTableName = HiveTestUtil.TABLE_NAME + HiveSyncTool.SUFFIX_SNAPSHOT_TABLE;
+    HiveTestUtil.createMORTable(instantTime, deltaCommitTime, 0, true, true);
+    reInitHiveSyncClient();
+    assertFalse(hiveClient.tableExists(snapshotTableName), ""Table "" + HiveTestUtil.TABLE_NAME + HiveSyncTool.SUFFIX_SNAPSHOT_TABLE + "" should not exist initially"");
+    // Lets do the sync
+    reSyncHiveTable();
+    assertTrue(hiveClient.tableExists(snapshotTableName), ""Table "" + HiveTestUtil.TABLE_NAME + HiveSyncTool.SUFFIX_SNAPSHOT_TABLE + "" should exist after sync completes"");
+    assertEquals(hiveClient.getMetastoreSchema(snapshotTableName).size(), SchemaTestUtil.getSimpleSchema().getFields().size() + HoodieRecord.HOODIE_META_COLUMNS.size(), ""Hive Schema should match the table schema + partition field"");
+    assertEquals(0, hiveClient.getAllPartitions(snapshotTableName).size(), ""Table partitions should match the number of partitions we wrote"");
+    assertEquals(deltaCommitTime, hiveClient.getLastCommitTimeSynced(snapshotTableName).get(), ""The last commit that was syn"
+PV-152,cxf,testAtLeastOnceAsyncExecutor,/Volumes/SSK Drive/apache-projects/cxf/systests/ws-rm/src/test/java/org/apache/cxf/systest/ws/rm/DeliveryAssuranceOnewayTest.java,junit4,Test,nonPT,,,,"@Test
+public void testAtLeastOnceAsyncExecutor() throws Exception {
+    testOnewayAtLeastOnce(Executors.newSingleThreadExecutor());
+}"
+PV-153,poi,testDump,/Volumes/SSK Drive/apache-projects/poi/poi/src/test/java/org/apache/poi/util/TestHexDump.java,junit5,Test,nonPT,,,,"@Test
+void testDump() throws IOException {
+    byte[] testArray = testArray();
+    UnsynchronizedByteArrayOutputStream streamAct = UnsynchronizedByteArrayOutputStream.builder().get();
+    HexDump.dump(testArray, 0, streamAct, 0);
+    byte[] bytesAct = streamAct.toByteArray();
+    byte[] bytesExp = toHexDump(0, 0);
+    assertEquals(bytesExp.length, bytesAct.length, ""array size mismatch"");
+    assertArrayEquals(bytesExp, bytesAct, ""array mismatch"");
+    // verify proper behavior with non-zero offset
+    streamAct.reset();
+    HexDump.dump(testArray, 0x10000000L, streamAct, 0);
+    bytesAct = streamAct.toByteArray();
+    bytesExp = toHexDump(0x10000000L, 0);
+    assertEquals(bytesExp.length, bytesAct.length, ""array size mismatch"");
+    assertArrayEquals(bytesExp, bytesAct, ""array mismatch"");
+    // verify proper behavior with negative offset
+    streamAct.reset();
+    HexDump.dump(testArray, 0xFF000000L, streamAct, 0);
+    bytesAct = streamAct.toByteArray();
+    bytesExp = toHexDump(0xFF000000L, 0);
+    assertEquals(bytesExp.length, bytesAct.length, ""array size mismatch"");
+    assertArrayEquals(bytesExp, bytesAct, ""array mismatch"");
+    // verify proper behavior with non-zero index
+    streamAct.reset();
+    HexDump.dump(testArray, 0xFF000000L, streamAct, 0x81);
+    bytesAct = streamAct.toByteArray();
+    bytesExp = toHexDump(0xFF000000L, 0x81);
+    assertEquals(bytesExp.length, bytesAct.length, ""array size mismatch"");
+    assertArrayEquals(bytesExp, bytesAct, ""array mismatch"");
+    // verify proper behavior with negative index
+    streamAct.reset();
+    assertThrows(ArrayInde"
+PV-154,commons-statistics,testInvalidArgumentsThrow,/Volumes/SSK Drive/apache-projects/commons-statistics/commons-statistics-interval/src/test/java/org/apache/commons/statistics/interval/NormalConfidenceIntervalTest.java,junit5,ParameterizedTest;EnumSource,PT,,,,"@ParameterizedTest
+@EnumSource
+void testInvalidArgumentsThrow(NormalConfidenceInterval method) {
+    double mean = 0.1;
+    double variance = 1.23;
+    int n = 42;
+    double alpha = 0.05;
+    Assertions.assertDoesNotThrow(() -> method.fromErrorRate(mean, variance, n, alpha));
+    // n < 2
+    Assertions.assertDoesNotThrow(() -> method.fromErrorRate(mean, variance, 2, alpha));
+    Assertions.assertThrows(IllegalArgumentException.class, () -> method.fromErrorRate(mean, variance, 1, alpha));
+    Assertions.assertThrows(IllegalArgumentException.class, () -> method.fromErrorRate(mean, variance, 0, alpha));
+    Assertions.assertThrows(IllegalArgumentException.class, () -> method.fromErrorRate(mean, variance, -1, alpha));
+    // alpha not in (0, 1)
+    Assertions.assertDoesNotThrow(() -> method.fromErrorRate(mean, variance, n, Math.nextUp(0.0)));
+    Assertions.assertDoesNotThrow(() -> method.fromErrorRate(mean, variance, n, Math.nextDown(1.0)));
+    Assertions.assertThrows(IllegalArgumentException.class, () -> method.fromErrorRate(mean, variance, n, 0.0));
+    Assertions.assertThrows(IllegalArgumentException.class, () -> method.fromErrorRate(mean, variance, n, 1.0));
+    Assertions.assertThrows(IllegalArgumentException.class, () -> method.fromErrorRate(mean, variance, n, -0.01));
+    Assertions.assertThrows(IllegalArgumentException.class, () -> method.fromErrorRate(mean, variance, n, 1.01));
+    Assertions.assertThrows(IllegalArgumentException.class, () -> method.fromErrorRate(mean, variance, n, Double.NaN));
+}"
+PV-155,ignite,testRandomPutGetRemove,/Volumes/SSK Drive/apache-projects/ignite/modules/core/src/test/java/org/apache/ignite/internal/processors/database/IgniteDbSingleNodeTinyPutGetTest.java,junit4,Test;Override,nonPT,,,,"/**
+ * {@inheritDoc}
+ */
+@Test
+@Override
+public void testRandomPutGetRemove() {
+    // No-op
+}"
+PV-156,pulsar,testInvalidTopicType,/Volumes/SSK Drive/apache-projects/pulsar/pulsar-common/src/test/java/org/apache/pulsar/common/policies/data/AutoTopicCreationOverrideTest.java,unknown,Test,nonPT,,,,"@Test
+public void testInvalidTopicType() {
+    AutoTopicCreationOverride override = AutoTopicCreationOverride.builder().allowAutoTopicCreation(true).topicType(""aaa"").build();
+    assertFalse(AutoTopicCreationOverrideImpl.validateOverride(override).isSuccess());
+}"
+PV-157,accumulo,testMergeAndSplit,/Volumes/SSK Drive/apache-projects/accumulo/test/src/main/java/org/apache/accumulo/test/ComprehensiveITBase.java,junit5,Test,nonPT,,,,"@Test
+public void testMergeAndSplit() throws Exception {
+    String table = getUniqueNames(1)[0];
+    try (AccumuloClient client = Accumulo.newClient().from(getClientProps()).build()) {
+        client.tableOperations().create(table);
+        final SortedMap<Key, Value> expectedData = generateKeys(0, 300);
+        write(client, table, generateMutations(0, 300, tr -> true));
+        verifyData(client, table, AUTHORIZATIONS, expectedData);
+        // test adding splits to a table
+        var splits = new TreeSet<>(List.of(new Text(row(75)), new Text(row(150))));
+        client.tableOperations().addSplits(table, splits);
+        assertEquals(splits, new TreeSet<>(client.tableOperations().listSplits(table)));
+        // adding splits should not change data
+        verifyData(client, table, AUTHORIZATIONS, expectedData);
+        // test merging splits away
+        client.tableOperations().merge(table, null, null);
+        assertEquals(Set.of(), new TreeSet<>(client.tableOperations().listSplits(table)));
+        // merging should not change data
+        verifyData(client, table, AUTHORIZATIONS, expectedData);
+        splits = new TreeSet<>(List.of(new Text(row(33)), new Text(row(66))));
+        client.tableOperations().addSplits(table, splits);
+        assertEquals(splits, new TreeSet<>(client.tableOperations().listSplits(table)));
+        verifyData(client, table, AUTHORIZATIONS, expectedData);
+        client.tableOperations().merge(table, null, null);
+        assertEquals(Set.of(), new TreeSet<>(client.tableOperations().listSplits(table)));
+        verifyData(client, table, AUTH"
+PV-158,ignite,testQuotedDDL,/Volumes/SSK Drive/apache-projects/ignite/modules/indexing/src/test/java/org/apache/ignite/internal/processors/query/SqlNotNullKeyValueFieldTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"/**
+ */
+@Test
+public void testQuotedDDL() {
+    doTestDDL(""\"""" + keyName + ""\"""", ""\"""" + valName + ""\"""");
+}"
+PV-159,sis,testValueOfURI,/Volumes/SSK Drive/apache-projects/sis/endorsed/src/org.apache.sis.metadata/test/org/apache/sis/xml/NilReasonTest.java,junit5,Test,nonPT,,,,"/**
+ * Tests the {@link NilReason#valueOf(String)} method on a URI.
+ *
+ * @throws URISyntaxException if a test URI cannot be parsed (should not happen).
+ */
+@Test
+public void testValueOfURI() throws URISyntaxException {
+    final NilReason other = NilReason.valueOf(""http://www.nilreasons.org"");
+    assertSame(other, NilReason.valueOf(""  http://www.nilreasons.org  ""));
+    assertNull(other.getOtherExplanation());
+    assertEquals(""http://www.nilreasons.org"", String.valueOf(other.getURI()));
+    final NilReason[] reasons = NilReason.values();
+    assertTrue(ArraysExt.contains(reasons, NilReason.TEMPLATE));
+    assertTrue(ArraysExt.contains(reasons, NilReason.MISSING));
+    assertTrue(ArraysExt.contains(reasons, other));
+}"
+PV-160,beam,transformsWithNoEnvironmentBecomeRunnerExecuted,/Volumes/SSK Drive/apache-projects/beam/sdks/java/core/src/test/java/org/apache/beam/sdk/util/construction/graph/GreedyPipelineFuserTest.java,junit4,Test,nonPT,,,,"/*
+   * impulse -> .out -> mystery -> .out
+   *                 \
+   *                  -> enigma -> .out
+   * becomes all runner-executed
+   */
+@Test
+public void transformsWithNoEnvironmentBecomeRunnerExecuted() {
+    Components components = partialComponents.toBuilder().putTransforms(""mystery"", PTransform.newBuilder().setSpec(FunctionSpec.newBuilder().setUrn(PTransformTranslation.PAR_DO_TRANSFORM_URN)).setUniqueName(""Mystery"").putInputs(""input"", ""impulse.out"").putOutputs(""output"", ""mystery.out"").build()).putPcollections(""mystery.out"", pc(""mystery.out"")).putTransforms(""enigma"", PTransform.newBuilder().setSpec(FunctionSpec.newBuilder().setUrn(PTransformTranslation.PAR_DO_TRANSFORM_URN)).setUniqueName(""Enigma"").putInputs(""input"", ""impulse.out"").putOutputs(""output"", ""enigma.out"").build()).putPcollections(""enigma.out"", pc(""enigma.out"")).build();
+    FusedPipeline fused = GreedyPipelineFuser.fuse(Pipeline.newBuilder().setComponents(components).build());
+    assertThat(fused.getRunnerExecutedTransforms(), containsInAnyOrder(PipelineNode.pTransform(""impulse"", components.getTransformsOrThrow(""impulse"")), PipelineNode.pTransform(""mystery"", components.getTransformsOrThrow(""mystery"")), PipelineNode.pTransform(""enigma"", components.getTransformsOrThrow(""enigma""))));
+    assertThat(fused.getFusedStages(), emptyIterable());
+}"
+PV-161,avro,emptyFile,/Volumes/SSK Drive/apache-projects/avro/lang/java/trevni/core/src/test/java/org/apache/trevni/TestColumnFile.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""codecs"")
+void emptyFile(ColumnFileMetaData fileMeta) throws Exception {
+    FILE.delete();
+    ColumnFileWriter out = new ColumnFileWriter(fileMeta);
+    out.writeTo(FILE);
+    ColumnFileReader in = new ColumnFileReader(FILE);
+    Assertions.assertEquals(0, in.getRowCount());
+    Assertions.assertEquals(0, in.getColumnCount());
+    in.close();
+}"
+PV-162,beam,toAndFromCloudObject,/Volumes/SSK Drive/apache-projects/beam/runners/google-cloud-dataflow-java/src/test/java/org/apache/beam/runners/dataflow/util/CloudObjectsTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void toAndFromCloudObject() throws Exception {
+    CloudObject cloudObject = CloudObjects.asCloudObject(coder, /*sdkComponents=*/
+    null);
+    Coder<?> fromCloudObject = CloudObjects.coderFromCloudObject(cloudObject);
+    assertEquals(coder.getClass(), fromCloudObject.getClass());
+    assertEquals(coder, fromCloudObject);
+}"
+PV-163,geode,distributedNoAckRegionSetsCachedSerializedNewValue,/Volumes/SSK Drive/apache-projects/geode/geode-core/src/test/java/org/apache/geode/internal/cache/EntryEventSerializationTest.java,junit4,Test,nonPT,,,,"@Test
+public void distributedNoAckRegionSetsCachedSerializedNewValue() {
+    when(region.getScope()).thenReturn(Scope.DISTRIBUTED_NO_ACK);
+    instance.serializeNewValueIfNeeded(region, event);
+    ArgumentCaptor<byte[]> captor = ArgumentCaptor.forClass(byte[].class);
+    verify(event, times(1)).setCachedSerializedNewValue(captor.capture());
+    assertThat(captor.getValue().length).isGreaterThan(0);
+}"
+PV-164,druid,testGetToBeLoadedOnNode,/Volumes/SSK Drive/apache-projects/druid/server/src/test/java/org/apache/druid/server/lookup/cache/LookupCoordinatorManagerTest.java,junit4,Test,nonPT,,,,"@Test
+public void testGetToBeLoadedOnNode() {
+    LookupCoordinatorManager manager = new LookupCoordinatorManager(client, druidNodeDiscoveryProvider, mapper, configManager, lookupCoordinatorManagerConfig);
+    LookupsState<LookupExtractorFactoryMapContainer> currNodeState = new LookupsState<>(ImmutableMap.of(""lookup0"", new LookupExtractorFactoryMapContainer(""v1"", ImmutableMap.of(""k0"", ""v0"")), ""lookup1"", new LookupExtractorFactoryMapContainer(""v1"", ImmutableMap.of(""k1"", ""v1""))), ImmutableMap.of(""lookup2"", new LookupExtractorFactoryMapContainer(""v1"", ImmutableMap.of(""k2"", ""v2"")), ""lookup3"", new LookupExtractorFactoryMapContainer(""v1"", ImmutableMap.of(""k3"", ""v3""))), ImmutableSet.of(""lookup2"", ""lookup4""));
+    Map<String, LookupExtractorFactoryMapContainer> stateToBe = ImmutableMap.of(""lookup0"", new LookupExtractorFactoryMapContainer(""v1"", ImmutableMap.of(""k0"", ""v0"")), ""lookup1"", new LookupExtractorFactoryMapContainer(""v2"", ImmutableMap.of(""k1"", ""v1"")), ""lookup2"", new LookupExtractorFactoryMapContainer(""v1"", ImmutableMap.of(""k2"", ""v2"")));
+    Assert.assertEquals(ImmutableMap.of(""lookup1"", new LookupExtractorFactoryMapContainer(""v2"", ImmutableMap.of(""k1"", ""v1"")), ""lookup2"", new LookupExtractorFactoryMapContainer(""v1"", ImmutableMap.of(""k2"", ""v2""))), manager.getToBeLoadedOnNode(currNodeState, stateToBe));
+}"
+PV-165,pulsar,testTerminatePartitionedTopic,/Volumes/SSK Drive/apache-projects/pulsar/pulsar-broker/src/test/java/org/apache/pulsar/broker/admin/PersistentTopicsTest.java,unknown,Test,nonPT,,,,"@Test
+public void testTerminatePartitionedTopic() {
+    String testLocalTopicName = ""topic-not-found"";
+    // 3) Create the partitioned topic
+    AsyncResponse response = mock(AsyncResponse.class);
+    persistentTopics.createPartitionedTopic(response, testTenant, testNamespace, testLocalTopicName, 1, true);
+    ArgumentCaptor<Response> responseCaptor = ArgumentCaptor.forClass(Response.class);
+    verify(response, timeout(5000).times(1)).resume(responseCaptor.capture());
+    Assert.assertEquals(responseCaptor.getValue().getStatus(), Response.Status.NO_CONTENT.getStatusCode());
+    // 5) Create a subscription
+    response = mock(AsyncResponse.class);
+    persistentTopics.createSubscription(response, testTenant, testNamespace, testLocalTopicName, ""test"", true, new ResetCursorData(MessageId.earliest), false);
+    responseCaptor = ArgumentCaptor.forClass(Response.class);
+    verify(response, timeout(5000).times(1)).resume(responseCaptor.capture());
+    Assert.assertEquals(responseCaptor.getValue().getStatus(), Response.Status.NO_CONTENT.getStatusCode());
+    // 9) terminate partitioned topic
+    response = mock(AsyncResponse.class);
+    persistentTopics.terminatePartitionedTopic(response, testTenant, testNamespace, testLocalTopicName, true);
+    Map<Integer, MessageId> messageIds = new ConcurrentHashMap<>();
+    messageIds.put(0, new MessageIdImpl(3, -1, -1));
+    verify(response, timeout(5000).times(1)).resume(messageIds);
+}"
+PV-166,flink,testCheckpointConfirmation,/Volumes/SSK Drive/apache-projects/flink/flink-state-backends/flink-statebackend-changelog/src/test/java/org/apache/flink/state/changelog/ChangelogKeyedStateBackendTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testCheckpointConfirmation() throws Exception {
+    MockKeyedStateBackend<Integer> mock = createMock();
+    ChangelogKeyedStateBackend<Integer> changelog = createChangelog(mock);
+    try {
+        changelog.handleMaterializationResult(SnapshotResult.empty(), materializationId, SequenceNumber.of(Long.MAX_VALUE));
+        checkpoint(changelog, checkpointId).get().discardState();
+        changelog.notifyCheckpointComplete(checkpointId);
+        assertEquals(materializationId, mock.getLastCompletedCheckpointID());
+    } finally {
+        changelog.close();
+        changelog.dispose();
+    }
+}"
+PV-167,druid,testGroupByFloatMaxExpressionVsVirtualColumn,/Volumes/SSK Drive/apache-projects/druid/processing/src/test/java/org/apache/druid/query/groupby/GroupByQueryRunnerTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testGroupByFloatMaxExpressionVsVirtualColumn() {
+    GroupByQuery query = makeQueryBuilder().setDataSource(QueryRunnerTestHelper.DATA_SOURCE).setQuerySegmentSpec(QueryRunnerTestHelper.FIRST_TO_THIRD).setDimensions(new DefaultDimensionSpec(""nil"", ""nil"", ColumnType.STRING)).setVirtualColumns(new ExpressionVirtualColumn(""v0"", ""\""floatNumericNull\"""", ColumnType.FLOAT, TestExprMacroTable.INSTANCE)).setAggregatorSpecs(new FloatMinAggregatorFactory(""min"", ""floatNumericNull""), new FloatMinAggregatorFactory(""minExpression"", null, ""\""floatNumericNull\"""", TestExprMacroTable.INSTANCE), new FloatMinAggregatorFactory(""minVc"", ""v0"")).setGranularity(QueryRunnerTestHelper.ALL_GRAN).build();
+    List<ResultRow> expectedResults = Collections.singletonList(makeRow(query, ""2011-04-01"", ""nil"", null, ""min"", 10.0, ""minExpression"", 10.0, ""minVc"", 10.0));
+    Iterable<ResultRow> results = GroupByQueryRunnerTestHelper.runQuery(factory, runner, query);
+    TestHelper.assertExpectedObjects(expectedResults, results, ""groupBy"");
+}"
+PV-168,jena,testCreateAnnotatedEntities,/Volumes/SSK Drive/apache-projects/jena/jena-ontapi/src/test/java/org/apache/jena/ontapi/OntModelOWLSpecsTest.java,junit5,ParameterizedTest;EnumSource,PT,,,,"@ParameterizedTest
+@EnumSource(names = { ""OWL2_DL_MEM_RDFS_BUILTIN_INF"", ""OWL2_MEM"", ""OWL2_MEM_TRANS_INF"", ""OWL2_EL_MEM"", ""OWL2_EL_MEM_TRANS_INF"", ""OWL2_QL_MEM"", ""OWL2_QL_MEM_TRANS_INF"", ""OWL2_RL_MEM"", ""OWL2_RL_MEM_TRANS_INF"" })
+public void testCreateAnnotatedEntities(TestSpec spec) {
+    OntModel m = OntModelFactory.createModel(spec.inst).setNsPrefixes(OntModelFactory.STANDARD);
+    createAnnotatedEntityTest(m, ""a-p"", OntAnnotationProperty.class);
+    createAnnotatedEntityTest(m, ""o-p"", OntObjectProperty.Named.class);
+    createAnnotatedEntityTest(m, ""d-p"", OntDataProperty.class);
+    createAnnotatedEntityTest(m, ""c"", OntClass.Named.class);
+    createAnnotatedEntityTest(m, ""d"", OntDataRange.Named.class);
+    createAnnotatedEntityTest(m, ""I"", OntIndividual.Named.class);
+}"
+PV-169,james-project,addForwardMappingShouldDetectLoops,/Volumes/SSK Drive/apache-projects/james-project/server/data/data-file/src/test/java/org/apache/james/rrt/file/XMLRecipientRewriteTableTest.java,junit5,Test;Disabled,nonPT,,,,"@Test
+@Disabled(""XMLRecipientRewriteTable is read only"")
+public void addForwardMappingShouldDetectLoops() {
+}"
+PV-170,commons-numbers,testGoldenRatioAInvalidEpsilon,/Volumes/SSK Drive/apache-projects/commons-numbers/commons-numbers-fraction/src/test/java/org/apache/commons/numbers/fraction/GeneralizedContinuedFractionTest.java,junit5,ParameterizedTest;ValueSource,PT,,,,"/**
+ * Test an invalid epsilon (big, very small, zero, negative or NaN).
+ * This test ensures the behaviour when passed an invalid epsilon is to attempt to
+ * converge rather than throw an exception.
+ * See NUMBERS-173.
+ */
+@ParameterizedTest
+@ValueSource(doubles = { 1.0, 0x1.0p-100, 0, -1, Double.NaN })
+void testGoldenRatioAInvalidEpsilon(double eps) {
+    final double actual = GeneralizedContinuedFraction.value(GoldenRatio.getInstance(), eps, 10000);
+    // An invalid epsilon is set to the default epsilon.
+    // It should converge to 1 ULP.
+    Assertions.assertEquals(GOLDEN_RATIO, actual, Math.ulp(GOLDEN_RATIO));
+}"
+PV-171,hadoop,testLongLivedClientPipelineRecovery,/Volumes/SSK Drive/apache-projects/hadoop/hadoop-hdfs-project/hadoop-hdfs/src/test/java/org/apache/hadoop/hdfs/TestEncryptedTransfer.java,junit5,MethodSource;ParameterizedTest,PT,,,,"@MethodSource(""data"")
+@ParameterizedTest
+public void testLongLivedClientPipelineRecovery(String pResolverClazz) throws IOException, InterruptedException, TimeoutException {
+    initTestEncryptedTransfer(pResolverClazz);
+    if (resolverClazz != null) {
+        // TestTrustedChannelResolver does not use encryption keys.
+        return;
+    }
+    // use 4 datanodes to make sure that after 1 data node is stopped,
+    // client only retries establishing pipeline with the 4th node.
+    int numDataNodes = 4;
+    setEncryptionConfigKeys();
+    cluster = new MiniDFSCluster.Builder(conf).numDataNodes(numDataNodes).build();
+    fs = getFileSystem(conf);
+    DFSClient client = DFSClientAdapter.getDFSClient((DistributedFileSystem) fs);
+    DFSClient spyClient = Mockito.spy(client);
+    DFSClientAdapter.setDFSClient((DistributedFileSystem) fs, spyClient);
+    writeTestDataToFile(fs);
+    BlockTokenSecretManager btsm = cluster.getNamesystem().getBlockManager().getBlockTokenSecretManager();
+    // Reduce key update interval and token life for testing.
+    btsm.setKeyUpdateIntervalForTesting(2 * 1000);
+    btsm.setTokenLifetime(2 * 1000);
+    btsm.clearAllKeysForTesting();
+    // Wait until the encryption key becomes invalid.
+    LOG.info(""Wait until encryption keys become invalid..."");
+    DataEncryptionKey encryptionKey = spyClient.getEncryptionKey();
+    List<DataNode> dataNodes = cluster.getDataNodes();
+    for (DataNode dn : dataNodes) {
+        GenericTestUtils.waitFor(new Supplier<Boolean>() {
+
+            @Override
+            public Boolean get() {
+                return !dn.getBl"
+PV-172,skywalking,testWrongSampleNumbers,/Volumes/SSK Drive/apache-projects/skywalking/oap-server/server-receiver-plugin/skywalking-telegraf-receiver-plugin/src/test/java/org/apache/skywalking/oap/server/receiver/telegraf/TelegrafMetricsTest.java,junit5,Test,nonPT,,,,"@Test
+public void testWrongSampleNumbers() {
+    String twoCpuMetrics = ""{\""metrics\"":"" + ""[{\""fields\"":"" + ""{\""usage_idle\"":95.32710280373831,\""usage_irq\"":0.3115264797507788,\""usage_system\"":1.7133956386292835,\""usage_user\"":2.64797507788162},"" + ""\""name\"":\""cpu\"","" + ""\""tags\"":{\""host\"":\""localHost\""},"" + ""\""timestamp\"":1663391390}, "" + ""{\""fields\"":"" + ""{\""usage_idle\"":45.32710280373831,\""usage_irq\"":0.4515344797507788,\""usage_system\"":3.4533956386292835,\""usage_user\"":45.64797507788162},"" + ""\""name\"":\""cpu\"","" + ""\""tags\"":{\""host\"":\""localHost\""},"" + ""\""timestamp\"":1453365320}]}"";
+    Assertions.assertThrows(AssertionError.class, () -> {
+        TelegrafData telegrafData = assertTelegrafJSONConvert(twoCpuMetrics);
+        String[] metricsNames = { ""cpu_usage_idle"", ""cpu_usage_irq"", ""cpu_usage_system"", ""cpu_usage_user"" };
+        assertConvertToSample(telegrafData, 6, metricsNames);
+    }, ""Expected AssertionError to throw, but it didn't."");
+}"
+PV-173,ignite,testCreateCacheWithSystemPermissions,/Volumes/SSK Drive/apache-projects/ignite/modules/core/src/test/java/org/apache/ignite/internal/processors/security/cache/CacheOperationPermissionCreateDestroyCheckTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"/**
+ */
+@Test
+public void testCreateCacheWithSystemPermissions() throws Exception {
+    SecurityPermissionSet secPermSet = builder().appendSystemPermissions(CACHE_CREATE).build();
+    try (Ignite node = startGrid(TEST_NODE, secPermSet, clientMode)) {
+        assertThrowsWithCause(() -> forbidden(clientMode).createCache(CACHE_NAME), SecurityException.class);
+        assertNotNull(node.createCache(CACHE_NAME));
+    }
+}"
+PV-174,camel,testUndertow,/Volumes/SSK Drive/apache-projects/camel/components/camel-undertow/src/test/java/org/apache/camel/component/undertow/UndertowNoAutoStartupTest.java,junit5,Test,nonPT,,,,"@Test
+public void testUndertow() {
+}"
+PV-175,jena,parse_ftp_02,/Volumes/SSK Drive/apache-projects/jena/jena-core/src/test/java/org/apache/jena/irix/TestIRIxJenaSystem.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void parse_ftp_02() {
+    good(""ftp://[::1]/abc/def?qs=ghi#jkl"");
+}"
+PV-176,hive,testAlterPartitionsWithEnvironmentCtxNullPartition,/Volumes/SSK Drive/apache-projects/hive/standalone-metastore/metastore-server/src/test/java/org/apache/hadoop/hive/metastore/client/TestAlterPartitions.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test(expected = NullPointerException.class)
+public void testAlterPartitionsWithEnvironmentCtxNullPartition() throws Exception {
+    createTable4PartColsParts(client);
+    Partition part = client.listPartitions(DB_NAME, TABLE_NAME, (short) -1).get(0);
+    client.alter_partitions(DB_NAME, TABLE_NAME, Lists.newArrayList(part, null), new EnvironmentContext());
+}"
+PV-177,hadoop,testMsyncOnlyToNamespaceWithObserver,/Volumes/SSK Drive/apache-projects/hadoop/hadoop-hdfs-project/hadoop-hdfs-rbf/src/test/java/org/apache/hadoop/hdfs/server/federation/router/TestObserverWithRouter.java,junit5,EnumSource;ParameterizedTest;Tag,PT,,,,"@EnumSource(ConfigSetting.class)
+@ParameterizedTest
+@Tag(SKIP_BEFORE_EACH_CLUSTER_STARTUP)
+public void testMsyncOnlyToNamespaceWithObserver(ConfigSetting configSetting) throws Exception {
+    Configuration confOverride = new Configuration(false);
+    String namespaceWithObserverReadsDisabled = ""ns0"";
+    // Disable observer reads for ns0
+    confOverride.set(RBFConfigKeys.DFS_ROUTER_OBSERVER_READ_OVERRIDES, namespaceWithObserverReadsDisabled);
+    startUpCluster(1, confOverride);
+    fileSystem = routerContext.getFileSystem(getConfToEnableObserverReads(configSetting));
+    // Send msync request
+    fileSystem.msync();
+    long rpcCountForActive = routerContext.getRouter().getRpcServer().getRPCMetrics().getActiveProxyOps();
+    // There should only be one call to the namespace that has an observer.
+    assertEquals(1, rpcCountForActive, ""Only one call to the namespace with an observer"");
+}"
+PV-178,ignite,testCancelAfterResultSetPartiallyRead,/Volumes/SSK Drive/apache-projects/ignite/modules/indexing/src/test/java/org/apache/ignite/internal/processors/query/KillQueryTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"/**
+ */
+@Test
+public void testCancelAfterResultSetPartiallyRead() throws Exception {
+    FieldsQueryCursor<List<?>> cur = ignite.context().query().querySqlFields(new SqlFieldsQuery(""select * from \""default\"".Integer"").setLazy(false), false);
+    Iterator<List<?>> it = cur.iterator();
+    it.next();
+    Long qryId = ignite.context().query().runningQueries(-1).iterator().next().id();
+    igniteForKillRequest.context().query().querySqlFields(createKillQuery(ignite.context().localNodeId(), qryId, asyncCancel), false).getAll();
+    if (asyncCancel)
+        GridTestUtils.waitForCondition(() -> ignite.context().query().runningQueries(-1).isEmpty(), 1000);
+}"
+PV-179,beam,shouldInferParallelismFromEnvironmentStreaming,/Volumes/SSK Drive/apache-projects/beam/runners/flink/src/test/java/org/apache/beam/runners/flink/FlinkExecutionEnvironmentsTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void shouldInferParallelismFromEnvironmentStreaming() throws IOException {
+    String confDir = extractFlinkConfig();
+    FlinkPipelineOptions options = getDefaultPipelineOptions();
+    options.setRunner(TestFlinkRunner.class);
+    options.setFlinkMaster(""host:80"");
+    StreamExecutionEnvironment sev = FlinkExecutionEnvironments.createStreamExecutionEnvironment(options, Collections.emptyList(), confDir);
+    assertThat(options.getParallelism(), is(23));
+    assertThat(sev.getParallelism(), is(23));
+}"
+PV-180,causeway,join_withImplicit_toString,/Volumes/SSK Drive/apache-projects/causeway/commons/src/test/java/org/apache/causeway/commons/collections/CanTest.java,junit5,ParameterizedTest;EnumSource,PT,,,,"// -- JOIN
+/**
+ * Tests all {@link Cardinality}(s) on
+ * {@link Can#join(String) join w/ implicit toString}
+ */
+@ParameterizedTest
+@EnumSource(CustomerScenario.class)
+void join_withImplicit_toString(final CustomerScenario scenario) {
+    assertEquals(scenario.customers.map(Object::toString).stream().collect(Collectors.joining("", "")), scenario.customers.join("", ""));
+}"
+PV-181,directory-ldap-api,testEncodeSyncRequestValue,/Volumes/SSK Drive/apache-projects/directory-ldap-api/ldap/extras/codec/src/test/java/org/apache/directory/api/ldap/extras/controls/syncrepl_impl/SyncRequestValueControlTest.java,junit5,Test,nonPT,,,,"@Test
+public void testEncodeSyncRequestValue() throws Exception {
+    ByteBuffer bb = ByteBuffer.allocate(0x05);
+    bb.put(new byte[] { 0x30, 0x03, 0x0A, 0x01, 0x01 });
+    SyncRequestValueFactory factory = (SyncRequestValueFactory) codec.getRequestControlFactories().get(SyncRequestValue.OID);
+    SyncRequestValue syncRequestValue = factory.newControl();
+    factory.decodeValue(syncRequestValue, bb.array());
+    // Test reverse encoding
+    testReverseEncoding(syncRequestValue, bb);
+}"
+PV-182,uima-uimaj,testSingleRelativeDifferentTypeSamePositionFail,/Volumes/SSK Drive/apache-projects/uima-uimaj/uimafit-core/src/test/java/org/apache/uima/fit/util/JCasUtilv3Test.java,junit5,Deprecated;Test,nonPT,,,,"// Actually, in UIMAv3 this does not fail - and it is ok to not fail
+@Deprecated()
+@Test
+public void testSingleRelativeDifferentTypeSamePositionFail() {
+    String text = ""one two three"";
+    tokenBuilder.buildTokens(jCas, text);
+    List<Token> tokens = new ArrayList<Token>(select(jCas, Token.class));
+    for (Token token : tokens) {
+        new AnalyzedText(jCas, token.getBegin(), token.getEnd()).addToIndexes();
+    }
+    Token firstToken = tokens.get(0);
+    // uimaFIT:
+    // assertThatExceptionOfType(IllegalArgumentException.class)
+    // .isThrownBy(() -> selectSingleRelative(jCas, AnalyzedText.class, firstToken, 0));
+    assertThat(jCas.select(AnalyzedText.class).startAt(firstToken).shifted(0).get()).isSameAs(jCas.select(AnalyzedText.class).get());
+}"
+PV-183,flink,testInvalidParameters,/Volumes/SSK Drive/apache-projects/flink/flink-table/flink-table-runtime/src/test/java/org/apache/flink/table/runtime/operators/window/tvf/slicing/CumulativeSliceAssignerTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest(name = ""timezone = {0}"")
+@MethodSource(""zoneIds"")
+void testInvalidParameters(final ZoneId zoneId) {
+    assertErrorMessage(() -> SliceAssigners.cumulative(0, zoneId, Duration.ofSeconds(-5), Duration.ofSeconds(1)), ""Cumulative Window parameters must satisfy maxSize > 0 and step > 0, but got maxSize -5000ms and step 1000ms."");
+    assertErrorMessage(() -> SliceAssigners.cumulative(0, zoneId, Duration.ofSeconds(5), Duration.ofSeconds(-1)), ""Cumulative Window parameters must satisfy maxSize > 0 and step > 0, but got maxSize 5000ms and step -1000ms."");
+    assertErrorMessage(() -> SliceAssigners.cumulative(0, zoneId, Duration.ofSeconds(5), Duration.ofSeconds(2)), ""Cumulative Window requires maxSize must be an integral multiple of step, but got maxSize 5000ms and step 2000ms."");
+    // should pass
+    SliceAssigners.hopping(0, zoneId, Duration.ofSeconds(10), Duration.ofSeconds(2)).withOffset(Duration.ofSeconds(-1));
+}"
+PV-184,commons-compress,testInvalidHCodings,/Volumes/SSK Drive/apache-projects/commons-compress/src/test/java/org/apache/commons/compress/harmony/pack200/CodecTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""hCodings"")
+void testInvalidHCodings(final int i) {
+    assertThrows(IllegalArgumentException.class, () -> new BHSDCodec(1, i), ""b=1 -> h=256"");
+}"
+PV-185,hive,testAlterPartitionWithEnvironmentCtx,/Volumes/SSK Drive/apache-projects/hive/standalone-metastore/metastore-server/src/test/java/org/apache/hadoop/hive/metastore/client/TestAlterPartitions.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"/**
+ * Testing alter_partition(String,String,Partition,EnvironmentContext) ->
+ *         alter_partition_with_environment_context(String,String,Partition,EnvironmentContext).
+ */
+@Test
+public void testAlterPartitionWithEnvironmentCtx() throws Exception {
+    EnvironmentContext context = new EnvironmentContext();
+    context.setProperties(new HashMap<String, String>() {
+
+        {
+            put(""TestKey"", ""TestValue"");
+        }
+    });
+    List<List<String>> testValues = createTable4PartColsParts(client);
+    List<Partition> oldParts = client.listPartitions(DB_NAME, TABLE_NAME, (short) -1);
+    Partition partition = oldParts.get(3);
+    assertPartitionUnchanged(partition, testValues.get(3), PARTCOL_SCHEMA);
+    makeTestChangesOnPartition(partition);
+    client.alter_partition(DB_NAME, TABLE_NAME, partition, context);
+    List<Partition> newParts = client.listPartitions(DB_NAME, TABLE_NAME, (short) -1);
+    partition = newParts.get(3);
+    assertPartitionChanged(partition, testValues.get(3), PARTCOL_SCHEMA);
+    assertPartitionsHaveCorrectValues(newParts, testValues);
+    client.alter_partition(DB_NAME, TABLE_NAME, partition, new EnvironmentContext());
+    client.alter_partition(DB_NAME, TABLE_NAME, partition, null);
+}"
+PV-186,zookeeper,testLoadPKCS12TrustStore,/Volumes/SSK Drive/apache-projects/zookeeper/zookeeper-server/src/test/java/org/apache/zookeeper/common/X509UtilTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""data"")
+public void testLoadPKCS12TrustStore(X509KeyType caKeyType, X509KeyType certKeyType, String keyPassword, Integer paramIndex) throws Exception {
+    init(caKeyType, certKeyType, keyPassword, paramIndex);
+    // Make sure we can instantiate a trust manager from the PKCS12 file on disk
+    X509TrustManager tm = X509Util.createTrustManager(x509TestContext.getTrustStoreFile(KeyStoreFileType.PKCS12).getAbsolutePath(), x509TestContext.getTrustStorePassword(), KeyStoreFileType.PKCS12.getPropertyValue(), true, true, true, true, false, false);
+}"
+PV-187,poi,testPrintAreaRemove,/Volumes/SSK Drive/apache-projects/poi/poi/src/test/java/org/apache/poi/ss/usermodel/BaseTestNamedRange.java,junit5,Test,nonPT,,,,"/**
+ * Verifies an existing print area is deleted
+ */
+@Test
+public final void testPrintAreaRemove() throws Exception {
+    try (Workbook workbook = _testDataProvider.createWorkbook()) {
+        workbook.createSheet(""Test Print Area"");
+        workbook.getSheetName(0);
+        workbook.setPrintArea(0, 0, 1, 0, 0);
+        String retrievedPrintArea = workbook.getPrintArea(0);
+        assertNotNull(retrievedPrintArea, ""Print Area not defined for first sheet"");
+        workbook.removePrintArea(0);
+        assertNull(workbook.getPrintArea(0), ""PrintArea was not removed"");
+    }
+}"
+PV-188,tez,testReduceProcessor,/Volumes/SSK Drive/apache-projects/tez/tez-mapreduce/src/test/java/org/apache/tez/mapreduce/processor/reduce/TestReduceProcessor.java,junit4,Test,nonPT,,,,"@Test(timeout = 5000)
+public void testReduceProcessor() throws Exception {
+    final String dagName = ""mrdag0"";
+    String mapVertexName = MultiStageMRConfigUtil.getInitialMapVertexName();
+    String reduceVertexName = MultiStageMRConfigUtil.getFinalReduceVertexName();
+    JobConf jobConf = new JobConf(defaultConf);
+    setUpJobConf(jobConf);
+    MRHelpers.translateMRConfToTez(jobConf);
+    jobConf.setInt(MRJobConfig.APPLICATION_ATTEMPT_ID, 0);
+    jobConf.set(MRFrameworkConfigs.TASK_LOCAL_RESOURCE_DIR, new Path(workDir, ""localized-resources"").toUri().toString());
+    jobConf.setBoolean(MRJobConfig.MR_TEZ_SPLITS_VIA_EVENTS, false);
+    Path mapInput = new Path(workDir, ""map0"");
+    MapUtils.generateInputSplit(localFs, workDir, jobConf, mapInput, 10);
+    InputSpec mapInputSpec = new InputSpec(""NullSrcVertex"", InputDescriptor.create(MRInputLegacy.class.getName()).setUserPayload(UserPayload.create(ByteBuffer.wrap(MRRuntimeProtos.MRInputUserPayloadProto.newBuilder().setConfigurationBytes(TezUtils.createByteStringFromConf(jobConf)).build().toByteArray()))), 1);
+    OutputSpec mapOutputSpec = new OutputSpec(""NullDestVertex"", OutputDescriptor.create(OrderedPartitionedKVOutput.class.getName()).setUserPayload(TezUtils.createUserPayloadFromConf(jobConf)), 1);
+    // Run a map
+    TestUmbilical testUmbilical = new TestUmbilical();
+    TezSharedExecutor sharedExecutor = new TezSharedExecutor(jobConf);
+    LogicalIOProcessorRuntimeTask mapTask = MapUtils.createLogicalTask(localFs, workDir, jobConf, 0, mapInput, testUmbilical, dagName, mapVertexName, Collections.singletonList(mapInputSp"
+PV-189,ignite,testAnotherServerJoined,/Volumes/SSK Drive/apache-projects/ignite/modules/core/src/test/java/org/apache/ignite/internal/processors/cache/persistence/db/wal/WalRebalanceRestartTest.java,junit4,Test,nonPT,,,,"/**
+ * Restart rebalance when another server joined.
+ *
+ * @throws Exception if failed.
+ */
+@Test
+public void testAnotherServerJoined() throws Exception {
+    restartRebalance((ignite) -> {
+        startGrid(""new_srv"");
+    }, true);
+}"
+PV-190,activemq,testMessageExpiredAdvisoryDurableServerTask,/Volumes/SSK Drive/apache-projects/activemq/activemq-unit-tests/src/test/java/org/apache/activemq/advisory/AdvisoryTests.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test(timeout = 60000)
+public void testMessageExpiredAdvisoryDurableServerTask() throws Exception {
+    testMessageExpiredDurableAdvisory(getClass().getName(), 2000, false, EXPIRE_MESSAGE_PERIOD * 2);
+}"
+PV-191,avro,enumRecordWithExtendedSchemaCanNotBeReadIfNewValuesAreUsed,/Volumes/SSK Drive/apache-projects/avro/lang/java/avro/src/test/java/org/apache/avro/TestReadingWritingDataInEvolvedSchemas.java,junit5,ParameterizedTest;EnumSource,PT,,,,"@ParameterizedTest
+@EnumSource(EncoderType.class)
+void enumRecordWithExtendedSchemaCanNotBeReadIfNewValuesAreUsed(EncoderType encoderType) throws Exception {
+    Schema writer = ENUM_ABC_RECORD;
+    Record record = defaultRecordWithSchema(writer, FIELD_A, new EnumSymbol(ENUM_ABC, ""C""));
+    byte[] encoded = encodeGenericBlob(record, encoderType);
+    AvroTypeException exception = Assertions.assertThrows(AvroTypeException.class, () -> decodeGenericBlob(ENUM_AB_RECORD, writer, encoded, encoderType));
+    Assertions.assertEquals(""No match for C"", exception.getMessage());
+}"
+PV-192,cloudstack,testUpdateLoadBalancerRule3,/Volumes/SSK Drive/apache-projects/cloudstack/server/src/test/java/com/cloud/network/lb/LoadBalancingRulesManagerImplTest.java,junit4,Test,nonPT,,,,"@Test
+public void testUpdateLoadBalancerRule3() throws Exception {
+    setupUpdateLoadBalancerRule();
+    // Update algorithm from source to roundrobin, lb protocol is same
+    UpdateLoadBalancerRuleCmd cmd = new UpdateLoadBalancerRuleCmd();
+    ReflectionTestUtils.setField(cmd, ApiConstants.ID, lbRuleId);
+    ReflectionTestUtils.setField(cmd, ""algorithm"", ""roundrobin"");
+    ReflectionTestUtils.setField(cmd, ""lbProtocol"", NetUtils.SSL_PROTO);
+    when(loadBalancerMock.getAlgorithm()).thenReturn(""source"");
+    when(loadBalancerMock.getLbProtocol()).thenReturn(NetUtils.SSL_PROTO);
+    lbr.updateLoadBalancerRule(cmd);
+    Mockito.verify(lbr, times(1)).applyLoadBalancerConfig(lbRuleId);
+    Mockito.verify(_lbCertMapDao, never()).remove(anyLong());
+}"
+PV-193,causeway,valueSerializer,/Volumes/SSK Drive/apache-projects/causeway/core/mmtest/src/test/java/org/apache/causeway/core/metamodel/facets/value/ValueSemanticsProviderAbstractTestCase.java,junit5,ParameterizedTest;EnumSource,PT,,,,"@ParameterizedTest
+@EnumSource(Format.class)
+final void valueSerializer(final Format format) {
+    if (!isValueSemanticsProviderSetup())
+        return;
+    final T value = getSample();
+    final String encoded = getValueSerializer().enstring(format, value);
+    switch(format) {
+        case JSON:
+            assertValueEncodesToJsonAs(value, encoded);
+            break;
+        case URL_SAFE:
+            assertTrue(_Strings.isUrlSafe(encoded));
+    }
+    T decoded = getValueSerializer().destring(format, encoded);
+    Optional.ofNullable(semantics.getOrderRelation()).ifPresentOrElse(rel -> Assertions.assertTrue(rel.equals(value, decoded)), () -> Assertions.assertEquals(value, decoded));
+}"
+PV-194,geode,testGetName,/Volumes/SSK Drive/apache-projects/geode/geode-core/src/integrationTest/java/org/apache/geode/distributed/internal/InternalDistributedSystemIntegrationTest.java,junit5,Test,nonPT,,,,"@Test
+public void testGetName() {
+    String name = ""testGetName"";
+    Properties props = new Properties();
+    props.put(NAME, name);
+    // a loner is all this test needs
+    props.setProperty(MCAST_PORT, ""0"");
+    props.setProperty(LOCATORS, """");
+    DistributionConfig config = createSystem(props).getOriginalConfig();
+    assertThat(name).isEqualTo(config.getName());
+}"
+PV-195,pulsar,testReacquireLocksAfterSessionLost,/Volumes/SSK Drive/apache-projects/pulsar/pulsar-metadata/src/test/java/org/apache/pulsar/metadata/ZKSessionTest.java,unknown,Test,nonPT,,,,"@Test
+public void testReacquireLocksAfterSessionLost() throws Exception {
+    @Cleanup
+    MetadataStoreExtended store = MetadataStoreExtended.create(zks.getConnectionString(), MetadataStoreConfig.builder().sessionTimeoutMillis(2_000).build());
+    BlockingQueue<SessionEvent> sessionEvents = new LinkedBlockingQueue<>();
+    store.registerSessionListener(sessionEvents::add);
+    @Cleanup
+    CoordinationService coordinationService = new CoordinationServiceImpl(store);
+    @Cleanup
+    LockManager<String> lm1 = coordinationService.getLockManager(String.class);
+    String path = newKey();
+    ResourceLock<String> lock = lm1.acquireLock(path, ""value-1"").join();
+    zks.expireSession(((ZKMetadataStore) store).getZkSessionId());
+    SessionEvent e = sessionEvents.poll(5, TimeUnit.SECONDS);
+    assertEquals(e, SessionEvent.ConnectionLost);
+    e = sessionEvents.poll(10, TimeUnit.SECONDS);
+    assertEquals(e, SessionEvent.SessionLost);
+    e = sessionEvents.poll(10, TimeUnit.SECONDS);
+    assertEquals(e, SessionEvent.Reconnected);
+    e = sessionEvents.poll(10, TimeUnit.SECONDS);
+    assertEquals(e, SessionEvent.SessionReestablished);
+    Awaitility.await().untilAsserted(() -> assertTrue(store.get(path).join().isPresent()));
+    assertFalse(lock.getLockExpiredFuture().isDone());
+}"
+PV-196,plc4x,testSingleElementPlcValues,/Volumes/SSK Drive/apache-projects/plc4x/plc4j/spi/src/test/java/org/apache/plc4x/java/spi/values/DefaultPlcValueHandlerTest.java,junit5,ParameterizedTest;MethodSource,PT,,,,"@ParameterizedTest
+@MethodSource(""getSingleElementPlcValues"")
+void testSingleElementPlcValues(PlcTag plcTag, Object input, PlcValue expected) {
+    PlcValueHandler sut = new DefaultPlcValueHandler();
+    PlcValue plcValue = sut.newPlcValue(plcTag, input);
+    assertNotNull(plcValue);
+    assertEquals(expected, plcValue);
+}"
+PV-197,nifi,testNullSuppression,/Volumes/SSK Drive/apache-projects/nifi/nifi-extension-bundles/nifi-standard-services/nifi-record-serialization-services-bundle/nifi-record-serialization-services/src/test/java/org/apache/nifi/xml/TestXMLRecordSetWriter.java,junit5,Test,nonPT,,,,"@Test
+public void testNullSuppression() throws IOException, InitializationException {
+    XMLRecordSetWriter writer = new XMLRecordSetWriter();
+    TestRunner runner = setup(writer);
+    runner.setProperty(writer, XMLRecordSetWriter.ROOT_TAG_NAME, ""root"");
+    runner.setProperty(writer, XMLRecordSetWriter.RECORD_TAG_NAME, ""record"");
+    runner.setProperty(writer, XMLRecordSetWriter.SUPPRESS_NULLS, XMLRecordSetWriter.ALWAYS_SUPPRESS);
+    runner.enableControllerService(writer);
+    runner.enqueue("""");
+    runner.run();
+    runner.assertQueueEmpty();
+    runner.assertAllFlowFilesTransferred(TestXMLRecordSetWriterProcessor.SUCCESS, 1);
+    String expected = ""<root><record><array_field>1</array_field><array_field>3</array_field>"" + ""<name1>val1</name1></record>"" + ""<record><array_field>1</array_field><array_field>3</array_field>"" + ""<name1>val1</name1></record></root>"";
+    String actual = new String(runner.getContentAsByteArray(runner.getFlowFilesForRelationship(TestXMLRecordSetWriterProcessor.SUCCESS).get(0)));
+    assertThat(expected, CompareMatcher.isSimilarTo(actual).ignoreWhitespace().withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byNameAndText)));
+}"
+PV-198,tomcat,testDispatchErrorSingle,/Volumes/SSK Drive/apache-projects/tomcat/test/org/apache/catalina/core/TestAsyncContextImpl.java,junit4,Test,nonPT,,,,"@Test
+public void testDispatchErrorSingle() throws Exception {
+    doTestDispatchError(1, false, false);
+}"
+PV-199,commons-functor,testContainsSingleStepDescending,/Volumes/SSK Drive/apache-projects/commons-functor/core/src/test/java/org/apache/commons/functor/range/TestDoubleRange.java,junit4,Test,nonPT,,,,"@Test
+public void testContainsSingleStepDescending() {
+    // [2, -2), -1 = 2, 1, 0, -1
+    DoubleRange descendingRange = Ranges.doubleRange(2, BoundType.CLOSED, -2, BoundType.OPEN, -1);
+    // [2, -2), -1 = 2, 1, 0, -1
+    List<Double> arr = Arrays.asList(2.0, 1.0, 0.0, -1.0);
+    for (Double element : arr) {
+        assertTrue(""Expected element ["" + element + ""] is missing in range ["" + descendingRange + ""]"", descendingRange.contains(element));
+    }
+    List<Double> elementsNotPresent = new ArrayList<Double>(fullRange);
+    elementsNotPresent.removeAll(arr);
+    for (Double element : elementsNotPresent) {
+        assertFalse(""Unexpected element ["" + element + ""] is present in range ["" + descendingRange + ""]"", descendingRange.contains(element));
+    }
+}"
+PV-200,druid,testConflictingPendingSegment,/Volumes/SSK Drive/apache-projects/druid/indexing-service/src/test/java/org/apache/druid/indexing/common/actions/SegmentAllocationQueueTest.java,junit4,Test;RunWith(Parameterized.class),PT,,,,"@Test
+public void testConflictingPendingSegment() {
+    SegmentAllocateRequest hourSegmentRequest = allocateRequest().forTask(createTask(TestDataSource.WIKI, ""group_1"")).withSegmentGranularity(Granularities.HOUR).build();
+    Future<SegmentIdWithShardSpec> hourSegmentFuture = allocationQueue.add(hourSegmentRequest);
+    SegmentAllocateRequest halfHourSegmentRequest = allocateRequest().forTask(createTask(TestDataSource.WIKI, ""group_1"")).withSegmentGranularity(Granularities.THIRTY_MINUTE).build();
+    Future<SegmentIdWithShardSpec> halfHourSegmentFuture = allocationQueue.add(halfHourSegmentRequest);
+    processDistinctDatasourceBatches();
+    processDistinctDatasourceBatches();
+    Assert.assertNotNull(getSegmentId(hourSegmentFuture));
+    Assert.assertNull(getSegmentId(halfHourSegmentFuture));
+}"

@@ -1,0 +1,166 @@
+scope,metric,group,kind,n,median,q1,q3,mean
+main-body,LOC,ValueSource,source,1456,16.0000,10.0000,29.0000,22.7754
+main-body,LOC,CsvSource,source,361,22.0000,14.0000,35.0000,29.1828
+main-body,LOC,EnumSource,source,828,23.0000,12.0000,35.0000,26.7754
+main-body,LOC,CsvFileSource,source,48,6.0000,6.0000,7.2500,7.2083
+main-body,LOC,MethodSource,source,5411,15.0000,8.0000,28.0000,22.1183
+main-body,LOC,ArgumentsSource,source,25,12.0000,10.0000,20.0000,15.7600
+main-body,LOC,FieldSource,source,35,9.0000,6.0000,14.0000,14.7429
+main-body,LOC,inline,family,1817,17.0000,11.0000,30.0000,24.0484
+main-body,LOC,type,family,828,23.0000,12.0000,35.0000,26.7754
+main-body,LOC,file,family,48,6.0000,6.0000,7.2500,7.2083
+main-body,LOC,provider,family,5471,15.0000,8.0000,28.0000,22.0420
+helper,LOC,ValueSource,source,1456,14.0000,0.0000,89.0000,85.9485
+helper,LOC,CsvSource,source,361,3.0000,0.0000,30.0000,38.2687
+helper,LOC,EnumSource,source,828,17.0000,3.0000,72.0000,89.7428
+helper,LOC,CsvFileSource,source,48,16.0000,3.0000,52.0000,25.7292
+helper,LOC,MethodSource,source,5411,53.0000,17.0000,178.0000,143.0335
+helper,LOC,ArgumentsSource,source,25,30.0000,10.0000,31.0000,46.5200
+helper,LOC,FieldSource,source,35,0.0000,0.0000,8.0000,17.0571
+helper,LOC,inline,family,1817,11.0000,0.0000,79.0000,76.4755
+helper,LOC,type,family,828,17.0000,3.0000,72.0000,89.7428
+helper,LOC,file,family,48,16.0000,3.0000,52.0000,25.7292
+helper,LOC,provider,family,5471,52.0000,17.0000,175.0000,141.7865
+total,LOC,ValueSource,source,1456,41.0000,15.0000,115.0000,108.7239
+total,LOC,CsvSource,source,361,32.0000,17.0000,69.0000,67.4515
+total,LOC,EnumSource,source,828,48.0000,28.0000,95.0000,116.5181
+total,LOC,CsvFileSource,source,48,25.5000,11.0000,58.0000,32.9375
+total,LOC,MethodSource,source,5411,72.0000,33.0000,204.0000,165.1517
+total,LOC,ArgumentsSource,source,25,40.0000,22.0000,55.0000,62.2800
+total,LOC,FieldSource,source,35,9.0000,7.0000,41.5000,31.8000
+total,LOC,inline,family,1817,38.0000,15.0000,105.0000,100.5239
+total,LOC,type,family,828,48.0000,28.0000,95.0000,116.5181
+total,LOC,file,family,48,25.5000,11.0000,58.0000,32.9375
+total,LOC,provider,family,5471,71.0000,33.0000,202.0000,163.8286
+main-body,CC,ValueSource,source,1456,1.0000,1.0000,2.0000,1.7074
+main-body,CC,CsvSource,source,361,1.0000,1.0000,2.0000,2.0886
+main-body,CC,EnumSource,source,828,1.0000,1.0000,2.0000,1.5882
+main-body,CC,CsvFileSource,source,48,1.0000,1.0000,1.0000,1.1042
+main-body,CC,MethodSource,source,5411,1.0000,1.0000,2.0000,1.7651
+main-body,CC,ArgumentsSource,source,25,1.0000,1.0000,1.0000,1.0400
+main-body,CC,FieldSource,source,35,1.0000,1.0000,1.0000,1.1143
+main-body,CC,inline,family,1817,1.0000,1.0000,2.0000,1.7832
+main-body,CC,type,family,828,1.0000,1.0000,2.0000,1.5882
+main-body,CC,file,family,48,1.0000,1.0000,1.0000,1.1042
+main-body,CC,provider,family,5471,1.0000,1.0000,2.0000,1.7576
+helper,CC,ValueSource,source,1456,3.0000,0.0000,15.0000,15.7912
+helper,CC,CsvSource,source,361,1.0000,0.0000,5.0000,7.5429
+helper,CC,EnumSource,source,828,2.0000,1.0000,14.0000,17.4771
+helper,CC,CsvFileSource,source,48,5.0000,2.0000,15.0000,7.3333
+helper,CC,MethodSource,source,5411,8.0000,2.0000,28.0000,24.3227
+helper,CC,ArgumentsSource,source,25,6.0000,3.0000,6.0000,7.8800
+helper,CC,FieldSource,source,35,0.0000,0.0000,1.5000,3.5429
+helper,CC,inline,family,1817,2.0000,0.0000,14.0000,14.1524
+helper,CC,type,family,828,2.0000,1.0000,14.0000,17.4771
+helper,CC,file,family,48,5.0000,2.0000,15.0000,7.3333
+helper,CC,provider,family,5471,8.0000,2.0000,27.0000,24.1146
+total,CC,ValueSource,source,1456,4.0000,1.0000,17.0000,17.4986
+total,CC,CsvSource,source,361,3.0000,1.0000,9.0000,9.6316
+total,CC,EnumSource,source,828,4.0000,2.0000,15.0000,19.0652
+total,CC,CsvFileSource,source,48,6.0000,3.0000,16.0000,8.4375
+total,CC,MethodSource,source,5411,10.0000,4.0000,29.0000,26.0878
+total,CC,ArgumentsSource,source,25,7.0000,4.0000,7.0000,8.9200
+total,CC,FieldSource,source,35,1.0000,1.0000,3.0000,4.6571
+total,CC,inline,family,1817,4.0000,1.0000,16.0000,15.9356
+total,CC,type,family,828,4.0000,2.0000,15.0000,19.0652
+total,CC,file,family,48,6.0000,3.0000,16.0000,8.4375
+total,CC,provider,family,5471,10.0000,4.0000,29.0000,25.8722
+main-body,CCTR,ValueSource,source,1456,5.0000,3.0000,8.0000,6.8977
+main-body,CCTR,CsvSource,source,361,5.0000,3.0000,7.0000,6.8116
+main-body,CCTR,EnumSource,source,828,5.0000,3.0000,10.0000,8.3756
+main-body,CCTR,CsvFileSource,source,48,3.0000,3.0000,3.0000,3.2292
+main-body,CCTR,MethodSource,source,5411,4.0000,3.0000,7.0000,6.6256
+main-body,CCTR,ArgumentsSource,source,25,4.0000,4.0000,9.0000,5.0000
+main-body,CCTR,FieldSource,source,35,5.0000,4.0000,6.0000,6.8857
+main-body,CCTR,inline,family,1817,5.0000,3.0000,8.0000,6.8806
+main-body,CCTR,type,family,828,5.0000,3.0000,10.0000,8.3756
+main-body,CCTR,file,family,48,3.0000,3.0000,3.0000,3.2292
+main-body,CCTR,provider,family,5471,4.0000,3.0000,7.0000,6.6198
+helper,CCTR,ValueSource,source,1456,1.0000,0.0000,16.0000,15.0481
+helper,CCTR,CsvSource,source,361,0.0000,0.0000,5.0000,7.2825
+helper,CCTR,EnumSource,source,828,1.0000,0.0000,8.0000,16.1498
+helper,CCTR,CsvFileSource,source,48,3.0000,0.0000,6.0000,3.0833
+helper,CCTR,MethodSource,source,5411,7.0000,0.0000,29.0000,24.4203
+helper,CCTR,ArgumentsSource,source,25,3.0000,1.0000,3.0000,5.1600
+helper,CCTR,FieldSource,source,35,0.0000,0.0000,0.0000,7.1143
+helper,CCTR,inline,family,1817,1.0000,0.0000,13.0000,13.5052
+helper,CCTR,type,family,828,1.0000,0.0000,8.0000,16.1498
+helper,CCTR,file,family,48,3.0000,0.0000,6.0000,3.0833
+helper,CCTR,provider,family,5471,7.0000,0.0000,29.0000,24.2215
+total,CCTR,ValueSource,source,1456,10.0000,5.0000,24.0000,21.9457
+total,CCTR,CsvSource,source,361,7.0000,4.0000,16.0000,14.0942
+total,CCTR,EnumSource,source,828,11.0000,6.0000,18.0000,24.5254
+total,CCTR,CsvFileSource,source,48,6.0000,4.0000,9.0000,6.3125
+total,CCTR,MethodSource,source,5411,15.0000,6.0000,38.0000,31.0458
+total,CCTR,ArgumentsSource,source,25,7.0000,7.0000,10.0000,10.1600
+total,CCTR,FieldSource,source,35,5.0000,4.0000,8.5000,14.0000
+total,CCTR,inline,family,1817,9.0000,4.0000,23.0000,20.3858
+total,CCTR,type,family,828,11.0000,6.0000,18.0000,24.5254
+total,CCTR,file,family,48,6.0000,4.0000,9.0000,6.3125
+total,CCTR,provider,family,5471,15.0000,6.0000,37.0000,30.8413
+main-body,DUP%,ValueSource,source,1456,0.7778,0.2857,1.0000,0.6288
+main-body,DUP%,CsvSource,source,361,0.5676,0.0714,0.9766,0.5205
+main-body,DUP%,EnumSource,source,828,0.9231,0.4802,1.0000,0.7059
+main-body,DUP%,CsvFileSource,source,48,1.0000,0.6111,1.0000,0.7760
+main-body,DUP%,MethodSource,source,5411,0.8966,0.3750,1.0000,0.6807
+main-body,DUP%,ArgumentsSource,source,25,0.0000,0.0000,1.0000,0.3476
+main-body,DUP%,FieldSource,source,35,0.6154,0.0000,0.8932,0.5266
+main-body,DUP%,inline,family,1817,0.7333,0.2286,1.0000,0.6073
+main-body,DUP%,type,family,828,0.9231,0.4802,1.0000,0.7059
+main-body,DUP%,file,family,48,1.0000,0.6111,1.0000,0.7760
+main-body,DUP%,provider,family,5471,0.8934,0.3652,1.0000,0.6782
+helper,DUP%,ValueSource,source,1456,0.0000,0.0000,0.0842,0.1110
+helper,DUP%,CsvSource,source,361,0.0000,0.0000,0.0000,0.1033
+helper,DUP%,EnumSource,source,828,0.0000,0.0000,0.1265,0.1112
+helper,DUP%,CsvFileSource,source,48,0.0000,0.0000,0.0000,0.0549
+helper,DUP%,MethodSource,source,5411,0.1818,0.0127,0.5213,0.3098
+helper,DUP%,ArgumentsSource,source,25,0.0000,0.0000,0.0000,0.0368
+helper,DUP%,FieldSource,source,35,0.0000,0.0000,0.4290,0.2513
+helper,DUP%,inline,family,1817,0.0000,0.0000,0.0748,0.1095
+helper,DUP%,type,family,828,0.0000,0.0000,0.1265,0.1112
+helper,DUP%,file,family,48,0.0000,0.0000,0.0000,0.0549
+helper,DUP%,provider,family,5471,0.1796,0.0120,0.5200,0.3082
+total,DUP%,ValueSource,source,1456,0.3377,0.0866,0.7015,0.4193
+total,DUP%,CsvSource,source,361,0.3514,0.0758,0.8596,0.4448
+total,DUP%,EnumSource,source,828,0.4615,0.1564,0.7543,0.4691
+total,DUP%,CsvFileSource,source,48,0.0929,0.0857,0.4361,0.2474
+total,DUP%,MethodSource,source,5411,0.3684,0.1484,0.6462,0.4123
+total,DUP%,ArgumentsSource,source,25,0.0000,0.0000,0.5652,0.2008
+total,DUP%,FieldSource,source,35,0.5000,0.1176,0.8500,0.5010
+total,DUP%,inline,family,1817,0.3421,0.0851,0.7197,0.4244
+total,DUP%,type,family,828,0.4615,0.1564,0.7543,0.4691
+total,DUP%,file,family,48,0.0929,0.0857,0.4361,0.2474
+total,DUP%,provider,family,5471,0.3684,0.1473,0.6462,0.4119
+main-body,DUP lines,ValueSource,source,1456,11.0000,5.0000,23.0000,17.9856
+main-body,DUP lines,CsvSource,source,361,12.0000,2.0000,26.0000,18.9501
+main-body,DUP lines,EnumSource,source,828,19.0000,8.0000,37.0000,24.0036
+main-body,DUP lines,CsvFileSource,source,48,6.0000,4.7500,6.0000,5.9167
+main-body,DUP lines,MethodSource,source,5411,11.0000,5.0000,23.0000,17.8671
+main-body,DUP lines,ArgumentsSource,source,25,0.0000,0.0000,13.0000,4.2800
+main-body,DUP lines,FieldSource,source,35,5.0000,0.0000,11.0000,10.4571
+main-body,DUP lines,inline,family,1817,11.0000,4.0000,24.0000,18.1772
+main-body,DUP lines,type,family,828,19.0000,8.0000,37.0000,24.0036
+main-body,DUP lines,file,family,48,6.0000,4.7500,6.0000,5.9167
+main-body,DUP lines,provider,family,5471,11.0000,5.0000,23.0000,17.7576
+helper,DUP lines,ValueSource,source,1456,0.0000,0.0000,8.0000,7.4471
+helper,DUP lines,CsvSource,source,361,0.0000,0.0000,0.0000,5.3047
+helper,DUP lines,EnumSource,source,828,0.0000,0.0000,5.0000,10.2862
+helper,DUP lines,CsvFileSource,source,48,0.0000,0.0000,0.0000,1.1042
+helper,DUP lines,MethodSource,source,5411,10.0000,2.0000,34.0000,35.6245
+helper,DUP lines,ArgumentsSource,source,25,0.0000,0.0000,0.0000,4.3200
+helper,DUP lines,FieldSource,source,35,0.0000,0.0000,3.0000,8.5714
+helper,DUP lines,inline,family,1817,0.0000,0.0000,6.0000,7.0215
+helper,DUP lines,type,family,828,0.0000,0.0000,5.0000,10.2862
+helper,DUP lines,file,family,48,0.0000,0.0000,0.0000,1.1042
+helper,DUP lines,provider,family,5471,9.0000,1.0000,33.0000,35.3084
+total,DUP lines,ValueSource,source,1456,15.0000,7.0000,34.0000,25.4327
+total,DUP lines,CsvSource,source,361,15.0000,3.0000,32.0000,24.2548
+total,DUP lines,EnumSource,source,828,25.0000,11.0000,44.0000,34.2899
+total,DUP lines,CsvFileSource,source,48,6.0000,5.5000,6.2500,7.0208
+total,DUP lines,MethodSource,source,5411,28.0000,12.0000,62.0000,53.4916
+total,DUP lines,ArgumentsSource,source,25,0.0000,0.0000,13.0000,8.6000
+total,DUP lines,FieldSource,source,35,8.0000,1.0000,29.0000,19.0286
+total,DUP lines,inline,family,1817,15.0000,6.0000,34.0000,25.1987
+total,DUP lines,type,family,828,25.0000,11.0000,44.0000,34.2899
+total,DUP lines,file,family,48,6.0000,5.5000,6.2500,7.0208
+total,DUP lines,provider,family,5471,27.0000,12.0000,62.0000,53.0660

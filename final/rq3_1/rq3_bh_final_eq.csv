@@ -1,0 +1,13 @@
+metric_x_layer,median_cliffs_delta,magnitude,n_sig_positive_q,n_sig_negative_q,n_not_sig_q,n_sig_before_BH,n_projects
+LOC (test),+0.1567,small,27,2,17,29,46
+CC (test),+0.1087,negligible,24,2,20,28,46
+CCTR* (test),-0.0141,negligible,9,10,27,22,46
+DUP% (test),-0.1017,negligible,7,24,15,32,46
+LOC (helpers),+0.4866,large,42,0,4,42,46
+CC (helpers),+0.4423,medium,42,1,3,43,46
+CCTR* (helpers),+0.2479,small,33,2,11,37,46
+DUP% (helpers),+0.3110,small,37,2,7,39,46
+LOC (total),+0.5041,large,40,0,6,40,46
+CC (total),+0.4501,medium,42,1,3,43,46
+CCTR* (total),+0.2002,small,28,1,17,29,46
+DUP% (total),-0.2195,small,3,25,18,32,46

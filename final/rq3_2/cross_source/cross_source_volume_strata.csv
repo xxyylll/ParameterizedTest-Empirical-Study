@@ -1,0 +1,61 @@
+scope,metric,stratum,n_sets_range,n_provider,n_inline,cliffs_delta,magnitude,p_raw
+main-body,LOC,Q1,0-2,1541,1026,0.0092,negligible,0.693824
+main-body,LOC,Q2,2-3,719,228,0.0409,negligible,0.351162
+main-body,LOC,Q3,3-7,1073,348,0.1663,small,0.000003
+main-body,LOC,Q4,7-960,1083,215,-0.3937,medium,0.000000
+helper,LOC,Q1,0-2,1541,1026,0.2904,small,0.000000
+helper,LOC,Q2,2-3,719,228,0.3845,medium,0.000000
+helper,LOC,Q3,3-7,1073,348,0.6518,large,0.000000
+helper,LOC,Q4,7-960,1083,215,0.6858,large,0.000000
+total,LOC,Q1,0-2,1541,1026,0.2402,small,0.000000
+total,LOC,Q2,2-3,719,228,0.3144,small,0.000000
+total,LOC,Q3,3-7,1073,348,0.5600,large,0.000000
+total,LOC,Q4,7-960,1083,215,0.4339,medium,0.000000
+main-body,CC,Q1,0-2,1541,1026,-0.0877,negligible,0.000010
+main-body,CC,Q2,2-3,719,228,0.1051,negligible,0.002728
+main-body,CC,Q3,3-7,1073,348,-0.0354,negligible,0.222520
+main-body,CC,Q4,7-960,1083,215,0.0624,negligible,0.077460
+helper,CC,Q1,0-2,1541,1026,0.2720,small,0.000000
+helper,CC,Q2,2-3,719,228,0.3459,medium,0.000000
+helper,CC,Q3,3-7,1073,348,0.6017,large,0.000000
+helper,CC,Q4,7-960,1083,215,0.5382,large,0.000000
+total,CC,Q1,0-2,1541,1026,0.2606,small,0.000000
+total,CC,Q2,2-3,719,228,0.3310,medium,0.000000
+total,CC,Q3,3-7,1073,348,0.5481,large,0.000000
+total,CC,Q4,7-960,1083,215,0.4818,large,0.000000
+main-body,CCTR,Q1,0-2,1541,1026,-0.0279,negligible,0.227654
+main-body,CCTR,Q2,2-3,719,228,0.0039,negligible,0.928054
+main-body,CCTR,Q3,3-7,1073,348,-0.2035,small,0.000000
+main-body,CCTR,Q4,7-960,1083,215,0.0769,negligible,0.069400
+helper,CCTR,Q1,0-2,1541,1026,0.1933,small,0.000000
+helper,CCTR,Q2,2-3,719,228,0.1430,negligible,0.000612
+helper,CCTR,Q3,3-7,1073,348,0.4398,medium,0.000000
+helper,CCTR,Q4,7-960,1083,215,0.3149,small,0.000000
+total,CCTR,Q1,0-2,1541,1026,0.2026,small,0.000000
+total,CCTR,Q2,2-3,719,228,0.1669,small,0.000138
+total,CCTR,Q3,3-7,1073,348,0.3850,medium,0.000000
+total,CCTR,Q4,7-960,1083,215,0.3032,small,0.000000
+main-body,DUP%,Q1,0-2,1541,1026,0.1439,negligible,0.000000
+main-body,DUP%,Q2,2-3,719,228,0.1420,negligible,0.000938
+main-body,DUP%,Q3,3-7,1073,348,0.2090,small,0.000000
+main-body,DUP%,Q4,7-960,1083,215,0.0053,negligible,0.897893
+helper,DUP%,Q1,0-2,1541,1026,0.3874,medium,0.000000
+helper,DUP%,Q2,2-3,719,228,0.3776,medium,0.000000
+helper,DUP%,Q3,3-7,1073,348,0.5534,large,0.000000
+helper,DUP%,Q4,7-960,1083,215,0.6172,large,0.000000
+total,DUP%,Q1,0-2,1541,1026,0.0672,negligible,0.003865
+total,DUP%,Q2,2-3,719,228,0.0538,negligible,0.219798
+total,DUP%,Q3,3-7,1073,348,-0.0629,negligible,0.077096
+total,DUP%,Q4,7-960,1083,215,-0.1496,small,0.000521
+main-body,DUP lines,Q1,0-2,1541,1026,0.0975,negligible,0.000027
+main-body,DUP lines,Q2,2-3,719,228,0.1429,negligible,0.001065
+main-body,DUP lines,Q3,3-7,1073,348,0.2843,small,0.000000
+main-body,DUP lines,Q4,7-960,1083,215,-0.2266,small,0.000000
+helper,DUP lines,Q1,0-2,1541,1026,0.4316,medium,0.000000
+helper,DUP lines,Q2,2-3,719,228,0.3623,medium,0.000000
+helper,DUP lines,Q3,3-7,1073,348,0.5916,large,0.000000
+helper,DUP lines,Q4,7-960,1083,215,0.6366,large,0.000000
+total,DUP lines,Q1,0-2,1541,1026,0.3352,medium,0.000000
+total,DUP lines,Q2,2-3,719,228,0.2704,small,0.000000
+total,DUP lines,Q3,3-7,1073,348,0.5216,large,0.000000
+total,DUP lines,Q4,7-960,1083,215,0.2541,small,0.000000

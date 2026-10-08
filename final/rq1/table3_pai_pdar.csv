@@ -1,0 +1,26 @@
+factor,group,n_pai,pai_median,pai_iqr,n_pdar,pdar_median,pdar_iqr,note
+Size,Small (<625),26,5.76,0.89-8.71,26,16.34,7.80-24.70,
+Size,Medium (625-1805),29,1.08,0.39-5.23,29,14.06,7.14-24.66,
+Size,Large (>=1806),51,2.12,0.73-4.36,51,14.00,8.54-27.86,
+Age,<=2005,35,1.08,0.68-5.72,35,13.89,8.11-21.77,
+Age,2006-2011,38,3.71,0.37-8.03,38,14.41,7.13-27.74,
+Age,2012-2017,27,2.81,0.97-5.09,27,21.28,8.71-31.05,
+Age,>=2018,6,0.68,0.25-8.93,6,15.23,6.68-31.66,excluded from KW (n<=6)
+Domain,Data & Analytics,38,2.54,0.70-5.27,38,12.32,7.48-27.77,
+Domain,Network & Comm.,16,1.53,0.36-4.86,16,15.96,6.36-25.14,
+Domain,Dev. & Tools,48,2.49,0.78-6.89,48,16.34,8.69-26.79,
+Domain,Web & Content,4,0.79,0.63-1.27,4,12.63,8.20-17.73,excluded from KW (n<=6)
+
+factor,metric,scope,KW_H,p,k_groups
+Size,PAI,all groups,4.48,0.107,3
+Size,PDAR,all groups,0.06,0.971,3
+Size,PAI,n>6 only,4.48,0.107,3
+Size,PDAR,n>6 only,0.06,0.971,3
+Age,PAI,all groups,2.33,0.508,4
+Age,PDAR,all groups,1.81,0.613,4
+Age,PAI,n>6 only,2.25,0.324,3
+Age,PDAR,n>6 only,1.89,0.388,3
+Domain,PAI,all groups,2.29,0.515,4
+Domain,PDAR,all groups,0.78,0.855,4
+Domain,PAI,n>6 only,0.45,0.797,3
+Domain,PDAR,n>6 only,0.28,0.867,3

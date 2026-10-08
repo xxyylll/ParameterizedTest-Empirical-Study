@@ -1,0 +1,14 @@
+dimension,group,n,median_helper_count,median_single_use_helpers,amortization_cctr_median,amortization_cctr_mean,private_cctr_share_median,private_cctr_share_mean,n_with_defined_ratio
+construction,Literal,2015,4.00,0.00,20.00,110.29,0.0000,0.0681,1290
+construction,Dynamic,3373,5.00,0.00,34.00,209.17,0.0000,0.0924,2680
+dependency,L0,3383,3.00,0.00,18.00,106.15,0.0000,0.0920,2261
+dependency,L1,353,6.00,0.00,11.00,62.02,0.0000,0.1574,283
+dependency,L2,480,25.50,0.00,267.88,761.11,0.0000,0.0373,434
+dependency,L3,502,11.00,0.00,25.81,63.18,0.0000,0.0849,445
+dependency,L4,670,11.00,0.00,125.56,158.79,0.0000,0.0532,547
+family,inline,1178,5.00,0.00,31.00,163.32,0.0000,0.0629,1005
+family,type,629,3.00,0.00,21.00,79.74,0.0000,0.0645,506
+family,file,46,2.50,0.00,21.67,87.84,0.0000,0.0000,35
+family,provider,5415,5.00,0.00,24.62,175.52,0.0000,0.0843,3990
+category,nonpt,100088,3.00,0.00,37.50,341.95,0.0000,0.0453,77469
+category,pt,7345,4.00,0.00,23.97,163.17,0.0000,0.0779,5606

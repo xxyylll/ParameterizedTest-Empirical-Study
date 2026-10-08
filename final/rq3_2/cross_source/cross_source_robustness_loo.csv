@@ -1,0 +1,13 @@
+comparison,scope,metric,delta_full,delta_min_loo,delta_max_loo,min_when_dropping,max_when_dropping,sign_stable
+provider vs inline,main-body,LOC,-0.1153,-0.1723,-0.0818,hadoop,flink,yes
+provider vs inline,helper,LOC,0.3876,0.3379,0.4781,hadoop,hudi,yes
+provider vs inline,total,LOC,0.2877,0.2217,0.3688,hadoop,hudi,yes
+provider vs inline,main-body,CC,-0.0451,-0.0669,-0.0075,hadoop,hudi,yes
+provider vs inline,helper,CC,0.3466,0.2933,0.4365,hadoop,hudi,yes
+provider vs inline,total,CC,0.3223,0.2650,0.4131,hadoop,hudi,yes
+provider vs inline,main-body,CCTR,-0.1006,-0.1317,-0.0586,hadoop,druid,yes
+provider vs inline,helper,CCTR,0.2297,0.1577,0.2911,hadoop,hudi,yes
+provider vs inline,total,CCTR,0.1970,0.1194,0.2580,hadoop,hudi,yes
+provider vs inline,main-body,DUP%,0.1154,0.0943,0.1359,commons-numbers,james-project,yes
+provider vs inline,helper,DUP%,0.4642,0.4247,0.5021,commons-numbers,zookeeper,yes
+provider vs inline,total,DUP%,0.0096,-0.0364,0.0379,hudi,druid,no
