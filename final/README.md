@@ -92,6 +92,7 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 
 | `pdar_layer_attribution.py` | 三层各自的独有贡献；纯粹从已有逐提交表算，不碰 git |
 | `pdar_context_sensitivity.py` | diff 上下文行数的敏感性；复用已发表表作 U3 基线，只重算大上下文 |
 | `pdar_context_sensitivity.csv` | 上述实测结果（10 个项目，U3 vs U25） |
+| `superseded_v2/` | **被取代的 v2 方法**，按方法身份与行区间追踪 PT 生命周期。**不是论文口径**，仅作方法学记录 |
 | `pt_projects_ssk.txt` | 项目清单（117 个；最终结果 115 个，少的两个是设计上排除的 `Commons-HttpClient` / `Lucene-Core`） |
 
 **三层检测**（逐提交判 `modifiedPT`）：
@@ -233,6 +234,19 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 
 > 随机抽样很可能一个正例都没有，此时全空 diff 也会「0 不一致」地**假通过**）；
 > 更大上下文的 diff 是更小上下文的超集，故 `touched_test` 与 L1 命中数的
 > **单调性**被当作硬断言；以及统计非 merge 提交却取不到 diff 的个数（应为 0）。
+
+> **曾经设计过一套不依赖 hunk 邻近性的方法（v2），但未被采用。**
+> 它解析 hunk 头取注解的**行号**，据行号定位所属方法，再与 parser 输出的
+> `startLine`/`endLine` join 得到方法的真实行区间，按 `(文件, 方法名)` 追踪每个 PT
+> 的生命周期（`[新增提交, 删除提交或 HEAD]`），JUnit5 的重命名用 RefactoringMiner
+> 识别。取 diff 用 `-U0`，因此**完全不受上下文行数影响** —— 上面那条局限在设计上
+> 就不存在。
+>
+> 它没被采用，也**没有留下任何结果**（`developer/result/` 不存在；归档的 2026-02
+> 那一轮用的仍是 v3 的三层 schema），所以 v2 与 v3 无法做实证对照。可推断的取舍：
+> 它需要对每个候选提交启动一次 RefactoringMiner（JVM 进程，数秒到数十秒），
+> 在 117 个项目、上百万提交的规模上不可行。代码与详细对比见
+> [`rq1/pdar/superseded_v2/`](rq1/pdar/superseded_v2/)。
 
 > **两个与上下文无关、但影响口径的实现细节。**
 > 1. **merge 提交被跳过。** `git diff-tree -p` 对 merge 提交默认不输出，

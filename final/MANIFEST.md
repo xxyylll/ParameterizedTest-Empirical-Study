@@ -163,6 +163,7 @@ JUnit5 内部：MethodSource 63.0%｜ValueSource 18.6%｜EnumSource 9.9%｜CsvSo
 |---|---|
 | `METHOD_complete.md` | 完整 Method + Threats（11 条） |
 | `project_name_map.json` | ssk 目录名 ↔ RQ1 显示名。跨数据源 join 必须用它，否则会静默漏匹配 |
+| `rq1/pdar/superseded_v2/` | PDAR 的 v2 方法（行号→方法身份→生命周期追踪，`-U0`）。**设计并实现过但未采用，无结果产物**，仅作方法学记录。代码逐字保留、未做可移植化 |
 | `requirements.txt` | **pandas 必须 <3.0**：pandas 3.0 移除了 statsmodels 0.14.x 依赖的内部 API，装上后 `category_logit.py` 在 import 阶段即崩 |
 | `requirements-recompute.txt` | 只有重算 RQ3.1 指标才需要（tree-sitter） |
 
