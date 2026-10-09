@@ -1,0 +1,5 @@
+project,context,n_commits_compared,n_merge_commits,pt_participants,core_developers,test_developers,pdar,core_pdar,layer1_commits,commits_gained_vs_U3,commits_lost_vs_U3,empty_diffs_nonmerge
+Fineract,3,10064,1628,25,20,213,11.74,9.39,52,0,0,0
+Fineract,25,10064,1628,31,20,217,14.29,9.22,75,23,0,27
+Druid,3,15965,2070,188,74,416,45.19,17.79,79,0,0,0
+Druid,25,15965,2070,188,74,416,45.19,17.79,116,23,0,17

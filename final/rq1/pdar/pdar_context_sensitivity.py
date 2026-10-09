@@ -82,11 +82,37 @@ BASELINE = 3
 L23 = {'junit4_file', 'pickaxe'}        # 与上下文无关的两层
 
 
+def _rev(repo, *args):
+    return subprocess.run(['git', '-C', repo, *args],
+                          capture_output=True, text=True).stdout.split()
+
+
 def merge_commits(repo):
     """一次 rev-list 取出所有 merge 提交（父提交 >1 个）。"""
     out = subprocess.run(['git', '-C', repo, 'rev-list', '--all', '--parents'],
                          capture_output=True, text=True).stdout
     return {p[0] for p in (l.split() for l in out.splitlines()) if len(p) > 2}
+
+
+def expected_empty(repo):
+    """`diff-tree -p` 本就不会有输出的提交，与 -U 无关，不应算作异常。
+
+    两类（实测 Fineract 共 27 个，占非 merge 提交的 0.3%）：
+      - **root 提交**：没有父提交，`diff-tree` 不加 `--root` 就没有输出（2 个）。
+      - **git 自己认为没改动文件的提交**：只改文件权限、空提交之类（25 个）。
+
+    这两类在论文那一轮里同样取不到 diff，所以基线把它们标成
+    `touched_test=0, modifiedPT=0, detection_layer=''`（实测 25/25 全是）。
+    各上下文对它们的处理一致，不构成污染 —— 真正需要告警的是**此外**的空 diff，
+    那才意味着仓库损坏或 git 调用失败。
+    """
+    out = subprocess.run(['git', '-C', repo, 'rev-list', '--all', '--parents'],
+                         capture_output=True, text=True).stdout
+    roots = {p[0] for p in (l.split() for l in out.splitlines()) if len(p) == 1}
+    nonmerge = set(_rev(repo, 'rev-list', '--all', '--no-merges'))
+    changed = set(_rev(repo, 'log', '--all', '--no-merges', '--format=%H',
+                       '--diff-filter=ACDMRTUXB'))
+    return roots | (nonmerge - changed)
 
 
 def selfcheck(repo, rows, merges, n):
@@ -125,9 +151,11 @@ def analyse(project, repo, baseline_csv, contexts, n_selfcheck=0):
     local = set(subprocess.run(['git', '-C', repo, 'rev-list', '--all'],
                                capture_output=True, text=True).stdout.split())
     merges = merge_commits(repo)
+    exp_empty_pre = expected_empty(repo)
     rows = [r for r in rows if r['commit_hash'] in local]      # 只取交集
     n_merge = sum(1 for r in rows if r['commit_hash'] in merges)
-    print(f'  交集 {len(rows)} 个提交（merge {n_merge} 个，diff 恒为空）', flush=True)
+    print(f'  交集 {len(rows)} 个提交（merge {n_merge} 个，diff 恒为空；'
+          f'另有 {len(exp_empty_pre)} 个 root/无改动提交同样恒为空）', flush=True)
 
     if n_selfcheck:
         mp, mn, npos = selfcheck(repo, rows, merges, n_selfcheck)
@@ -136,7 +164,8 @@ def analyse(project, repo, baseline_csv, contexts, n_selfcheck=0):
                   f'正例数 {npos}）—— ΔPDAR 不可用', file=sys.stderr)
 
     extra = [c for c in contexts if c != BASELINE]
-    empty_diffs = {c: 0 for c in extra}      # 非 merge 提交却取不到 diff —— 异常信号
+    exp_empty = exp_empty_pre                # 本就无输出的提交，不算异常
+    empty_diffs = {c: 0 for c in extra}      # 此外的空 diff —— 真正的异常信号
     sets = {c: {'test': set(), 'pt': set(), 'core': set()} for c in contexts}
     flips = {c: {'gained': 0, 'lost': 0} for c in extra}
     l1_hits = {c: 0 for c in contexts}
@@ -177,7 +206,7 @@ def analyse(project, repo, baseline_csv, contexts, n_selfcheck=0):
 
         for c in extra:
             diff = get_commit_diff(repo, h, c)
-            if not diff:
+            if not diff and h not in exp_empty:
                 empty_diffs[c] += 1
             l1 = check_junit5_in_diff(diff)
             if l1:

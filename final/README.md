@@ -91,6 +91,7 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 
 | `pdar_repo_map.csv` | **仓库名的唯一来源**（117 项目 → git URL） |
 | `pdar_layer_attribution.py` | 三层各自的独有贡献；纯粹从已有逐提交表算，不碰 git |
 | `pdar_context_sensitivity.py` | diff 上下文行数的敏感性；复用已发表表作 U3 基线，只重算大上下文 |
+| `pdar_context_sensitivity.csv` | 上述实测结果（Fineract + Druid，U3 vs U25） |
 | `pt_projects_ssk.txt` | 项目清单（117 个；最终结果 115 个，少的两个是设计上排除的 `Commons-HttpClient` / `Lucene-Core`） |
 
 **三层检测**（逐提交判 `modifiedPT`）：
@@ -126,6 +127,26 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 
 > 受影响最大的都是 **JUnit5-only** 项目（Hudi +36.55、Commons-Statistics
 > +35.71、Commons-Numbers +33.33）—— 因为 Layer 2 只认 JUnit 4，兜不住它们。
 > 注意 Layer 1 只命中全部提交的 0.32%（5,561 / 174 万），命中率低但杠杆大。
+>
+> **实测结果**（`pdar_context_sensitivity.py`，Fineract + Druid，U3 vs U25）：
+>
+> | | L1 命中提交 | PDAR | ΔPDAR |
+> |---|---|---|---|
+> | Fineract U3 / U25 | 52 → **75**（+44%） | 11.74% → 14.29% | **+2.55pp** |
+> | Druid U3 / U25 | 79 → **116**（+47%） | 45.19% → 45.19% | **+0.00pp** |
+>
+> **提交层面漏检很严重，但 PDAR 几乎不动。** 把上下文从 3 行放到 25 行，
+> Layer 1 多认出三到五成的提交 —— 说明默认口径确实漏掉了相当一部分「PT 方法内部
+> 但离注解较远」的改动。可是 PDAR 数的是**开发者**且按 email 去重：Druid 多认出
+> 23 个提交却**一个新开发者都没有**（作者本就已被计入）；Fineract 多认出 23 个提交
+> → 多 6 个开发者（25→31），同时分母也从 213 涨到 217（上下文变大后
+> `check_touched_test` 多看到 `@Test`），两头部分抵消。
+>
+> 限定：**n=2**，且两个项目 PT 活动都不少，PT 提交稀少的项目可能摆动更大
+> （Fineract +2.55 vs Druid +0.00 已显示方差）。Druid 的 U3 值 45.19% 低于
+> 已发表的 46.85%，因为限定在交集上（15,965 / 18,324 个提交）。
+> 空 diff 告警方向是保守的：取不到 diff 则 Layer 1 无法命中，只会低估 U25，
+> 故测出的 ΔPDAR 是**下界**。
 >
 > `--context N` 即为此而设：结果写到 `result_U{N}/`，与论文口径的 `result/` 并存：
 > ```bash
