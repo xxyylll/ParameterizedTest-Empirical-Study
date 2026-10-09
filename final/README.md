@@ -174,6 +174,28 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 
 > `junit4_file` / `pickaxe` / 空 各若干），人工判断每个提交是否真的改动了参数化测试：
 > 前三层给出各自的 precision，空值层给出 recall（即上下文局限的直接度量）。
 
+> **在外置 exFAT 盘上跑 PDAR 的两个坑**（实测踩过，会导致**静默错误**）。
+> macOS 在 exFAT 上用 AppleDouble 文件存资源叉，于是仓库里会出现几千个 `._*`
+> 文件（实测单个 fineract 的 `.git` 下有 4,844 个）。git 对每个 `._pack-*.idx`
+> 都报 `non-monotonic index`，但那只是 stderr 上的抱怨，它会忽略伪 idx 继续工作 ——
+> 所以**源仓库可用**。真正出事的是复制它：
+> 1. `git clone --bare`（本地文件拷贝）会被伪 idx 误导，产出**缺对象**的仓库，
+>    之后每次 `diff-tree` 都 `fatal: unable to read <object>` 返回 rc=128；
+>    `git clone --bare --no-local`（走传输协议）则直接 `early EOF` 失败。
+>    可行的做法是 `rsync -a --exclude='._*' <src>/.git/ <dst>.git/`，
+>    之后**必须跑 `git fsck --connectivity-only` 确认 0 问题**再用。
+> 2. 吞吐差别很大：`diff-tree` 在本地盘 **22.1 次/秒**，在外置 exFAT 盘只有
+>    **2.4 次/秒**（实测，约 9.2 倍）。大批量重跑应先把仓库复制到本地盘。
+>
+> 为什么要在 README 里写这个：取 diff 失败时 `get_commit_diff` 返回**空串**，
+> 调用方无法与「这个提交真的没改动」区分，于是整轮分析会给出看似合理但完全错误的
+> 数字（实测得到 Druid 在 -U25 下 `test_developers = 0`、PDAR 0.00）。
+> `pdar_context_sensitivity.py` 因此加了三道防线：自校验**强制纳入正例**
+> （`junit5_hunk` 在提交里极稀疏 —— Fineract 10,064 个提交里仅 52 个，
+> 随机抽样很可能一个正例都没有，此时全空 diff 也会「0 不一致」地**假通过**）；
+> 更大上下文的 diff 是更小上下文的超集，故 `touched_test` 与 L1 命中数的
+> **单调性**被当作硬断言；以及统计非 merge 提交却取不到 diff 的个数（应为 0）。
+
 > **两个与上下文无关、但影响口径的实现细节。**
 > 1. **merge 提交被跳过。** `git diff-tree -p` 对 merge 提交默认不输出，
 >    所以合并提交在逐提交检测里既不进分子也不进分母（实测 Fineract 前 213 个

@@ -90,16 +90,34 @@ def merge_commits(repo):
 
 
 def selfcheck(repo, rows, merges, n):
-    """抽 n 个非 merge 提交，验证本机重算的 U3 Layer 1 与已发表标签一致。"""
-    sel = [r for r in rows if r['commit_hash'] not in merges][:n]
-    mism = 0
-    for r in sel:
-        diff = get_commit_diff(repo, r['commit_hash'], BASELINE)
-        if check_junit5_in_diff(diff) != (r.get('detection_layer') == 'junit5_hunk'):
-            mism += 1
-    print(f'  自校验：{len(sel)} 个非 merge 提交，U3 下 Layer 1 与已发表标签不一致 {mism}',
-          flush=True)
-    return mism
+    """验证本机重算的 U3 Layer 1 与已发表标签一致。
+
+    **必须按正负例分别验。** 早先的版本只抽前 n 个提交数不一致个数 —— 这会**假通过**：
+    `junit5_hunk` 在提交里极其稀疏（Fineract 10,064 个提交里只有 52 个），
+    随机 300 个样本很可能一个正例都没有，此时即便所有 diff 都返回空
+    （例如仓库对象损坏、git 报 rc=128），`check_junit5_in_diff('')` 一律为 False，
+    与「绝大多数提交不是 junit5_hunk」完全吻合，不一致数就是 0。
+    这正是一次真实踩过的坑：从 exFAT 外置盘做本地 clone 时，`._pack-*.idx`
+    这类 AppleDouble 文件让 git 误用了错误的 pack 索引，产出缺对象的仓库，
+    所有 diff 都 fatal，而旧自校验照样报 0。
+
+    所以这里强制纳入正例，并分开报告；正例数为 0 直接视为无法验证。
+    返回 (正例不一致数, 负例不一致数, 正例总数)。
+    """
+    nonmerge = [r for r in rows if r['commit_hash'] not in merges]
+    pos = [r for r in nonmerge if r.get('detection_layer') == 'junit5_hunk']
+    neg = [r for r in nonmerge if r.get('detection_layer') != 'junit5_hunk']
+    pos, neg = pos[:max(1, n // 2)], neg[:n - min(len(pos), max(1, n // 2))]
+
+    mism_pos = sum(1 for r in pos
+                   if not check_junit5_in_diff(get_commit_diff(repo, r['commit_hash'], BASELINE)))
+    mism_neg = sum(1 for r in neg
+                   if check_junit5_in_diff(get_commit_diff(repo, r['commit_hash'], BASELINE)))
+    print(f'  自校验（U3 复现已发表标签）：'
+          f'正例 {len(pos)} 个，未复现 {mism_pos}；负例 {len(neg)} 个，误报 {mism_neg}', flush=True)
+    if not pos:
+        print('  ⚠️  样本里没有 junit5_hunk 正例 —— 无法验证，结果不可用', file=sys.stderr)
+    return mism_pos, mism_neg, len(pos)
 
 
 def analyse(project, repo, baseline_csv, contexts, n_selfcheck=0):
@@ -112,11 +130,13 @@ def analyse(project, repo, baseline_csv, contexts, n_selfcheck=0):
     print(f'  交集 {len(rows)} 个提交（merge {n_merge} 个，diff 恒为空）', flush=True)
 
     if n_selfcheck:
-        if selfcheck(repo, rows, merges, n_selfcheck):
-            print('  ⚠️  自校验不为 0：本机克隆与已发表那轮不同源，ΔPDAR 不可用',
-                  file=sys.stderr)
+        mp, mn, npos = selfcheck(repo, rows, merges, n_selfcheck)
+        if npos == 0 or mp or mn:
+            print(f'  ⚠️  {project} 自校验未通过（正例未复现 {mp}，负例误报 {mn}，'
+                  f'正例数 {npos}）—— ΔPDAR 不可用', file=sys.stderr)
 
     extra = [c for c in contexts if c != BASELINE]
+    empty_diffs = {c: 0 for c in extra}      # 非 merge 提交却取不到 diff —— 异常信号
     sets = {c: {'test': set(), 'pt': set(), 'core': set()} for c in contexts}
     flips = {c: {'gained': 0, 'lost': 0} for c in extra}
     l1_hits = {c: 0 for c in contexts}
@@ -157,6 +177,8 @@ def analyse(project, repo, baseline_csv, contexts, n_selfcheck=0):
 
         for c in extra:
             diff = get_commit_diff(repo, h, c)
+            if not diff:
+                empty_diffs[c] += 1
             l1 = check_junit5_in_diff(diff)
             if l1:
                 l1_hits[c] += 1
@@ -172,6 +194,17 @@ def analyse(project, repo, baseline_csv, contexts, n_selfcheck=0):
             elif base_pt and not pt:
                 flips[c]['lost'] += 1
 
+    # 不变量：更大的上下文给出的 diff 是更小上下文的**超集**，所以
+    # touched_test 与 Layer 1 命中都只能单调不减。违反它必定是取 diff 本身出了问题
+    # （仓库损坏、git 超时、rc != 0 被静默吞成空串），而不是真实的敏感性效应。
+    for c in extra:
+        if len(sets[c]['test']) < len(sets[BASELINE]['test']) or l1_hits[c] < l1_hits[BASELINE]:
+            print(f'  ⚠️  单调性被违反：-U{c} 的 touched_test 开发者 '
+                  f'{len(sets[c]["test"])} < U{BASELINE} 的 {len(sets[BASELINE]["test"])}，'
+                  f'或 L1 命中 {l1_hits[c]} < {l1_hits[BASELINE]}。'
+                  f'几乎可以肯定是 diff 取不到（仓库损坏/超时），结果不可用。',
+                  file=sys.stderr)
+
     out = []
     for c in contexts:
         s = sets[c]
@@ -186,7 +219,12 @@ def analyse(project, repo, baseline_csv, contexts, n_selfcheck=0):
             'layer1_commits': l1_hits[c],
             'commits_gained_vs_U3': flips.get(c, {}).get('gained', 0),
             'commits_lost_vs_U3': flips.get(c, {}).get('lost', 0),
+            'empty_diffs_nonmerge': empty_diffs.get(c, 0),
         })
+    for c in extra:
+        if empty_diffs[c]:
+            print(f'  ⚠️  -U{c}：{empty_diffs[c]} 个非 merge 提交取不到 diff '
+                  f'（应为 0）—— 检查仓库完整性与超时', file=sys.stderr)
     return out
 
 
