@@ -309,6 +309,25 @@ def load_repo_mapping() -> Dict[str, Dict[str, str]]:
     return mapping
 
 
+def is_git_dir(path: str) -> bool:
+    """既接受普通克隆（有 .git 子目录），也接受 bare 克隆（目录本身就是 git 目录）。
+
+    PDAR 全程只用 `git log` / `diff-tree` / `show`，**不需要工作树**，所以 bare
+    克隆完全够用，而且省掉检出的时间与磁盘 —— 大仓库上差别很明显。
+    """
+    return (os.path.isdir(os.path.join(path, '.git'))
+            or (os.path.isdir(os.path.join(path, 'objects'))
+                and os.path.exists(os.path.join(path, 'HEAD'))))
+
+
+def shallow_marker(path: str) -> str:
+    """浅克隆标记的位置，普通克隆在 .git/ 下，bare 克隆在仓库根。"""
+    for cand in (os.path.join(path, '.git', 'shallow'), os.path.join(path, 'shallow')):
+        if os.path.exists(cand):
+            return cand
+    return ''
+
+
 def resolve_repo(project_name: str, explicit: Optional[str] = None) -> str:
     """定位该项目的**全量**克隆。
 
@@ -323,13 +342,15 @@ def resolve_repo(project_name: str, explicit: Optional[str] = None) -> str:
         entry = load_repo_mapping().get(project_name)
         repo_name = entry['repo'] if entry else project_name.lower()
         candidates = [os.path.join(PDAR_WORK, project_name),
+                      os.path.join(PDAR_WORK, project_name + '.git'),
                       os.path.join(PDAR_WORK, repo_name),
+                      os.path.join(PDAR_WORK, repo_name + '.git'),
                       os.path.join(APACHE_PROJECTS, repo_name)]
 
     for path in candidates:
-        if os.path.isdir(os.path.join(path, '.git')):
-            if os.path.exists(os.path.join(path, '.git', 'shallow')):
-                print(f"Error: {path} 是浅克隆（存在 .git/shallow）。")
+        if is_git_dir(path):
+            if shallow_marker(path):
+                print(f"Error: {path} 是浅克隆（存在 shallow 标记）。")
                 print("  PDAR 需要全量历史。请用 batch_pdar.sh，它会 clone 全量、分析、再删除。")
                 sys.exit(2)
             return path

@@ -89,6 +89,8 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 
 | `calculate_pdar.py` | 把提交表汇总成项目级 PDAR |
 | `batch_pdar.sh` | 整张清单：clone 全量 → 分析 → **立刻删除** |
 | `pdar_repo_map.csv` | **仓库名的唯一来源**（117 项目 → git URL） |
+| `pdar_layer_attribution.py` | 三层各自的独有贡献；纯粹从已有逐提交表算，不碰 git |
+| `pdar_context_sensitivity.py` | diff 上下文行数的敏感性；复用已发表表作 U3 基线，只重算大上下文 |
 | `pt_projects_ssk.txt` | 项目清单（117 个；最终结果 115 个，少的两个是设计上排除的 `Commons-HttpClient` / `Lucene-Core`） |
 
 **三层检测**（逐提交判 `modifiedPT`）：
@@ -118,11 +120,70 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 
 > 扫描可能越过 PT 方法末尾进入下一个无注解的方法 —— 这会引入**假阳性**。
 > 因此 PDAR 是升是降需要实测，不能先验断定。
 >
+> **Layer 1 是承重的**，所以这个局限不能先验当成无关。在全语料（106 个采纳者）
+> 的逐提交表上把 Layer 1 整个拿掉：PDAR 中位数从 **14.52% 掉到 10.56%**
+> （−3.96pp），逐项目差值中位 2.88pp、最大 36.55pp，30/106 个项目为 0。
+> 受影响最大的都是 **JUnit5-only** 项目（Hudi +36.55、Commons-Statistics
+> +35.71、Commons-Numbers +33.33）—— 因为 Layer 2 只认 JUnit 4，兜不住它们。
+> 注意 Layer 1 只命中全部提交的 0.32%（5,561 / 174 万），命中率低但杠杆大。
+>
 > `--context N` 即为此而设：结果写到 `result_U{N}/`，与论文口径的 `result/` 并存：
 > ```bash
 > ./batch_pdar.sh --context 25 --projects sens_sample.txt
 > python3 calculate_pdar.py --context 25
 > ```
+> 若只想量化上下文这一个变量，用 `pdar_context_sensitivity.py` 更省：
+> 上下文只影响 Layer 1，而 Layer 2/3 的判定已存在于已发表逐提交表的
+> `detection_layer` 列，可直接复用作基线、只重算 Layer 1，省掉全部
+> `git show` 与 pickaxe。
+
+> **各层的独有贡献**（`pdar_layer_attribution.py`，106 个采纳者的精确值，无需重跑 git）。
+> 「拿掉某层」= 该层**首次命中**的提交不再计入分子，分母不变：
+>
+> | 拿掉 | PDAR 中位 | Δ中位 | 逐项目Δ中位 | 最大Δ | Δ=0 的项目 |
+> |---|---|---|---|---|---|
+> | — | 14.52% | — | | | |
+> | `junit4_file` (L2) | 6.17% | **−8.35** | 6.42 | 49.50 | 25/106 |
+> | `junit5_hunk` (L1) | 10.56% | **−3.96** | 2.88 | 36.55 | 30/106 |
+> | `pickaxe` (L3) | 13.95% | **−0.57** | 0.00 | 30.00 | **73/106** |
+>
+> 命中率与杠杆完全不成比例：L1 只命中全部提交的 0.32%、L2 占 1.28%、L3 占 0.06%，
+> 但 L2 承了 8 个百分点。L3 对 PDAR 几乎无影响（73/106 个项目完全不变），
+> 它实际只对 `core_pdar` 关键 —— 所以上面那条 pickaxe 超时警告主要毁的是
+> `core_pdar`，不是 PDAR。
+
+> **最大的方法学隐患是粒度不对称，而它无法与真实现象干净分离。**
+>
+> | | 判定粒度 |
+> |---|---|
+> | Layer 1（JUnit 5） | **hunk 级** —— 必须在 `@ParameterizedTest` 附近几行内有 `+`/`-` |
+> | Layer 2（JUnit 4） | **文件级** —— 文件含 `@RunWith(Parameterized` 即可，改该文件任何一处都算 |
+>
+> 而 L2 恰恰比 L1 更承重。后果可以测：有 JUnit4 PT 的项目（n=84）PDAR 中位
+> 17.03%，只有 JUnit5 PT 的（n=20）只有 6.40%，Mann-Whitney **p=0.0010**、
+> Cliff's δ=**+0.474**；OLS 控制 `files_java`、`total_tests`、提交数、测试开发者数后，
+> `has_junit4_pt` 的系数稳定在 **+7.8 ~ +8.3pp**（p≈0.011）。
+>
+> **但这不能直接算作误差。** JUnit 4 的 `@RunWith(Parameterized.class)` 参数化的是
+> **整个类**，所以「碰过这个类的人确实碰过参数化测试代码」在语义上成立；而 JUnit 5 的
+> `@ParameterizedTest` 是**方法级**的，本就需要方法级精度。检测粒度的不对称恰好映射了
+> 两个框架本身的不对称，两者纠缠，现有数据分不开。
+>
+> **要给出真正的 precision / recall，只能人工标注。** 没有 ground truth 时，任何
+> 「误差率」都是无依据的。可行做法是按 `detection_layer` 分层抽样（`junit5_hunk` /
+> `junit4_file` / `pickaxe` / 空 各若干），人工判断每个提交是否真的改动了参数化测试：
+> 前三层给出各自的 precision，空值层给出 recall（即上下文局限的直接度量）。
+
+> **两个与上下文无关、但影响口径的实现细节。**
+> 1. **merge 提交被跳过。** `git diff-tree -p` 对 merge 提交默认不输出，
+>    所以合并提交在逐提交检测里既不进分子也不进分母（实测 Fineract 前 213 个
+>    提交中 89 个 diff 为空）。这本身说得过去 —— 合并不产生新的改动 ——
+>    但 PDAR 的「提交」实际指**非合并提交**。
+> 2. **pickaxe 在大仓库上会超时。** `git log --all -G` 要对每个提交做 diff，
+>    实测 Fineract（约 1 万提交）两个 pattern 各 600s 全部 Timeout。超时时
+>    脚本只打印 warning 并以**空集**继续，于是 Layer 3 静默失效、`is_core`
+>    全为 0。重跑大仓库时必须检查这条 warning，否则会得到偏低的
+>    PDAR 与全 0 的 core_pdar。
 
 > **`pdar_repo_map.csv` 是仓库名的唯一来源。** 此前有两套互相冲突的来源：
 > `projects.txt` 的解析用了 `url.rstrip('.git')` —— 这是 bug，`rstrip` 剥的是

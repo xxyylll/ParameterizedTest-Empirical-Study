@@ -78,12 +78,14 @@ for ((i = 0; i < TOTAL; i++)); do
         ((failed++)); continue
     fi
 
-    project_dir="$WORK_DIR/$project"
+    project_dir="$WORK_DIR/$project.git"
     echo "[$((i+1))/$TOTAL] $project"
-    echo "  clone  $git_url"
+    echo "  clone  $git_url  (--bare)"
     rm -rf "$project_dir"
 
-    if ! git clone --quiet "$git_url" "$project_dir" 2>/dev/null || [[ ! -d "$project_dir/.git" ]]; then
+    # --bare：PDAR 全程只用 git log / diff-tree / show，不需要工作树。
+    # 省掉检出可观地缩短 clone 时间、也少占一半磁盘 —— 大仓库上差别很明显。
+    if ! git clone --quiet --bare "$git_url" "$project_dir" 2>/dev/null || [[ ! -d "$project_dir/objects" ]]; then
         echo "  ✗ clone 失败"
         rm -rf "$project_dir"; ((failed++)); continue
     fi
