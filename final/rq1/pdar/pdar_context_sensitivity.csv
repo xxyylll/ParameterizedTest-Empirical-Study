@@ -1,5 +1,11 @@
-project,context,n_commits_compared,n_merge_commits,pt_participants,core_developers,test_developers,pdar,core_pdar,layer1_commits,commits_gained_vs_U3,commits_lost_vs_U3,empty_diffs_nonmerge
-Fineract,3,10064,1628,25,20,213,11.74,9.39,52,0,0,0
-Fineract,25,10064,1628,31,20,217,14.29,9.22,75,23,0,27
-Druid,3,15965,2070,188,74,416,45.19,17.79,79,0,0,0
-Druid,25,15965,2070,188,74,416,45.19,17.79,116,23,0,17
+project,drop_without_layer1,layer1_commits_U3,layer1_commits_U25,pdar_U3,pdar_U25,delta_pdar,test_developers_U3,test_developers_U25,commits_gained,commits_lost
+Commons-Imaging,26.67,40,67,46.67,53.33,6.66,45,45,27,0
+Commons-IO,16.19,156,209,20.95,26.67,5.72,105,105,53,0
+Commons-Numbers,33.33,50,60,47.62,52.38,4.76,21,21,10,0
+Rat,17.39,87,142,21.74,26.09,4.35,23,23,55,0
+Fineract,11.74,52,75,11.74,14.29,2.55,213,217,23,0
+Commons-Statistics,35.71,110,156,35.71,35.71,0.0,14,14,46,0
+Commons-Digester,15.0,3,3,25.0,25.0,0.0,20,20,0,0
+Commons-Codec,13.16,43,53,36.84,36.84,0.0,38,38,10,0
+OpenNLP,12.5,40,50,14.06,14.06,0.0,64,64,10,0
+Druid,0.47,79,116,45.19,45.19,0.0,416,416,23,0
