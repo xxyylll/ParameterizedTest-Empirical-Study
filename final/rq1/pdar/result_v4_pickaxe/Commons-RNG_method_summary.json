@@ -1,0 +1,42 @@
+{
+  "project": "Commons-RNG",
+  "table_commits": 2128,
+  "found_in_repo": 2128,
+  "missing_in_repo": 0,
+  "found_ratio": 1.0,
+  "judged": 986,
+  "stream_commits": 1074,
+  "published_hit_not_in_stream": 0,
+  "published_hit_not_in_stream_sample": [],
+  "blobs_read": 226,
+  "blobs_with_pt": 202,
+  "parse_error_blobs": 0,
+  "xrefs": 47,
+  "commits_l1m_pt": 60,
+  "commits_l1m_prov": 67,
+  "commits_parse_err": 0,
+  "commits_core_diff": 46,
+  "commits_pclass": 0,
+  "old_l1_hits": 49,
+  "attribution": {},
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 1.5
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 1.6
+    }
+  ],
+  "pickaxe_commits": 47,
+  "pickaxe_not_judged": 1,
+  "core_pickaxe_disagree": 0,
+  "seconds": 3.1
+}

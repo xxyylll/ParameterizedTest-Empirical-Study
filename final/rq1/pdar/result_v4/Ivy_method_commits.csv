@@ -1,0 +1,5 @@
+commit_hash,l1m_pt,l1m_prov,l2,parse_err,core_diff,pickaxe_new,pclass,attr,fullscan_mismatch
+d80acb29c04a8e92a3ddbc539b0be8a521098870,0,0,1,0,1,,0,,
+12aeeec70feae05a87a5adfe7b9c2c63744be37f,0,0,1,0,0,,0,,
+0d07c9985cfaa96172a154f4eeea2f2c348f8c3f,0,0,0,0,0,,0,,
+d7036d97bef720db534b1a132fbffed0851f622e,0,0,1,0,0,,0,,

@@ -24,3 +24,9 @@ venv/
 # 脚本运行日志（每次跑都会新生成，不入库）
 final/*/logs/
 logs/
+
+# PDAR v4 第一阶段的逐提交表（189 MB，外部数据，见 final/rq1/pdar/PDAR_METHOD.md）
+/result_v3/
+/result_v3.zip
+# 批处理日志
+final/rq1/pdar/result_v4*/logs/

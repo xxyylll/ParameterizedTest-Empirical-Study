@@ -1,0 +1,9 @@
+commit_hash,l1m_pt,l1m_prov,l2,parse_err,core_diff,pickaxe_new,pclass,attr,fullscan_mismatch
+0842c27fa72d0da5de0c5723a66d402fe20903df,0,0,,0,1,1,0,,
+ab1ea4a2006f6bd6a2b5f72740b7135662f8f160,0,0,,0,1,1,0,,
+d0432fc09b50d6545f1e0024f8f9aa5fdc63de31,0,0,,0,0,1,0,,
+aeef99d3cf72ec1f7a65d0bd68d0837d0041995d,1,1,0,0,1,1,0,,
+f15073b8f7b6bc38af0575f6442885c945b319ab,1,1,,0,0,0,0,,
+27fc6a374836949eeb3e51d54ea58b3750274881,1,1,,0,0,0,0,,
+b95f118c5d09d51275f8d8014a484b5ceb80d7f9,1,1,,0,0,0,0,,
+d9c4883efee4abc7dfc6fdb18662fed52c6deb0e,1,1,,0,0,0,0,,

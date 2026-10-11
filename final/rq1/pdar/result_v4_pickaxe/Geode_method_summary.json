@@ -1,0 +1,42 @@
+{
+  "project": "Geode",
+  "table_commits": 13497,
+  "found_in_repo": 13497,
+  "missing_in_repo": 0,
+  "found_ratio": 1.0,
+  "judged": 9191,
+  "stream_commits": 9646,
+  "published_hit_not_in_stream": 0,
+  "published_hit_not_in_stream_sample": [],
+  "blobs_read": 6,
+  "blobs_with_pt": 4,
+  "parse_error_blobs": 0,
+  "xrefs": 0,
+  "commits_l1m_pt": 6,
+  "commits_l1m_prov": 6,
+  "commits_parse_err": 0,
+  "commits_core_diff": 132,
+  "commits_pclass": 0,
+  "old_l1_hits": 6,
+  "attribution": {},
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 33.5
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 33.6
+    }
+  ],
+  "pickaxe_commits": 132,
+  "pickaxe_not_judged": 0,
+  "core_pickaxe_disagree": 0,
+  "seconds": 67.1
+}

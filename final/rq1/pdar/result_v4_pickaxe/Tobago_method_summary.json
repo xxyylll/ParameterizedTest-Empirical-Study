@@ -1,0 +1,42 @@
+{
+  "project": "Tobago",
+  "table_commits": 19410,
+  "found_in_repo": 19405,
+  "missing_in_repo": 5,
+  "found_ratio": 0.9997,
+  "judged": 7726,
+  "stream_commits": 7847,
+  "published_hit_not_in_stream": 0,
+  "published_hit_not_in_stream_sample": [],
+  "blobs_read": 31,
+  "blobs_with_pt": 27,
+  "parse_error_blobs": 0,
+  "xrefs": 0,
+  "commits_l1m_pt": 12,
+  "commits_l1m_prov": 14,
+  "commits_parse_err": 0,
+  "commits_core_diff": 33,
+  "commits_pclass": 0,
+  "old_l1_hits": 5,
+  "attribution": {},
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 33.4
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 33.7
+    }
+  ],
+  "pickaxe_commits": 33,
+  "pickaxe_not_judged": 0,
+  "core_pickaxe_disagree": 0,
+  "seconds": 67.2
+}

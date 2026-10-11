@@ -1,0 +1,55 @@
+{
+  "project": "Flink",
+  "table_commits": 51022,
+  "found_in_repo": 50999,
+  "missing_in_repo": 23,
+  "found_ratio": 0.9995,
+  "judged": 36292,
+  "stream_commits": 37618,
+  "published_hit_not_in_stream": 8,
+  "published_hit_not_in_stream_sample": [
+    "39b2031936037ec4e6f776a1a52d733d815d8cf1",
+    "0729118386a4c57e5c2459afea3b1f88e0f58599",
+    "85c62a66f80d876a8e6d04ca0e5e406a29b1d6f5",
+    "1e6eb76d3846a86acd683c33a12220f65bd40a29",
+    "9b2a11268dc8b4e6ea5a604dca0ea27f0fee3ed8",
+    "111423b3fbceeb5cf93005a4e9bbff0574421cd5",
+    "2608c44b7d189b4dfa11f7026a9e5145b266354e",
+    "457c3dc6ce4b869de07f13edae30a8d4580b6217"
+  ],
+  "blobs_read": 2432,
+  "blobs_with_pt": 1955,
+  "parse_error_blobs": 2,
+  "xrefs": 400,
+  "commits_l1m_pt": 540,
+  "commits_l1m_prov": 621,
+  "commits_parse_err": 0,
+  "commits_core_diff": 1097,
+  "commits_pclass": 0,
+  "old_l1_hits": 437,
+  "attribution": {
+    "rename": 6,
+    "overrun_prev": 11,
+    "pt_mention_not_method": 4
+  },
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 59.1
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 64.6
+    }
+  ],
+  "pickaxe_commits": 1240,
+  "pickaxe_not_judged": 51,
+  "core_pickaxe_disagree": 92,
+  "seconds": 124.0
+}

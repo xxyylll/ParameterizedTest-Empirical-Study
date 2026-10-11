@@ -1,0 +1,50 @@
+{
+  "project": "JMeter",
+  "table_commits": 32480,
+  "found_in_repo": 32480,
+  "missing_in_repo": 0,
+  "found_ratio": 1.0,
+  "judged": 20495,
+  "stream_commits": 20516,
+  "published_hit_not_in_stream": 3,
+  "published_hit_not_in_stream_sample": [
+    "d80c0226f8179dae9b6018b11db8b6002eb82fba",
+    "23f922817fefd24e10328fc9cdd23ddb41827c93",
+    "c46e37a4f0ef8a0aa87c2ea4fe2cab9e0423c49d"
+  ],
+  "blobs_read": 207,
+  "blobs_with_pt": 183,
+  "parse_error_blobs": 11,
+  "xrefs": 11,
+  "commits_l1m_pt": 58,
+  "commits_l1m_prov": 67,
+  "commits_parse_err": 0,
+  "commits_core_diff": 42,
+  "commits_pclass": 0,
+  "old_l1_hits": 55,
+  "attribution": {
+    "pt_mention_not_method": 8,
+    "overrun_prev": 2,
+    "unexplained": 1
+  },
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 32.3
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 32.7
+    }
+  ],
+  "pickaxe_commits": 57,
+  "pickaxe_not_judged": 3,
+  "core_pickaxe_disagree": 12,
+  "seconds": 65.2
+}

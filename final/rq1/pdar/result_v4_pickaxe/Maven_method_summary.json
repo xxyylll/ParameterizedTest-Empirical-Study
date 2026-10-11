@@ -1,0 +1,45 @@
+{
+  "project": "Maven",
+  "table_commits": 19263,
+  "found_in_repo": 19181,
+  "missing_in_repo": 82,
+  "found_ratio": 0.9957,
+  "judged": 11345,
+  "stream_commits": 12056,
+  "published_hit_not_in_stream": 0,
+  "published_hit_not_in_stream_sample": [],
+  "blobs_read": 160,
+  "blobs_with_pt": 114,
+  "parse_error_blobs": 0,
+  "xrefs": 170,
+  "commits_l1m_pt": 52,
+  "commits_l1m_prov": 54,
+  "commits_parse_err": 0,
+  "commits_core_diff": 24,
+  "commits_pclass": 0,
+  "old_l1_hits": 36,
+  "attribution": {
+    "rename": 2,
+    "overrun_prev": 1
+  },
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 10.8
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 10.9
+    }
+  ],
+  "pickaxe_commits": 24,
+  "pickaxe_not_judged": 0,
+  "core_pickaxe_disagree": 0,
+  "seconds": 21.8
+}

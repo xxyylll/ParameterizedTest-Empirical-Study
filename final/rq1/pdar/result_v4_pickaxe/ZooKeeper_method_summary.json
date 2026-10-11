@@ -1,0 +1,31 @@
+{
+  "project": "ZooKeeper",
+  "table_commits": 5307,
+  "found_in_repo": 5307,
+  "missing_in_repo": 0,
+  "found_ratio": 1.0,
+  "judged": 2747,
+  "stream_commits": 2827,
+  "published_hit_not_in_stream": 0,
+  "published_hit_not_in_stream_sample": [],
+  "blobs_read": 155,
+  "blobs_with_pt": 130,
+  "parse_error_blobs": 0,
+  "xrefs": 631,
+  "commits_l1m_pt": 68,
+  "commits_l1m_prov": 68,
+  "commits_parse_err": 0,
+  "commits_core_diff": 66,
+  "commits_pclass": 0,
+  "old_l1_hits": 42,
+  "attribution": {
+    "overrun_prev": 2
+  },
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": null,
+  "pickaxe_commits": null,
+  "pickaxe_not_judged": null,
+  "core_pickaxe_disagree": null,
+  "seconds": 5.0
+}

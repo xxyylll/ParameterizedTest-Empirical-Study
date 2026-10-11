@@ -1,0 +1,44 @@
+{
+  "project": "NetBeans",
+  "table_commits": 13606,
+  "found_in_repo": 13605,
+  "missing_in_repo": 1,
+  "found_ratio": 0.9999,
+  "judged": 6648,
+  "stream_commits": 10734,
+  "published_hit_not_in_stream": 0,
+  "published_hit_not_in_stream_sample": [],
+  "blobs_read": 6,
+  "blobs_with_pt": 3,
+  "parse_error_blobs": 0,
+  "xrefs": 0,
+  "commits_l1m_pt": 0,
+  "commits_l1m_prov": 0,
+  "commits_parse_err": 0,
+  "commits_core_diff": 4,
+  "commits_pclass": 0,
+  "old_l1_hits": 2,
+  "attribution": {
+    "pt_mention_not_method": 2
+  },
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 52.1
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 52.0
+    }
+  ],
+  "pickaxe_commits": 5,
+  "pickaxe_not_judged": 1,
+  "core_pickaxe_disagree": 0,
+  "seconds": 104.2
+}

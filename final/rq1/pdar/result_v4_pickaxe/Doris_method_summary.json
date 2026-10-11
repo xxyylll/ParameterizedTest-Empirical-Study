@@ -1,0 +1,44 @@
+{
+  "project": "Doris",
+  "table_commits": 82230,
+  "found_in_repo": 81127,
+  "missing_in_repo": 1103,
+  "found_ratio": 0.9866,
+  "judged": 37276,
+  "stream_commits": 39065,
+  "published_hit_not_in_stream": 0,
+  "published_hit_not_in_stream_sample": [],
+  "blobs_read": 20,
+  "blobs_with_pt": 16,
+  "parse_error_blobs": 0,
+  "xrefs": 0,
+  "commits_l1m_pt": 15,
+  "commits_l1m_prov": 15,
+  "commits_parse_err": 0,
+  "commits_core_diff": 16,
+  "commits_pclass": 0,
+  "old_l1_hits": 18,
+  "attribution": {
+    "pt_mention_not_method": 3
+  },
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 161.7
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 163.5
+    }
+  ],
+  "pickaxe_commits": 16,
+  "pickaxe_not_judged": 0,
+  "core_pickaxe_disagree": 0,
+  "seconds": 325.6
+}

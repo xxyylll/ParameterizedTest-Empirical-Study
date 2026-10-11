@@ -17,7 +17,7 @@
   PT_METRICS      RQ3 的指标中间表目录        默认 /Users/immortal/Complexity_Analysis
   PT_MANUAL       人工标注表目录             默认 $PT_SSD/rq2.2_manual
   PT_PDAR_WORK    PDAR 的全量克隆工作区        默认 $PT_SSD/pdar_projects
-  PT_PDAR_RESULT  PDAR 的逐项目提交表输出目录   默认 <final>/rq1/pdar/result
+  PT_PDAR_RESULT  PDAR v4 第一阶段的逐提交表（result_v3） 默认 <repo>/result_v3/result_v3
 
 用法：
     from paths import FINAL, SSD, APACHE_PROJECTS, require
@@ -38,7 +38,10 @@ MANUAL_DIR = _env('PT_MANUAL', os.path.join(SSD, 'rq2.2_manual'))
 # PDAR 需要**全量**克隆（git log --all / diff-tree 在 --depth 1 的浅克隆上只有 1 个提交）。
 # apache-projects 里的是浅克隆，不能用于 PDAR；工作区按 clone → 分析 → 删除 的方式复用。
 PDAR_WORK = _env('PT_PDAR_WORK', os.path.join(SSD, 'pdar_projects'))
-PDAR_RESULT = _env('PT_PDAR_RESULT', os.path.join(FINAL, 'rq1', 'pdar', 'result'))
+# PDAR v4 第一阶段（pdar_v4_commit_table.py）的逐项目提交表；第二阶段只读它。
+# 189 MB，不随仓库分发（见 rq1/pdar/PDAR_METHOD.md）。
+PDAR_RESULT = _env('PT_PDAR_RESULT', os.path.join(REPO, 'result_v3', 'result_v3'))
+PDAR_V4_RESULT = os.path.join(FINAL, 'rq1', 'pdar', 'result_v4')
 
 APACHE_PROJECTS = os.path.join(SSD, 'apache-projects')     # 源码快照 + 各项目的 AAA/
 DUP_RESULT = os.path.join(SSD, 'dup_result_ssk')           # CCFinderSW 输出
@@ -78,5 +81,6 @@ if __name__ == '__main__':
                     ('MANUAL_DIR', MANUAL_DIR), ('APACHE_PROJECTS', APACHE_PROJECTS),
                     ('DUP_RESULT', DUP_RESULT), ('MERGED_DATA', MERGED_DATA),
                     ('PDAR_SUMMARY', PDAR_SUMMARY), ('PDAR_WORK', PDAR_WORK),
-                    ('PDAR_RESULT', PDAR_RESULT), ('PT_PROJECTS_LIST', PT_PROJECTS_LIST)):
+                    ('PDAR_RESULT', PDAR_RESULT), ('PDAR_V4_RESULT', PDAR_V4_RESULT),
+                    ('PT_PROJECTS_LIST', PT_PROJECTS_LIST)):
         print(f'{name:18}{p:60}{"OK" if os.path.exists(p) else "缺失"}')

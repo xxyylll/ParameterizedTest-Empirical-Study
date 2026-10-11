@@ -13,7 +13,7 @@
 | 数字 | 错的来源 | 对的来源 |
 |---|---|---|
 | RQ1 项目数 214 | `merged_data_ssk.csv` + 旧脚本 | `rq1_new/merged_data.csv`，筛后 **174** |
-| PDAR 中位 20.0% | `result_v3_backup_20260602/`（43 行） | `result_v3/pdar_summary_ssk.csv`，n=106 → **14.52%** |
+| PDAR 中位 20.0% / 14.52% | 20.0%：`result_v3_backup_20260602/`（43 行）；14.52%：v3 的 hunk 邻近判定（已被 v4 取代，见 `rq1/pdar/PDAR_METHOD.md`） | `rq1/pdar_summary_ssk.csv`（v4），n=106 → **15.50%** |
 | RQ2.1 的 284 个 Unknown | `source_types_summary.csv`（旧 clone，且漏 JUnit4） | ssk 快照重算 → **248**，且 JUnit4 占 48.8% |
 | 规模分档 ≤800 / 801–3000 | 旧脚本的硬编码阈值 | **三等分，切点 625 / 1806** |
 | IRR 抽样 109 个项目 | 直接 `len(set(project))` | 大小写混用去重后 **79** |
@@ -40,7 +40,7 @@
 | 文件 | 内容 | 生成脚本 |
 |---|---|---|
 | `merged_data_218.csv` | 每项目一行，**218 行未筛选** —— 筛选在分析时做 | `analyzer.py` + `batch_parse_all_projects.sh` → `parser_result_ssk/` |
-| `pdar_summary_ssk.csv` | 115 个项目的 PDAR，取 174 口径内有 PT 的 **106 个**算中位数 | `developer/find_pt_developers_v3.py` |
+| `pdar_summary_ssk.csv` | **106 个采纳者**的 PDAR v4（主口径 `pdar` / `core_pdar`，另含 `pdar_pt_only`、`pdar_v3` 等对照列） | `rq1/pdar/calculate_pdar_v4.py` |
 | `pt_adoption_by_groups.png/pdf` | 规模/年龄分组的采纳率 | `rq1_new/scale_age_adoption/regen_adoption_by_groups.py` |
 | `SUMMARY.md` | retired vs active 对比、各分组结果 | — |
 | `COMPARISON_sample_size_filtering.md` | 领域分析的 EPV 筛选（10 → 4 个 category） | — |
@@ -48,7 +48,7 @@
 | `table3_pai_pdar.csv` + `build_table3.py` | **Table 3**：106 个采纳者按 Size / Age / Domain 的 PAI 与 PDAR 中位数、IQR、KW 检验 | 同目录脚本 |
 | `category_logit_results.csv` + `category_logit.py` | **category 逻辑回归**（N=168）。EPV 筛选去掉的是**变量**不是项目：只排除 6 个无 category 的项目，仅给项目数 ≥20 的类别设变量，其余项目留作参照组 | 同目录脚本 |
 
-**关键数字**：CAR 106/174 = 60.9%｜Deep(≥5%) 34/174 = 19.5%｜PAI 中位 0.281%（采纳者 2.211%）｜PDAR 中位 **14.52%**（n=106）
+**关键数字**：CAR 106/174 = 60.9%｜Deep(≥5%) 34/174 = 19.5%｜PAI 中位 0.281%（采纳者 2.211%）｜PDAR 中位 **15.50%**（n=106，v4）
 
 **规模分档是三等分**，切点 **625 / 1806**，**左闭右开**：`[0,625) / [625,1806) / [1806,∞)`，
 即 `<625` / `625–1805` / `**>=1806**`。全语料只有 Ranger 正好是 1806 个文件，归入 Large，
@@ -163,6 +163,7 @@ JUnit5 内部：MethodSource 63.0%｜ValueSource 18.6%｜EnumSource 9.9%｜CsvSo
 |---|---|
 | `METHOD_complete.md` | 完整 Method + Threats（11 条） |
 | `project_name_map.json` | ssk 目录名 ↔ RQ1 显示名。跨数据源 join 必须用它，否则会静默漏匹配 |
+| `rq1/pdar/PDAR_METHOD.md` | **PDAR v4 的方法、验证、统计结果与复现**（论文 PDAR 数字的唯一方法说明） |
 | `rq1/pdar/superseded_v2/` | PDAR 的 v2 方法（行号→方法身份→生命周期追踪，`-U0`）。**设计并实现过但未采用，无结果产物**，仅作方法学记录。代码逐字保留、未做可移植化 |
 | `requirements.txt` | **pandas 必须 <3.0**：pandas 3.0 移除了 statsmodels 0.14.x 依赖的内部 API，装上后 `category_logit.py` 在 import 阶段即崩 |
 | `requirements-recompute.txt` | 只有重算 RQ3.1 指标才需要（tree-sitter） |

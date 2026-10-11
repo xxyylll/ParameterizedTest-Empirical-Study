@@ -1,0 +1,42 @@
+{
+  "project": "JDO",
+  "table_commits": 2195,
+  "found_in_repo": 2195,
+  "missing_in_repo": 0,
+  "found_ratio": 1.0,
+  "judged": 1062,
+  "stream_commits": 1092,
+  "published_hit_not_in_stream": 0,
+  "published_hit_not_in_stream_sample": [],
+  "blobs_read": 7,
+  "blobs_with_pt": 5,
+  "parse_error_blobs": 0,
+  "xrefs": 0,
+  "commits_l1m_pt": 2,
+  "commits_l1m_prov": 2,
+  "commits_parse_err": 0,
+  "commits_core_diff": 1,
+  "commits_pclass": 0,
+  "old_l1_hits": 1,
+  "attribution": {},
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 220.8
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 220.9
+    }
+  ],
+  "pickaxe_commits": 1,
+  "pickaxe_not_judged": 0,
+  "core_pickaxe_disagree": 0,
+  "seconds": 441.8
+}

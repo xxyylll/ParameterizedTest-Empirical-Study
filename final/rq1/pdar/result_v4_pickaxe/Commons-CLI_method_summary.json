@@ -1,0 +1,45 @@
+{
+  "project": "Commons-CLI",
+  "table_commits": 2242,
+  "found_in_repo": 2242,
+  "missing_in_repo": 0,
+  "found_ratio": 1.0,
+  "judged": 937,
+  "stream_commits": 988,
+  "published_hit_not_in_stream": 0,
+  "published_hit_not_in_stream_sample": [],
+  "blobs_read": 138,
+  "blobs_with_pt": 134,
+  "parse_error_blobs": 1,
+  "xrefs": 13,
+  "commits_l1m_pt": 33,
+  "commits_l1m_prov": 45,
+  "commits_parse_err": 2,
+  "commits_core_diff": 19,
+  "commits_pclass": 0,
+  "old_l1_hits": 31,
+  "attribution": {
+    "rename": 2,
+    "overrun_prev": 2
+  },
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 0.6
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 0.6
+    }
+  ],
+  "pickaxe_commits": 19,
+  "pickaxe_not_judged": 0,
+  "core_pickaxe_disagree": 0,
+  "seconds": 2.1
+}

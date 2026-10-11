@@ -1,0 +1,67 @@
+{
+  "project": "JAMES",
+  "table_commits": 19262,
+  "found_in_repo": 19262,
+  "missing_in_repo": 0,
+  "found_ratio": 1.0,
+  "judged": 13620,
+  "stream_commits": 14269,
+  "published_hit_not_in_stream": 23,
+  "published_hit_not_in_stream_sample": [
+    "7eff66d0a1614d148ee4f3c3cab3c451bf8ade27",
+    "49709df9e31f87b845390535a754ee937ca381fe",
+    "4d4d10a5e97e7134ada348f92355ad6d94fe219f",
+    "1e99b7edda161ce17d9ddcd8f5abf9897cb2cd63",
+    "11ae5320f1ddb9fcfdc7cb1029ddf6758ad21d45",
+    "4306950317d246aa8799a9d9ebe2659667ef6920",
+    "f7aa673640acdee20d3f538fc7a379735cd1b241",
+    "22a6e85923b4b3137980bf9ac845a66be6d43ff6",
+    "2f299ff2cc415ae04165de9bb5bc49e0a3306076",
+    "2772a727358716b68dea48a1c031f7486acc0831",
+    "7c9a5651e954006f8bd6ef34e3170ba4449d5045",
+    "5f05f5dd52d75d93181631bfdac44c64bcc14f85",
+    "1e190d045ec1824ad6b853d011f3a8e7002ce106",
+    "4b789e36a777b8c9c10ea004a7ae8666a2368eef",
+    "ff5a09a25880ca7482d679c4104ecb529eddbecb",
+    "48a2b94d5a916d3ef3609bee2918b8e75ddecfc3",
+    "93c30a0694961027cc8276da369f4d28c9530cfe",
+    "879006ec8fa6cfce3473ab6775636b4481dd9e0a",
+    "3fac80d4ca7c3bf74aab86fb5781d83770c42f78",
+    "c006b026f129fbd1f7973b7cdeb3332d226d48f2"
+  ],
+  "blobs_read": 665,
+  "blobs_with_pt": 605,
+  "parse_error_blobs": 5,
+  "xrefs": 20,
+  "commits_l1m_pt": 232,
+  "commits_l1m_prov": 265,
+  "commits_parse_err": 0,
+  "commits_core_diff": 134,
+  "commits_pclass": 0,
+  "old_l1_hits": 230,
+  "attribution": {
+    "overrun_prev": 11,
+    "pt_mention_not_method": 6,
+    "rename": 14
+  },
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 16.9
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 16.4
+    }
+  ],
+  "pickaxe_commits": 147,
+  "pickaxe_not_judged": 9,
+  "core_pickaxe_disagree": 4,
+  "seconds": 33.4
+}

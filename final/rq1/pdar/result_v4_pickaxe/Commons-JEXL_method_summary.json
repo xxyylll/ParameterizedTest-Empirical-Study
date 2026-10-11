@@ -1,0 +1,42 @@
+{
+  "project": "Commons-JEXL",
+  "table_commits": 5955,
+  "found_in_repo": 5954,
+  "missing_in_repo": 1,
+  "found_ratio": 0.9998,
+  "judged": 3280,
+  "stream_commits": 3497,
+  "published_hit_not_in_stream": 0,
+  "published_hit_not_in_stream_sample": [],
+  "blobs_read": 27,
+  "blobs_with_pt": 24,
+  "parse_error_blobs": 0,
+  "xrefs": 0,
+  "commits_l1m_pt": 13,
+  "commits_l1m_prov": 15,
+  "commits_parse_err": 0,
+  "commits_core_diff": 3,
+  "commits_pclass": 0,
+  "old_l1_hits": 5,
+  "attribution": {},
+  "fullscan": false,
+  "fullscan_mismatch": 0,
+  "pickaxe": [
+    {
+      "pattern": "@ParameterizedTest",
+      "rc": 0,
+      "completed": true,
+      "seconds": 2.1
+    },
+    {
+      "pattern": "RunWith.*Parameterized",
+      "rc": 0,
+      "completed": true,
+      "seconds": 2.1
+    }
+  ],
+  "pickaxe_commits": 3,
+  "pickaxe_not_judged": 0,
+  "core_pickaxe_disagree": 0,
+  "seconds": 4.2
+}

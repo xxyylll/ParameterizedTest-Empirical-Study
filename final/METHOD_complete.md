@@ -137,13 +137,18 @@ Parquet、Flume、Fluo、Fluo Recipes 被成功 clone、也解析出了测试，
 **(c) PDAR**（Parameterized-test Developer Adoption Ratio）
 = `写过 PT 的开发者数 / 碰过测试代码的开发者数`，基于 git 提交历史逐 commit 判定。
 
-PT 相关 commit 采用**三层检测**（`developer/find_pt_developers_v3.py`），逐层回退：
+PT 相关 commit 采用 **v4 判定**（`rq1/pdar/`，完整说明见 `rq1/pdar/PDAR_METHOD.md`），只看 `.java`：
 
-1. **JUnit5 hunk 检测** —— diff 中出现 `@ParameterizedTest`，且同一 hunk 内其后存在 +/− 行
-2. **JUnit4 文件检测** —— 第 1 层未命中时，对 diff 涉及的 `.java` 文件执行
-   `git show <commit>:<file>`，检查是否含 `@RunWith(Parameterized`
-3. **Pickaxe 检测** —— 前两层均未命中时，检查该 commit 是否出现在
-   `git log -G <PT 关键词>` 结果中（额外标记为 core developer）
+1. **JUnit5（方法级）** —— 取 `-U0` diff，`-` 行对应父提交、`+` 行对应本提交的文件快照；
+   用 tree-sitter 求出 `@ParameterizedTest` 方法及其**同文件**数据源（`@MethodSource` /
+   `@FieldSource` 引用的成员、`@EnumSource` 的 enum、`@ArgumentsSource` 的类）的行区间，
+   任一改动行落在区间内即命中（改动前后两侧都看）。纯重命名不算
+2. **JUnit4（类级）** —— 同样按改动行判定，区间是 `@RunWith([value =] Parameterized)` 标注的类，
+   扣除其中嵌套的独立测试类（带 `@RunWith` / `@Nested` 或含 `@Test` 方法）；`Enclosed` 外层里只算被参数化的嵌套类
+
+`modifiedPT = 1 ∨ 2`；pickaxe（`git log -G`）不再进入分子（只会额外带入 Scala/Kotlin、文档、注释等）。
+提交集合与分母沿用 v3 的逐提交表（2026-06 快照）。v3（hunk 邻近判定 + L2 的路径解析 bug 与过窄模式）
+中位数为 14.52%，已被取代。
 
 开发者以 email 小写去重。
 
@@ -161,7 +166,7 @@ PDAR 恒为 0，计入只会把中位数拉向 0 而不反映真实情况。
 | Deep Adoption（≥5%） | 34/174 = 19.5% |
 | PAI（全部 174）中位 / 均值 | **0.281%** / 3.187%（Q1–Q3 = 0–3.552%，max 60.03%） |
 | PAI（采纳者 n=106）中位 / 均值 | **2.211%** / 5.232% |
-| PDAR（n=106）中位 / 均值 | **14.52%** / 18.05% |
+| PDAR（n=106）中位 / 均值 | **15.50%** / 18.85%（v4；v3 为 14.52% / 18.05%） |
 
 **核心发现：采纳普遍（60.9%）但使用极浅** —— 即便在采纳者中，PT 也仅占测试的 2.2%。
 
@@ -200,7 +205,7 @@ PDAR 恒为 0，计入只会把中位数拉向 0 而不反映真实情况。
 > 串联的 `merged_data_ssk.csv`（214 行，不同 clone、未做筛选）与
 > `developer/result_v3_backup_20260602/pdar_summary.csv`（43 行）。
 > 使用它们会得到 N=214 / CAR=54.2% / PDAR=20.0% 等**错误数字**。
-> 论文口径一律以 **`rq1_new/`** + **`developer/result_v3/pdar_summary_ssk.csv`** 为准。
+> 论文口径一律以 **`rq1_new/`** + **`rq1/pdar_summary_ssk.csv`（PDAR v4）** 为准。
 
 ---
 
