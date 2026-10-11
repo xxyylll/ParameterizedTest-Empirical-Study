@@ -1,5 +1,9 @@
 factor,test,statistic,p,detail
 size x adoption,chi-square,14.4954,0.0007118,"adoption% [np.float64(44.1), np.float64(60.0), np.float64(77.3)]; df=2; CramerV=0.288"
+age x adoption (all groups),chi-square,1.7223,0.632,n=175; df=3; CramerV=0.099
+age x adoption (excluding >=2018),chi-square,1.7176,0.4237,n=165; df=2; CramerV=0.102
+domain x adoption (all groups),chi-square,4.6034,0.2032,n=175; df=3; CramerV=0.162
+domain x adoption (excluding Web & Content),chi-square,0.4184,0.8112,n=163; df=2; CramerV=0.051
 size x PAI,Kruskal-Wallis,7.0758,0.02907,"median PAI [0.0, 0.194, 0.978]"
 JUnit PT framework x PAI (adopters; paper),Mann-Whitney U (JUnit5-PT-only vs JUnit4-PT-only),1177.0,0.1067,"n {JUnit4-PT-only: 30 (median 1.04), JUnit5-PT-only: 65 (median 2.22), Both: 12 (median 3.92)}; cliffs_delta=0.207; projects with JUnit4 PT=42, JUnit5 PT=77"
 JUnit test framework x adoption (supplementary),Mann-Whitney U (JUnit5-only vs JUnit4-only),2266.0,0.000255,"rates {JUnit4-only: 38.3% (n=47), JUnit5-only: 72.2% (n=72), Mixed: 72.5% (n=51)}; cliffs_delta=0.339"

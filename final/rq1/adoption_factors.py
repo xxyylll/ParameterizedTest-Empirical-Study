@@ -7,6 +7,9 @@
 
 各项定义：
   规模 × 采纳     size_grp × uses_pt 的 3×2 卡方，Cramér's V = sqrt(χ² / (n·(min(r,c)−1)))
+  年龄 / 领域 × 采纳
+                  age_grp / domain_grp × uses_pt 的卡方与 Cramér's V，两种口径：全部组，以及排除小组
+                  （Age 去掉 >=2018，n=10；Domain 去掉 Web & Content，n=12）—— 与 Table 3 的 KW 一样报两种
   规模 × PAI      全部项目（含 PAI=0）按 size_grp 的 Kruskal-Wallis
   JUnit 版本 × PAI（论文口径）
                   在采纳者里按 **PT 用的框架**分组：JUnit4-PT-only（junit4_pt > 0 且 junit5_pt = 0）、
@@ -58,6 +61,19 @@ def junit_group(r):
     return None
 
 
+SMALL_GROUPS = {'age_grp': ['>=2018'], 'domain_grp': ['Web & Content']}
+
+
+def chi2_adoption(df, col, order, exclude=()):
+    keep = [g for g in order if g not in exclude]
+    d = df[df[col].astype(str).isin(keep)]
+    ct = pd.crosstab(d[col].astype(str), d['uses_pt']).reindex(keep)
+    chi2, p, dof, _ = stats.chi2_contingency(ct)
+    return {'groups': keep, 'n': int(ct.values.sum()), 'chi2': chi2, 'df': int(dof), 'p': p,
+            'V': float(np.sqrt(chi2 / (ct.values.sum() * (min(ct.shape) - 1)))),
+            'excluded': list(exclude)}
+
+
 def mwu(x, y):
     u, p = stats.mannwhitneyu(x, y, alternative='two-sided')
     return {'U': float(u), 'p': float(p), 'delta': cliffs_delta_from_u(u, len(x), len(y)),
@@ -82,6 +98,12 @@ def compute(df=None):
         'chi2': chi2, 'df': int(dof), 'p': p,
         'V': float(np.sqrt(chi2 / (ct.values.sum() * (min(ct.shape) - 1)))),
     }
+
+    # 1b. 年龄 / 领域 × 采纳：全部组与排除小组两种口径
+    for key, col, order in (('age_adoption', 'age_grp', rq1_bins.AGE_LABELS),
+                            ('domain_adoption', 'domain_grp', rq1_bins.DOMAIN_ORDER)):
+        R[key] = {'all': chi2_adoption(df, col, order),
+                  'excl': chi2_adoption(df, col, order, SMALL_GROUPS[col])}
 
     # 2. 规模 × PAI（全部项目）
     groups = [df.loc[df.size_grp == g, 'pai'].dropna() for g in rq1_bins.SIZE_LABELS]
@@ -147,6 +169,11 @@ def report(R):
     s = R['size_adoption']
     print('规模 × 采纳  采纳率 ' + ' / '.join(f"{g['rate']:.1f}%" for g in s['groups']) +
           f"   χ²={s['chi2']:.2f}, df={s['df']}, p={s['p']:.5f}, V={s['V']:.3f}")
+    for key, name in (('age_adoption', '年龄'), ('domain_adoption', '领域')):
+        for scope, label in (('all', '全部组'), ('excl', '排除小组')):
+            c = R[key][scope]
+            ex = f"（去掉 {', '.join(c['excluded'])}）" if c['excluded'] else ''
+            print(f"{name} × 采纳  {label}{ex}：n={c['n']}, χ²={c['chi2']:.2f}, df={c['df']}, p={c['p']:.3f}, V={c['V']:.3f}")
     s = R['size_pai']
     print(f"规模 × PAI   中位 PAI {[round(x, 3) for x in s['medians']]}   H={s['H']:.2f}, p={s['p']:.4f}")
     jp = R['junit_pt']
@@ -174,6 +201,10 @@ def to_rows(R):
     rows = [
         ('size x adoption', 'chi-square', s['chi2'], s['p'],
          f"adoption% {[round(g['rate'], 1) for g in s['groups']]}; df={s['df']}; CramerV={s['V']:.3f}"),
+        *[(f"{name} x adoption ({'all groups' if sc == 'all' else 'excluding ' + ', '.join(R[key][sc]['excluded'])})",
+           'chi-square', R[key][sc]['chi2'], R[key][sc]['p'],
+           f"n={R[key][sc]['n']}; df={R[key][sc]['df']}; CramerV={R[key][sc]['V']:.3f}")
+          for key, name in (('age_adoption', 'age'), ('domain_adoption', 'domain')) for sc in ('all', 'excl')],
         ('size x PAI', 'Kruskal-Wallis', R['size_pai']['H'], R['size_pai']['p'],
          f"median PAI {[round(x, 3) for x in R['size_pai']['medians']]}"),
     ]

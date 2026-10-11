@@ -112,6 +112,8 @@ def main():
     age_dom_p = {
         '年龄 × 采纳率': adoption_stats(df, 'age_grp', rq1_bins.AGE_LABELS)[2],
         '领域 × 采纳率': adoption_stats(df, 'domain_grp', rq1_bins.DOMAIN_ORDER)[2],
+        '年龄 × 采纳率（去掉 >=2018）': R['age_adoption']['excl']['p'],
+        '领域 × 采纳率（去掉 Web & Content）': R['domain_adoption']['excl']['p'],
         '年龄 × PAI（全部项目）': R['age_pai']['p'],
         **{f'{r.factor} × {r.metric}（Table 3）': r.p for r in kw[kw.factor.isin(['Age', 'Domain'])].itertuples()},
         **{f'category {r.variable}': r.p for r in cat.itertuples()},
@@ -222,6 +224,16 @@ def main():
             tail = f'{chi2:.2f} | {fp(p)} {sig(p)} | {v:.3f}' if i == 0 else ' |  | '
             w(f'| {name if i == 0 else ""} | {g} | {int(r.pt_users)}/{int(r.total)} | {r.pct:.1f}% | {tail} |')
     w('\nCramér\'s V = √(χ² / (N · (min(行, 列) − 1)))；这里列数为 2，即 √(χ² / N)。\n')
+    w('与 Table 3 的 KW 一样，Age 与 Domain 的卡方也报「排除小组」口径（Age 去掉 >=2018，Domain 去掉 Web & Content）：\n')
+    w('| 因素 | 口径 | N | χ² | df | p | Cramér\'s V |\n|---|---|---:|---:|---:|---:|---:|')
+    for key, name in (('age_adoption', 'Age'), ('domain_adoption', 'Domain')):
+        for sc in ('all', 'excl'):
+            c = R[key][sc]
+            label = '全部组' if sc == 'all' else f"去掉 {', '.join(c['excluded'])}"
+            w(f"| {name if sc == 'all' else ''} | {label} | {c['n']} | {c['chi2']:.2f} | {c['df']} | "
+              f"{fp(c['p'])} {sig(c['p'])} | {c['V']:.3f} |")
+    w('')
+
 
     # ---------------- 4. 影响因素
     w('## 4. 影响因素\n')
