@@ -21,6 +21,8 @@
   files_java
       SSD 快照 HEAD 上 `git ls-tree -r --name-only HEAD | grep -F '.java' | wc -l`
       —— 与 trigger.sh 生成旧底表时是同一条命令，只是换成 ssk 的那次 clone
+  date
+      ssk 快照里该项目 HEAD 的提交时间（旧底表里这一列是运行时刻）
   first_commit_iso, first_commit, age
       沿用旧底表（仓库历史的起点不随快照变）；Parquet 取自全量 clone
   categories
@@ -33,7 +35,6 @@ import json
 import os
 import subprocess
 import sys
-from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
@@ -67,6 +68,13 @@ def ssk_key(project, inv):
     return None
 
 
+def snapshot_date(key):
+    """ssk 快照里该项目 HEAD 的提交时间 —— 作为 date 列，使底表可重复生成（不随运行时刻变）。"""
+    out = subprocess.run(['git', '-C', os.path.join(APACHE_PROJECTS, key), 'log', '-1', '--format=%cI'],
+                         capture_output=True, text=True)
+    return out.stdout.strip() if out.returncode == 0 else ''
+
+
 def files_java(key):
     repo = os.path.join(APACHE_PROJECTS, key)
     if not os.path.isdir(repo):
@@ -86,7 +94,6 @@ def main():
 
     old = list(csv.DictReader(open(OLD)))
     fields = list(old[0].keys())
-    stamp = datetime.now(timezone.utc).isoformat(timespec='seconds')
 
     rows, problems = [], []
     todo = [(r['project'], r) for r in old] + [(p, None) for p in ADDED]
@@ -110,7 +117,7 @@ def main():
             fj = base['files_java'] if base else ''
         year = int(first_iso[:4]) if first_iso else ''
         rows.append({
-            'project': project, 'date': stamp,
+            'project': project, 'date': snapshot_date(key),
             'total_tests': total, 'pt_total': pt, 'junit4_pt': j4pt, 'junit5_pt': j5pt, 'pt_share': share,
             'junit4_total': j4t, 'junit5_total': j5t,
             'junit4_param_share': j4s, 'junit5_param_share': j5s,

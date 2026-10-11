@@ -30,7 +30,7 @@
 它们同时出现在前一版清单（`projects_副本.txt`，2025-10-14）与后一版清单（`projects.txt`，2025-10-27）中，
 只在中间那份 `my_projects.txt`（2025-10-16）里缺失，更像整理清单时漏粘，而不是有意排除。
 
-- **Parquet 已补回**（2026-10-11）。它是活跃项目，1,799 个测试、176 个 PT（全部 JUnit 4）。
+- **Parquet 已补回**（2026-10-10）。它是活跃项目，1,799 个测试、176 个 PT（全部 JUnit 4）。
   category 取自 projects.apache.org（`big-data`），首次提交年份与 PDAR 由全量 clone 得到。
 - **其余 3 个按其状态不纳入**：Flume 已转入 dormant；Fluo 与 Fluo Recipes 自 2018 年后无更新。
   三者合计 29 个 PT（全部来自 Flume，JUnit 4）。

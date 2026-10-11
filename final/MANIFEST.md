@@ -45,8 +45,8 @@
 | `pt_adoption_by_groups.png/pdf` | 规模/年龄/领域分组的采纳率 | `adoption_by_groups_figure.py`（同目录） |
 | `rq1_pai_three_panel` / `rq1_pdar_three_panel`（png/pdf） | PAI、PDAR 按 Size / Age / Domain 的三联图 | `three_panel_figures.py`（同目录） |
 | `adoption_factors.csv` + `adoption_factors.py` | 影响因素：规模 × 采纳的卡方、规模 × PAI、JUnit 版本、套件规模、年龄，及多元 logistic 回归 | 同目录脚本 |
-| `SUMMARY.md` | retired vs active 对比、各分组结果 | — |
-| `COMPARISON_sample_size_filtering.md` | 领域分析的 EPV 筛选（10 → 4 个 category） | — |
+| **`RQ1_RESULTS.md`** | **RQ1 全部结果的汇总**：Table 1、描述统计、分组采纳率、影响因素、两个回归、Table 3、PDAR、图。**由脚本自动生成，不要手改** | `build_rq1_results.py`（同目录） |
+| `run_rq1.sh` | 一键重跑 RQ1：底表 → PDAR 汇总 → 全部分析与图 → `RQ1_RESULTS.md`。缺外部数据的步骤自动跳过 | — |
 | `rq1_bins.py` | **分组口径的唯一定义**：语料筛选、Size/Age 分档、Domain 映射。`load()` 直接返回带好分组列的 DataFrame | — |
 | `table3_pai_pdar.csv` + `build_table3.py` | **Table 3**：107 个采纳者按 Size / Age / Domain 的 PAI 与 PDAR 中位数、IQR、KW 检验 | 同目录脚本 |
 | `category_logit_results.csv` + `category_logit.py` | **category 逻辑回归**（N=169）。EPV 筛选去掉的是**变量**不是项目：只排除 6 个无 category 的项目，仅给项目数 ≥20 的类别设变量，其余项目留作参照组 | 同目录脚本 |

@@ -260,7 +260,8 @@ def make_three_panel(metric: str, ylabel: str, out_stem: str,
         add_n_labels(ax, grp)
 
     fig.patch.set_facecolor("white")
-    plt.savefig(os.path.join(HERE, out_stem + ".pdf"),
+    # metadata：去掉 PDF 里的生成时间，使重跑产物逐字节可复现
+    plt.savefig(os.path.join(HERE, out_stem + ".pdf"), metadata={"CreationDate": None},
                 bbox_inches="tight", backend="pdf")
     plt.savefig(os.path.join(HERE, out_stem + ".png"),
                 bbox_inches="tight", dpi=300)

@@ -311,7 +311,7 @@ git -c core.quotepath=false -c log.showRoot=true log --all --full-history --reve
 
 ## 5. 结果（107 个采纳者）
 
-> **2026-10-11 补录 Parquet。** Parquet 在语料构建的 263 → 218 那一步被漏掉，现已补回（RQ1 变为 175 个项目、
+> **2026-10-10 补录 Parquet。** Parquet 在语料构建的 263 → 218 那一步被漏掉，现已补回（RQ1 变为 175 个项目、
 > 107 个采纳者，见 `final/corpus/README.md`）。它没有 v3 已发表值，所以只进入 v4 的统计。
 > 第一阶段表在一个**截断到 2026-06-23** 的全量 clone 上生成（每个 ref 退回到该日之前最近的提交，
 > 与其余项目 2026-05 下旬 ~ 06-23 的批量 clone 对齐），共 3,341 个提交；第二阶段自检全部通过

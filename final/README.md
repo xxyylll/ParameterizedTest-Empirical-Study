@@ -17,6 +17,7 @@ source .env
 
 python paths.py                          # 检查哪些数据源可用
 cd rq1 && python rq1_bins.py             # 自检：应输出 N=175 / 采纳者 107
+./run_rq1.sh                             # 一键重跑 RQ1 全部分析与图，并重新生成 RQ1_RESULTS.md
 ```
 
 > **`requirements.txt` 的 pandas 上限是必需的，不是保守。** pandas 3.0 移除了
@@ -63,6 +64,7 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=175 / 采纳者 
 
 | 脚本 | 产出 | 自足 |
 |---|---|---|
+| **`run_rq1.sh`** | **一键重跑 RQ1**，最后由 `build_rq1_results.py` 生成 **`RQ1_RESULTS.md`**（全部结果汇总，不要手改） | 缺外部数据的步骤自动跳过 |
 | `rq1_bins.py` | **分组口径的唯一定义**：语料筛选、Size/Age 分档、Domain 映射 | ✅ |
 | `build_table3.py` | `table3_pai_pdar.csv` — PAI/PDAR 按 Size/Age/Domain 分组 | ✅ |
 | `category_logit.py` | `category_logit_results.csv` — category 逻辑回归（N=169） | ✅ |

@@ -88,7 +88,9 @@ def main():
     plt.tight_layout()
     for ext in ('png', 'pdf'):
         out = os.path.join(HERE, f'pt_adoption_by_groups.{ext}')
-        plt.savefig(out, dpi=300, bbox_inches='tight')
+        # PDF 去掉生成时间，使重跑产物逐字节可复现
+        meta = {'CreationDate': None} if ext == 'pdf' else None
+        plt.savefig(out, dpi=300, bbox_inches='tight', metadata=meta)
         print(f'Saved: {os.path.basename(out)}')
     plt.close()
 

@@ -1,23 +1,29 @@
 #!/usr/bin/env python3
-"""RQ1「影响因素」：项目规模、JUnit 版本、测试套件规模、年龄与 PT 采纳的关系，以及多元 logistic 回归。
+"""RQ1「影响因素」：项目规模、JUnit 版本、测试套件规模、年龄与 PT 采纳 / PAI 的关系，以及多元 logistic 回归。
 
 这些数字此前只存在于 METHOD_complete.md / MANIFEST.md 里 —— 是在早先会话中临时算出、直接写进文档的，
 没有留下脚本。本文件把它们固定下来，并统一从 rq1_bins.load() 取语料（与 Table 3 等同源）。
+在旧 174 口径（--merged merged_data_218.csv）上逐位复现过文档的每个数。
 
-各项定义（以在旧 174 口径上逐个复现文档数字为准，见 --merged）：
+各项定义：
   规模 × 采纳     size_grp × uses_pt 的 3×2 卡方，Cramér's V = sqrt(χ² / (n·(min(r,c)−1)))
   规模 × PAI      全部项目（含 PAI=0）按 size_grp 的 Kruskal-Wallis
   JUnit 版本      按测试方法的 JUnit 框架分组：JUnit4-only / JUnit5-only / Mixed（两者都有）；
-                  两个都没有的项目（如纯 TestNG）不进这一项。
-                  JUnit5-only vs JUnit4-only 的采纳（0/1）做 Mann-Whitney U 与 Cliff's δ
+                  两个都没有的项目（如纯 TestNG）不进这一项。报告：
+                    - 三组采纳率；
+                    - 三组 PAI 中位数（全部项目 / 仅采纳者）与三组 KW；
+                    - JUnit5-only vs JUnit4-only 的 Mann-Whitney U 与 Cliff's δ，分别对 PAI（全部项目，
+                      即文档原口径）、采纳 0/1、PAI（仅采纳者）三种对象。
+                  **全部项目口径下的 PAI 差异几乎全由采纳率造成**（JUnit4-only 大量 PAI=0）；
+                  只看采纳者时差异消失，所以三种都报告。
   套件规模 × PAI  log1p(total_tests) 与 PAI 的 Spearman
   年龄            全部项目按 age_grp 的 PAI Kruskal-Wallis
   多元 logistic   uses_pt ~ Medium + Large + HasJUnit5（Small 为参照；HasJUnit5 = junit5_total > 0）
 
 用法：
-  python adoption_factors.py                         # 当前底表（paths.MERGED_DATA）
-  python adoption_factors.py --merged merged_data_218.csv   # 指定底表，用于核对旧数字
-输出 adoption_factors.csv（仅当使用当前底表时写出）
+  python adoption_factors.py                                # 当前底表（paths.MERGED_DATA），写 adoption_factors.csv
+  python adoption_factors.py --merged merged_data_218.csv   # 指定底表，只打印，用于核对旧数字
+其它脚本（build_rq1_results.py）通过 compute() 取结构化结果。
 """
 import argparse
 import csv
@@ -32,6 +38,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.dirname(HERE))
 import rq1_bins   # noqa: E402
+
+JUNIT_ORDER = ('JUnit4-only', 'JUnit5-only', 'Mixed')
+LOGIT_VARS = ('Medium scale (625-1805)', 'Large scale (>=1806)', 'Has JUnit5')
 
 
 def cliffs_delta_from_u(u, n1, n2):
@@ -49,96 +58,153 @@ def junit_group(r):
     return None
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument('--merged', default=None, help='改用指定底表（相对本目录或绝对路径）')
-    a = ap.parse_args()
-    if a.merged:
-        rq1_bins.MERGED = a.merged if os.path.isabs(a.merged) else os.path.join(HERE, a.merged)
+def mwu(x, y):
+    u, p = stats.mannwhitneyu(x, y, alternative='two-sided')
+    return {'U': float(u), 'p': float(p), 'delta': cliffs_delta_from_u(u, len(x), len(y)),
+            'n1': len(x), 'n2': len(y)}
 
-    df = rq1_bins.load()
+
+def compute(df=None):
+    """返回全部影响因素的结构化结果。df 缺省时取 rq1_bins.load()。"""
+    if df is None:
+        df = rq1_bins.load()
+    df = df.copy()
     for c in ('junit4_total', 'junit5_total', 'total_tests', 'uses_pt'):
         df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0)
-    n = len(df)
-    out = []
-
-    def rec(factor, test, stat, p, detail=''):
-        out.append({'factor': factor, 'test': test, 'statistic': stat, 'p': p, 'detail': detail})
-
-    print(f'底表: {os.path.basename(rq1_bins.MERGED)}   N = {n}   采纳 = {int(df.uses_pt.sum())}\n')
+    R = {'n': len(df), 'adopters': int(df.uses_pt.sum())}
 
     # 1. 规模 × 采纳
     ct = pd.crosstab(df['size_grp'], df['uses_pt']).reindex(rq1_bins.SIZE_LABELS)
     chi2, p, dof, _ = stats.chi2_contingency(ct)
-    v = np.sqrt(chi2 / (ct.values.sum() * (min(ct.shape) - 1)))
-    rates = (ct[1] / ct.sum(axis=1) * 100).round(1)
-    print('规模 × 采纳  采纳率 ' + ' / '.join(f'{r}%' for r in rates.values) +
-          f'   χ²={chi2:.2f}, df={dof}, p={p:.5f}, V={v:.3f}')
-    rec('size x adoption', 'chi-square', round(chi2, 2), p,
-        f'adoption% {list(rates.values)}; df={dof}; CramerV={v:.3f}')
+    R['size_adoption'] = {
+        'groups': [{'group': g, 'adopters': int(ct.loc[g, 1]), 'n': int(ct.loc[g].sum()),
+                    'rate': ct.loc[g, 1] / ct.loc[g].sum() * 100} for g in rq1_bins.SIZE_LABELS],
+        'chi2': chi2, 'df': int(dof), 'p': p,
+        'V': float(np.sqrt(chi2 / (ct.values.sum() * (min(ct.shape) - 1)))),
+    }
 
     # 2. 规模 × PAI（全部项目）
     groups = [df.loc[df.size_grp == g, 'pai'].dropna() for g in rq1_bins.SIZE_LABELS]
     h, p = stats.kruskal(*groups)
-    meds = [round(g.median(), 3) for g in groups]
-    print(f'规模 × PAI   中位 PAI {meds}   H={h:.2f}, p={p:.4f}')
-    rec('size x PAI', 'Kruskal-Wallis', round(h, 2), p, f'median PAI {meds}')
+    R['size_pai'] = {'medians': [float(g.median()) for g in groups], 'H': h, 'p': p}
 
     # 3. JUnit 版本
     df['jg'] = df.apply(junit_group, axis=1)
     jg = df.dropna(subset=['jg'])
-    info = {g: (len(s), s.uses_pt.mean() * 100) for g, s in jg.groupby('jg')}
-    print('JUnit 版本   采纳率 ' + '  '.join(f'{g} {info[g][1]:.1f}%(n={info[g][0]})'
-                                           for g in ('JUnit4-only', 'JUnit5-only', 'Mixed')) +
-          f'   （无 JUnit 的 {n - len(jg)} 个不计）')
-    rates = '; '.join(f'{g}: {info[g][1]:.1f}% (n={info[g][0]})' for g in info)
-    # 文档里报告的 U=2280 / δ=0.377 是对 **PAI** 做的检验（在旧 174 口径上逐位复现），
-    # 而同一行列出的是采纳率 —— 两个量混在了一行。这里两者都算、分开标注。
-    for col, label in (('pai', 'PAI（文档原口径）'), ('uses_pt', '采纳 0/1')):
-        x5 = jg.loc[jg.jg == 'JUnit5-only', col]
-        x4 = jg.loc[jg.jg == 'JUnit4-only', col]
-        u, p = stats.mannwhitneyu(x5, x4, alternative='two-sided')
-        d = cliffs_delta_from_u(u, len(x5), len(x4))
-        print(f'             JUnit5-only vs JUnit4-only，{label}：U={u:.0f}, p={p:.2e}, δ={d:.3f}')
-        rec(f'JUnit version x {col}', 'Mann-Whitney U (JUnit5-only vs JUnit4-only)', round(u, 1), p,
-            f'cliffs_delta={d:.3f}; adoption rates {{{rates}}}')
+    ad = jg[jg.uses_pt == 1]
+    pick = lambda d, g, col='pai': d.loc[d.jg == g, col]
+    h_all, p_all = stats.kruskal(*[pick(jg, g) for g in JUNIT_ORDER])
+    h_ad, p_ad = stats.kruskal(*[pick(ad, g) for g in JUNIT_ORDER])
+    R['junit'] = {
+        'excluded_no_junit': len(df) - len(jg),
+        'groups': [{'group': g, 'n': int((jg.jg == g).sum()), 'adopters': int((ad.jg == g).sum()),
+                    'rate': pick(jg, g, 'uses_pt').mean() * 100,
+                    'pai_median_all': float(pick(jg, g).median()),
+                    'pai_median_adopters': float(pick(ad, g).median())} for g in JUNIT_ORDER],
+        'kw_all': {'H': h_all, 'p': p_all},
+        'kw_adopters': {'H': h_ad, 'p': p_ad},
+        'mwu_pai_all': mwu(pick(jg, 'JUnit5-only'), pick(jg, 'JUnit4-only')),
+        'mwu_adoption': mwu(pick(jg, 'JUnit5-only', 'uses_pt'), pick(jg, 'JUnit4-only', 'uses_pt')),
+        'mwu_pai_adopters': mwu(pick(ad, 'JUnit5-only'), pick(ad, 'JUnit4-only')),
+    }
 
     # 4. 套件规模 × PAI
     rho, p = stats.spearmanr(np.log1p(df.total_tests), df.pai)
-    print(f'套件规模×PAI ρ={rho:.3f}, p={p:.2e}')
-    rec('test suite size x PAI', 'Spearman (log1p)', round(rho, 3), p)
+    R['suite_pai'] = {'rho': rho, 'p': p}
 
     # 5. 年龄 × PAI
-    groups = [df.loc[df.age_grp == g, 'pai'].dropna() for g in rq1_bins.AGE_LABELS]
-    groups = [g for g in groups if len(g)]
+    groups = [g for g in (df.loc[df.age_grp == a, 'pai'].dropna() for a in rq1_bins.AGE_LABELS) if len(g)]
     h, p = stats.kruskal(*groups)
-    print(f'年龄 × PAI   H={h:.2f}, p={p:.3f}')
-    rec('age x PAI', 'Kruskal-Wallis', round(h, 2), p)
+    R['age_pai'] = {'H': h, 'p': p}
 
     # 6. 多元 logistic
     import statsmodels.api as sm
     X = pd.DataFrame({
-        'Medium scale (625-1805)': (df.size_grp == rq1_bins.SIZE_LABELS[1]).astype(int),
-        'Large scale (>=1806)': (df.size_grp == rq1_bins.SIZE_LABELS[2]).astype(int),
-        'Has JUnit5': (df.junit5_total > 0).astype(int),
+        LOGIT_VARS[0]: (df.size_grp == rq1_bins.SIZE_LABELS[1]).astype(int),
+        LOGIT_VARS[1]: (df.size_grp == rq1_bins.SIZE_LABELS[2]).astype(int),
+        LOGIT_VARS[2]: (df.junit5_total > 0).astype(int),
     })
     m = sm.Logit(df.uses_pt.astype(int), sm.add_constant(X)).fit(disp=0)
     ci = np.exp(m.conf_int())
-    print(f'\n多元 logistic  N={int(m.nobs)}  Pseudo-R²={m.prsquared:.3f}  AIC={m.aic:.1f}')
-    for var in X.columns:
-        print(f'   {var:26} OR={np.exp(m.params[var]):6.3f}  '
-              f'[{ci.loc[var, 0]:.3f}, {ci.loc[var, 1]:.3f}]  p={m.pvalues[var]:.4f}')
-        rec('logit: ' + var, 'OR', round(float(np.exp(m.params[var])), 3), m.pvalues[var],
-            f'95%CI [{ci.loc[var, 0]:.3f}, {ci.loc[var, 1]:.3f}]')
-    rec('logit model', f'N={int(m.nobs)}', round(m.prsquared, 3), m.llr_pvalue,
-        f'pseudo_R2={m.prsquared:.3f}; AIC={m.aic:.1f}')
+    R['logit'] = {
+        'N': int(m.nobs), 'pseudo_r2': m.prsquared, 'aic': m.aic, 'llr_p': m.llr_pvalue,
+        'vars': [{'var': v, 'OR': float(np.exp(m.params[v])), 'ci_low': float(ci.loc[v, 0]),
+                  'ci_high': float(ci.loc[v, 1]), 'p': float(m.pvalues[v])} for v in LOGIT_VARS],
+    }
+    return R
 
+
+def report(R):
+    print(f"N = {R['n']}   采纳 = {R['adopters']}\n")
+    s = R['size_adoption']
+    print('规模 × 采纳  采纳率 ' + ' / '.join(f"{g['rate']:.1f}%" for g in s['groups']) +
+          f"   χ²={s['chi2']:.2f}, df={s['df']}, p={s['p']:.5f}, V={s['V']:.3f}")
+    s = R['size_pai']
+    print(f"规模 × PAI   中位 PAI {[round(x, 3) for x in s['medians']]}   H={s['H']:.2f}, p={s['p']:.4f}")
+    j = R['junit']
+    print('JUnit 版本   采纳率 ' + '  '.join(f"{g['group']} {g['rate']:.1f}%(n={g['n']})" for g in j['groups']) +
+          f"   （无 JUnit 的 {j['excluded_no_junit']} 个不计）")
+    print('             PAI 中位（全部项目）' + '  '.join(f"{g['group']} {g['pai_median_all']:.3f}%" for g in j['groups']) +
+          f"   三组 KW H={j['kw_all']['H']:.2f}, p={j['kw_all']['p']:.2e}")
+    print('             PAI 中位（仅采纳者）' + '  '.join(f"{g['group']} {g['pai_median_adopters']:.3f}%" for g in j['groups']) +
+          f"   三组 KW H={j['kw_adopters']['H']:.2f}, p={j['kw_adopters']['p']:.3f}")
+    for key, label in (('mwu_pai_all', 'PAI，全部项目（文档原口径）'), ('mwu_adoption', '采纳 0/1'),
+                       ('mwu_pai_adopters', 'PAI，仅采纳者')):
+        t = j[key]
+        print(f"             JUnit5-only vs JUnit4-only，{label}：U={t['U']:.0f}, p={t['p']:.2e}, δ={t['delta']:.3f}"
+              f"（n={t['n1']} / {t['n2']}）")
+    print(f"套件规模×PAI ρ={R['suite_pai']['rho']:.3f}, p={R['suite_pai']['p']:.2e}")
+    print(f"年龄 × PAI   H={R['age_pai']['H']:.2f}, p={R['age_pai']['p']:.3f}")
+    L = R['logit']
+    print(f"\n多元 logistic  N={L['N']}  Pseudo-R²={L['pseudo_r2']:.3f}  AIC={L['aic']:.1f}")
+    for v in L['vars']:
+        print(f"   {v['var']:26} OR={v['OR']:6.3f}  [{v['ci_low']:.3f}, {v['ci_high']:.3f}]  p={v['p']:.4f}")
+
+
+def to_rows(R):
+    s, j, L = R['size_adoption'], R['junit'], R['logit']
+    rows = [
+        ('size x adoption', 'chi-square', s['chi2'], s['p'],
+         f"adoption% {[round(g['rate'], 1) for g in s['groups']]}; df={s['df']}; CramerV={s['V']:.3f}"),
+        ('size x PAI', 'Kruskal-Wallis', R['size_pai']['H'], R['size_pai']['p'],
+         f"median PAI {[round(x, 3) for x in R['size_pai']['medians']]}"),
+        ('JUnit version x PAI (3 groups, all)', 'Kruskal-Wallis', j['kw_all']['H'], j['kw_all']['p'],
+         'median PAI {' + ', '.join(f"{g['group']}: {g['pai_median_all']:.3f}" for g in j['groups']) + '}'),
+        ('JUnit version x PAI (3 groups, adopters)', 'Kruskal-Wallis', j['kw_adopters']['H'], j['kw_adopters']['p'],
+         'median PAI {' + ', '.join(f"{g['group']}: {g['pai_median_adopters']:.3f}" for g in j['groups']) + '}'),
+    ]
+    for key, label in (('mwu_pai_all', 'JUnit5-only vs JUnit4-only: PAI (all)'),
+                       ('mwu_adoption', 'JUnit5-only vs JUnit4-only: adoption 0/1'),
+                       ('mwu_pai_adopters', 'JUnit5-only vs JUnit4-only: PAI (adopters)')):
+        t = j[key]
+        rows.append((label, 'Mann-Whitney U', t['U'], t['p'], f"n={t['n1']}/{t['n2']}; cliffs_delta={t['delta']:.3f}"))
+    rows += [
+        ('test suite size x PAI', 'Spearman (log1p)', R['suite_pai']['rho'], R['suite_pai']['p'], ''),
+        ('age x PAI', 'Kruskal-Wallis', R['age_pai']['H'], R['age_pai']['p'], ''),
+    ]
+    rows += [('logit: ' + v['var'], 'OR', v['OR'], v['p'], f"95%CI [{v['ci_low']:.3f}, {v['ci_high']:.3f}]")
+             for v in L['vars']]
+    rows.append(('logit model', f"N={L['N']}", L['pseudo_r2'], L['llr_p'],
+                 f"pseudo_R2={L['pseudo_r2']:.3f}; AIC={L['aic']:.1f}"))
+    return rows
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--merged', default=None, help='改用指定底表（相对本目录或绝对路径）；只打印不写文件')
+    a = ap.parse_args()
+    if a.merged:
+        rq1_bins.MERGED = a.merged if os.path.isabs(a.merged) else os.path.join(HERE, a.merged)
+    print(f'底表: {os.path.basename(rq1_bins.MERGED)}')
+    R = compute()
+    report(R)
     if not a.merged:
         path = os.path.join(HERE, 'adoption_factors.csv')
         with open(path, 'w', newline='') as f:
-            w = csv.DictWriter(f, fieldnames=['factor', 'test', 'statistic', 'p', 'detail'])
-            w.writeheader()
-            w.writerows(out)
+            w = csv.writer(f)
+            w.writerow(['factor', 'test', 'statistic', 'p', 'detail'])
+            for factor, test, stat, p, detail in to_rows(R):
+                w.writerow([factor, test, round(float(stat), 4), f'{float(p):.4g}', detail])
         print(f'\nwrote {os.path.relpath(path, os.path.dirname(HERE))}')
 
 
