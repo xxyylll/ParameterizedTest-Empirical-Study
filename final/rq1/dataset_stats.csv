@@ -1,5 +1,5 @@
 metric,mean,median,min,max,n
-# of Total files,"2,446","1,174",14,"40,338",175
+# of Java files,"2,446","1,174",14,"40,338",175
 # of Test files,454,170,1,"9,270",175
 # of Test methods,"2,664","1,091",1,"23,145",175
 Project Age (Years),17,18,4,28,175

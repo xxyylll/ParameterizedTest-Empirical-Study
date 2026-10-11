@@ -8,14 +8,14 @@
 各项定义：
   规模 × 采纳     size_grp × uses_pt 的 3×2 卡方，Cramér's V = sqrt(χ² / (n·(min(r,c)−1)))
   规模 × PAI      全部项目（含 PAI=0）按 size_grp 的 Kruskal-Wallis
-  JUnit 版本      按测试方法的 JUnit 框架分组：JUnit4-only / JUnit5-only / Mixed（两者都有）；
-                  两个都没有的项目（如纯 TestNG）不进这一项。报告：
-                    - 三组采纳率；
-                    - 三组 PAI 中位数（全部项目 / 仅采纳者）与三组 KW；
-                    - JUnit5-only vs JUnit4-only 的 Mann-Whitney U 与 Cliff's δ，分别对 PAI（全部项目，
-                      即文档原口径）、采纳 0/1、PAI（仅采纳者）三种对象。
-                  **全部项目口径下的 PAI 差异几乎全由采纳率造成**（JUnit4-only 大量 PAI=0）；
-                  只看采纳者时差异消失，所以三种都报告。
+  JUnit 版本 × PAI（论文口径）
+                  在采纳者里按 **PT 用的框架**分组：JUnit4-PT-only（junit4_pt > 0 且 junit5_pt = 0）、
+                  JUnit5-PT-only（反之）、两者都有。JUnit5-PT-only vs JUnit4-PT-only 的 PAI 做 Mann-Whitney U
+                  与 Cliff's δ。在旧 174 口径上复现了论文的 n = 29 / 65、p = 0.074。
+  JUnit 版本 × 采纳（补充，对应 logistic 的 Has JUnit5）
+                  在全部项目里按 **测试方法用的框架**分组：JUnit4-only / JUnit5-only / Mixed；两个框架都没有的项目
+                  （如纯 TestNG）不计。报告三组采纳率，以及 JUnit5-only vs JUnit4-only 的采纳（0/1）Mann-Whitney U。
+                  注意它和上面的论文口径是**两种不同的分组**，不要混用。
   套件规模 × PAI  log1p(total_tests) 与 PAI 的 Spearman
   年龄            全部项目按 age_grp 的 PAI Kruskal-Wallis
   多元 logistic   uses_pt ~ Medium + Large + HasJUnit5（Small 为参照；HasJUnit5 = junit5_total > 0）
@@ -88,24 +88,32 @@ def compute(df=None):
     h, p = stats.kruskal(*groups)
     R['size_pai'] = {'medians': [float(g.median()) for g in groups], 'H': h, 'p': p}
 
-    # 3. JUnit 版本
+    # 3a. JUnit 版本 × PAI（论文口径：采纳者内按 PT 的框架分组）
+    for c in ('junit4_pt', 'junit5_pt'):
+        df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0)
+    ad = df[df.uses_pt == 1]
+    pt_groups = {
+        'JUnit4-PT-only': ad[(ad.junit4_pt > 0) & (ad.junit5_pt == 0)],
+        'JUnit5-PT-only': ad[(ad.junit5_pt > 0) & (ad.junit4_pt == 0)],
+        'Both': ad[(ad.junit4_pt > 0) & (ad.junit5_pt > 0)],
+    }
+    R['junit_pt'] = {
+        'groups': [{'group': g, 'n': len(d), 'pai_median': float(d.pai.median()),
+                    'pai_q1': float(d.pai.quantile(.25)), 'pai_q3': float(d.pai.quantile(.75))}
+                   for g, d in pt_groups.items()],
+        'mwu': mwu(pt_groups['JUnit5-PT-only'].pai, pt_groups['JUnit4-PT-only'].pai),
+        'projects_with_junit4_pt': int((df.junit4_pt > 0).sum()),
+        'projects_with_junit5_pt': int((df.junit5_pt > 0).sum()),
+    }
+
+    # 3b. JUnit 版本 × 采纳（补充：全部项目按测试方法的框架分组，对应 logistic 的 Has JUnit5）
     df['jg'] = df.apply(junit_group, axis=1)
     jg = df.dropna(subset=['jg'])
-    ad = jg[jg.uses_pt == 1]
-    pick = lambda d, g, col='pai': d.loc[d.jg == g, col]
-    h_all, p_all = stats.kruskal(*[pick(jg, g) for g in JUNIT_ORDER])
-    h_ad, p_ad = stats.kruskal(*[pick(ad, g) for g in JUNIT_ORDER])
     R['junit'] = {
         'excluded_no_junit': len(df) - len(jg),
-        'groups': [{'group': g, 'n': int((jg.jg == g).sum()), 'adopters': int((ad.jg == g).sum()),
-                    'rate': pick(jg, g, 'uses_pt').mean() * 100,
-                    'pai_median_all': float(pick(jg, g).median()),
-                    'pai_median_adopters': float(pick(ad, g).median())} for g in JUNIT_ORDER],
-        'kw_all': {'H': h_all, 'p': p_all},
-        'kw_adopters': {'H': h_ad, 'p': p_ad},
-        'mwu_pai_all': mwu(pick(jg, 'JUnit5-only'), pick(jg, 'JUnit4-only')),
-        'mwu_adoption': mwu(pick(jg, 'JUnit5-only', 'uses_pt'), pick(jg, 'JUnit4-only', 'uses_pt')),
-        'mwu_pai_adopters': mwu(pick(ad, 'JUnit5-only'), pick(ad, 'JUnit4-only')),
+        'groups': [{'group': g, 'n': int((jg.jg == g).sum()), 'adopters': int(jg.loc[jg.jg == g, 'uses_pt'].sum()),
+                    'rate': jg.loc[jg.jg == g, 'uses_pt'].mean() * 100} for g in JUNIT_ORDER],
+        'mwu_adoption': mwu(jg.loc[jg.jg == 'JUnit5-only', 'uses_pt'], jg.loc[jg.jg == 'JUnit4-only', 'uses_pt']),
     }
 
     # 4. 套件规模 × PAI
@@ -141,18 +149,18 @@ def report(R):
           f"   χ²={s['chi2']:.2f}, df={s['df']}, p={s['p']:.5f}, V={s['V']:.3f}")
     s = R['size_pai']
     print(f"规模 × PAI   中位 PAI {[round(x, 3) for x in s['medians']]}   H={s['H']:.2f}, p={s['p']:.4f}")
+    jp = R['junit_pt']
+    print('JUnit × PAI  （论文口径，采纳者内按 PT 的框架）' + '  '.join(
+        f"{g['group']} n={g['n']} 中位 {g['pai_median']:.2f}%" for g in jp['groups']))
+    t = jp['mwu']
+    print(f"             JUnit5-PT-only vs JUnit4-PT-only：U={t['U']:.0f}, p={t['p']:.3f}, δ={t['delta']:.3f}"
+          f"   （用到 JUnit 4 PT 的项目 {jp['projects_with_junit4_pt']} 个，JUnit 5 PT 的 {jp['projects_with_junit5_pt']} 个）")
     j = R['junit']
-    print('JUnit 版本   采纳率 ' + '  '.join(f"{g['group']} {g['rate']:.1f}%(n={g['n']})" for g in j['groups']) +
-          f"   （无 JUnit 的 {j['excluded_no_junit']} 个不计）")
-    print('             PAI 中位（全部项目）' + '  '.join(f"{g['group']} {g['pai_median_all']:.3f}%" for g in j['groups']) +
-          f"   三组 KW H={j['kw_all']['H']:.2f}, p={j['kw_all']['p']:.2e}")
-    print('             PAI 中位（仅采纳者）' + '  '.join(f"{g['group']} {g['pai_median_adopters']:.3f}%" for g in j['groups']) +
-          f"   三组 KW H={j['kw_adopters']['H']:.2f}, p={j['kw_adopters']['p']:.3f}")
-    for key, label in (('mwu_pai_all', 'PAI，全部项目（文档原口径）'), ('mwu_adoption', '采纳 0/1'),
-                       ('mwu_pai_adopters', 'PAI，仅采纳者')):
-        t = j[key]
-        print(f"             JUnit5-only vs JUnit4-only，{label}：U={t['U']:.0f}, p={t['p']:.2e}, δ={t['delta']:.3f}"
-              f"（n={t['n1']} / {t['n2']}）")
+    print('JUnit × 采纳 （补充，全部项目按测试框架）' + '  '.join(
+        f"{g['group']} {g['rate']:.1f}%(n={g['n']})" for g in j['groups']) +
+        f"   （无 JUnit 的 {j['excluded_no_junit']} 个不计）")
+    t = j['mwu_adoption']
+    print(f"             JUnit5-only vs JUnit4-only 采纳 0/1：U={t['U']:.0f}, p={t['p']:.2e}, δ={t['delta']:.3f}")
     print(f"套件规模×PAI ρ={R['suite_pai']['rho']:.3f}, p={R['suite_pai']['p']:.2e}")
     print(f"年龄 × PAI   H={R['age_pai']['H']:.2f}, p={R['age_pai']['p']:.3f}")
     L = R['logit']
@@ -168,16 +176,18 @@ def to_rows(R):
          f"adoption% {[round(g['rate'], 1) for g in s['groups']]}; df={s['df']}; CramerV={s['V']:.3f}"),
         ('size x PAI', 'Kruskal-Wallis', R['size_pai']['H'], R['size_pai']['p'],
          f"median PAI {[round(x, 3) for x in R['size_pai']['medians']]}"),
-        ('JUnit version x PAI (3 groups, all)', 'Kruskal-Wallis', j['kw_all']['H'], j['kw_all']['p'],
-         'median PAI {' + ', '.join(f"{g['group']}: {g['pai_median_all']:.3f}" for g in j['groups']) + '}'),
-        ('JUnit version x PAI (3 groups, adopters)', 'Kruskal-Wallis', j['kw_adopters']['H'], j['kw_adopters']['p'],
-         'median PAI {' + ', '.join(f"{g['group']}: {g['pai_median_adopters']:.3f}" for g in j['groups']) + '}'),
     ]
-    for key, label in (('mwu_pai_all', 'JUnit5-only vs JUnit4-only: PAI (all)'),
-                       ('mwu_adoption', 'JUnit5-only vs JUnit4-only: adoption 0/1'),
-                       ('mwu_pai_adopters', 'JUnit5-only vs JUnit4-only: PAI (adopters)')):
-        t = j[key]
-        rows.append((label, 'Mann-Whitney U', t['U'], t['p'], f"n={t['n1']}/{t['n2']}; cliffs_delta={t['delta']:.3f}"))
+    jp = R['junit_pt']
+    t = jp['mwu']
+    rows.append(('JUnit PT framework x PAI (adopters; paper)', 'Mann-Whitney U (JUnit5-PT-only vs JUnit4-PT-only)',
+                 t['U'], t['p'],
+                 'n {' + ', '.join(f"{g['group']}: {g['n']} (median {g['pai_median']:.2f})" for g in jp['groups']) + '}'
+                 f"; cliffs_delta={t['delta']:.3f}; projects with JUnit4 PT={jp['projects_with_junit4_pt']},"
+                 f" JUnit5 PT={jp['projects_with_junit5_pt']}"))
+    t = j['mwu_adoption']
+    rows.append(('JUnit test framework x adoption (supplementary)', 'Mann-Whitney U (JUnit5-only vs JUnit4-only)',
+                 t['U'], t['p'], 'rates {' + ', '.join(f"{g['group']}: {g['rate']:.1f}% (n={g['n']})" for g in j['groups'])
+                 + f"}}; cliffs_delta={t['delta']:.3f}"))
     rows += [
         ('test suite size x PAI', 'Spearman (log1p)', R['suite_pai']['rho'], R['suite_pai']['p'], ''),
         ('age x PAI', 'Kruskal-Wallis', R['age_pai']['H'], R['age_pai']['p'], ''),

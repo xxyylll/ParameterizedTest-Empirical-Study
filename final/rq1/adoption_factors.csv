@@ -1,11 +1,8 @@
 factor,test,statistic,p,detail
 size x adoption,chi-square,14.4954,0.0007118,"adoption% [np.float64(44.1), np.float64(60.0), np.float64(77.3)]; df=2; CramerV=0.288"
 size x PAI,Kruskal-Wallis,7.0758,0.02907,"median PAI [0.0, 0.194, 0.978]"
-"JUnit version x PAI (3 groups, all)",Kruskal-Wallis,12.5262,0.001905,"median PAI {JUnit4-only: 0.000, JUnit5-only: 0.906, Mixed: 0.768}"
-"JUnit version x PAI (3 groups, adopters)",Kruskal-Wallis,1.1292,0.5686,"median PAI {JUnit4-only: 3.484, JUnit5-only: 2.180, Mixed: 1.731}"
-JUnit5-only vs JUnit4-only: PAI (all),Mann-Whitney U,2289.0,0.0007736,n=72/47; cliffs_delta=0.353
-JUnit5-only vs JUnit4-only: adoption 0/1,Mann-Whitney U,2266.0,0.000255,n=72/47; cliffs_delta=0.339
-JUnit5-only vs JUnit4-only: PAI (adopters),Mann-Whitney U,491.0,0.7624,n=52/18; cliffs_delta=0.049
+JUnit PT framework x PAI (adopters; paper),Mann-Whitney U (JUnit5-PT-only vs JUnit4-PT-only),1177.0,0.1067,"n {JUnit4-PT-only: 30 (median 1.04), JUnit5-PT-only: 65 (median 2.22), Both: 12 (median 3.92)}; cliffs_delta=0.207; projects with JUnit4 PT=42, JUnit5 PT=77"
+JUnit test framework x adoption (supplementary),Mann-Whitney U (JUnit5-only vs JUnit4-only),2266.0,0.000255,"rates {JUnit4-only: 38.3% (n=47), JUnit5-only: 72.2% (n=72), Mixed: 72.5% (n=51)}; cliffs_delta=0.339"
 test suite size x PAI,Spearman (log1p),0.4219,6.039e-09,
 age x PAI,Kruskal-Wallis,3.3169,0.3453,
 logit: Medium scale (625-1805),OR,2.2457,0.05611,"95%CI [0.979, 5.150]"

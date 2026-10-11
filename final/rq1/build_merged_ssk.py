@@ -18,6 +18,8 @@
   total_tests, pt_total, junit4_pt, junit5_pt, pt_share,
   junit4_total, junit5_total, junit4_param_share, junit5_param_share
       ssk 的 parser 输出，计算逻辑直接调用 pt_summary.py（与旧底表同一份代码）
+  files_java_suffix
+      同一棵树上严格以 .java 结尾的文件数（仅供核对，分组不用它）
   files_java
       SSD 快照 HEAD 上 `git ls-tree -r --name-only HEAD | grep -F '.java' | wc -l`
       —— 与 trigger.sh 生成旧底表时是同一条命令，只是换成 ssk 的那次 clone
@@ -76,14 +78,17 @@ def snapshot_date(key):
 
 
 def files_java(key):
+    """返回 (子串计数, 严格后缀计数)。子串计数即原定义（与 trigger.sh 相同），Size 分组用它；
+    严格后缀计数单独存为 files_java_suffix 列，供核对两种口径的差别。"""
     repo = os.path.join(APACHE_PROJECTS, key)
     if not os.path.isdir(repo):
-        return None
+        return None, None
     out = subprocess.run(['git', '-C', repo, 'ls-tree', '-r', '--name-only', 'HEAD'],
                          capture_output=True, text=True)
     if out.returncode != 0:
-        return None
-    return sum(1 for line in out.stdout.splitlines() if '.java' in line)
+        return None, None
+    lines = out.stdout.splitlines()
+    return sum('.java' in x for x in lines), sum(x.endswith('.java') for x in lines)
 
 
 def main():
@@ -93,7 +98,7 @@ def main():
     inv = {v: k for k, v in json.load(open(NAME_MAP)).items()}
 
     old = list(csv.DictReader(open(OLD)))
-    fields = list(old[0].keys())
+    fields = list(old[0].keys()) + ['files_java_suffix']
 
     rows, problems = [], []
     todo = [(r['project'], r) for r in old] + [(p, None) for p in ADDED]
@@ -106,12 +111,12 @@ def main():
             # 底表保持完整：原样沿用旧行。目前只有 Commons-HttpClient，它在 DATA_INTEGRITY_EXCL 里，
             # 本就不进 RQ1 的分析集合，所以不影响任何结果。
             problems.append(f'{project}: 没有 ssk parser 输出，原样沿用旧底表的行')
-            rows.append(dict(base))
+            rows.append({**base, 'files_java_suffix': ''})
             continue
         recs = ps.load_json_records(os.path.join(PARSER_SSK, f'{key}_output.json'))[0]
         total, pt, j4pt, j5pt, share = ps.compute_stats(recs)
         j4t, j5t, j4s, j5s = ps.compute_flavor_breakdown(recs)
-        fj = files_java(key)
+        fj, fj_suffix = files_java(key)
         if fj is None:
             problems.append(f'{project}: SSD 上没有可读的源码快照，files_java 沿用旧值')
             fj = base['files_java'] if base else ''
@@ -122,6 +127,7 @@ def main():
             'junit4_total': j4t, 'junit5_total': j5t,
             'junit4_param_share': j4s, 'junit5_param_share': j5s,
             'files_java': float(fj) if fj != '' else '',
+            'files_java_suffix': fj_suffix if fj_suffix is not None else '',
             'first_commit_iso': first_iso, 'uses_pt': int(pt > 0), 'categories': cats,
             'first_commit': year, 'age': (YEAR_NOW - year) if year != '' else '',
         })

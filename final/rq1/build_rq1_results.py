@@ -91,13 +91,17 @@ def main():
       f'（Small / Medium / Large），χ² p = {fp(R["size_adoption"]["p"])}；'
       f'控制 JUnit 版本后 Large 的 OR = {lv["Large scale (>=1806)"]["OR"]:.2f}。')
     # 3–5 条是定性判断，措辞由 p 值决定，避免数字更新后结论文字过时
-    adp = j['mwu_pai_adopters']
+    jp = R['junit_pt']
+    jpg = {g['group']: g for g in jp['groups']}
+    adp = jp['mwu']
     more_likely = lv['Has JUnit5']['p'] < 0.05 and j['mwu_adoption']['p'] < 0.05
     head3 = ('**用了 JUnit 5 的项目更可能采纳' if more_likely else '**JUnit 版本与采纳无显著关联') + \
-            ('，但采纳后用得并不更多。**' if adp['p'] >= 0.05 else '，且采纳后 PAI 也有差异。**')
-    w(f'3. {head3} 采纳率 JUnit5-only {jgrp["JUnit5-only"]["rate"]:.1f}% vs JUnit4-only {jgrp["JUnit4-only"]["rate"]:.1f}%，'
-      f'logistic 中 Has JUnit5 的 OR = {lv["Has JUnit5"]["OR"]:.2f}（p = {fp(lv["Has JUnit5"]["p"])}）；'
-      f'只看采纳者时两组的 PAI：p = {fp(adp["p"])}，δ = {adp["delta"]:.3f}（{delta_mag(adp["delta"])}）。')
+            ('，但采纳后用得并不显著更多。**' if adp['p'] >= 0.05 else '，且采纳后 PAI 也有显著差异。**')
+    w(f'3. {head3} 采纳率 JUnit5-only {jgrp["JUnit5-only"]["rate"]:.1f}% vs JUnit4-only {jgrp["JUnit4-only"]["rate"]:.1f}%'
+      f'（按测试框架），logistic 中 Has JUnit5 的 OR = {lv["Has JUnit5"]["OR"]:.2f}（p = {fp(lv["Has JUnit5"]["p"])}）；'
+      f'采纳者里按 PT 的框架分组，PAI 中位 JUnit5-PT-only {jpg["JUnit5-PT-only"]["pai_median"]:.2f}%（n = {jpg["JUnit5-PT-only"]["n"]}）'
+      f' vs JUnit4-PT-only {jpg["JUnit4-PT-only"]["pai_median"]:.2f}%（n = {jpg["JUnit4-PT-only"]["n"]}），'
+      f'p = {fp(adp["p"])}，δ = {adp["delta"]:.3f}（{delta_mag(adp["delta"])}）。')
 
     age_dom_p = {
         '年龄 × 采纳率': adoption_stats(df, 'age_grp', rq1_bins.AGE_LABELS)[2],
@@ -129,6 +133,26 @@ def main():
     for r in t1.itertuples():
         w(f'| {r.metric} | {r.mean} | {r.median} | {r.min} | {r.max} |')
     w('')
+    fj = pd.to_numeric(df.files_java, errors='coerce')
+    fs = pd.to_numeric(df.get('files_java_suffix'), errors='coerce')
+    if fs.notna().all():
+        diff = fj - fs
+        g = lambda x: pd.cut(x, bins=rq1_bins.SIZE_BINS, labels=rq1_bins.SIZE_LABELS, right=rq1_bins.SIZE_RIGHT).astype(str)
+        moved = int((g(fj) != g(fs)).sum())
+        w('「# of Java files」与 Size 分组是同一列 `files_java`：ssk 快照 HEAD 上 `git ls-tree -r --name-only HEAD | grep -F .java`'
+          ' 的行数（与旧底表同一条命令）。它是子串匹配，会多计路径中间含 `.java` 的少数文件（如 `*.java.template`、'
+          f'`web.javascript.debugger/` 目录下的文件）。按严格的 `.java` 后缀计（`files_java_suffix` 列），{n} 个项目里 '
+          f'{int((diff > 0).sum())} 个有差异、合计 {int(diff.sum()):,} 个（{diff.sum() / fj.sum() * 100:.2f}%），'
+          f'均值 {fs.mean():,.0f}、最大值 {fs.max():,.0f}，换 Size 组的项目 {moved} 个。\n')
+    old = pd.read_csv(os.path.join(HERE, 'merged_data_218.csv'))
+    rq_old = set(old.project) & set(df.project)
+    o = old.set_index('project').loc[sorted(rq_old), 'files_java'].astype(float)
+    nw = df.set_index('project')['files_java'].astype(float)
+    dlt = nw.loc[o.index] - o
+    top = dlt.abs().idxmax()
+    w(f'与旧底表（{len(o)} 个项目，均值 {o.mean():,.0f}）相比，均值升到 {nw.mean():,.0f}，主要来自 {top} 一个项目'
+      f'（{o[top]:,.0f} → {nw[top]:,.0f}）；若它保持旧值，均值为 {(nw.sum() - dlt[top]) / len(nw):,.0f}。'
+      f'旧底表的来源快照已不在磁盘上，旧值无法复现。\n')
 
     # ---------------- 2. 描述统计
     w('## 2. 采纳的描述统计\n')
@@ -142,20 +166,23 @@ def main():
       f'（Q1–Q3 = {q(ad.pai, .25):.3f}–{q(ad.pai, .75):.3f}%） |')
     w(f'| PDAR，采纳者 {len(pdar)} 个：中位 / 均值 | **{pdar.pdar.median():.2f}%** / {pdar.pdar.mean():.2f}%'
       f'（Q1–Q3 = {q(pdar.pdar, .25):.2f}–{q(pdar.pdar, .75):.2f}%） |')
-    w(f'| PT 总数 | {int(df.pt_total.sum()):,}（JUnit 4 {int(df.junit4_pt.sum()):,} / JUnit 5 {int(df.junit5_pt.sum()):,}） |\n')
+    w(f'| PT 总数 | {int(df.pt_total.sum()):,}（JUnit 4 {int(df.junit4_pt.sum()):,} = {df.junit4_pt.sum() / df.pt_total.sum() * 100:.1f}%，'
+      f'{R["junit_pt"]["projects_with_junit4_pt"]} 个项目；JUnit 5 {int(df.junit5_pt.sum()):,} = {df.junit5_pt.sum() / df.pt_total.sum() * 100:.1f}%，'
+      f'{R["junit_pt"]["projects_with_junit5_pt"]} 个项目） |\n')
     w('PAI = 项目内 PT 数 / 测试方法总数。PDAR = 改过 PT 的开发者 / 改过测试代码的开发者，只在采纳者上计算（v4 口径）。\n')
 
     # ---------------- 3. 分组采纳率
     w('## 3. 采纳率按项目特征分组（`pt_adoption_by_groups.png`）\n')
-    w('| 因素 | 组 | 采纳 / 项目数 | 采纳率 | χ² | p |\n|---|---|---:|---:|---:|---:|')
+    w('| 因素 | 组 | 采纳 / 项目数 | 采纳率 | χ² | p | Cramér\'s V |\n|---|---|---:|---:|---:|---:|---:|')
     for name, col, order in (('Size', 'size_grp', rq1_bins.SIZE_LABELS),
                              ('Age', 'age_grp', rq1_bins.AGE_LABELS),
                              ('Domain', 'domain_grp', rq1_bins.DOMAIN_ORDER)):
         s, chi2, p = adoption_stats(df, col, order)
         for i, (g, r) in enumerate(s.iterrows()):
-            tail = f'{chi2:.2f} | {fp(p)} {sig(p)}' if i == 0 else ' | '
+            v = (chi2 / (s.total.sum() * (min(len(s), 2) - 1))) ** 0.5
+            tail = f'{chi2:.2f} | {fp(p)} {sig(p)} | {v:.3f}' if i == 0 else ' |  | '
             w(f'| {name if i == 0 else ""} | {g} | {int(r.pt_users)}/{int(r.total)} | {r.pct:.1f}% | {tail} |')
-    w(f'\n规模的 Cramér\'s V = {R["size_adoption"]["V"]:.3f}。\n')
+    w('\nCramér\'s V = √(χ² / (N · (min(行, 列) − 1)))；这里列数为 2，即 √(χ² / N)。\n')
 
     # ---------------- 4. 影响因素
     w('## 4. 影响因素\n')
@@ -169,25 +196,29 @@ def main():
       f'它们在本语料上分出 {", ".join(str(g["n"]) for g in size)} 个项目，**不是本语料的三分位**。\n')
 
     w('### 4.2 JUnit 版本\n')
-    w(f'按测试方法的 JUnit 框架把项目分成三组；两个框架都没有的 {j["excluded_no_junit"]} 个项目（如纯 TestNG）不计。\n')
-    w('| 组 | 项目数 | 采纳率 | PAI 中位（全部项目） | PAI 中位（仅采纳者） |\n|---|---:|---:|---:|---:|')
+    t = jp['mwu']
+    w('**PAI（论文口径）：在采纳者里按 PT 用的框架分组。**\n')
+    w('| 组 | 项目数 | PAI 中位 (IQR) |\n|---|---:|---|')
+    for g in jp['groups']:
+        label = {'JUnit4-PT-only': '只用 JUnit 4 写 PT', 'JUnit5-PT-only': '只用 JUnit 5 写 PT',
+                 'Both': '两种都用'}[g['group']]
+        w(f'| {label}（{g["group"]}） | {g["n"]} | {g["pai_median"]:.2f}% ({g["pai_q1"]:.2f}–{g["pai_q3"]:.2f}) |')
+    w(f'\nJUnit5-PT-only vs JUnit4-PT-only：Mann-Whitney U = {t["U"]:.0f}，p = {fp(t["p"])} {sig(t["p"])}，'
+      f'Cliff\'s δ = {t["delta"]:.3f}（{delta_mag(t["delta"])}）。'
+      f'用到 JUnit 4 PT 的项目共 {jp["projects_with_junit4_pt"]} 个，用到 JUnit 5 PT 的 {jp["projects_with_junit5_pt"]} 个。\n')
+    w(f'**采纳（补充）：在全部项目里按测试方法用的框架分组。** 这是 4.4 节 logistic 回归中 Has JUnit5 变量的口径；'
+      f'两个框架都没有的 {j["excluded_no_junit"]} 个项目（如纯 TestNG）不计。**它与上面的 PAI 分组不是同一种分组。**\n')
+    w('| 组 | 项目数 | 采纳率 |\n|---|---:|---:|')
     for g in j['groups']:
-        w(f'| {g["group"]} | {g["n"]} | {g["rate"]:.1f}% | {g["pai_median_all"]:.3f}% | '
-          f'{g["pai_median_adopters"]:.3f}%（n={g["adopters"]}） |')
-    w('\n| 检验（JUnit5-only vs JUnit4-only） | U | p | Cliff\'s δ |\n|---|---:|---:|---|')
-    for key, label in (('mwu_adoption', '采纳 0/1'), ('mwu_pai_all', 'PAI，全部项目'),
-                       ('mwu_pai_adopters', 'PAI，仅采纳者')):
-        t = j[key]
-        w(f'| {label}（n = {t["n1"]} / {t["n2"]}） | {t["U"]:.0f} | {fp(t["p"])} {sig(t["p"])} | '
-          f'{t["delta"]:.3f}（{delta_mag(t["delta"])}） |')
-    w(f'| 三组 KW，PAI 全部项目 | H = {j["kw_all"]["H"]:.2f} | {fp(j["kw_all"]["p"])} {sig(j["kw_all"]["p"])} | |')
-    w(f'| 三组 KW，PAI 仅采纳者 | H = {j["kw_adopters"]["H"]:.2f} | {fp(j["kw_adopters"]["p"])} '
-      f'{sig(j["kw_adopters"]["p"])} | |')
-    w(f'\n> **解读要点。** 全部项目口径下 JUnit4-only 的 PAI 中位数是 {jgrp["JUnit4-only"]["pai_median_all"]:.3f}%，'
-      f'因为它只有 {jgrp["JUnit4-only"]["rate"]:.1f}% 的项目采纳、其余 PAI 都是 0。所以「JUnit5-only 的 PAI 更高」'
-      f'几乎完全来自采纳率的差别。只看采纳者，JUnit4-only 的中位数（{jgrp["JUnit4-only"]["pai_median_adopters"]:.2f}%）'
-      f'反而不低于 JUnit5-only（{jgrp["JUnit5-only"]["pai_median_adopters"]:.2f}%），差异不显著。'
-      f'论文里应写「JUnit 5 项目更可能采纳 PT」，而不是「JUnit 5 项目用得更多」。\n')
+        w(f'| {g["group"]} | {g["n"]} | {g["rate"]:.1f}%（{g["adopters"]}/{g["n"]}） |')
+    t = j['mwu_adoption']
+    w(f'\nJUnit5-only vs JUnit4-only 的采纳（0/1）：U = {t["U"]:.0f}，p = {fp(t["p"])} {sig(t["p"])}，'
+      f'δ = {t["delta"]:.3f}（{delta_mag(t["delta"])}）。\n')
+    if j['mwu_adoption']['p'] < 0.05 and jp['mwu']['p'] >= 0.05:
+        w('> **解读要点。** 用 JUnit 5 的项目显著更可能采纳 PT；但在已采纳的项目里，只用 JUnit 5 写 PT 的项目 PAI 中位数虽更高，'
+          '差异不显著。论文里应写「JUnit 5 项目更可能采纳 PT」，而不是「JUnit 5 项目用得更多」。\n')
+    else:
+        w(f'> **解读要点。** 采纳：p = {fp(j["mwu_adoption"]["p"])}；采纳者内的 PAI：p = {fp(jp["mwu"]["p"])}。\n')
 
     w('### 4.3 测试套件规模与年龄\n')
     w(f'- 测试套件规模 × PAI：Spearman ρ = {R["suite_pai"]["rho"]:.3f}（log1p 变换），'

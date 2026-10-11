@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.dirname(HERE))
 from rq1_bins import load                            # noqa: E402
 from paths import PARSER_SSK, PROJECT_NAME_MAP, require  # noqa: E402
 
-ROWS = [('# of Total files', 'files_java'), ('# of Test files', 'test_files'),
+ROWS = [('# of Java files', 'files_java'), ('# of Test files', 'test_files'),
         ('# of Test methods', 'total_tests'), ('Project Age (Years)', 'age')]
 
 

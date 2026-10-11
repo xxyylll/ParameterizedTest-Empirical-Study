@@ -183,7 +183,8 @@ PDAR 恒为 0，计入只会把中位数拉向 0 而不反映真实情况。
 |---|---|---|
 | **项目规模**（files_java，固定切点 **625 / 1806**，左闭右开） | 卡方 + Cramér's V | 采纳率 44.1%(<625) / 60.0%(625–1805) / **77.3%(≥1806)**；χ²=14.50, df=2, **p=0.00071**, V=0.288 |
 | 规模 × PAI | Kruskal-Wallis | 中位 PAI 0% / 0.194% / **0.978%**；H=7.08, **p=0.029** |
-| **JUnit 版本** | Mann-Whitney U + Cliff's δ | 采纳率 JUnit4-only **38.3%**(n=47) vs JUnit5-only **72.2%**(n=72) vs Mixed 72.5%(n=51)；JUnit5-only vs JUnit4-only 的 **PAI**：U=2289, **p=7.7e-4**, **δ=0.353（medium）**（对采纳 0/1 做同一检验：U=2266, p=2.6e-4, δ=0.339）。**只看采纳者则无差异**：PAI 中位 JUnit4-only 3.48% vs JUnit5-only 2.18%，U=491, p=0.762, δ=0.049（negligible）—— 全部项目口径下的 PAI 差异几乎完全来自采纳率 |
+| **JUnit 版本 × PAI**（论文口径：采纳者内按 **PT 用的框架**分组） | Mann-Whitney U + Cliff's δ | 只用 JUnit 4 写 PT 的 **30** 个（PAI 中位 1.04%）vs 只用 JUnit 5 写 PT 的 **65** 个（2.22%），两者都用的 12 个不计；U=1177, **p=0.107**, δ=0.207（small）—— 不显著（174 口径时为 29 / 65，p=0.074） |
+| JUnit 版本 × 采纳（补充：全部项目按**测试方法**的框架分组，对应下面 logistic 的 Has JUnit5） | Mann-Whitney U | 采纳率 JUnit4-only **38.3%**(n=47) vs JUnit5-only **72.2%**(n=72) vs Mixed 72.5%(n=51)；U=2266, **p=2.6e-4**, δ=0.339（medium）。与上一行是两种不同的分组 |
 | 测试套件规模 × PAI | Spearman（log 变换） | **ρ=0.422**, p=6.0e-9 |
 | 项目年龄（首次提交分四档） | Kruskal-Wallis | 不显著（H=3.32, p=0.345） |
 
