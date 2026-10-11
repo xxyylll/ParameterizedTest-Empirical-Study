@@ -1,38 +1,17 @@
-# ---- 大体积数据：不进 Git，走 DOI 归档 ----
-parser_result/                 # 旧 clone 的 parser 产物，624 MB，已废弃
-parser_result_ssk/             # 轻量 parser 的逐项目 JSON，~1.5 GB
-archive/                       # 废弃产物，77 MB，仅供回溯
-releases/
-selected_releases/
-trend_result/
-temp_project/
-
-# ---- 运行时与本地配置 ----
+# External data and intermediate outputs (see README §8)
+data/
 .env
-*.log
-api_keys.env
+
+# Python / tooling
 __pycache__/
 *.pyc
 .venv/
 venv/
+*.log
+logs/
+**/outputs/
 
-# ---- 系统文件 ----
+# OS / editor
 .DS_Store
 ._*
 .idea/
-
-# 脚本运行日志（每次跑都会新生成，不入库）
-final/*/logs/
-logs/
-
-# PDAR v4 第一阶段的逐提交表（189 MB，外部数据，见 final/rq1/pdar/PDAR_METHOD.md）
-/result_v3/
-/result_v3.zip
-# 批处理日志
-final/rq1/results/pdar/result_v4*/logs/
-
-# RQ2.2 流水线与 RQ3 解压出的指标表（中间产物，可重建）
-rq22_work/
-rq3_work/
-# method_source_analysis.py 作为脚本运行时写的输出
-final/**/outputs/

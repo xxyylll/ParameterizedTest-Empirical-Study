@@ -1,0 +1,263 @@
+JDO
+.NET Ant Library
+Accumulo
+ActiveMQ
+Airavata
+Ambari
+Anakia
+Ant
+AntUnit
+Any23 (in the Attic)
+Apex (in the Attic)
+Archiva (in the Attic)
+Aries
+Arrow
+Avro
+Axiom
+Axis2
+Beam
+Beehive (in the Attic)
+Bigtop
+BookKeeper
+Brooklyn
+BVal
+Calcite
+Camel
+CarbonData
+Cassandra
+Causeway
+Cayenne
+Chainsaw
+Chemistry (in the Attic)
+Chukwa (in the Attic)
+Clerezza (in the Attic)
+Click (in the Attic)
+CloudStack
+Cocoon (in the Attic)
+Commons BCEL
+Commons BeanUtils
+Commons BSF
+Commons Chain (Dormant)
+Commons CLI
+Commons Codec
+Commons Collections
+Commons Compress
+Commons Configuration
+Commons Crypto
+Commons CSV
+Commons Daemon
+Commons DBCP
+Commons DbUtils
+Commons Digester
+Commons Email
+Commons Exec
+Commons FileUpload
+Commons Functor (Dormant)
+Commons Geometry
+Commons HttpClient
+Commons Imaging
+Commons IO
+Commons JCI
+Commons JCS
+Commons Jelly
+Commons JEXL
+Commons JXPath
+Commons Lang
+Commons Logging
+Commons Math
+Commons Net
+Commons Numbers
+Commons OGNL (Dormant)
+Commons Pool
+Commons Proxy (Dormant)
+Commons RDF
+Commons RNG
+Commons SCXML
+Commons Statistics
+Commons Text
+Commons Validator
+Commons VFS
+Commons Weaver
+Compress Ant Library
+Continuum (in the Attic)
+Cordova
+Crunch (in the Attic)
+cTAKES
+Curator
+CXF
+Daffodil
+DataFu
+datasketches
+DeltaSpike
+Derby
+DeviceMap (in the Attic)
+DirectMemory (in the Attic)
+Directory
+Directory Server
+Directory Studio
+Doris
+Drill
+Druid
+ECS (in the Attic)
+Empire-db
+Etch (in the Attic)
+EventMesh
+Excalibur (in the Attic)
+Falcon (in the Attic)
+Felix
+Fineract
+Flink
+Flume
+Fluo
+Fluo Recipes
+Fluo YARN
+FOP
+Forrest (in the Attic)
+Fortress
+FreeMarker
+FtpServer
+Geode
+Geronimo
+Giraph (in the Attic)
+Gobblin
+Gora (in the Attic)
+Groovy
+Guacamole
+Hadoop
+Hama (in the Attic)
+Harmony (in the Attic)
+HBase
+Helix
+Hive
+Hivemind (in the Attic)
+Hop
+HttpComponents Client
+HttpComponents Core
+Hudi
+Iceberg
+Ignite
+Impala
+InLong
+IoTDB
+Ivy
+IvyDE
+Jackrabbit
+Jakarta Cactus (in the Attic)
+JAMES
+jclouds (in the Attic)
+Jena
+JMeter
+JSPWiki
+Karaf
+Kerby
+Knox
+Kylin
+Lens (in the Attic)
+Lenya (in the Attic)
+Linkis
+Log4j
+Lucene Core
+Mahout
+ManifoldCF
+Marmotta (in the Attic)
+Maven
+Maven Doxia
+MetaModel (in the Attic)
+MINA
+MRUnit (in the Attic)
+MyFaces
+NetBeans
+NiFi
+Nutch
+ODE (in the Attic)
+OFBiz
+Olingo
+Oltu - Parent (in the Attic)
+OODT (in the Attic)
+Oozie (in the Attic)
+OpenJPA
+OpenMeetings
+OpenNLP
+OpenWebBeans
+ORC
+ORO (in the Attic)
+Ozone
+Parquet
+PDFBox
+Phoenix
+Pig
+Pinot
+Pivot (in the Attic)
+PLC4X
+POI
+Polygene (in the Attic)
+Portals (in the Attic)
+Props Ant Library
+Pulsar
+Qpid
+Ranger
+Rat
+REEF (in the Attic)
+Regexp (in the Attic)
+River (in the Attic)
+Roller
+Sandesha2
+Santuario
+SeaTunnel
+ServiceMix
+Shale (in the Attic)
+Shindig (in the Attic)
+Shiro
+SkyWalking
+Sling
+Solr
+Spark
+Spatial Information System
+Sqoop (in the Attic)
+SSHD
+Stanbol (in the Attic)
+Storm
+Stratos (in the Attic)
+Struts
+Submarine (in the Attic)
+Synapse
+Syncope
+Tajo (in the Attic)
+Tapestry
+Tentacles
+Texen
+Tez
+Thrift
+Tika
+Tiles (in the Attic)
+Tobago
+Tomcat
+TomEE
+Torque
+TsFile
+Turbine
+Tuscany (in the Attic)
+UIMA
+Unomi
+Velocity
+Velocity DVSL
+Velocity Tools
+VSS Ant Library
+VXQuery (in the Attic)
+Vysper
+Whirr (in the Attic)
+Whisker
+Wicket
+Wink (in the Attic)
+Woden
+Wookie (in the Attic)
+Xalan for Java XSLT Processor
+Xerces for Java XML Parser
+Xindice (in the Attic)
+XML Commons External
+XML Commons Resolver
+XML Graphics Commons
+XMLBeans
+Yetus
+Zeppelin
+ZooKeeper
