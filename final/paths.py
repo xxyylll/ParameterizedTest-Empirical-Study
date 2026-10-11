@@ -41,22 +41,36 @@ PDAR_WORK = _env('PT_PDAR_WORK', os.path.join(SSD, 'pdar_projects'))
 # PDAR v4 第一阶段（pdar_v4_commit_table.py）的逐项目提交表；第二阶段只读它。
 # 189 MB，不随仓库分发（见 rq1/pdar/PDAR_METHOD.md）。
 PDAR_RESULT = _env('PT_PDAR_RESULT', os.path.join(REPO, 'result_v3', 'result_v3'))
-PDAR_V4_RESULT = os.path.join(FINAL, 'rq1', 'pdar', 'result_v4')
+# PDAR_V4_RESULT 等结果目录在下面按 RQ 统一定义
 
 APACHE_PROJECTS = os.path.join(SSD, 'apache-projects')     # 源码快照 + 各项目的 AAA/
 DUP_RESULT = os.path.join(SSD, 'dup_result_ssk')           # CCFinderSW 输出
 
 # 随 final/ 一同分发的小文件
 PROJECT_NAME_MAP = os.path.join(FINAL, 'project_name_map.json')
-RQ1_DIR = os.path.join(FINAL, 'rq1')
-RQ2_1_DIR = os.path.join(FINAL, 'rq2_1')
-RQ2_2_DIR = os.path.join(FINAL, 'rq2_2')
-RQ3_1_DIR = os.path.join(FINAL, 'rq3_1')
+CORPUS = os.path.join(FINAL, 'corpus')
+RQ3_PROJECTS = os.path.join(CORPUS, 'rq3_candidates_47.txt')     # RQ3 候选 47 个
+RQ3_EXCLUDED = os.path.join(CORPUS, 'rq3_excluded.txt')          # 其中排除的（hive）
 
-MERGED_DATA = os.path.join(RQ1_DIR, 'merged_data_219_ssk.csv')   # 218 + Parquet，计数取自 ssk 快照；见 rq1/build_merged_ssk.py
-PDAR_SUMMARY = os.path.join(RQ1_DIR, 'pdar_summary_ssk.csv')
-PT_PROJECTS_LIST = os.path.join(RQ1_DIR, 'pdar', 'pt_projects_ssk.txt')
+# 每个 RQ 分 code/ 与 results/：脚本放 code/，它们产出的表、图、汇总文档放 results/
+RQ1_CODE = os.path.join(FINAL, 'rq1', 'code')
+RQ1_RESULTS = os.path.join(FINAL, 'rq1', 'results')
+RQ2_1_CODE = os.path.join(FINAL, 'rq2', 'code', 'rq2_1')
+RQ2_1_RESULTS = os.path.join(FINAL, 'rq2', 'results', 'rq2_1')
+RQ2_2_CODE = os.path.join(FINAL, 'rq2', 'code', 'rq2_2')
+RQ2_2_RESULTS = os.path.join(FINAL, 'rq2', 'results', 'rq2_2')
+RQ2_2_IRR_RESULTS = os.path.join(RQ2_2_RESULTS, 'irr')
+RQ3_1_CODE = os.path.join(FINAL, 'rq3', 'code', 'rq3_1')
+RQ3_1_RESULTS = os.path.join(FINAL, 'rq3', 'results', 'rq3_1')
+RQ3_2_CODE = os.path.join(FINAL, 'rq3', 'code', 'rq3_2')
+RQ3_2_RESULTS = os.path.join(FINAL, 'rq3', 'results', 'rq3_2')
 
+MERGED_DATA = os.path.join(RQ1_RESULTS, 'merged_data_219_ssk.csv')   # 218 + Parquet，计数取自 ssk 快照；见 rq1/code/build_merged_ssk.py
+PDAR_SUMMARY = os.path.join(RQ1_RESULTS, 'pdar_summary_ssk.csv')
+PT_PROJECTS_LIST = os.path.join(RQ1_CODE, 'pdar', 'pt_projects_ssk.txt')
+PDAR_V4_RESULT = os.path.join(RQ1_RESULTS, 'pdar', 'result_v4')
+PDAR_V4_PICKAXE = os.path.join(RQ1_RESULTS, 'pdar', 'result_v4_pickaxe')
+PDAR_V3_PUBLISHED = os.path.join(RQ1_RESULTS, 'pdar', 'pdar_v3_published.csv')
 
 def require(path, what):
     """路径不存在时给出能照着修的报错，而不是裸的 FileNotFoundError。"""
