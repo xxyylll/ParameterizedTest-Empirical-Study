@@ -142,7 +142,8 @@ def main():
 
     fig.subplots_adjust(left=0.215, right=0.985, top=0.775, bottom=0.355)
     for ext in ('png', 'pdf'):
-        fig.savefig(os.path.join(RESULTS_DIR, f'dependency_distribution.{ext}'), dpi=200, facecolor=SURFACE)
+        fig.savefig(os.path.join(RESULTS_DIR, f'dependency_distribution.{ext}'), dpi=200, facecolor=SURFACE,
+                    metadata={'CreationDate': None} if ext == 'pdf' else None)
     print('wrote dependency_distribution.png / .pdf')
 
     with open(os.path.join(RESULTS_DIR, 'dependency_distribution.csv'), 'w', newline='') as f:

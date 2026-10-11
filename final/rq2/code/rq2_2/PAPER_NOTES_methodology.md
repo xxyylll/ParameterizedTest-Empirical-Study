@@ -1,13 +1,13 @@
 # 论文方法学说明（RQ2.2 / RQ3）
 
 面向：写论文时需要在 Methodology / Threats to Validity 里如实交代的口径与已知局限。
-数据截止 2026-09-28，对应 `full*/rq22_*_all.csv` 与 `Complexity_Analysis/test_metrics_all_*.csv`。
+数据截止 2026-09-28，对应 `rq2/results/rq2_2/rq22_*_all.csv` 与 `rq3/results/rq3_1/test_metrics_all_46projects_v2.csv.gz`。
 
 ---
 
 ## 1. 语料：46 个 Apache Java 项目（47 减 hive）
 
-RQ2.2 和 RQ3 用**同一套** 46 个项目 —— 两边脚本读同一个 `rq2/rq2_2_structure/excluded_projects.txt`，
+RQ2.2 和 RQ3 用**同一套** 46 个项目 —— 两边脚本读同一个排除名单 `corpus/rq3_excluded.txt`（原 `rq2/rq2_2_structure/excluded_projects.txt`），
 所以跨 RQ 的对照是成立的。
 
 ### 为什么排除 hive

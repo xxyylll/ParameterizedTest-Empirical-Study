@@ -160,7 +160,8 @@ fig.legend(handles, labels, frameon=False, fontsize=9, ncol=6, loc='upper left',
 
 fig.subplots_adjust(top=0.825, bottom=0.095, left=0.075, right=0.985)
 for ext in ('png', 'pdf'):
-    fig.savefig(os.path.join(RESULTS_DIR, f'nsets_distribution.{ext}'), dpi=200, facecolor=SURFACE)
+    fig.savefig(os.path.join(RESULTS_DIR, f'nsets_distribution.{ext}'), dpi=200, facecolor=SURFACE,
+                    metadata={'CreationDate': None} if ext == 'pdf' else None)
 print('wrote nsets_distribution.png / .pdf')
 
 with open(os.path.join(RESULTS_DIR, 'nsets_summary.csv'), 'w', newline='') as f:

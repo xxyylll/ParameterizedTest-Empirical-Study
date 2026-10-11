@@ -18,6 +18,9 @@
   PT_MANUAL       人工标注表目录             默认 $PT_SSD/rq2.2_manual
   PT_PDAR_WORK    PDAR 的全量克隆工作区        默认 $PT_SSD/pdar_projects
   PT_PDAR_RESULT  PDAR v4 第一阶段的逐提交表（result_v3） 默认 <repo>/result_v3/result_v3
+  PT_RQ22_WORK    RQ2.2 流水线的中间产物目录       默认 <repo>/rq22_work
+  PT_AAA_JAR      Javalang-analyzing-cli 的 fat jar  默认 ~/Javalang-analyzing-cli/build/libs/…-1.3.2-all.jar
+  PT_JAVA         java 可执行文件（JDK 21）         默认 java
 
 用法：
     from paths import FINAL, SSD, APACHE_PROJECTS, require
@@ -43,7 +46,11 @@ PDAR_WORK = _env('PT_PDAR_WORK', os.path.join(SSD, 'pdar_projects'))
 PDAR_RESULT = _env('PT_PDAR_RESULT', os.path.join(REPO, 'result_v3', 'result_v3'))
 # PDAR_V4_RESULT 等结果目录在下面按 RQ 统一定义
 
-APACHE_PROJECTS = os.path.join(SSD, 'apache-projects')     # 源码快照 + 各项目的 AAA/
+APACHE_PROJECTS = os.path.join(SSD, 'apache-projects')
+# RQ2.2 流水线（rq2/code/rq2_2/pipeline/）：中间产物目录、AAA 分析器 jar（提供 JDT，Java 分析器编译与运行都要）、java
+RQ22_WORK = _env('PT_RQ22_WORK', os.path.join(REPO, 'rq22_work'))
+AAA_JAR = _env('PT_AAA_JAR', os.path.expanduser('~/Javalang-analyzing-cli/build/libs/Javalang-analyzing-cli-1.3.2-all.jar'))
+JAVA_BIN = _env('PT_JAVA', 'java')     # 源码快照 + 各项目的 AAA/
 DUP_RESULT = os.path.join(SSD, 'dup_result_ssk')           # CCFinderSW 输出
 
 # 随 final/ 一同分发的小文件
