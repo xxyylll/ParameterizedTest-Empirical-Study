@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """RQ1「影响因素」：项目规模、JUnit 版本、测试套件规模、年龄与 PT 采纳 / PAI 的关系，以及多元 logistic 回归。
 
-这些数字此前只存在于 METHOD_complete.md / MANIFEST.md 里 —— 是在早先会话中临时算出、直接写进文档的，
+这些数字此前只存在于 METHOD_complete.md 与早先的清单文档里 —— 是在早先会话中临时算出、直接写进文档的，
 没有留下脚本。本文件把它们固定下来，并统一从 rq1_bins.load() 取语料（与 Table 3 等同源）。
 在旧 174 口径（--merged merged_data_218.csv）上逐位复现过文档的每个数。
 
