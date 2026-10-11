@@ -27,6 +27,12 @@ from adoption_by_groups_figure import adoption_stats  # noqa: E402
 
 OUT = os.path.join(HERE, 'RQ1_RESULTS.md')
 
+# Fig. 2 两张直方图的分箱，均为左闭右开（与 PDAR_METHOD.md 5.2 一致）
+PAI_BINS = [0, 1, 5, 10, 20, float('inf')]
+PAI_LABELS = ['<1%', '1–5%', '5–10%', '10–20%', '≥20%']
+PDAR_BINS = [0, 5, 10, 15, 20, 25, 30, 40, 50, 100.0001]
+PDAR_LABELS = ['[0,5)', '[5,10)', '[10,15)', '[15,20)', '[20,25)', '[25,30)', '[30,40)', '[40,50)', '[50,100]']
+
 
 def fp(p):
     """p 值格式：< 0.001 用科学计数法，否则 3 位小数。"""
@@ -170,6 +176,39 @@ def main():
       f'{R["junit_pt"]["projects_with_junit4_pt"]} 个项目；JUnit 5 {int(df.junit5_pt.sum()):,} = {df.junit5_pt.sum() / df.pt_total.sum() * 100:.1f}%，'
       f'{R["junit_pt"]["projects_with_junit5_pt"]} 个项目） |\n')
     w('PAI = 项目内 PT 数 / 测试方法总数。PDAR = 改过 PT 的开发者 / 改过测试代码的开发者，只在采纳者上计算（v4 口径）。\n')
+
+    # ---------------- 2.1 分布（Fig. 2）
+    def hist(x, bins, labels):
+        return pd.cut(x, bins=bins, labels=labels, right=False).value_counts().reindex(labels).astype(int)
+    w('### 2.1 PAI 与 PDAR 的分布（Fig. 2）\n')
+    w('分箱均为**左闭右开**（如「1–5%」是 [1%, 5%)，「≥20%」含 20%）。\n')
+    h_ad, h_all = hist(ad.pai, PAI_BINS, PAI_LABELS), hist(df.pai, PAI_BINS, PAI_LABELS)
+    w('| PAI | ' + ' | '.join(PAI_LABELS) + ' | 合计 |\n|---|' + '---:|' * (len(PAI_LABELS) + 1))
+    w(f'| **采纳者** | ' + ' | '.join(str(v) for v in h_ad) + f' | {h_ad.sum()} |')
+    w(f'| 全部项目（含未采纳，PAI = 0） | ' + ' | '.join(str(v) for v in h_all) + f' | {h_all.sum()} |')
+    edge = ad[ad.pai.isin(PAI_BINS)]
+    w(f'\n恰好落在 PAI 分箱边界上的采纳者：{len(edge)} 个' + ('，闭合方向不影响计数。' if not len(edge) else
+      '（' + '、'.join(f'{r.project} {r.pai:.2f}%' for r in edge.itertuples()) + '）。'))
+
+    # 与 174 口径相比换了区间的项目（旧底表在仓库里，现算）
+    old = pd.read_csv(os.path.join(HERE, 'merged_data_218.csv'))
+    old = old[old.project.isin(ad.project) & (pd.to_numeric(old.uses_pt) == 1)].drop_duplicates('project')
+    old_pai = (pd.to_numeric(old.pt_total) / pd.to_numeric(old.total_tests) * 100).set_axis(old.project)
+    cut = lambda x: pd.cut(x, bins=PAI_BINS, labels=PAI_LABELS, right=False).astype(str)
+    new_pai = ad.set_index('project').pai
+    moved = [p for p in old_pai.index if cut(old_pai)[p] != cut(new_pai.loc[old_pai.index])[p]]
+    added = sorted(set(ad.project) - set(old_pai.index))
+    notes = [f'{p} {old_pai[p]:.2f}% → {new_pai[p]:.2f}%（{cut(old_pai)[p]} → {cut(new_pai)[p]}）' for p in moved]
+    notes += [f'新增 {p} {new_pai[p]:.2f}%（{cut(new_pai)[p]}）' for p in added]
+    w('与 174 口径相比的变化：' + ('；'.join(notes) if notes else '无') + '。\n')
+
+    h_pd = hist(pdar.pdar, PDAR_BINS, PDAR_LABELS)
+    w('| PDAR（v4） | ' + ' | '.join(PDAR_LABELS) + ' | 合计 |\n|---|' + '---:|' * (len(PDAR_LABELS) + 1))
+    w(f'| 采纳者 | ' + ' | '.join(str(v) for v in h_pd) + f' | {h_pd.sum()} |')
+    edge = pdar[pdar.pdar.isin(PDAR_BINS)]
+    w(f'\n恰好落在 PDAR 分箱边界上的：' + ('无。' if not len(edge) else
+      '、'.join(f'{r.project} {r.pdar:.2f}%（{r.pt_participants}/{r.test_developers}）' for r in edge.itertuples())
+      + ' —— 按左闭右开归入右侧区间；改成右闭会改变相邻区间的计数。') + '\n')
 
     # ---------------- 3. 分组采纳率
     w('## 3. 采纳率按项目特征分组（`pt_adoption_by_groups.png`）\n')
