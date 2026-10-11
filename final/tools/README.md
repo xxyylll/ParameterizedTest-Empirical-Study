@@ -30,7 +30,7 @@ java -cp test-parser-1.0-SNAPSHOT-jar-with-dependencies.jar \
 > fat jar。jar 里保留了完整的 class 文件（含 `JUnit5ParameterSourceExtractor`
 > 等），行为可复现、可反编译核验，但无法直接重新编译。jar 校验和已固定在本目录，
 > 供复现者确认用的是同一个二进制。
-> 注解级抽取的准确性另有人工核验：`../rq1/parser_validation/`（200 条分层样本）。
+> 注解级抽取的准确性另有人工核验：`../rq1/results/parser_validation/`（200 条分层样本）。
 
 ## 2. AAA trace analyzer — RQ3.1 / RQ3.2
 
@@ -52,7 +52,7 @@ java -jar build/libs/Javalang-analyzing-cli-1.3.2-all.jar <project-dir>
 它做完整的符号解析，输出每个测试方法的 Arrange–Act–Assert 语句序列
 （`parsedStatementsSequence`），这是 RQ3 复杂度与重复度指标的输入。
 因为要解析符号，项目必须先构建成功 —— 这是 RQ3 语料只有 46 个项目的原因。
-解析成功率见 `../rq3_1/parse_success_rate.py`。
+解析成功率见 `../rq3/code/rq3_1/parse_success_rate.py`。
 
 ## 3. Clone detection — RQ3.1 duplication
 
@@ -63,4 +63,4 @@ java -jar CCFinderSW-1.0.jar -d <dir> -l java -t 50 -ccf -o <out>
 ```
 
 `-t 50` 为最小 token 数阈值。dupPerc 按行比例计算，细节见
-`../rq3_1/build_test_dup_metrics.py`。
+`../rq3/code/rq3_1/build_test_dup_metrics.py`。

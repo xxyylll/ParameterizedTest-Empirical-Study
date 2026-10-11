@@ -12,12 +12,13 @@
 
 | 数字 | 错的来源 | 对的来源 |
 |---|---|---|
-| RQ1 项目数 214 | `merged_data_ssk.csv` + 旧脚本 | `rq1/merged_data_219_ssk.csv`，筛后 **175**（174 + 补回的 Parquet） |
-| PDAR 中位 20.0% / 14.52% | 20.0%：`result_v3_backup_20260602/`（43 行）；14.52%：v3 的 hunk 邻近判定（已被 v4 取代，见 `rq1/pdar/PDAR_METHOD.md`） | `rq1/pdar_summary_ssk.csv`（v4），n=107 → **15.62%** |
+| RQ1 项目数 214 | `merged_data_ssk.csv` + 旧脚本 | `rq1/results/merged_data_219_ssk.csv`，筛后 **175**（174 + 补回的 Parquet） |
+| PDAR 中位 20.0% / 14.52% | 20.0%：`result_v3_backup_20260602/`（43 行）；14.52%：v3 的 hunk 邻近判定（已被 v4 取代，见 `rq1/code/pdar/PDAR_METHOD.md`） | `rq1/results/pdar_summary_ssk.csv`（v4），n=107 → **15.62%** |
 | RQ2.1 的 284 个 Unknown | `source_types_summary.csv`（旧 clone，且漏 JUnit4） | ssk 快照重算 → **248**，且 JUnit4 占 49.3% |
 | 规模分档 ≤800 / 801–3000 | 旧脚本的硬编码阈值 | **三等分，切点 625 / 1806** |
 | IRR 抽样 109 个项目 | 直接 `len(set(project))` | 大小写混用去重后 **79** |
 | EnumSource n=834 | `status=OK` | **814**（n_sets 非空 + structure≠n/a + 非 External） |
+| RQ3.2 `rq32_*` 的 N = 3,394 / 2,022 | 拿全量 `pt_methodsource_structure.csv`（5,508 行）当 379 条样本表跑出的 `rq32_*`（10-08 曾误入库） | `rq2/results/rq2_2/pt_methodsource_structure_validated379.csv` → **N = 223 / 150**，与 `RQ3_2_FINDINGS.md` 一致 |
 
 这些的根因都不是文件乱，而是**同名异义的数字散在多处而没有权威索引**。
 
@@ -35,13 +36,13 @@
 
 ---
 
-## rq1/
+## rq1/（脚本在 `rq1/code/`，产出在 `rq1/results/`；明细见 `rq1/README.md`）
 
 | 文件 | 内容 | 生成脚本 |
 |---|---|---|
 | `merged_data_219_ssk.csv` | 每项目一行，**219 行未筛选**（218 + Parquet）—— 筛选在分析时做。计数与 `files_java` 取自 ssk 快照 | `build_merged_ssk.py`（同目录） |
 | `merged_data_218.csv` | 旧底表，**仅作追溯**：其计数来自 2025-10-15 的一批 parser 输出，那批输出已被覆盖、无法复现 | `trigger.sh` + `pt_summary.py` → 旧 `parser_result/`（已被后来的重跑部分覆盖） |
-| `pdar_summary_ssk.csv` | **107 个采纳者**的 PDAR v4（主口径 `pdar` / `core_pdar`，另含 `pdar_pt_only`、`pdar_v3` 等对照列） | `rq1/pdar/calculate_pdar_v4.py` |
+| `pdar_summary_ssk.csv` | **107 个采纳者**的 PDAR v4（主口径 `pdar` / `core_pdar`，另含 `pdar_pt_only`、`pdar_v3` 等对照列） | `rq1/code/pdar/calculate_pdar_v4.py` |
 | `pt_adoption_by_groups.png/pdf` | 规模/年龄/领域分组的采纳率 | `adoption_by_groups_figure.py`（同目录） |
 | `rq1_pai_three_panel` / `rq1_pdar_three_panel`（png/pdf） | PAI、PDAR 按 Size / Age / Domain 的三联图 | `three_panel_figures.py`（同目录） |
 | `adoption_factors.csv` + `adoption_factors.py` | 影响因素：规模 × 采纳的卡方、规模 × PAI、JUnit 版本、套件规模、年龄，及多元 logistic 回归 | 同目录脚本 |
@@ -76,7 +77,7 @@
 
 ---
 
-## rq2_1/
+## RQ2.1（`rq2/code/rq2_1/` → `rq2/results/rq2_1/`；明细见 `rq2/README.md`）
 
 | 文件 | 内容 | 生成脚本 |
 |---|---|---|
@@ -89,11 +90,11 @@ JUnit5 内部：MethodSource 63.0%｜ValueSource 18.6%｜EnumSource 9.9%｜CsvSo
 
 ---
 
-## rq2_2/
+## RQ2.2（`rq2/code/rq2_2/` → `rq2/results/rq2_2/`）
 
 | 文件 | 内容 |
 |---|---|
-| `rq22_*_all.csv` | 六个 source 的交付表（construction / dependency / structure 三维度） |
+| `rq22_*_all.csv` 等 9 张交付表 | 各 source 的交付表（construction / dependency / structure 三维度）。由 **`rq2/code/rq2_2/pipeline/run_rq22.sh`** 生成：10 个 Python 脚本 + 9 个 Java 分析器，此前留在 `rq2/rq2_2_structure/` 未入包，现已搬入并改为可移植；从零重跑 MethodSource 三张表逐字节复现 |
 | `construction_distribution.{png,pdf,csv}` | 各 source 的 construction 分布 |
 | `dependency_distribution.{png,pdf,csv}` | 各 source 的 dependency 分布 |
 | `nsets_distribution.{png,pdf}` | n_sets 分布（含 runtime-dependent） |
@@ -111,13 +112,17 @@ JUnit5 内部：MethodSource 63.0%｜ValueSource 18.6%｜EnumSource 9.9%｜CsvSo
 
 ---
 
-## rq3_1/
+## RQ3.1（`rq3/code/rq3_1/` → `rq3/results/rq3_1/`；明细见 `rq3/README.md`）
 
 | 文件 | 内容 |
 |---|---|
 | `rq3_forest_junit5.png` | 森林图，JUnit5 对照组，**原始 CCTR** |
 | `rq3_forest_junit5_cctreq.png` | 同上，**同权 CCTR\***（建议正文用这版） |
 | `rq3_heatmap_portrait_junit5*.png` | 竖版热力图，口径同上 |
+| `test_metrics_all_46projects_v2.csv.gz` | **RQ3 的核心数据**（199,437 个测试 × LOC/CC/CCTR/DUP% 三层），7 MB。产出论文数字时用的那一版；`run_rq3.sh` 在缺 `PT_METRICS` 时自动解压使用 |
+| `test_helper_detail_46projects.csv.gz` | 逐 helper 的复杂度明细，RQ3.2 摊销分析的输入，5.6 MB |
+| `merge_metrics_and_dup_v2.py`、`build_helper_detail.py`（code/） | 生成上面两张表的最后一步，此前留在 `Complexity_Analysis/` 未入包，现已搬入。当前快照上重建只差 3 行（druid 的 3 个非 PT 测试，helper CCTR 的 N 分量 +1） |
+| `rq3_bh_final_{eq,orig}.csv` 的生成 | 此前没有脚本；现由 `rq3_bh_correction.py` 从逐项目结果汇总写出，与原文件逐字节相同 |
 | `RQ3_1_metrics_and_findings.md` | 指标定义与发现 |
 | `RQ3_1_refinement_2026-09-29.md` | JUnit5 筛选、CCTR 偏置、provider-DUP 三项修订 |
 | `rq3_bh_final_{eq,orig}.csv` | **正文用的结果表**：每个指标×层次的中位 Cliff's δ、效应量级、以及 q<0.05 下显著为正/为负/不显著的项目数 |
@@ -134,6 +139,23 @@ JUnit5 内部：MethodSource 63.0%｜ValueSource 18.6%｜EnumSource 9.9%｜CsvSo
 
 **CCTR 必须用同权口径报告**：原口径给 `@ParameterizedTest` 记 2 分而 `@Test` 记 1 分，PT 白得 1 分。
 同权后 test 层 delta 从 0.23 降到 **−0.01**，显著项目从 34 正/2 负变成 11 正/11 负 —— 原口径下的 test 层结论站不住。
+
+---
+
+## RQ3.2（`rq3/code/rq3_2/` → `rq3/results/rq3_2/`；明细见 `rq3/README.md`）
+
+| 子目录 | 内容 | FINDINGS |
+|---|---|---|
+| `methodsource/` | `rq32_*`：379 条人工核验样本；`rq32_full_*`：全量 5,508 条 | `RQ3_2_FINDINGS.md`、`RQ3_2_FULL_POPULATION.md` |
+| `cross_source/` | 各 source 之间的对比 | `RQ3_3_FINDINGS.md` |
+| `enumsource/` | EnumSource 的表示与利用方式（分母 814） | `ENUMSOURCE_FINDINGS.md` |
+| `amortization/` | helper 复用的摊销效应，读 `cross_source/` 的产物 | `AMORTIZATION_FINDINGS.md` |
+
+- **379 条样本表是单独的输入**：`rq2/results/rq2_2/pt_methodsource_structure_validated379.csv`，人工核验过，不由流水线生成。
+  `build_rq32_dataset.py`（默认模式）与 `check_label_agreement.py` 读它；`--full` 模式读 `rq22_methodsource_all.csv`。
+- 各 FINDINGS 文末的 `APPENDIX` 块由 `make_result_appendix.py` 从 CSV 生成，不要手改。
+- 从随包指标表重跑，四个子目录的全部 CSV 与原工作目录逐字节一致；只有 `amortization_metrics.csv`
+  的 8 个值在小数点后第 4 位差 1（浮点求和顺序），不影响任何统计结果。
 
 ---
 
@@ -166,22 +188,24 @@ JUnit5 内部：MethodSource 63.0%｜ValueSource 18.6%｜EnumSource 9.9%｜CsvSo
 |---|---|
 | `METHOD_complete.md` | 完整 Method + Threats（11 条） |
 | `project_name_map.json` | ssk 目录名 ↔ RQ1 显示名。跨数据源 join 必须用它，否则会静默漏匹配 |
-| `rq1/pdar/PDAR_METHOD.md` | **PDAR v4 的方法、验证、统计结果与复现**（论文 PDAR 数字的唯一方法说明） |
-| `rq1/pdar/superseded_v2/` | PDAR 的 v2 方法（行号→方法身份→生命周期追踪，`-U0`）。**设计并实现过但未采用，无结果产物**，仅作方法学记录。代码逐字保留、未做可移植化 |
+| `rq1/code/pdar/PDAR_METHOD.md` | **PDAR v4 的方法、验证、统计结果与复现**（论文 PDAR 数字的唯一方法说明） |
+| `rq1/code/pdar/superseded_v2/` | PDAR 的 v2 方法（行号→方法身份→生命周期追踪，`-U0`）。**设计并实现过但未采用，无结果产物**，仅作方法学记录。代码逐字保留、未做可移植化 |
 | `requirements.txt` | **pandas 必须 <3.0**：pandas 3.0 移除了 statsmodels 0.14.x 依赖的内部 API，装上后 `category_logit.py` 在 import 阶段即崩 |
 | `requirements-recompute.txt` | 只有重算 RQ3.1 指标才需要（tree-sitter） |
 
 ---
 
-## 仍在上层目录的（没复制进来，太大或是原始数据）
+## 不随包分发的外部数据
 
-| 路径 | 为什么留在原地 |
-|---|---|
-| `parser_result_ssk/` | 243 个项目的 parser 产物，RQ1/RQ2.1 的原始输入 |
-| `parser_result/` | 624M，旧 clone。**不要用于分析**，仅供回溯旧数字 |
-| `/Volumes/SSKSSD/apache-projects/` | 源码快照，RQ2.2/RQ3 的输入 |
-| `/Volumes/SSKSSD/rq2.2_manual/` | 人工编码表（1,497 行），IRR 的 gold standard |
-| `Complexity_Analysis/` | RQ3 的脚本与中间产物 |
+| 内容 | 环境变量 | 说明 |
+|---|---|---|
+| 轻量 parser 的逐项目 JSON | `PT_PARSER_SSK` | 243 个项目，~1.5 GB；RQ1 底表、RQ2.1、RQ2.2 流水线的输入 |
+| 源码快照与 AAA 轨迹、CCFinderSW 输出 | `PT_SSD` | ~55 GB；RQ2.2 流水线与 RQ3 指标表的输入 |
+| PDAR 第一阶段的逐提交表 | `PT_PDAR_RESULT` | 189 MB |
+| RQ2.2 人工编码表 | `PT_MANUAL` | 1,497 行，IRR 的 gold standard |
+
+旧的 `parser_result/`（另一次 clone）**不要用于分析**，仅供回溯旧数字。
+RQ2.2 的生产代码（原 `rq2/rq2_2_structure/`）与 RQ3 指标表的最后两步（原 `Complexity_Analysis/`）都已搬入本包。
 
 ## archive/
 

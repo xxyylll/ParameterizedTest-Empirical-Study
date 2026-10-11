@@ -182,11 +182,11 @@ anyway.
 Reproduce with:
 
 ```bash
-cd /Users/immortal/Complexity_Analysis && source .venv/bin/activate
-python3 rq3_2_methodsource/build_rq32_dataset.py
-python3 rq3_2_methodsource/analyze_rq32.py
-python3 rq3_2_methodsource/plot_rq32.py
-python3 make_result_appendix.py      # regenerates the appendix below
+cd final/rq3/code/rq3_2/methodsource      # 或直接 final/rq3/code/run_rq3.sh 跑整个 RQ3
+python3 build_rq32_dataset.py
+python3 analyze_rq32.py
+python3 plot_rq32.py
+python3 ../make_result_appendix.py   # 重写各 FINDINGS 文末的附录
 ```
 
 ---

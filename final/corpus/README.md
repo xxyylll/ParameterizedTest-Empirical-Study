@@ -9,7 +9,7 @@
 | `rq3_candidates_47.txt` | RQ3 候选：构建成功、能产出 AAA trace 的 47 个 |
 | `rq3_excluded.txt` | 其中被排除的（`hive`，trace 不完整） |
 | `rq3_corpus_46.txt` | **RQ3 实际语料**，46 个 |
-| `../rq1/merged_data_219_ssk.csv` | 筛选前的 219 个项目全量指标（218 + Parquet），筛选可追溯 |
+| `../rq1/results/merged_data_219_ssk.csv` | 筛选前的 219 个项目全量指标（218 + Parquet），筛选可追溯 |
 
 ## 语料是怎么收窄到 175 的
 
@@ -21,7 +21,7 @@
    - **2 个 data integrity issues**：`Commons-HttpClient` 与 `Lucene-Core`
      （前者早已被 HttpComponents Client 取代、测试目录与后继项目重叠；
       后者是 Lucene 的一个 sub-module，与母项目重复计数）。
-     判定写在 `../rq1/rq1_bins.py` 的 `DATA_INTEGRITY_EXCL`。
+     判定写在 `../rq1/code/rq1_bins.py` 的 `DATA_INTEGRITY_EXCL`。
 4. **175** —— 补回 **Parquet**（见下）。
 
 ## 第 2 步漏掉的 4 个项目
@@ -43,7 +43,7 @@ RQ1 的 CAR 60.9% → 61.1%，没有任何检验的方向或显著性改变。
 
 计数（`total_tests`、`pt_total` 等）与 `files_java` 都取自 **ssk 快照** —— 外置盘 `apache-projects/`
 上那次 clone（HEAD 在 2025-10-16 ~ 10-21），也是 RQ2 / RQ3 用的同一份。生成脚本是
-`../rq1/build_merged_ssk.py`。
+`../rq1/code/build_merged_ssk.py`。
 
 旧底表 `merged_data_218.csv` 的计数来自 2025-10-15 跑的一批 parser 输出，那批输出后来被部分重跑覆盖，
 已不在磁盘上，无法复现；保留它只为追溯。从旧底表切换到 ssk 快照，174 个项目里 61 个计数有变，
@@ -52,7 +52,7 @@ RQ1 的 CAR 60.9% → 61.1%，没有任何检验的方向或显著性改变。
 ## 分组口径
 
 Size / Age / Domain 的分档切点与 domain 映射规则**只在
-`../rq1/rq1_bins.py` 中定义一处**（本项目早期因同一口径在多个脚本里各写一份
+`../rq1/code/rq1_bins.py` 中定义一处**（本项目早期因同一口径在多个脚本里各写一份
 而反复出现数字不一致，故改为单一来源）。`corpus_175.csv` 里的
 `size_grp` / `age_grp` / `domain_grp` 三列即由它生成。
 

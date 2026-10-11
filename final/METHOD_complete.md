@@ -50,7 +50,7 @@ RQ1 与 RQ2.1 也基于这份快照（`parser_result_ssk/`），共用 175 个�
 | JUnit4 参数化测试 | `@RunWith(Parameterized.class)` |
 
 只做语法层面识别，不解析类型绑定、不展开调用链。
-产物 `parser_result_ssk/{project}_output.json` → 由 `rq1/build_merged_ssk.py` 汇总为 **`rq1/merged_data_219_ssk.csv`**（每项目一行）。
+产物 `parser_result_ssk/{project}_output.json` → 由 `rq1/code/build_merged_ssk.py` 汇总为 **`rq1/results/merged_data_219_ssk.csv`**（每项目一行）。
 旧底表 `merged_data_218.csv` 的计数来自 2025-10-15 跑的另一批 parser 输出，那批输出后来被部分重跑覆盖、已无法复现，
 因此 RQ1 统一切到 ssk 快照。切换后 174 个项目里 61 个计数有变，但没有一个项目的采纳状态翻转，CAR、采纳者数、PAI 中位数均不变。
 
@@ -125,7 +125,7 @@ Parquet、Flume、Fluo、Fluo Recipes 被成功 clone、也解析出了测试，
 
 **处理：补回 Parquet，其余 3 个不纳入。** Parquet 是活跃项目（ASF category `big-data`，取自 projects.apache.org），
 它的首次提交年份与 PDAR 由全量 clone 得到，不存在混合口径的问题；PDAR 的第一阶段表截断到 2026-06-23，
-与其余项目的批量 clone 时间对齐（见 `rq1/pdar/PDAR_METHOD.md` 第 5 节）。
+与其余项目的批量 clone 时间对齐（见 `rq1/code/pdar/PDAR_METHOD.md` 第 5 节）。
 其余 3 个按其状态不纳入：Flume 已转入 dormant，Fluo 与 Fluo Recipes 自 2018 年后无更新。
 
 ### 1.3 指标定义
@@ -142,7 +142,7 @@ Parquet、Flume、Fluo、Fluo Recipes 被成功 clone、也解析出了测试，
 **(c) PDAR**（Parameterized-test Developer Adoption Ratio）
 = `写过 PT 的开发者数 / 碰过测试代码的开发者数`，基于 git 提交历史逐 commit 判定。
 
-PT 相关 commit 采用 **v4 判定**（`rq1/pdar/`，完整说明见 `rq1/pdar/PDAR_METHOD.md`），只看 `.java`：
+PT 相关 commit 采用 **v4 判定**（`rq1/code/pdar/`，完整说明见 `rq1/code/pdar/PDAR_METHOD.md`），只看 `.java`：
 
 1. **JUnit5（方法级）** —— 取 `-U0` diff，`-` 行对应父提交、`+` 行对应本提交的文件快照；
    用 tree-sitter 求出 `@ParameterizedTest` 方法及其**同文件**数据源（`@MethodSource` /
@@ -163,7 +163,7 @@ PDAR 恒为 0，计入只会把中位数拉向 0 而不反映真实情况。
 
 ### 1.4 统计方法与结果
 
-> 完整的结果表（含 Table 1、Table 3、分组采纳率、PDAR）见 **`rq1/RQ1_RESULTS.md`**，由 `rq1/run_rq1.sh` 自动生成。
+> 完整的结果表（含 Table 1、Table 3、分组采纳率、PDAR）见 **`rq1/results/RQ1_RESULTS.md`**，由 `rq1/code/run_rq1.sh` 自动生成。
 
 **描述统计**
 
@@ -177,7 +177,7 @@ PDAR 恒为 0，计入只会把中位数拉向 0 而不反映真实情况。
 
 **核心发现：采纳普遍（61.1%）但使用极浅** —— 即便在采纳者中，PT 也仅占测试的 2.2%。
 
-**影响因素**（全部在 175 个项目上计算，`rq1/adoption_factors.py`）
+**影响因素**（全部在 175 个项目上计算，`rq1/code/adoption_factors.py`）
 
 | 因素 | 检验 | 结果 |
 |---|---|---|
@@ -188,7 +188,7 @@ PDAR 恒为 0，计入只会把中位数拉向 0 而不反映真实情况。
 | 测试套件规模 × PAI | Spearman（log 变换） | **ρ=0.422**, p=6.0e-9 |
 | 项目年龄（首次提交分四档） | Kruskal-Wallis | 不显著（H=3.32, p=0.345） |
 
-**领域（category）的 logistic regression**（`rq1/category_logit.py`）：
+**领域（category）的 logistic regression**（`rq1/code/category_logit.py`）：
 
 1. 先对比 retired vs active 的采纳率与强度（见 1.2），确认 retired 是混淆因素，所以只用 active 项目
 2. 只排除完全没有 category 的 6 个项目，**N = 169**
@@ -217,7 +217,7 @@ network-server OR = 0.830（p = 0.685），**没有任何 category 显著**。
 > 串联的 `merged_data_ssk.csv`（214 行，不同 clone、未做筛选）与
 > `developer/result_v3_backup_20260602/pdar_summary.csv`（43 行）。
 > 使用它们会得到 N=214 / CAR=54.2% / PDAR=20.0% 等**错误数字**。
-> 论文口径一律以 **`final/rq1/`**（底表 `merged_data_219_ssk.csv`）+ **`rq1/pdar_summary_ssk.csv`（PDAR v4）** 为准。
+> 论文口径一律以 **`final/rq1/`**（底表 `merged_data_219_ssk.csv`）+ **`rq1/results/pdar_summary_ssk.csv`（PDAR v4）** 为准。
 
 ---
 

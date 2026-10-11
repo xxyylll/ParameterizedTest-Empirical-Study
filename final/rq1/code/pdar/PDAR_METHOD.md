@@ -82,7 +82,7 @@ PDAR 的分子若混入 Kotlin/Scala 的 PT，就与论文其余部分的「PT�
 第二阶段  pdar_v4_method_level.py  完整重算分子：L1（JUnit 5，方法级）、L2（JUnit 4，类级），并归因、自检
              │   result_v4/{project}_method_commits.csv + _method_summary.json
              ▼
-汇总      calculate_pdar_v4.py     → rq1/pdar_summary_ssk.csv（论文口径） + result_v4/pdar_v4_summary.csv
+汇总      calculate_pdar_v4.py     → rq1/results/pdar_summary_ssk.csv（论文口径） + rq1/results/pdar/result_v4/pdar_v4_summary.csv
 ```
 
 **分工**：提交集合、分母、作者去重取自第一阶段的同一张表，不改动；分子由第二阶段完整重算。
@@ -338,7 +338,7 @@ git -c core.quotepath=false -c log.showRoot=true log --all --full-history --reve
 | v4 项目数（n=107） | 12 | 25 | 15 | 10 | 13 | 12 | 12 | 4 | 4 |
 | v3 项目数（n=106） | 11 | 24 | 19 | 9 | 13 | 13 | 10 | 5 | 2 |
 
-逐项目数据（作图用）在 `rq1/pdar_summary_ssk.csv`，列：
+逐项目数据（作图用）在 `rq1/results/pdar_summary_ssk.csv`，列：
 
 | 列 | 含义 |
 |---|---|
@@ -373,7 +373,7 @@ git -c core.quotepath=false -c log.showRoot=true log --all --full-history --reve
 远小于此。原因是 PDAR 按 email 去重数开发者，多认出的提交大多出自已被计入的人；小项目的 PDAR 只能按 1/n
 跳台阶。**若论文某处报告「PT 相关提交数」，v3 的数会明显偏离。**
 
-### 5.4 影响因素（Table 3，`rq1/table3_pai_pdar.csv`）
+### 5.4 影响因素（Table 3，`rq1/results/table3_pai_pdar.csv`）
 
 Kruskal-Wallis 检验，v4 列为 107 个项目，v3 列为 106 个。
 
@@ -442,7 +442,7 @@ PDAR 只与 PAI 强相关：PT 用得越多的项目，写过 PT 的开发者比
 `PT_PDAR_RESULT` 指向它。默认位置 `<repo>/result_v3/result_v3`。
 
 ```bash
-cd final/rq1/pdar
+cd final/rq1/code/pdar
 
 # 单元测试（几秒）
 python -m unittest discover -s tests -v
@@ -450,7 +450,7 @@ python -m unittest discover -s tests -v
 # 第二阶段：106 个项目，bare clone → 分析 → 删除（本轮实测约 45 分钟，3 并发）
 python batch_pdar_v4.py --jobs 3 --no-pickaxe --work /path/to/scratch
 
-# 汇总 → rq1/pdar_summary_ssk.csv 与 result_v4/pdar_v4_summary.csv
+# 汇总 → rq1/results/pdar_summary_ssk.csv 与 rq1/results/pdar/result_v4/pdar_v4_summary.csv
 python calculate_pdar_v4.py
 
 # Table 3

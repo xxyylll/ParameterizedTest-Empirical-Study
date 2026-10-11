@@ -298,11 +298,12 @@ to any decomposition of the helper layer.
 | `amortization_reuse_profile.png` | the mechanism: weighted reuse and single-use share per level |
 
 ```bash
-cd /Users/immortal/Complexity_Analysis && source .venv/bin/activate
-python3 build_helper_detail.py                              # ~25 min, 46 projects
-python3 rq3_5_amortization/build_amortization_dataset.py
-python3 rq3_5_amortization/analyze_amortization.py
-python3 rq3_5_amortization/plot_amortization.py
+# 前置：test_helper_detail_46projects.csv（随包 .gz；或 rq3/code/rq3_1/build_helper_detail.py 重建，约 25 分钟）
+cd final/rq3/code/rq3_2/amortization      # 须在 cross_source 之后跑；或直接 final/rq3/code/run_rq3.sh
+python3 build_amortization_dataset.py
+python3 analyze_amortization.py
+python3 plot_amortization.py
+python3 ../make_result_appendix.py   # 重写各 FINDINGS 文末的附录
 ```
 
 ---

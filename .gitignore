@@ -29,4 +29,10 @@ logs/
 /result_v3/
 /result_v3.zip
 # 批处理日志
-final/rq1/pdar/result_v4*/logs/
+final/rq1/results/pdar/result_v4*/logs/
+
+# RQ2.2 流水线与 RQ3 解压出的指标表（中间产物，可重建）
+rq22_work/
+rq3_work/
+# method_source_analysis.py 作为脚本运行时写的输出
+final/**/outputs/

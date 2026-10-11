@@ -149,12 +149,12 @@ counts, construction stats, dependency descriptives/kruskal/pairwise,
 robustness, 4 figures), plus `rq32_label_agreement.csv`.
 
 ```bash
-cd /Users/immortal/Complexity_Analysis && source .venv/bin/activate
-python3 rq3_2_methodsource/build_rq32_dataset.py --full
-python3 rq3_2_methodsource/check_label_agreement.py
-python3 rq3_2_methodsource/analyze_rq32.py --prefix rq32_full
-python3 rq3_2_methodsource/plot_rq32.py  --prefix rq32_full
-python3 make_result_appendix.py      # regenerates the appendix below
+cd final/rq3/code/rq3_2/methodsource      # 或直接 final/rq3/code/run_rq3.sh 跑整个 RQ3
+python3 build_rq32_dataset.py --full
+python3 check_label_agreement.py
+python3 analyze_rq32.py --prefix rq32_full
+python3 plot_rq32.py  --prefix rq32_full
+python3 ../make_result_appendix.py   # 重写各 FINDINGS 文末的附录
 ```
 
 ---

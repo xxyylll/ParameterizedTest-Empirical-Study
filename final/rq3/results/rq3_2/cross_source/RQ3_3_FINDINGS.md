@@ -123,11 +123,11 @@ stays in 0.338–0.478, helper CCTR in 0.158–0.291, helper DUP% in
 `cross_source_volume_heatmap.png`, `cross_source_boxplots.png`.
 
 ```bash
-cd /Users/immortal/Complexity_Analysis && source .venv/bin/activate
-python3 rq3_3_cross_source/build_cross_source_dataset.py
-python3 rq3_3_cross_source/analyze_cross_source.py
-python3 rq3_3_cross_source/plot_cross_source.py
-python3 make_result_appendix.py      # regenerates the appendix below
+cd final/rq3/code/rq3_2/cross_source      # 或直接 final/rq3/code/run_rq3.sh 跑整个 RQ3
+python3 build_cross_source_dataset.py
+python3 analyze_cross_source.py
+python3 plot_cross_source.py
+python3 ../make_result_appendix.py   # 重写各 FINDINGS 文末的附录
 ```
 
 ---

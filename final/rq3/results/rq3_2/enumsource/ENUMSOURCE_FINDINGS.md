@@ -185,11 +185,11 @@ population; `plot_enumsource.py` → `enumsource_structure_heatmap.png`,
 `enumsource_dimensions_heatmap.png`, `enumsource_boxplots.png`.
 
 ```bash
-cd /Users/immortal/Complexity_Analysis && source .venv/bin/activate
-python3 rq3_4_enumsource/build_enumsource_dataset.py
-python3 rq3_4_enumsource/analyze_enumsource.py
-python3 rq3_4_enumsource/plot_enumsource.py
-python3 make_result_appendix.py      # regenerates the appendix below
+cd final/rq3/code/rq3_2/enumsource        # 或直接 final/rq3/code/run_rq3.sh 跑整个 RQ3
+python3 build_enumsource_dataset.py
+python3 analyze_enumsource.py
+python3 plot_enumsource.py
+python3 ../make_result_appendix.py   # 重写各 FINDINGS 文末的附录
 ```
 
 ---

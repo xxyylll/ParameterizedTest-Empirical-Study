@@ -6,7 +6,7 @@ split into main-body / helper / total).
 
 Inputs
   - RQ2.2 structure table (379 manually-validated MethodSource tests):
-      PT_Empirical_Auto/rq2/rq2_2_structure/pt_methodsource_structure.csv
+      final/rq2/results/rq2_2/pt_methodsource_structure_validated379.csv
   - Unified metrics (tree-sitter LOC/CC/CCTR joined with CCFinderSW dupPerc):
       Complexity_Analysis/test_metrics_all_46projects_v2.csv
 
@@ -54,7 +54,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RQ2_DIR = _paths.RQ2_2_RESULTS
 # The 379-test manually validated sample (default) vs the 5508-test
 # auto-derived full population.
-STRUCTURE_CSV = os.path.join(RQ2_DIR, "pt_methodsource_structure.csv")
+STRUCTURE_CSV = os.path.join(RQ2_DIR, "pt_methodsource_structure_validated379.csv")
 # 全量表在 rq2/results/rq2_2/ 下（原工作目录里它在 full/ 子目录，搬进 final/ 时没有改这条路径，
 # 所以 --full 此前在 final/ 里跑不通；提交的 rq32_full_* 是在原工作目录生成的）
 FULL_CSV = os.path.join(RQ2_DIR, "rq22_methodsource_all.csv")

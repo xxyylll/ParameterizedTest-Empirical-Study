@@ -31,7 +31,7 @@ from paths import METRICS_DIR, FINAL  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RQ2_DIR = _paths.RQ2_2_RESULTS
-MANUAL = os.path.join(RQ2_DIR, "pt_methodsource_structure.csv")
+MANUAL = os.path.join(RQ2_DIR, "pt_methodsource_structure_validated379.csv")
 AUTO = os.path.join(RQ2_DIR, "rq22_methodsource_all.csv")
 OUT = os.path.join(RESULTS_DIR, "rq32_label_agreement.csv")
 
