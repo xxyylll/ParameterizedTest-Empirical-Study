@@ -1,6 +1,6 @@
 category,n,pct_of_group,n_projects,pct_of_projects_in_group
-JUnit4 @Parameters,8451,48.75,41,
-JUnit5 (all sources),8884,51.25,77,
+JUnit4 @Parameters,8627,49.27,42,
+JUnit5 (all sources),8884,50.73,77,
 
 -- within JUnit5 --,,,,
 MethodSource,5598,63.01,66,85.7

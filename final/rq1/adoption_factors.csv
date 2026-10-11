@@ -1,0 +1,11 @@
+factor,test,statistic,p,detail
+size x adoption,chi-square,14.5,0.0007118238944151854,"adoption% [np.float64(44.1), np.float64(60.0), np.float64(77.3)]; df=2; CramerV=0.288"
+size x PAI,Kruskal-Wallis,7.08,0.02907460031481257,"median PAI [np.float64(0.0), np.float64(0.194), np.float64(0.978)]"
+JUnit version x pai,Mann-Whitney U (JUnit5-only vs JUnit4-only),2289.0,0.0007736268898544909,cliffs_delta=0.353; adoption rates {JUnit4-only: 38.3% (n=47); JUnit5-only: 72.2% (n=72); Mixed: 72.5% (n=51)}
+JUnit version x uses_pt,Mann-Whitney U (JUnit5-only vs JUnit4-only),2266.0,0.0002550400834579152,cliffs_delta=0.339; adoption rates {JUnit4-only: 38.3% (n=47); JUnit5-only: 72.2% (n=72); Mixed: 72.5% (n=51)}
+test suite size x PAI,Spearman (log1p),0.422,6.038899477291003e-09,
+age x PAI,Kruskal-Wallis,3.32,0.3452906821743534,
+logit: Medium scale (625-1805),OR,2.246,0.05610670252367923,"95%CI [0.979, 5.150]"
+logit: Large scale (>=1806),OR,4.897,0.0001955506880530854,"95%CI [2.123, 11.296]"
+logit: Has JUnit5,OR,5.461,7.049370484771708e-06,"95%CI [2.604, 11.452]"
+logit model,N=175,0.158,4.922977191581495e-08,pseudo_R2=0.158; AIC=205.0

@@ -116,3 +116,4 @@ Wicket,wicket,https://github.com/apache/wicket.git,projects.txt
 XMLBeans,xmlbeans,https://github.com/apache/xmlbeans.git,projects.txt
 Zeppelin,zeppelin,https://github.com/apache/zeppelin.git,projects.txt
 ZooKeeper,zookeeper,https://github.com/apache/zookeeper.git,projects.txt
+Parquet,parquet-mr,https://github.com/apache/parquet-mr.git,projects.txt

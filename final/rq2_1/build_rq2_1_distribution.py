@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""RQ2.1：parameter source 的总体分布（基于 ssk 快照 + RQ1 的 174 项目口径）。
+"""RQ2.1：parameter source 的总体分布（基于 ssk 快照 + RQ1 的 175 项目口径）。
 
 与旧的 `source_types_summary.csv` / `parameter_source_statistics.csv` 的区别：
   1. 数据源是 `parser_result_ssk/`（全部项目同一时间 clone），不是时间不一致的 `parser_result/`
-  2. 项目框架与 RQ1 一致（218 − 42 retired − 2 data integrity = 174）
+  2. 项目框架与 RQ1 一致（218 − 42 retired − 2 data integrity + Parquet = 175）
   3. **JUnit4 的 @Parameters 单独统计** —— 旧表只算了 JUnit5，漏掉了近一半的 PT
 
 输出 rq2/rq2_1_source_distribution_ssk.csv
@@ -26,7 +26,7 @@ _norm = lambda s: (s or '').strip().lower()
 
 
 def rq1_projects():
-    """RQ1 的 174 个项目，映射到 ssk 的目录名。
+    """RQ1 的 175 个项目，映射到 ssk 的目录名。
 
     语料筛选直接复用 rq1_bins.load()，不再自己重写一遍 retired / data-integrity 的过滤，
     保证与 RQ1 完全同源。项目名映射存在 `project_name_map.json`。

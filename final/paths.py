@@ -6,7 +6,7 @@
 换一台机器、甚至只是从 `final/` 里直接运行就会失败。
 
 设计：
-  - **小体积的数据与 `final/` 同级放好**（merged_data_218.csv、rq22_*_all.csv 等），
+  - **小体积的数据与 `final/` 同级放好**（merged_data_219_ssk.csv、rq22_*_all.csv 等），
     脚本优先用这些，不依赖任何外部目录。
   - **大体积的数据**（外置盘上的源码快照、AAA 轨迹、CCFinderSW 结果、
     parser 的逐项目 JSON）用环境变量指定，带一个本机默认值。
@@ -53,7 +53,7 @@ RQ2_1_DIR = os.path.join(FINAL, 'rq2_1')
 RQ2_2_DIR = os.path.join(FINAL, 'rq2_2')
 RQ3_1_DIR = os.path.join(FINAL, 'rq3_1')
 
-MERGED_DATA = os.path.join(RQ1_DIR, 'merged_data_218.csv')
+MERGED_DATA = os.path.join(RQ1_DIR, 'merged_data_219_ssk.csv')   # 218 + Parquet，计数取自 ssk 快照；见 rq1/build_merged_ssk.py
 PDAR_SUMMARY = os.path.join(RQ1_DIR, 'pdar_summary_ssk.csv')
 PT_PROJECTS_LIST = os.path.join(RQ1_DIR, 'pdar', 'pt_projects_ssk.txt')
 

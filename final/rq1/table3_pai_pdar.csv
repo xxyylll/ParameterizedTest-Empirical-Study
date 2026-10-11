@@ -1,26 +1,26 @@
 factor,group,n_pai,pai_median,pai_iqr,n_pdar,pdar_median,pdar_iqr,note
-Size,Small (<625),26,5.76,0.89-8.71,26,16.21,8.06-25.82,
-Size,Medium (625-1805),29,1.08,0.39-5.23,29,14.77,7.14-25.81,
-Size,Large (>=1806),51,2.12,0.73-4.36,51,16.90,7.91-28.00,
-Age,<=2005,35,1.08,0.68-5.72,35,13.89,7.75-23.71,
-Age,2006-2011,38,3.71,0.37-8.03,38,15.50,6.67-28.62,
-Age,2012-2017,27,2.81,0.97-5.09,27,20.63,9.44-33.33,
-Age,>=2018,6,0.68,0.25-8.93,6,14.28,6.21-37.02,excluded from KW (n<=6)
-Domain,Data & Analytics,38,2.54,0.70-5.27,38,14.99,7.37-28.82,
-Domain,Network & Comm.,16,1.53,0.36-4.86,16,19.05,6.36-25.40,
+Size,Small (<625),26,5.76,0.89-8.77,26,16.21,8.06-25.82,
+Size,Medium (625-1805),30,1.24,0.40-5.55,30,15.07,7.32-25.52,
+Size,Large (>=1806),51,2.12,0.72-4.42,51,16.90,7.91-28.00,
+Age,<=2005,35,1.09,0.68-5.92,35,13.89,7.75-23.71,
+Age,2006-2011,38,3.79,0.37-8.03,38,15.50,6.67-28.62,
+Age,2012-2017,28,2.97,0.98-5.71,28,21.56,9.45-33.33,
+Age,>=2018,6,0.67,0.25-8.93,6,14.28,6.21-37.02,excluded from KW (n<=6)
+Domain,Data & Analytics,39,2.81,0.77-5.95,39,16.42,7.53-28.51,
+Domain,Network & Comm.,16,1.61,0.36-4.99,16,19.05,6.36-25.40,
 Domain,Dev. & Tools,48,2.49,0.78-6.89,48,15.20,7.88-26.46,
-Domain,Web & Content,4,0.79,0.63-1.27,4,13.52,7.55-19.70,excluded from KW (n<=6)
+Domain,Web & Content,4,0.78,0.62-1.49,4,13.52,7.55-19.70,excluded from KW (n<=6)
 
 factor,metric,scope,KW_H,p,k_groups
-Size,PAI,all groups,4.48,0.107,3
-Size,PDAR,all groups,0.11,0.949,3
-Size,PAI,n>6 only,4.48,0.107,3
-Size,PDAR,n>6 only,0.11,0.949,3
-Age,PAI,all groups,2.33,0.508,4
-Age,PDAR,all groups,2.46,0.483,4
-Age,PAI,n>6 only,2.25,0.324,3
-Age,PDAR,n>6 only,2.60,0.273,3
-Domain,PAI,all groups,2.29,0.515,4
+Size,PAI,all groups,3.86,0.145,3
+Size,PDAR,all groups,0.07,0.964,3
+Size,PAI,n>6 only,3.86,0.145,3
+Size,PDAR,n>6 only,0.07,0.964,3
+Age,PAI,all groups,2.60,0.458,4
+Age,PDAR,all groups,2.60,0.457,4
+Age,PAI,n>6 only,2.52,0.284,3
+Age,PDAR,n>6 only,2.74,0.254,3
+Domain,PAI,all groups,2.10,0.553,4
 Domain,PDAR,all groups,0.61,0.895,4
-Domain,PAI,n>6 only,0.45,0.797,3
-Domain,PDAR,n>6 only,0.10,0.951,3
+Domain,PAI,n>6 only,0.42,0.811,3
+Domain,PDAR,n>6 only,0.09,0.958,3

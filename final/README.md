@@ -16,7 +16,7 @@ cp .env.example .env && $EDITOR .env    # 按需改路径；只核对数字的�
 source .env
 
 python paths.py                          # 检查哪些数据源可用
-cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 106
+cd rq1 && python rq1_bins.py             # 自检：应输出 N=175 / 采纳者 107
 ```
 
 > **`requirements.txt` 的 pandas 上限是必需的，不是保守。** pandas 3.0 移除了
@@ -53,31 +53,35 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 
 
 | 文件 | 内容 |
 |---|---|
-| `corpus_174.csv` | RQ1/RQ2 主语料，174 个项目及分组列 |
+| `corpus_175.csv` | RQ1/RQ2.1 主语料，175 个项目及分组列 |
 | `rq3_corpus_46.txt` | RQ3 语料，46 个 |
 
-263 → 218 → 174 的收窄链条、以及 4 个项目未被纳入的已知缺口，
+263 → 218 → 174 → 175 的收窄链条（含补回 Parquet 的说明），
 见 [`corpus/README.md`](corpus/README.md)。被分析的 Apache 源码本身不随包分发。
 
-### `rq1/` — 采纳情况（174 个项目）
+### `rq1/` — 采纳情况（175 个项目）
 
 | 脚本 | 产出 | 自足 |
 |---|---|---|
 | `rq1_bins.py` | **分组口径的唯一定义**：语料筛选、Size/Age 分档、Domain 映射 | ✅ |
 | `build_table3.py` | `table3_pai_pdar.csv` — PAI/PDAR 按 Size/Age/Domain 分组 | ✅ |
-| `category_logit.py` | `category_logit_results.csv` — category 逻辑回归（N=168） | ✅ |
+| `category_logit.py` | `category_logit_results.csv` — category 逻辑回归（N=169） | ✅ |
+| `adoption_factors.py` | `adoption_factors.csv` — 影响因素：规模 / JUnit 版本 / 套件规模 / 年龄，及多元 logistic 回归 | ✅ |
+| `three_panel_figures.py` | `rq1_pai_three_panel` / `rq1_pdar_three_panel` — PAI、PDAR 按 Size / Age / Domain | ✅ |
+| `adoption_by_groups_figure.py` | `pt_adoption_by_groups` — 采纳率按 Size / Age / Domain | ✅ |
+| `build_merged_ssk.py` | `merged_data_219_ssk.csv` — 项目级底表（从 ssk 快照重建） | 需 `PT_PARSER_SSK`、`PT_SSD` |
 | `dataset_stats.py` | `dataset_stats.csv` — 论文 Table 1 | 需 `PT_PARSER_SSK` |
 | `parser_validation/` | 200 条 parser 人工验证样本（PT/非 PT 各 100，含源码） | ✅ |
 | `pdar/` | **PDAR v4 流水线**，见下节与 `pdar/PDAR_METHOD.md` | 需全量 git 克隆 |
 
-数据：`merged_data_218.csv`、`pdar_summary_ssk.csv`。
+数据：`merged_data_219_ssk.csv`（ssk 快照，218 + Parquet）、`pdar_summary_ssk.csv`。旧底表 `merged_data_218.csv` 的来源快照已不在磁盘上，只保留作追溯。
 
 > **`rq1_bins.py` 是所有 RQ1 分组口径的唯一来源。** 这些常量曾散在五个脚本里，
 > 年龄分档有三套互不相同的版本，导致同一张表的不同图给出不同的 n。新增分析一律从它导入。
 
 #### `rq1/pdar/` — PDAR
 
-**PDAR = 改过 PT 的开发者 / 改过测试代码的开发者**（×100，%）。采纳者中位数 **15.50%**（n=106）。
+**PDAR = 改过 PT 的开发者 / 改过测试代码的开发者**（×100，%）。采纳者中位数 **15.62%**（n=107）。
 论文数字来自 **v4** 两阶段流水线（改动行 ∩ 参数化测试区间：JUnit 5 是 PT 方法及其同文件数据源，JUnit 4 是参数化类）。
 方法定义、实现细节、验证、统计结果与复现命令全部见
 [`rq1/pdar/PDAR_METHOD.md`](rq1/pdar/PDAR_METHOD.md)。
@@ -88,8 +92,8 @@ cd rq1 && python rq1_bins.py             # 自检：应输出 N=174 / 采纳者 
 
 `build_rq2_1_distribution.py` → `rq2_1_source_distribution_ssk.csv`（需 `PT_PARSER_SSK`）
 
-**JUnit4 与 JUnit5 分开统计** —— 174 个项目共 17,335 个 PT，其中 JUnit4 `@Parameters`
-8,451（48.8%）、JUnit5 八种 source 8,884（51.2%）。
+**JUnit4 与 JUnit5 分开统计** —— 175 个项目共 17,511 个 PT，其中 JUnit4 `@Parameters`
+8,627（49.3%）、JUnit5 八种 source 8,884（50.7%）。
 
 ### `rq2_2/` — parameter source 的结构刻画（46 个项目）
 

@@ -11,7 +11,7 @@
 未判定的提交（merge / 根提交 / 本地缺失）取第一阶段的 L1/L2 原值。
 分母 `touched_test`、email 去重规则与 v3 完全相同（email 去空白、转小写；无 email 的提交丢弃）。
 
-输出 `pdar_v4_summary.csv`（逐项目）并打印 106 个采纳者上的中位数对比。
+输出 `pdar_v4_summary.csv`（逐项目）并打印 107 个采纳者上的中位数对比。
 """
 
 import argparse
@@ -181,7 +181,11 @@ def main():
             missing.append(p)
             continue
         r = project_pdar(p, a.result_dir, a.pickaxe_from or None)
-        if abs(r['pdar_pub'] - pub_summary[p]) > 0.01:
+        if p not in pub_summary:
+            # 论文 v3 那一轮之后才加入语料的项目（目前只有 Parquet），没有可核对的已发表值；
+            # 它的第一阶段表截在 2026-06-23，与其余项目的批量 clone 时间对齐
+            r['flags'] = (r['flags'] + ';' if r['flags'] else '') + 'added_after_v3'
+        elif abs(r['pdar_pub'] - pub_summary[p]) > 0.01:
             r['flags'] = (r['flags'] + ';' if r['flags'] else '') + 'pub_mismatch'
         rows.append(r)
 

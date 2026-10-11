@@ -1,5 +1,5 @@
 metric,mean,median,min,max,n
-# of Total files,"2,315","1,184",14,"20,663",174
-# of Test files,455,168,1,"9,270",174
-# of Test methods,"2,642","1,074",1,"22,457",174
-Project Age (Years),17,18,4,28,174
+# of Total files,"2,446","1,174",14,"40,338",175
+# of Test files,454,170,1,"9,270",175
+# of Test methods,"2,664","1,091",1,"23,145",175
+Project Age (Years),17,18,4,28,175

@@ -11,7 +11,8 @@
   [0,625) / [625,1806) / [1806,inf) → <625 / 625–1805 / >=1806
   只有 Ranger 正好是 1806 个文件，归入 Large。
 
-语料：218 − 42 retired − 2 data integrity = 174；其中采纳 PT 的 106 个。
+语料：218 − 42 retired − 2 data integrity = 174，再补回 Parquet = 175；其中采纳 PT 的 107 个。
+底表是 merged_data_219_ssk.csv（ssk 快照，见 build_merged_ssk.py）。
 """
 import os
 import sys
@@ -70,7 +71,7 @@ def assign_domain(row):
 
 
 def load(adopters_only=False, with_pdar=False):
-    """RQ1 的 174 个项目（或其中采纳 PT 的 106 个），已带好分组列。"""
+    """RQ1 的 175 个项目（或其中采纳 PT 的 107 个），已带好分组列。"""
     df = pd.read_csv(MERGED)
     df = df[~df['categories'].fillna('').str.contains('retired')]
     df = df[~df['project'].isin(DATA_INTEGRITY_EXCL)].drop_duplicates('project').copy()

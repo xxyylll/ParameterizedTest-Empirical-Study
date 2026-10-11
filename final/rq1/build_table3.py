@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Table 3：active 且采纳 PT 的 106 个项目，PAI 与 PDAR 按项目特征分组的中位数与 IQR。
+"""Table 3：active 且采纳 PT 的 107 个项目，PAI 与 PDAR 按项目特征分组的中位数与 IQR。
 
 分档口径（与论文正文一致，均为**右闭**）：
   Size   `files_java` 三等分，切点 625 / 1806，**左闭右开**：
@@ -35,7 +35,7 @@ MIN_GROUP = 6                       # n <= 6 的组不进 KW 检验
 
 
 def load():
-    """106 个采纳 PT 的项目，已带 size_grp / age_grp / domain_grp / pai / pdar。"""
+    """107 个采纳 PT 的项目，已带 size_grp / age_grp / domain_grp / pai / pdar。"""
     return load_corpus(adopters_only=True, with_pdar=True)
 
 

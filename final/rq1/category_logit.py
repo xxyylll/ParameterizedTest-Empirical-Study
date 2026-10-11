@@ -3,7 +3,7 @@
 
 与早先 `check_category_llr.py` 的两处关键差异：
 
-1. **项目口径是 174**（218 − 42 retired − 2 data integrity），不是 176。
+1. **项目口径与 RQ1 一致**（218 − 42 retired − 2 data integrity，再补回 Parquet = 175），不是 176。
 
 2. **EPV 筛选去掉的是变量，不是项目。**
    EPV 原则针对的是「某类别项目太少 → 它的 0/1 变量估计不稳」，所以应当不给它设变量；
@@ -12,14 +12,14 @@
      - 更要紧的是参照组变了味：留下的每个项目都至少属于四类之一，
        于是 "big-data OR" 比较的是「big-data vs 属于 library/network-server/database 之一」，
        而不是读者自然理解的「big-data vs 其余所有」。
-   这里改为：**只排除完全没有 category 的项目**（6 个），其余 168 个全部入模；
+   这里改为：**只排除完全没有 category 的项目**（6 个），其余 169 个全部入模；
    仅给项目数 ≥ MIN_PROJECTS 的类别设变量，不达标的类别不设变量但项目保留，
    它们在所有变量上取 0，自然构成参照组。
 
-按 174 口径重新计数后，达标的只有 library(73) / big-data(39) / network-server(26)；
-database 以 19 个差一个落选 —— 这是口径从 176 改到 174 带来的直接后果（176 时是 20）。
+按 175 口径计数，达标的只有 library(73) / big-data(40，含 Parquet) / network-server(26)；
+database 以 19 个差一个落选 —— 这是去掉 2 个 data-integrity 项目带来的直接后果（176 时是 20）。
 
-输出 rq1_new/category_logit_results.csv
+输出 rq1/category_logit_results.csv
 """
 import collections
 import csv

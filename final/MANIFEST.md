@@ -12,9 +12,9 @@
 
 | 数字 | 错的来源 | 对的来源 |
 |---|---|---|
-| RQ1 项目数 214 | `merged_data_ssk.csv` + 旧脚本 | `rq1_new/merged_data.csv`，筛后 **174** |
-| PDAR 中位 20.0% / 14.52% | 20.0%：`result_v3_backup_20260602/`（43 行）；14.52%：v3 的 hunk 邻近判定（已被 v4 取代，见 `rq1/pdar/PDAR_METHOD.md`） | `rq1/pdar_summary_ssk.csv`（v4），n=106 → **15.50%** |
-| RQ2.1 的 284 个 Unknown | `source_types_summary.csv`（旧 clone，且漏 JUnit4） | ssk 快照重算 → **248**，且 JUnit4 占 48.8% |
+| RQ1 项目数 214 | `merged_data_ssk.csv` + 旧脚本 | `rq1/merged_data_219_ssk.csv`，筛后 **175**（174 + 补回的 Parquet） |
+| PDAR 中位 20.0% / 14.52% | 20.0%：`result_v3_backup_20260602/`（43 行）；14.52%：v3 的 hunk 邻近判定（已被 v4 取代，见 `rq1/pdar/PDAR_METHOD.md`） | `rq1/pdar_summary_ssk.csv`（v4），n=107 → **15.62%** |
+| RQ2.1 的 284 个 Unknown | `source_types_summary.csv`（旧 clone，且漏 JUnit4） | ssk 快照重算 → **248**，且 JUnit4 占 49.3% |
 | 规模分档 ≤800 / 801–3000 | 旧脚本的硬编码阈值 | **三等分，切点 625 / 1806** |
 | IRR 抽样 109 个项目 | 直接 `len(set(project))` | 大小写混用去重后 **79** |
 | EnumSource n=834 | `status=OK` | **814**（n_sets 非空 + structure≠n/a + 非 External） |
@@ -27,8 +27,8 @@
 
 | 层 | N | 用于 | 怎么来的 |
 |---|---:|---|---|
-| L1 广度 | **174** | RQ1、RQ2.1 | 218 初始 − 42 retired − 2 data integrity |
-| L2 含 PT | 106 | RQ1 的 PAI/PDAR 分母 | 174 中 pt_total > 0 |
+| L1 广度 | **175** | RQ1、RQ2.1 | 218 初始 − 42 retired − 2 data integrity + Parquet（补回，见 `corpus/README.md`） |
+| L2 含 PT | 107 | RQ1 的 PAI/PDAR 分母 | 175 中 pt_total > 0 |
 | L3 深度 | **46** | RQ2.2、RQ3 | 47 可完成 AAA 解析 − hive |
 
 剔除的 2 个 data integrity 项目：**Commons-HttpClient**（与 HttpComponents-Client 数据完全相同，同仓库重复计入）、**Lucene-Core**（子模块，files_java 5,934 但 total_tests 1,193）。
@@ -39,21 +39,24 @@
 
 | 文件 | 内容 | 生成脚本 |
 |---|---|---|
-| `merged_data_218.csv` | 每项目一行，**218 行未筛选** —— 筛选在分析时做 | `analyzer.py` + `batch_parse_all_projects.sh` → `parser_result_ssk/` |
-| `pdar_summary_ssk.csv` | **106 个采纳者**的 PDAR v4（主口径 `pdar` / `core_pdar`，另含 `pdar_pt_only`、`pdar_v3` 等对照列） | `rq1/pdar/calculate_pdar_v4.py` |
-| `pt_adoption_by_groups.png/pdf` | 规模/年龄分组的采纳率 | `rq1_new/scale_age_adoption/regen_adoption_by_groups.py` |
+| `merged_data_219_ssk.csv` | 每项目一行，**219 行未筛选**（218 + Parquet）—— 筛选在分析时做。计数与 `files_java` 取自 ssk 快照 | `build_merged_ssk.py`（同目录） |
+| `merged_data_218.csv` | 旧底表，**仅作追溯**：其计数来自 2025-10-15 的一批 parser 输出，那批输出已被覆盖、无法复现 | `trigger.sh` + `pt_summary.py` → 旧 `parser_result/`（已被后来的重跑部分覆盖） |
+| `pdar_summary_ssk.csv` | **107 个采纳者**的 PDAR v4（主口径 `pdar` / `core_pdar`，另含 `pdar_pt_only`、`pdar_v3` 等对照列） | `rq1/pdar/calculate_pdar_v4.py` |
+| `pt_adoption_by_groups.png/pdf` | 规模/年龄/领域分组的采纳率 | `adoption_by_groups_figure.py`（同目录） |
+| `rq1_pai_three_panel` / `rq1_pdar_three_panel`（png/pdf） | PAI、PDAR 按 Size / Age / Domain 的三联图 | `three_panel_figures.py`（同目录） |
+| `adoption_factors.csv` + `adoption_factors.py` | 影响因素：规模 × 采纳的卡方、规模 × PAI、JUnit 版本、套件规模、年龄，及多元 logistic 回归 | 同目录脚本 |
 | `SUMMARY.md` | retired vs active 对比、各分组结果 | — |
 | `COMPARISON_sample_size_filtering.md` | 领域分析的 EPV 筛选（10 → 4 个 category） | — |
 | `rq1_bins.py` | **分组口径的唯一定义**：语料筛选、Size/Age 分档、Domain 映射。`load()` 直接返回带好分组列的 DataFrame | — |
-| `table3_pai_pdar.csv` + `build_table3.py` | **Table 3**：106 个采纳者按 Size / Age / Domain 的 PAI 与 PDAR 中位数、IQR、KW 检验 | 同目录脚本 |
-| `category_logit_results.csv` + `category_logit.py` | **category 逻辑回归**（N=168）。EPV 筛选去掉的是**变量**不是项目：只排除 6 个无 category 的项目，仅给项目数 ≥20 的类别设变量，其余项目留作参照组 | 同目录脚本 |
+| `table3_pai_pdar.csv` + `build_table3.py` | **Table 3**：107 个采纳者按 Size / Age / Domain 的 PAI 与 PDAR 中位数、IQR、KW 检验 | 同目录脚本 |
+| `category_logit_results.csv` + `category_logit.py` | **category 逻辑回归**（N=169）。EPV 筛选去掉的是**变量**不是项目：只排除 6 个无 category 的项目，仅给项目数 ≥20 的类别设变量，其余项目留作参照组 | 同目录脚本 |
 
-**关键数字**：CAR 106/174 = 60.9%｜Deep(≥5%) 34/174 = 19.5%｜PAI 中位 0.281%（采纳者 2.211%）｜PDAR 中位 **15.50%**（n=106，v4）
+**关键数字**：CAR 107/175 = 61.1%｜Deep(≥5%) 35/175 = 20.0%｜PAI 中位 0.282%（采纳者 2.221%）｜PDAR 中位 **15.62%**（n=107，v4）
 
-**规模分档是三等分**，切点 **625 / 1806**，**左闭右开**：`[0,625) / [625,1806) / [1806,∞)`，
+**规模分档切点是固定常量 625 / 1806**（在 175 个项目上分出 59 / 50 / 66，不应称作本语料的三分位），**左闭右开**：`[0,625) / [625,1806) / [1806,∞)`，
 即 `<625` / `625–1805` / `**>=1806**`。全语料只有 Ranger 正好是 1806 个文件，归入 Large，
-于是采纳者分组为 26 / 29 / 51（若改成右闭则是 26 / 30 / 50）。
-采纳率 44.1% / 59.2% / 77.3%，χ²=14.51, p=0.00071, V=0.289。
+于是采纳者分组为 26 / 30 / 51（若改成右闭则是 26 / 31 / 50）。
+采纳率 44.1% / 60.0% / 77.3%，χ²=14.50, p=0.00071, V=0.288。
 
 **年龄分档一律是 `≤2005 / 2006–2011 / 2012–2017 / ≥2018`**，实现为
 `AGE_BINS = [0, 2006, 2012, 2018, 2030]` + `right=False`。任何与此不同的都是旧的或错的。
@@ -65,10 +68,10 @@
 
 **Domain 需要手工补充映射**：9 个采纳 PT 的项目其 ASF category 不落在四大类里
 （cloud / javaee / testing / ide / observability / identity-management，以及 3 个 category 为空），
-见 `build_table3.py` 的 `DOMAIN_MANUAL`。不补的话 Domain 一栏只覆盖 97 个而非 106 个。
+见 `build_table3.py` 的 `DOMAIN_MANUAL`。不补的话 Domain 一栏只覆盖 98 个而非 107 个。
 
 > ⚠️ **Table 3 的 KW 检验口径必须在正文统一**。脚注写的是「n≤6 的组排除出 KW 检验」，
-> 但表中报告的 H/p 实际是**含全部组**的结果（Age PAI H=2.33, p=0.508 对应 df=3，即 4 组）。
+> 但表中报告的 H/p 实际是**含全部组**的结果（Age PAI H=2.60, p=0.458 对应 df=3，即 4 组）。
 > `table3_pai_pdar.csv` 把两种口径都算出来了，选定一种后同步改脚注。
 
 ---
@@ -79,7 +82,7 @@
 |---|---|---|
 | `rq2_1_source_distribution_ssk.csv` | source 分布，**JUnit4 与 JUnit5 分开** | `build_rq2_1_distribution.py`（同目录） |
 
-**关键数字**：174 项目共 **17,335 个 PT** —— JUnit4 `@Parameters` **8,451（48.8%）** / JUnit5 **8,884（51.2%）**。
+**关键数字**：175 项目共 **17,511 个 PT** —— JUnit4 `@Parameters` **8,627（49.3%）** / JUnit5 **8,884（50.7%）**。
 JUnit5 内部：MethodSource 63.0%｜ValueSource 18.6%｜EnumSource 9.9%｜CsvSource 4.4%｜**Unknown 248（2.8%，自定义 source 注解，246 条来自 directory-studio 的 `@LdapServersSource`）**。
 
 > 旧的 `source_types_summary.csv` **只统计了 JUnit5**，漏掉近一半的 PT，已移入 `archive/rq2_1_old/`。
@@ -138,13 +141,13 @@ JUnit5 内部：MethodSource 63.0%｜ValueSource 18.6%｜EnumSource 9.9%｜CsvSo
 
 | 文件 | 说明 |
 |---|---|
-| `corpus_174.csv` | RQ1/RQ2 主语料，174 行，含 `size_grp`/`age_grp`/`domain_grp` 三列 |
+| `corpus_175.csv` | RQ1/RQ2.1 主语料，175 行，含 `size_grp`/`age_grp`/`domain_grp` 三列 |
 | `rq3_candidates_47.txt` | RQ3 候选 47 个（构建成功、有 AAA trace） |
 | `rq3_excluded.txt` | 其中排除的 `hive`（trace 不完整） |
 | `rq3_corpus_46.txt` | RQ3 实际语料 46 个 |
 
-263 → 218 → 174 的收窄链条、以及 4 个项目未被纳入的已知缺口（合计 3,180 测试、
-205 PT、全为 JUnit 4，故只影响 RQ1 的 CAR：60.9% → 60.7%），见 `corpus/README.md`。
+263 → 218 → 174 → 175 的收窄链条：第 2 步漏掉的 4 个项目中 Parquet 已补回，
+其余 3 个（Flume / Fluo / Fluo Recipes）按其状态不纳入，见 `corpus/README.md`。
 
 ## tools/
 

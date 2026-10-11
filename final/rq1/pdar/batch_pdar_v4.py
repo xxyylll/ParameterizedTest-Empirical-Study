@@ -2,7 +2,7 @@
 """PDAR v4 第二阶段批处理：逐个项目 bare clone 全量 → pdar_v4_method_level.py → 立刻删除。
 
   - 仓库 URL 唯一来源：pdar_repo_map.csv
-  - 项目清单默认 = rq1_bins.load(adopters_only=True)（106 个采纳者）
+  - 项目清单默认 = rq1_bins.load(adopters_only=True)（107 个采纳者）
   - 已有 `{project}_method_summary.json` 的项目跳过（可断点续跑）
   - 每个项目的分析在独立子进程里跑，日志写到 result_v4/logs/{project}.log
   - 分析失败不删 clone 以外的任何东西；clone 无论成败都删
@@ -97,7 +97,7 @@ def main():
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(encoding='utf-8', errors='replace')
     ap = argparse.ArgumentParser()
-    ap.add_argument('--projects', help='每行一个项目名；缺省为 106 个采纳者')
+    ap.add_argument('--projects', help='每行一个项目名；缺省为 107 个采纳者')
     ap.add_argument('--jobs', type=int, default=3)
     ap.add_argument('--work', default=DEFAULT_WORK)
     ap.add_argument('--out', default=OUT_DIR)

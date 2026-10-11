@@ -1,25 +1,25 @@
 project,files_java,total_tests,pt_total,size_grp,age_grp,domain_grp,categories
-Accumulo,2344.0,3175,25,Large (>=1806),2006-2011,Data & Analytics,big-data
-ActiveMQ,4400.0,2875,346,Large (>=1806),<=2005,Network & Comm.,"network-server, network-client"
+Accumulo,2344.0,3252,28,Large (>=1806),2006-2011,Data & Analytics,big-data
+ActiveMQ,4401.0,2875,346,Large (>=1806),<=2005,Network & Comm.,"network-server, network-client"
 Airavata,929.0,147,0,Medium (625-1805),2006-2011,Data & Analytics,"network-server, cloud, big-data"
 Ambari,3336.0,5176,7,Large (>=1806),2006-2011,Data & Analytics,big-data
 Ant,1333.0,2442,20,Medium (625-1805),<=2005,Dev. & Tools,build-management
 Aries,1795.0,1285,5,Medium (625-1805),2006-2011,Dev. & Tools,library
-Avro,778.0,1414,99,Medium (625-1805),2006-2011,Data & Analytics,"library, big-data, data-engineering, integration"
+Avro,778.0,1415,99,Medium (625-1805),2006-2011,Data & Analytics,"library, big-data, data-engineering, integration"
 Axiom,2045.0,97,0,Large (>=1806),2006-2011,Dev. & Tools,"library, xml"
 Axis2,2959.0,656,1,Large (>=1806),<=2005,Network & Comm.,"xml, http, network-server, network-client"
 BVal,322.0,207,11,Small (<625),2006-2011,Dev. & Tools,"javaee, library"
-Beam,6644.0,13108,548,Large (>=1806),2012-2017,Data & Analytics,big-data
+Beam,6644.0,13111,548,Large (>=1806),2012-2017,Data & Analytics,big-data
 Bigtop,183.0,64,0,Small (<625),2006-2011,Data & Analytics,big-data
 BookKeeper,2368.0,3332,124,Large (>=1806),2006-2011,Data & Analytics,big-data
-CXF,7561.0,8083,139,Large (>=1806),2006-2011,Network & Comm.,"library, xml, network-client, network-server"
-Calcite,2546.0,8593,82,Large (>=1806),2012-2017,Data & Analytics,"big-data, hadoop, sql, geospatial"
-Camel,19154.0,22457,257,Large (>=1806),2006-2011,Dev. & Tools,"integration, cloud, java, library"
+CXF,7565.0,8084,139,Large (>=1806),2006-2011,Network & Comm.,"library, xml, network-client, network-server"
+Calcite,2550.0,8606,83,Large (>=1806),2012-2017,Data & Analytics,"big-data, hadoop, sql, geospatial"
+Camel,23534.0,23145,329,Large (>=1806),2006-2011,Dev. & Tools,"integration, cloud, java, library"
 CarbonData,1144.0,959,0,Medium (625-1805),2012-2017,Data & Analytics,big-data
-Cassandra,5930.0,10148,650,Large (>=1806),2006-2011,Data & Analytics,database
-Causeway,4586.0,2124,57,Large (>=1806),<=2005,Web & Content,web-framework
+Cassandra,5931.0,10149,650,Large (>=1806),2006-2011,Data & Analytics,database
+Causeway,4564.0,2200,78,Large (>=1806),<=2005,Web & Content,web-framework
 Cayenne,3898.0,4108,2,Large (>=1806),2006-2011,Data & Analytics,"database, library, network-server, network-client, xml, web-framework"
-CloudStack,7655.0,8644,14,Large (>=1806),2006-2011,Dev. & Tools,cloud
+CloudStack,7657.0,8648,14,Large (>=1806),2006-2011,Dev. & Tools,cloud
 Commons-BCEL,654.0,318,24,Medium (625-1805),<=2005,Dev. & Tools,library
 Commons-BSF,78.0,9,0,Small (<625),<=2005,Dev. & Tools,library
 Commons-BeanUtils,293.0,960,0,Small (<625),<=2005,Dev. & Tools,library
@@ -27,7 +27,7 @@ Commons-CLI,87.0,443,36,Small (<625),<=2005,Dev. & Tools,library
 Commons-CSV,54.0,511,14,Small (<625),<=2005,Dev. & Tools,library
 Commons-Chain,153.0,137,11,Small (<625),<=2005,Dev. & Tools,library
 Commons-Codec,161.0,918,57,Small (<625),<=2005,Dev. & Tools,library
-Commons-Collections,659.0,1925,18,Medium (625-1805),<=2005,Dev. & Tools,library
+Commons-Collections,659.0,1926,18,Medium (625-1805),<=2005,Dev. & Tools,library
 Commons-Compress,655.0,1841,124,Medium (625-1805),<=2005,Dev. & Tools,library
 Commons-Configuration,474.0,2662,7,Small (<625),<=2005,Dev. & Tools,library
 Commons-Crypto,103.0,85,0,Small (<625),2012-2017,Dev. & Tools,library
@@ -40,13 +40,13 @@ Commons-Exec,69.0,122,0,Small (<625),<=2005,Dev. & Tools,library
 Commons-FileUpload,95.0,91,0,Small (<625),<=2005,Dev. & Tools,library
 Commons-Functor,396.0,833,0,Small (<625),<=2005,Dev. & Tools,library
 Commons-Geometry,482.0,2983,4,Small (<625),>=2018,Dev. & Tools,library
-Commons-IO,551.0,2605,230,Small (<625),<=2005,Dev. & Tools,library
+Commons-IO,552.0,2605,232,Small (<625),<=2005,Dev. & Tools,library
 Commons-Imaging,626.0,390,54,Medium (625-1805),2006-2011,Dev. & Tools,library
-Commons-JCS,576.0,447,0,Small (<625),<=2005,Dev. & Tools,library
+Commons-JCS,576.0,451,0,Small (<625),<=2005,Dev. & Tools,library
 Commons-JEXL,223.0,952,60,Small (<625),<=2005,Dev. & Tools,library
 Commons-JXPath,248.0,332,0,Small (<625),<=2005,Dev. & Tools,library
 Commons-Lang,526.0,4526,128,Small (<625),<=2005,Dev. & Tools,library
-Commons-Math,1087.0,2885,12,Medium (625-1805),<=2005,Dev. & Tools,library
+Commons-Math,1088.0,2885,12,Medium (625-1805),<=2005,Dev. & Tools,library
 Commons-Net,314.0,462,34,Small (<625),<=2005,Dev. & Tools,library
 Commons-Numbers,273.0,1384,558,Small (<625),2012-2017,Dev. & Tools,library
 Commons-OGNL,305.0,74,11,Small (<625),2006-2011,Dev. & Tools,library
@@ -67,109 +67,110 @@ DeltaSpike,1713.0,772,1,Medium (625-1805),2006-2011,Dev. & Tools,javaee
 Directory,1516.0,3891,1,Medium (625-1805),2006-2011,Network & Comm.,"network-server, network-client"
 Directory-Server,1273.0,2368,0,Medium (625-1805),<=2005,Network & Comm.,network-server
 Directory-Studio,1853.0,654,250,Large (>=1806),2006-2011,Network & Comm.,network-client
-Doris,6019.0,4648,2,Large (>=1806),2012-2017,Data & Analytics,database
+Doris,6040.0,4675,2,Large (>=1806),2012-2017,Data & Analytics,database
 Drill,4684.0,8779,87,Large (>=1806),2012-2017,Data & Analytics,big-data
-Druid,8932.0,18504,2449,Large (>=1806),2012-2017,Data & Analytics,"big-data, database"
+Druid,8905.0,18507,2460,Large (>=1806),2012-2017,Data & Analytics,"big-data, database"
 Empire-db,466.0,127,0,Small (<625),2006-2011,Data & Analytics,database
 EventMesh,1684.0,426,0,Medium (625-1805),>=2018,Network & Comm.,cloud
-FOP,2086.0,1006,11,Large (>=1806),<=2005,Dev. & Tools,"xml, graphics"
-Fineract,5490.0,2410,95,Large (>=1806),2012-2017,Data & Analytics,
-Flink,14144.0,15672,669,Large (>=1806),2006-2011,Data & Analytics,big-data
+FOP,2087.0,1008,11,Large (>=1806),<=2005,Dev. & Tools,"xml, graphics"
+Fineract,5537.0,2718,107,Large (>=1806),2012-2017,Data & Analytics,
+Flink,14190.0,15707,669,Large (>=1806),2006-2011,Data & Analytics,big-data
 Fortress,334.0,110,0,Small (<625),2006-2011,Dev. & Tools,"identity-management, library, security, SDK"
-FreeMarker,912.0,830,0,Medium (625-1805),2006-2011,Web & Content,"Java, html, templating, content"
-Geode,8580.0,20968,476,Large (>=1806),2012-2017,Data & Analytics,database
-Geronimo,3516.0,351,0,Large (>=1806),<=2005,Network & Comm.,"javaee, network-server, http, web-framework"
+FreeMarker,912.0,840,0,Medium (625-1805),2006-2011,Web & Content,"Java, html, templating, content"
+Geode,8580.0,20958,476,Large (>=1806),2012-2017,Data & Analytics,database
+Geronimo,3518.0,351,0,Large (>=1806),<=2005,Network & Comm.,"javaee, network-server, http, web-framework"
 Gobblin,3612.0,2525,0,Large (>=1806),2012-2017,Data & Analytics,big-data
-Groovy,1806.0,219,0,Large (>=1806),<=2005,Dev. & Tools,library
+Groovy,1806.0,220,0,Large (>=1806),<=2005,Dev. & Tools,library
 Guacamole,841.0,48,0,Medium (625-1805),2006-2011,Network & Comm.,"network-client, network-server"
-HBase,5173.0,7543,707,Large (>=1806),2006-2011,Data & Analytics,database
-Hadoop,12559.0,21819,958,Large (>=1806),2006-2011,Data & Analytics,big-data
+HBase,5178.0,7546,707,Large (>=1806),2006-2011,Data & Analytics,database
+Hadoop,12561.0,21821,958,Large (>=1806),2006-2011,Data & Analytics,big-data
 Helix,1536.0,1853,0,Medium (625-1805),2006-2011,Data & Analytics,"cloud, big-data"
-Hive,8314.0,10201,1349,Large (>=1806),2006-2011,Data & Analytics,database
-Hop,4263.0,3209,13,Large (>=1806),>=2018,Data & Analytics,big-data
-HttpComponents-Client,913.0,1800,24,Medium (625-1805),<=2005,Network & Comm.,"http, library, network-client"
-HttpComponents-Core,1012.0,1594,11,Medium (625-1805),<=2005,Network & Comm.,"http, library, network-client, network-server"
-Hudi,3576.0,4245,868,Large (>=1806),2012-2017,Dev. & Tools,library
-Iceberg,4772.0,6319,274,Large (>=1806),2012-2017,Data & Analytics,"big-data, database, data-engineering"
-Ignite,10447.0,14646,798,Large (>=1806),2012-2017,Data & Analytics,"big-data, sql, cloud, database, distributed-sql-database, data-management-platform, hadoop, network-server, network-client, osgi, iot"
-Impala,1048.0,1738,54,Medium (625-1805),2006-2011,Data & Analytics,big-data
-InLong,5354.0,1486,3,Large (>=1806),>=2018,Data & Analytics,big-data
-IoTDB,6976.0,7396,50,Large (>=1806),2012-2017,Data & Analytics,"database, iot, java, python, c++, go, csharp"
+Hive,8314.0,10228,1349,Large (>=1806),2006-2011,Data & Analytics,database
+Hop,4276.0,3308,13,Large (>=1806),>=2018,Data & Analytics,big-data
+HttpComponents-Client,919.0,1809,27,Medium (625-1805),<=2005,Network & Comm.,"http, library, network-client"
+HttpComponents-Core,1012.0,1595,11,Medium (625-1805),<=2005,Network & Comm.,"http, library, network-client, network-server"
+Hudi,3577.0,4301,882,Large (>=1806),2012-2017,Dev. & Tools,library
+Iceberg,4782.0,6351,283,Large (>=1806),2012-2017,Data & Analytics,"big-data, database, data-engineering"
+Ignite,10460.0,14647,806,Large (>=1806),2012-2017,Data & Analytics,"big-data, sql, cloud, database, distributed-sql-database, data-management-platform, hadoop, network-server, network-client, osgi, iot"
+Impala,1049.0,1738,54,Medium (625-1805),2006-2011,Data & Analytics,big-data
+InLong,5355.0,1487,3,Large (>=1806),>=2018,Data & Analytics,big-data
+IoTDB,6993.0,7404,50,Large (>=1806),2012-2017,Data & Analytics,"database, iot, java, python, c++, go, csharp"
 Ivy,667.0,1134,2,Medium (625-1805),<=2005,Dev. & Tools,build-management
 IvyDE,210.0,10,0,Small (<625),2006-2011,Dev. & Tools,build-management
-JAMES,6053.0,14325,251,Large (>=1806),2006-2011,Network & Comm.,"mail, network-server"
+JAMES,6056.0,14503,251,Large (>=1806),2006-2011,Network & Comm.,"mail, network-server"
 JDO,1080.0,370,4,Medium (625-1805),<=2005,Data & Analytics,
-JMeter,1405.0,1299,68,Medium (625-1805),<=2005,Dev. & Tools,testing
+JMeter,1409.0,1333,75,Medium (625-1805),<=2005,Dev. & Tools,testing
 JSPWiki,755.0,1105,2,Medium (625-1805),2006-2011,Web & Content,content
 Jackrabbit,2937.0,37,0,Large (>=1806),<=2005,Data & Analytics,"database, library, network-server, xml"
-Jena,6811.0,13862,591,Large (>=1806),2012-2017,Dev. & Tools,library
-Karaf,1630.0,846,0,Medium (625-1805),2006-2011,Network & Comm.,"network-server, osgi"
+Jena,6813.0,14609,603,Large (>=1806),2012-2017,Dev. & Tools,library
+Karaf,1632.0,846,0,Medium (625-1805),2006-2011,Network & Comm.,"network-server, osgi"
 Kerby,951.0,374,0,Medium (625-1805),2012-2017,Dev. & Tools,"identity-management, identity-provisioning, Kerberos, library, security, SDK"
 Knox,1683.0,2335,0,Medium (625-1805),2012-2017,Data & Analytics,big-data
-Kylin,3496.0,5378,51,Large (>=1806),>=2018,Data & Analytics,big-data
+Kylin,3496.0,5380,51,Large (>=1806),>=2018,Data & Analytics,big-data
 Lingo,1860.0,2981,0,Large (>=1806),2012-2017,Network & Comm.,
-Linkis,2109.0,732,0,Large (>=1806),>=2018,Data & Analytics,big-data
-Log4j,2562.0,3487,200,Large (>=1806),2006-2011,Dev. & Tools,library
+Linkis,2111.0,732,0,Large (>=1806),>=2018,Data & Analytics,big-data
+Log4j,2569.0,3487,200,Large (>=1806),2006-2011,Dev. & Tools,library
 MINA,319.0,355,1,Small (<625),<=2005,Network & Comm.,"network-client, network-server"
 ManifoldCF,1374.0,183,0,Medium (625-1805),2006-2011,Web & Content,content
-Maven,3054.0,2799,24,Large (>=1806),<=2005,Dev. & Tools,build-management
+Maven,3057.0,3061,34,Large (>=1806),<=2005,Dev. & Tools,build-management
 Maven-Doxia,153.0,356,1,Small (<625),<=2005,Dev. & Tools,build-management
-MyFaces,1887.0,1254,0,Large (>=1806),2006-2011,Web & Content,"web-framework, javaee"
-NetBeans,20663.0,2303,21,Large (>=1806),2012-2017,Dev. & Tools,"java, groovy, php, ide"
-NiFi,8128.0,9229,139,Large (>=1806),2012-2017,Data & Analytics,big-data
+MyFaces,1887.0,1336,0,Large (>=1806),2006-2011,Web & Content,"web-framework, javaee"
+NetBeans,40338.0,2365,21,Large (>=1806),2012-2017,Dev. & Tools,"java, groovy, php, ide"
+NiFi,8150.0,10285,176,Large (>=1806),2012-2017,Data & Analytics,big-data
 Nutch,605.0,295,0,Small (<625),<=2005,Web & Content,web-framework
-OFBiz,1149.0,289,0,Medium (625-1805),2006-2011,Data & Analytics,"web-framework, database, network-server, xml, http, content, geospatial"
+OFBiz,1149.0,290,0,Medium (625-1805),2006-2011,Data & Analytics,"web-framework, database, network-server, xml, http, content, geospatial"
 ORC,409.0,904,128,Small (<625),2012-2017,Data & Analytics,"big-data, database, hadoop, library"
 Oltu-Parent,247.0,224,0,Small (<625),2006-2011,Network & Comm.,
 OpenJPA,4754.0,270,0,Large (>=1806),2006-2011,Data & Analytics,"database, library, javaee"
-OpenMeetings,827.0,266,3,Medium (625-1805),2012-2017,Network & Comm.,"network-server, network-client"
-OpenNLP,1174.0,1205,65,Medium (625-1805),2006-2011,Dev. & Tools,library
+OpenMeetings,827.0,286,4,Medium (625-1805),2012-2017,Network & Comm.,"network-server, network-client"
+OpenNLP,1174.0,1223,65,Medium (625-1805),2006-2011,Dev. & Tools,library
 OpenWebBeans,1564.0,666,0,Medium (625-1805),2006-2011,Dev. & Tools,javaee
-Ozone,4213.0,5521,640,Large (>=1806),>=2018,Data & Analytics,big-data
-PDFBox,1280.0,1092,54,Medium (625-1805),2006-2011,Dev. & Tools,"content, library"
-PLC4X,5169.0,576,18,Large (>=1806),2012-2017,Network & Comm.,"c, c++, go, integration, iot, java, library, network-client, python"
-POI,3753.0,5851,130,Large (>=1806),<=2005,Dev. & Tools,"content, library"
+Ozone,4221.0,5562,645,Large (>=1806),>=2018,Data & Analytics,big-data
+PDFBox,1280.0,1093,54,Medium (625-1805),2006-2011,Dev. & Tools,"content, library"
+PLC4X,5204.0,576,18,Large (>=1806),2012-2017,Network & Comm.,"c, c++, go, integration, iot, java, library, network-client, python"
+POI,3756.0,5854,130,Large (>=1806),<=2005,Dev. & Tools,"content, library"
+Parquet,874.0,1799,176,Medium (625-1805),2012-2017,Data & Analytics,big-data
 Phoenix,2418.0,1993,56,Large (>=1806),2012-2017,Data & Analytics,"big-data, database"
 Pig,1791.0,3865,14,Medium (625-1805),2006-2011,Data & Analytics,database
-Pinot,4997.0,6631,0,Large (>=1806),2012-2017,Data & Analytics,big-data
-Pulsar,4436.0,8041,0,Large (>=1806),2012-2017,Data & Analytics,big-data
+Pinot,5010.0,6664,0,Large (>=1806),2012-2017,Data & Analytics,big-data
+Pulsar,4440.0,8259,0,Large (>=1806),2012-2017,Data & Analytics,big-data
 Qpid,3071.0,5110,20,Large (>=1806),2006-2011,Network & Comm.,"network-server, network-client"
 Ranger,1806.0,5036,1,Large (>=1806),2012-2017,Data & Analytics,"big-data, security"
 Rat,320.0,294,31,Small (<625),2006-2011,Dev. & Tools,build-management
 Roller,623.0,159,0,Small (<625),<=2005,Web & Content,content
-SSHD,1408.0,1035,201,Medium (625-1805),2006-2011,Network & Comm.,network-server
+SSHD,1408.0,1037,203,Medium (625-1805),2006-2011,Network & Comm.,network-server
 Santuario,598.0,434,0,Small (<625),<=2005,Dev. & Tools,"library, security, xml"
-SeaTunnel,3964.0,1782,7,Large (>=1806),2012-2017,Data & Analytics,big-data
+SeaTunnel,3969.0,1786,7,Large (>=1806),2012-2017,Data & Analytics,big-data
 ServiceMix,129.0,33,0,Small (<625),2006-2011,Network & Comm.,"network-client, network-server, xml, osgi"
 Shiro,857.0,482,1,Medium (625-1805),<=2005,Dev. & Tools,"library, web-framework"
-SkyWalking,2148.0,584,37,Large (>=1806),2012-2017,Dev. & Tools,observability
-Solr,4283.0,4929,0,Large (>=1806),<=2005,Network & Comm.,"web-framework, network-server, search, java"
-Spark,1215.0,1085,2,Medium (625-1805),2006-2011,Data & Analytics,big-data
-Spatial-Information-System,3428.0,3281,0,Large (>=1806),2006-2011,Data & Analytics,
+SkyWalking,2149.0,585,37,Large (>=1806),2012-2017,Dev. & Tools,observability
+Solr,4320.0,5117,0,Large (>=1806),<=2005,Network & Comm.,"web-framework, network-server, search, java"
+Spark,1225.0,1195,2,Medium (625-1805),2006-2011,Data & Analytics,big-data
+Spatial-Information-System,3428.0,3390,0,Large (>=1806),2006-2011,Data & Analytics,
 Storm,2014.0,1179,25,Large (>=1806),2006-2011,Data & Analytics,big-data
-Struts,2216.0,981,0,Large (>=1806),2006-2011,Web & Content,web-framework
+Struts,2229.0,988,0,Large (>=1806),2006-2011,Web & Content,web-framework
 Synapse,1297.0,6,0,Medium (625-1805),<=2005,Network & Comm.,"xml, http, network-server, network-client"
-Syncope,3249.0,1724,1,Large (>=1806),2006-2011,Dev. & Tools,"identity-management, identity-provisioning, security"
+Syncope,3249.0,1737,1,Large (>=1806),2006-2011,Dev. & Tools,"identity-management, identity-provisioning, security"
 Tapestry,3408.0,1572,0,Large (>=1806),2006-2011,Web & Content,web-framework
 Tentacles,32.0,2,0,Small (<625),2006-2011,Dev. & Tools,build-management
 Tez,1193.0,1498,71,Medium (625-1805),2012-2017,Data & Analytics,big-data
 Thrift,293.0,239,20,Small (<625),2006-2011,Network & Comm.,"http, library, network-client, network-server"
-Tika,1659.0,2201,0,Medium (625-1805),2006-2011,Dev. & Tools,"content, library"
+Tika,1660.0,2203,0,Medium (625-1805),2006-2011,Dev. & Tools,"content, library"
 Tobago,897.0,374,3,Medium (625-1805),<=2005,Web & Content,web-framework
-TomEE,6265.0,1882,3,Large (>=1806),2006-2011,Network & Comm.,network-server
-Tomcat,2746.0,4358,161,Large (>=1806),2006-2011,Network & Comm.,"network-server, http, javaee"
+TomEE,6261.0,1889,3,Large (>=1806),2006-2011,Network & Comm.,network-server
+Tomcat,2747.0,4377,169,Large (>=1806),2006-2011,Network & Comm.,"network-server, http, javaee"
 TsFile,644.0,836,0,Medium (625-1805),>=2018,Data & Analytics,"big-data, iot, java, python, c++, c"
-Turbine,434.0,165,0,Small (<625),<=2005,Web & Content,web-framework
-UIMA,2175.0,1338,117,Large (>=1806),2006-2011,Data & Analytics,
+Turbine,437.0,165,0,Small (<625),<=2005,Web & Content,web-framework
+UIMA,2181.0,1352,117,Large (>=1806),2006-2011,Data & Analytics,
 Unomi,725.0,283,0,Medium (625-1805),2012-2017,Data & Analytics,search
-Velocity,401.0,13,0,Small (<625),<=2005,Dev. & Tools,library
+Velocity,401.0,14,0,Small (<625),<=2005,Dev. & Tools,library
 Velocity-Tools,142.0,350,0,Small (<625),<=2005,Dev. & Tools,library
 Vysper,781.0,497,0,Medium (625-1805),2006-2011,Network & Comm.,network-server
-Wicket,3318.0,2712,21,Large (>=1806),<=2005,Web & Content,web-framework
+Wicket,3318.0,2736,21,Large (>=1806),<=2005,Web & Content,web-framework
 XML-Graphics-Commons,412.0,211,0,Small (<625),2006-2011,Dev. & Tools,library
-XMLBeans,1287.0,2099,14,Medium (625-1805),<=2005,Dev. & Tools,xml
+XMLBeans,1288.0,2099,14,Medium (625-1805),<=2005,Dev. & Tools,xml
 Yetus,14.0,6,0,Small (<625),2012-2017,Dev. & Tools,"build-management, library, testing"
 Zeppelin,834.0,1091,24,Medium (625-1805),2012-2017,Data & Analytics,big-data
 ZooKeeper,958.0,1759,253,Medium (625-1805),2006-2011,Data & Analytics,database
 cTAKES,1781.0,119,0,Medium (625-1805),>=2018,Dev. & Tools,"content, library"
-datasketches,604.0,2221,0,Small (<625),2012-2017,Data & Analytics,"library, big-data"
+datasketches,602.0,2221,0,Small (<625),2012-2017,Data & Analytics,"library, big-data"
