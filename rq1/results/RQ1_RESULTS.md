@@ -14,7 +14,7 @@
 
 ## 1. 语料（Table 1）
 
-175 个项目 = 218 − 42 retired − 2 data integrity + Parquet（补回）。收窄链条见 `../../corpus/README.md`。
+175 个项目，语料构成见 `../../corpus/README.md`。
 
 | Metric | Mean | Median | Min | Max |
 |---|---:|---:|---:|---:|
@@ -23,9 +23,7 @@
 | # of Test methods | 2,664 | 1,091 | 1 | 23,145 |
 | Project Age (Years) | 17 | 18 | 4 | 28 |
 
-「# of Java files」与 Size 分组是同一列 `files_java`：ssk 快照 HEAD 上 `git ls-tree -r --name-only HEAD | grep -F .java` 的行数（与旧底表同一条命令）。它是子串匹配，会多计路径中间含 `.java` 的少数文件（如 `*.java.template`、`web.javascript.debugger/` 目录下的文件）。按严格的 `.java` 后缀计（`files_java_suffix` 列），175 个项目里 25 个有差异、合计 1,313 个（0.31%），均值 2,439、最大值 39,141，换 Size 组的项目 0 个。
-
-与旧底表（174 个项目，均值 2,315）相比，均值升到 2,446，主要来自 NetBeans 一个项目（20,663 → 40,338）；若它保持旧值，均值为 2,334。旧底表的来源快照已不在磁盘上，旧值无法复现。
+「# of Java files」与 Size 分组是同一列 `files_java`：ssk 快照 HEAD 上 `git ls-tree -r --name-only HEAD | grep -F .java` 的行数。它是子串匹配，会多计路径中间含 `.java` 的少数文件（如 `*.java.template`、`web.javascript.debugger/` 目录下的文件）。按严格的 `.java` 后缀计（`files_java_suffix` 列），175 个项目里 25 个有差异、合计 1,313 个（0.31%），均值 2,439、最大值 39,141，换 Size 组的项目 0 个。
 
 ## 2. 采纳的描述统计
 
@@ -50,8 +48,6 @@ PAI = 项目内 PT 数 / 测试方法总数。PDAR = 改过 PT 的开发者 / �
 | 全部项目（含未采纳，PAI = 0） | 109 | 31 | 20 | 10 | 5 | 175 |
 
 恰好落在 PAI 分箱边界上的采纳者：0 个，闭合方向不影响计数。
-与 174 口径相比的变化：Maven 0.86% → 1.11%（<1% → 1–5%）；新增 Parquet 9.78%（5–10%）。
-
 | PDAR（v4） | [0,5) | [5,10) | [10,15) | [15,20) | [20,25) | [25,30) | [30,40) | [40,50) | [50,100] | 合计 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | 采纳者 | 12 | 25 | 15 | 10 | 13 | 12 | 12 | 4 | 4 | 107 |
@@ -204,10 +200,9 @@ v4 口径（改动行 ∩ 参数化测试区间），107 个采纳者。方法�
 
 ## 8. 口径与注意事项
 
-- **快照**：计数与 `files_java` 取自 ssk 快照（与 RQ2 / RQ3 同一次 clone）。旧底表 `merged_data_218.csv` 的来源快照已不在磁盘上，无法复现，只作追溯。
-- **Parquet**：2026-10-10 补回（语料构建时漏掉）。它没有 PDAR v3 值，只进入 v4 统计；其 PDAR 第一阶段表截断到 2026-06-23，与其余项目对齐。
+- **快照**：计数与 `files_java` 取自 ssk 快照（与 RQ2 / RQ3 同一次 clone）。PDAR 的逐提交表取自 2026-06 的全量 clone。
 - **PDAR 只在采纳者上计算**：未采纳项目的 PDAR 恒为 0，计入只会把中位数拉向 0。
-- **parser 人工核验样本**（`parser_validation/`）抽于补回 Parquet 之前的 174 个项目，没有重抽。
+- **parser 人工核验样本**（`parser_validation/`）的抽样框是除 Parquet 外的 174 个项目（Parquet 的 PT 全部是 JUnit 4）。
 - **Domain** 用四大类互斥映射，15 个项目靠手工补录（`rq1_bins.DOMAIN_MANUAL`）；不补的话采纳者里只有 98 个能自动归类。
 
 ## 9. 复现

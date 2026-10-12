@@ -1,0 +1,9 @@
+dim,n_items,all_three_agree,rater_author_agree,rater_author_pairs
+equivalence_class,15,12,42,45
+semantic_role,10,10,27,30
+methodsource_intent,5,3,12,15
+type_complexity,3,2,6,9
+value_complexity,4,3,11,12
+behavior_carrying,10,8,25,30
+enum_structure,5,5,15,15
+enum_usage_intent,5,3,11,15

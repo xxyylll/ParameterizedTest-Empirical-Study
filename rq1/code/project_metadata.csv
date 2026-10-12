@@ -1,0 +1,220 @@
+project,ssk_key,first_commit_iso,categories
+JDO,,2005-03-18 22:51:42+00:00,
+Accumulo,,2011-10-04 00:46:07+00:00,big-data
+ActiveMQ,,2005-12-12 17:53:59+00:00,"network-server, network-client"
+Airavata,,2011-07-09 19:21:43+00:00,"network-server, cloud, big-data"
+Ambari,,2011-08-30 22:00:51+00:00,big-data
+Ant,,2000-01-13 10:15:43+00:00,build-management
+Any23,,2008-12-18 17:56:05+00:00,"retired, content"
+Apex,,2012-06-07 02:42:55+00:00,"retired, big-data"
+Archiva,,2005-11-23 23:54:12+00:00,"retired, build-management"
+Aries,,2009-09-29 12:10:45+00:00,library
+Avro,,2009-04-09 18:13:31+00:00,"library, big-data, data-engineering, integration"
+Axiom,,2006-02-01 02:24:08+00:00,"library, xml"
+Axis2,,2004-09-02 16:01:47+00:00,"xml, http, network-server, network-client"
+Beam,,2014-12-13 18:56:14+00:00,big-data
+Bigtop,,2011-07-19 19:44:48+00:00,big-data
+BookKeeper,,2011-03-30 04:43:01+00:00,big-data
+BVal,,2010-03-12 20:07:45+00:00,"javaee, library"
+Calcite,,2012-04-20 03:40:33+00:00,"big-data, hadoop, sql, geospatial"
+Camel,,2007-03-19 10:54:57+00:00,"integration, cloud, java, library"
+CarbonData,,2016-03-02 07:47:31+00:00,big-data
+Cassandra,,2009-03-02 07:57:22+00:00,database
+Causeway,,2004-07-30 11:02:50+00:00,web-framework
+Cayenne,,2007-01-21 11:11:02+00:00,"database, library, network-server, network-client, xml, web-framework"
+Chukwa,,2008-08-12 22:35:16+00:00,"retired, hadoop"
+Clerezza,,2009-11-30 11:01:52+00:00,"retired, osgi, content"
+CloudStack,,2010-08-11 16:13:25+00:00,cloud
+Cocoon,,2003-02-27 01:27:33+00:00,"database, graphics, http, network-client, network-server, web-framework, xml, retired"
+Commons-BCEL,,2001-10-29 12:42:33+00:00,library
+Commons-BeanUtils,,2001-03-27 05:25:34+00:00,library
+Commons-BSF,,2002-11-01 10:03:07+00:00,library
+Commons-Chain,,2003-08-11 04:44:15+00:00,library
+Commons-CLI,,2002-06-10 18:01:16+00:00,library
+Commons-Codec,,2003-04-25 17:51:00+00:00,library
+Commons-Collections,,2001-04-14 15:38:58+00:00,library
+Commons-Compress,,2003-11-23 20:07:47+00:00,library
+Commons-Configuration,,2003-12-23 15:09:04+00:00,library
+Commons-Crypto,,2015-03-27 08:35:20+00:00,library
+Commons-CSV,,2005-12-17 05:41:27+00:00,library
+Commons-Daemon,,2003-09-04 23:28:19+00:00,library
+Commons-DBCP,,2001-04-14 17:14:51+00:00,library
+Commons-DbUtils,,2003-11-02 19:15:24+00:00,library
+Commons-Digester,,2001-05-03 00:28:33+00:00,library
+Commons-Email,,2004-11-25 09:56:55+00:00,library
+Commons-Exec,,2005-07-29 02:59:37+00:00,library
+Commons-FileUpload,,2002-03-24 07:05:13+00:00,library
+Commons-Functor,,2003-01-27 19:33:44+00:00,library
+Commons-Geometry,,2018-04-07 00:28:17+00:00,library
+Commons-HttpClient,httpcomponents-client,2005-12-21 18:47:13+00:00,library
+Commons-Imaging,,2007-10-06 05:00:16+00:00,library
+Commons-IO,,2002-01-25 19:06:14+00:00,library
+Commons-JCS,,2002-04-07 16:55:19+00:00,library
+Commons-JEXL,,2002-04-26 04:23:17+00:00,library
+Commons-JXPath,,2001-08-23 00:47:02+00:00,library
+Commons-Lang,,2002-07-19 03:35:56+00:00,library
+Commons-Math,,2003-05-12 15:07:54+00:00,library
+Commons-Net,,2002-04-03 01:04:21+00:00,library
+Commons-Numbers,,2017-01-04 10:04:25+00:00,library
+Commons-OGNL,,2011-05-05 09:38:09+00:00,library
+Commons-Pool,,2001-04-14 16:40:29+00:00,library
+Commons-Proxy,,2005-08-21 17:38:47+00:00,library
+Commons-RDF,,2014-06-06 07:52:20+00:00,library
+Commons-RNG,,2016-08-07 21:44:22+00:00,library
+Commons-SCXML,,2005-08-17 18:48:02+00:00,library
+Commons-Statistics,,2018-01-03 01:57:38+00:00,library
+Commons-Text,,2014-11-11 19:42:39+00:00,library
+Commons-Validator,,2002-01-06 00:47:39+00:00,library
+Commons-VFS,,2002-07-16 17:19:16+00:00,library
+Commons-Weaver,,2012-11-19 03:54:31+00:00,library
+Continuum,,2005-04-11 03:04:49+00:00,"build-management, retired"
+Crunch,,2011-10-10 06:12:24+00:00,"retired, big-data, library"
+cTAKES,,2022-11-29 19:55:39+00:00,"content, library"
+Curator,,2011-07-14 19:59:21+00:00,database
+CXF,,2008-04-23 17:50:00+00:00,"library, xml, network-client, network-server"
+Daffodil,,2011-07-29 03:54:39+00:00,"big-data, library, xml"
+DataFu,,2011-09-22 21:36:54+00:00,big-data
+datasketches,,2015-06-30 01:05:21+00:00,"library, big-data"
+DeltaSpike,,2011-12-22 13:04:14+00:00,javaee
+DirectMemory,,2011-10-12 19:37:28+00:00,"big-data, retired"
+Directory,,2006-01-13 18:00:28+00:00,"network-server, network-client"
+Directory-Server,,2004-01-31 03:36:01+00:00,network-server
+Directory-Studio,,2006-11-16 09:49:01+00:00,network-client
+Doris,,2017-08-11 09:51:21+00:00,database
+Drill,,2012-09-03 20:21:32+00:00,big-data
+Druid,,2012-10-23 19:08:07+00:00,"big-data, database"
+Empire-db,,2008-08-04 07:33:09+00:00,database
+Etch,,2008-07-29 06:31:55+00:00,"network-server, network-client, library, retired"
+EventMesh,,2019-09-16 03:04:57+00:00,cloud
+Falcon,,2011-11-24 03:46:09+00:00,"big-data, retired"
+Fineract,,2012-04-20 09:31:01+00:00,
+Flink,,2010-12-15 16:02:01+00:00,big-data
+FOP,,1999-10-31 18:13:49+00:00,"xml, graphics"
+Forrest,,2002-02-06 17:37:46+00:00,"retired, build-management, database, graphics, http, network-client, network-server, web-framework, xml"
+Fortress,,2011-09-11 18:28:10+00:00,"identity-management, library, security, SDK"
+FreeMarker,,2010-03-14 20:26:24+00:00,"Java, html, templating, content"
+Geode,,2015-04-28 21:37:16+00:00,database
+Geronimo,,2003-08-07 20:22:20+00:00,"javaee, network-server, http, web-framework"
+Giraph,,2011-08-06 07:27:30+00:00,"retired, big-data"
+Gobblin,,2014-02-04 23:07:00+00:00,big-data
+Gora,,2010-10-08 21:17:10+00:00,"nosql, retired"
+Groovy,,2003-08-28 18:48:39+00:00,library
+Guacamole,,2010-06-25 07:33:08+00:00,"network-client, network-server"
+Hadoop,,2009-05-19 04:20:40+00:00,big-data
+Hama,,2008-06-19 09:52:00+00:00,"retired, big-data"
+Harmony,,2005-09-29 21:02:59+00:00,"virtual-machine, retired"
+HBase,,2007-04-03 20:34:28+00:00,database
+Helix,,2011-06-22 01:56:46+00:00,"cloud, big-data"
+Hive,,2008-09-02 23:58:59+00:00,database
+Hop,,2019-09-24 10:48:13+00:00,big-data
+HttpComponents-Client,,2005-12-21 18:47:13+00:00,"http, library, network-client"
+HttpComponents-Core,,2005-02-08 21:51:02+00:00,"http, library, network-client, network-server"
+Hudi,,2016-12-16 22:03:59+00:00,library
+Iceberg,,2017-12-13 21:52:43+00:00,"big-data, database, data-engineering"
+Ignite,,2014-02-20 10:33:43+00:00,"big-data, sql, cloud, database, distributed-sql-database, data-management-platform, hadoop, network-server, network-client, osgi, iot"
+Impala,,2011-05-23 22:28:19+00:00,big-data
+InLong,,2019-09-11 04:55:41+00:00,big-data
+IoTDB,,2017-05-07 06:50:07+00:00,"database, iot, java, python, c++, go, csharp"
+Ivy,,2005-06-16 11:18:39+00:00,build-management
+IvyDE,,2007-01-24 18:30:33+00:00,build-management
+Jackrabbit,,2004-09-13 17:48:13+00:00,"database, library, network-server, xml"
+JAMES,,2006-09-30 17:19:35+00:00,"mail, network-server"
+jclouds,,2009-04-11 16:24:33+00:00,"cloud, library, retired"
+Jena,,2012-05-08 12:22:19+00:00,library
+JMeter,,1998-09-03 00:24:13+00:00,testing
+JSPWiki,,2007-10-06 05:00:16+00:00,content
+Karaf,,2007-11-26 18:06:16+00:00,"network-server, osgi"
+Kerby,,2014-02-21 18:49:21+00:00,"identity-management, identity-provisioning, Kerberos, library, security, SDK"
+Knox,,2012-10-24 18:57:32+00:00,big-data
+Kylin,,2022-08-01 07:48:53+00:00,big-data
+Lens,,2013-05-23 06:47:52+00:00,"retired, big-data"
+Lenya,,2002-01-11 14:52:57+00:00,"web-framework, xml, retired"
+Linkis,,2019-07-23 06:41:52+00:00,big-data
+Log4j,,2010-05-13 06:31:04+00:00,library
+Lucene-Core,,2001-09-11 21:44:36+00:00,"database, library, search"
+ManifoldCF,,2010-01-11 22:36:06+00:00,content
+Marmotta,,2013-01-03 12:41:43+00:00,retired
+Maven,,2003-09-01 16:05:50+00:00,build-management
+Maven-Doxia,,2005-11-01 01:22:33+00:00,build-management
+MetaModel,,2013-06-09 20:32:07+00:00,"database, big-data, library, retired"
+MINA,,2005-12-28 07:54:25+00:00,"network-client, network-server"
+MRUnit,,2009-04-06 21:23:26+00:00,"library, retired"
+MyFaces,,2006-01-17 14:10:57+00:00,"web-framework, javaee"
+NetBeans,,2017-09-11 13:32:02+00:00,"java, groovy, php, ide"
+NiFi,,2014-12-08 20:22:14+00:00,big-data
+Nutch,,2005-01-23 01:28:09+00:00,web-framework
+ODE,,2006-02-17 21:10:46+00:00,"retired, xml, network-server"
+OFBiz,,2006-07-01 19:05:20+00:00,"web-framework, database, network-server, xml, http, content, geospatial"
+Lingo,,2013-11-07 12:28:42+00:00,
+Oltu-Parent,,2010-01-27 16:34:31+00:00,
+OODT,,2010-05-03 01:15:31+00:00,"retired, big-data"
+Oozie,,2011-08-19 19:23:39+00:00,"retired, big-data"
+OpenJPA,,2006-05-02 01:50:04+00:00,"database, library, javaee"
+OpenMeetings,,2015-12-13 05:54:37+00:00,"network-server, network-client"
+OpenNLP,,2010-12-02 22:56:04+00:00,library
+OpenWebBeans,,2008-11-22 17:29:01+00:00,javaee
+ORC,,2015-05-07 12:51:50+00:00,"big-data, database, hadoop, library"
+Ozone,,2018-03-15 16:23:33+00:00,big-data
+PDFBox,,2008-02-10 18:26:16+00:00,"content, library"
+Phoenix,,2014-01-27 19:16:01+00:00,"big-data, database"
+Pig,,2007-10-29 19:40:23+00:00,database
+Pinot,,2014-10-31 17:25:02+00:00,big-data
+Pivot,,2008-06-05 13:08:58+00:00,"retired, library"
+PLC4X,,2017-10-16 11:09:26+00:00,"c, c++, go, integration, iot, java, library, network-client, python"
+POI,,2002-01-31 02:22:28+00:00,"content, library"
+Polygene,,2007-03-04 06:07:33+00:00,"library, retired"
+Portals,,2003-09-30 14:01:12+00:00,"web-framework, retired"
+Pulsar,,2016-09-07 05:10:37+00:00,big-data
+Qpid,,2006-09-19 22:06:50+00:00,"network-server, network-client"
+Ranger,,2014-08-14 20:48:58+00:00,"big-data, security"
+Rat,,2008-03-11 23:08:58+00:00,build-management
+REEF,,2012-08-01 16:33:53+00:00,"retired, big-data"
+Roller,,2005-06-07 02:56:59+00:00,content
+Santuario,,2001-09-28 17:52:10+00:00,"library, security, xml"
+SeaTunnel,,2017-08-05 14:30:14+00:00,big-data
+ServiceMix,,2011-06-29 12:04:27+00:00,"network-client, network-server, xml, osgi"
+Shindig,,2007-12-11 23:06:13+00:00,"javaee, retired"
+Shiro,,2005-07-14 15:10:24+00:00,"library, web-framework"
+SkyWalking,,2015-11-07 03:30:37+00:00,observability
+Solr,,2001-09-11 21:44:36+00:00,"web-framework, network-server, search, java"
+Spark,,2010-03-29 23:17:55+00:00,big-data
+Spatial-Information-System,,2010-03-20 18:49:04+00:00,
+Sqoop,,2011-06-14 12:07:16+00:00,"retired, big-data"
+SSHD,,2008-12-04 16:24:17+00:00,network-server
+Stanbol,,2010-11-15 13:19:31+00:00,"retired, content"
+Storm,,2011-09-16 05:20:45+00:00,big-data
+Stratos,,2013-06-28 19:05:24+00:00,"cloud, retired"
+Struts,,2006-02-22 05:16:10+00:00,web-framework
+Submarine,,2019-09-19 06:37:15+00:00,"retired, cloud, java, python, go"
+Synapse,,2005-08-22 12:39:51+00:00,"xml, http, network-server, network-client"
+Syncope,,2010-04-29 10:33:03+00:00,"identity-management, identity-provisioning, security"
+Tajo,,2011-12-09 11:39:47+00:00,"retired, big-data"
+Tapestry,,2007-04-24 02:30:57+00:00,web-framework
+Tentacles,,2011-09-27 21:22:57+00:00,build-management
+Tez,,2013-03-15 21:49:28+00:00,big-data
+Thrift,,2008-05-16 20:33:47+00:00,"http, library, network-client, network-server"
+Tika,,2007-03-31 07:22:55+00:00,"content, library"
+Tiles,,2004-12-30 06:56:21+00:00,"web-framework, retired"
+Tobago,,2004-04-22 10:10:28+00:00,web-framework
+Tomcat,,2006-03-27 13:53:46+00:00,"network-server, http, javaee"
+TomEE,,2006-01-02 00:24:53+00:00,network-server
+TsFile,,2018-11-19 03:31:03+00:00,"big-data, iot, java, python, c++, c"
+Turbine,,2001-08-16 05:06:53+00:00,web-framework
+UIMA,,2006-11-02 22:06:05+00:00,
+Unomi,,2014-04-23 08:06:35+00:00,search
+Velocity,,2000-09-30 17:03:07+00:00,library
+Velocity-Tools,,2002-01-03 20:11:54+00:00,library
+VXQuery,,2009-07-20 04:18:07+00:00,"retired, big-data, xml"
+Vysper,,2009-04-21 09:10:30+00:00,network-server
+Whirr,,2010-06-01 04:41:54+00:00,"network-server, retired"
+Wicket,,2004-09-21 15:10:53+00:00,web-framework
+Wink,,2009-06-08 17:20:10+00:00,"javaee, retired"
+Wookie,,2007-10-14 10:58:41+00:00,"web-framework, retired"
+XML-Graphics-Commons,,2006-02-20 15:49:33+00:00,library
+XMLBeans,,2003-09-02 18:55:16+00:00,xml
+Yetus,,2015-09-17 19:37:27+00:00,"build-management, library, testing"
+Zeppelin,,2013-06-19 04:40:59+00:00,big-data
+ZooKeeper,,2008-05-19 17:51:27+00:00,database
+jclouds,,2009-04-11 16:24:33+00:00,"cloud, library, retired"
+jclouds,,2009-04-11 16:24:33+00:00,"cloud, library, retired"
+Parquet,,2012-08-31T15:17:05-07:00,big-data

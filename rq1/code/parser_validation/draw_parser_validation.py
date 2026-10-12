@@ -13,10 +13,9 @@
 
 非 PT 侧不分层随机抽 —— 假阴性可能出现在任何地方，没有先验理由偏向某处。
 
-语料与 RQ1 一致：174 个项目（218 − 42 retired − 2 data integrity）。
-注意：这份样本抽于 2026-10-10 补回 Parquet 之前，抽样框是当时的 174 个项目；RQ1 现为 175 个，
-但样本**没有重抽**（重抽会换掉已用于人工核验的样本）。Parquet 全部是 JUnit 4 PT，只影响 PT 抽样框的 1.0%。
-随机种子 42。
+抽样框：RQ1 语料中的项目（FRAME_EXCLUDE 除外）。随机种子 42。
+注意：仓库里的 parser_validation_sample.csv 是早期版本的脚本抽的，PT 的 100 条与本脚本一致，
+非 PT 的 100 条不一致（当时非 PT 抽样池的项目范围不同）。
 
 输出 parser_validation_sample.csv（含源码，便于直接判读）
 """
@@ -37,23 +36,26 @@ import random
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
-SSK = os.path.join(ROOT, 'parser_result_ssk')
+ROOT = _paths.ROOT
+SSK = _paths.PARSER_SSK
 SEED = 42
 N_PT, N_NONPT = 100, 100
 MAX_SRC = 1600                      # 源码截断，防止单条过长
 
-sys.path.insert(0, os.path.join(ROOT, 'rq2'))
-sys.path.insert(0, os.path.join(ROOT, 'rq1_new'))
+sys.path.insert(0, _paths.RQ2_1_CODE)
+sys.path.insert(0, _paths.RQ1_CODE)
 from method_source_analysis import is_parameterized_test  # noqa: E402
 from rq1_bins import load as load_rq1                     # noqa: E402
 
 
+FRAME_EXCLUDE = {'Parquet'}   # 不在抽样框内，见文件头
+
+
 def ssk_projects():
-    """RQ1 的 174 个项目映射到 ssk 目录名。"""
+    """抽样框的 174 个项目映射到 ssk 目录名。"""
     m = json.load(open(os.path.join(ROOT, 'project_name_map.json')))
     old2ssk = {v: k for k, v in m.items()}
-    return {old2ssk.get(p, str(p).lower()) for p in load_rq1()['project']}
+    return {old2ssk.get(p, str(p).lower()) for p in load_rq1()['project'] if p not in FRAME_EXCLUDE}
 
 
 def main():

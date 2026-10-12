@@ -3,7 +3,7 @@
 
 与早先 `check_category_llr.py` 的两处关键差异：
 
-1. **项目口径与 RQ1 一致**（218 − 42 retired − 2 data integrity，再补回 Parquet = 175），不是 176。
+1. **项目口径与 RQ1 一致**：175 个项目（rq1_bins.load()）。
 
 2. **EPV 筛选去掉的是变量，不是项目。**
    EPV 原则针对的是「某类别项目太少 → 它的 0/1 变量估计不稳」，所以应当不给它设变量；
@@ -16,7 +16,7 @@
    仅给项目数 ≥ MIN_PROJECTS 的类别设变量，不达标的类别不设变量但项目保留，
    它们在所有变量上取 0，自然构成参照组。
 
-按 175 口径计数，达标的只有 library(73) / big-data(40，含 Parquet) / network-server(26)；
+按 175 口径计数，达标的只有 library(73) / big-data(40) / network-server(26)；
 database 以 19 个差一个落选 —— 这是去掉 2 个 data-integrity 项目带来的直接后果（176 时是 20）。
 
 输出 rq1/category_logit_results.csv

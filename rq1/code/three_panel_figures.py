@@ -6,7 +6,7 @@ Outputs (saved to this script's directory):
   rq1_pdar_three_panel.pdf / .png  – PDAR × Size / Age / Category
 
 Both figures share identical style, layout, and colour palette.
-Project set matches the RQ1 text: 218 - 42 retired - 2 data-integrity = 174.
+Project set: the 175-project RQ1 corpus (rq1_bins.load()).
 """
 
 # 向上找到 仓库根（paths.py 所在处）并加入 sys.path —— 不依赖本文件在目录树里的深度

@@ -146,7 +146,7 @@ def main():
 
     # ---------------- 1. Table 1
     w('## 1. 语料（Table 1）\n')
-    w(f'{n} 个项目 = 218 − 42 retired − 2 data integrity + Parquet（补回）。收窄链条见 `../../corpus/README.md`。\n')
+    w(f'{n} 个项目，语料构成见 `../../corpus/README.md`。\n')
     w('| Metric | Mean | Median | Min | Max |\n|---|---:|---:|---:|---:|')
     for r in t1.itertuples():
         w(f'| {r.metric} | {r.mean} | {r.median} | {r.min} | {r.max} |')
@@ -158,20 +158,10 @@ def main():
         g = lambda x: pd.cut(x, bins=rq1_bins.SIZE_BINS, labels=rq1_bins.SIZE_LABELS, right=rq1_bins.SIZE_RIGHT).astype(str)
         moved = int((g(fj) != g(fs)).sum())
         w('「# of Java files」与 Size 分组是同一列 `files_java`：ssk 快照 HEAD 上 `git ls-tree -r --name-only HEAD | grep -F .java`'
-          ' 的行数（与旧底表同一条命令）。它是子串匹配，会多计路径中间含 `.java` 的少数文件（如 `*.java.template`、'
+          ' 的行数。它是子串匹配，会多计路径中间含 `.java` 的少数文件（如 `*.java.template`、'
           f'`web.javascript.debugger/` 目录下的文件）。按严格的 `.java` 后缀计（`files_java_suffix` 列），{n} 个项目里 '
           f'{int((diff > 0).sum())} 个有差异、合计 {int(diff.sum()):,} 个（{diff.sum() / fj.sum() * 100:.2f}%），'
           f'均值 {fs.mean():,.0f}、最大值 {fs.max():,.0f}，换 Size 组的项目 {moved} 个。\n')
-    old = pd.read_csv(os.path.join(RESULTS_DIR, 'merged_data_218.csv'))
-    rq_old = set(old.project) & set(df.project)
-    o = old.set_index('project').loc[sorted(rq_old), 'files_java'].astype(float)
-    nw = df.set_index('project')['files_java'].astype(float)
-    dlt = nw.loc[o.index] - o
-    top = dlt.abs().idxmax()
-    w(f'与旧底表（{len(o)} 个项目，均值 {o.mean():,.0f}）相比，均值升到 {nw.mean():,.0f}，主要来自 {top} 一个项目'
-      f'（{o[top]:,.0f} → {nw[top]:,.0f}）；若它保持旧值，均值为 {(nw.sum() - dlt[top]) / len(nw):,.0f}。'
-      f'旧底表的来源快照已不在磁盘上，旧值无法复现。\n')
-
     # ---------------- 2. 描述统计
     w('## 2. 采纳的描述统计\n')
     q = lambda s, x: s.quantile(x)
@@ -201,18 +191,6 @@ def main():
     edge = ad[ad.pai.isin(PAI_BINS)]
     w(f'\n恰好落在 PAI 分箱边界上的采纳者：{len(edge)} 个' + ('，闭合方向不影响计数。' if not len(edge) else
       '（' + '、'.join(f'{r.project} {r.pai:.2f}%' for r in edge.itertuples()) + '）。'))
-
-    # 与 174 口径相比换了区间的项目（旧底表在仓库里，现算）
-    old = pd.read_csv(os.path.join(RESULTS_DIR, 'merged_data_218.csv'))
-    old = old[old.project.isin(ad.project) & (pd.to_numeric(old.uses_pt) == 1)].drop_duplicates('project')
-    old_pai = (pd.to_numeric(old.pt_total) / pd.to_numeric(old.total_tests) * 100).set_axis(old.project)
-    cut = lambda x: pd.cut(x, bins=PAI_BINS, labels=PAI_LABELS, right=False).astype(str)
-    new_pai = ad.set_index('project').pai
-    moved = [p for p in old_pai.index if cut(old_pai)[p] != cut(new_pai.loc[old_pai.index])[p]]
-    added = sorted(set(ad.project) - set(old_pai.index))
-    notes = [f'{p} {old_pai[p]:.2f}% → {new_pai[p]:.2f}%（{cut(old_pai)[p]} → {cut(new_pai)[p]}）' for p in moved]
-    notes += [f'新增 {p} {new_pai[p]:.2f}%（{cut(new_pai)[p]}）' for p in added]
-    w('与 174 口径相比的变化：' + ('；'.join(notes) if notes else '无') + '。\n')
 
     h_pd = hist(pdar.pdar, PDAR_BINS, PDAR_LABELS)
     w('| PDAR（v4） | ' + ' | '.join(PDAR_LABELS) + ' | 合计 |\n|---|' + '---:|' * (len(PDAR_LABELS) + 1))
@@ -348,12 +326,9 @@ def main():
 
     # ---------------- 8. 注意事项
     w('## 8. 口径与注意事项\n')
-    w('- **快照**：计数与 `files_java` 取自 ssk 快照（与 RQ2 / RQ3 同一次 clone）。旧底表 `merged_data_218.csv` '
-      '的来源快照已不在磁盘上，无法复现，只作追溯。')
-    w('- **Parquet**：2026-10-10 补回（语料构建时漏掉）。它没有 PDAR v3 值，只进入 v4 统计；其 PDAR 第一阶段表截断到 '
-      '2026-06-23，与其余项目对齐。')
+    w('- **快照**：计数与 `files_java` 取自 ssk 快照（与 RQ2 / RQ3 同一次 clone）。PDAR 的逐提交表取自 2026-06 的全量 clone。')
     w('- **PDAR 只在采纳者上计算**：未采纳项目的 PDAR 恒为 0，计入只会把中位数拉向 0。')
-    w('- **parser 人工核验样本**（`parser_validation/`）抽于补回 Parquet 之前的 174 个项目，没有重抽。')
+    w('- **parser 人工核验样本**（`parser_validation/`）的抽样框是除 Parquet 外的 174 个项目（Parquet 的 PT 全部是 JUnit 4）。')
     w('- **Domain** 用四大类互斥映射，15 个项目靠手工补录（`rq1_bins.DOMAIN_MANUAL`）；不补的话采纳者里只有 '
       f'{int((~ad.project.str.strip().str.lower().isin(rq1_bins.DOMAIN_MANUAL) & ad.domain_grp.notna()).sum())} 个能自动归类。\n')
 

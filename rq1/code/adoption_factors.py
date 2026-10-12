@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """RQ1「影响因素」：项目规模、JUnit 版本、测试套件规模、年龄与 PT 采纳 / PAI 的关系，以及多元 logistic 回归。
 
-这些数字此前只存在于 METHOD_complete.md 与早先的清单文档里 —— 是在早先会话中临时算出、直接写进文档的，
-没有留下脚本。本文件把它们固定下来，并统一从 rq1_bins.load() 取语料（与 Table 3 等同源）。
-在旧 174 口径（--merged merged_data_218.csv）上逐位复现过文档的每个数。
+语料统一从 rq1_bins.load() 取（与 Table 3 等同源）。
 
 各项定义：
   规模 × 采纳     size_grp × uses_pt 的 3×2 卡方，Cramér's V = sqrt(χ² / (n·(min(r,c)−1)))
@@ -14,7 +12,7 @@
   JUnit 版本 × PAI（论文口径）
                   在采纳者里按 **PT 用的框架**分组：JUnit4-PT-only（junit4_pt > 0 且 junit5_pt = 0）、
                   JUnit5-PT-only（反之）、两者都有。JUnit5-PT-only vs JUnit4-PT-only 的 PAI 做 Mann-Whitney U
-                  与 Cliff's δ。在旧 174 口径上复现了论文的 n = 29 / 65、p = 0.074。
+                  与 Cliff's δ。
   JUnit 版本 × 采纳（补充，对应 logistic 的 Has JUnit5）
                   在全部项目里按 **测试方法用的框架**分组：JUnit4-only / JUnit5-only / Mixed；两个框架都没有的项目
                   （如纯 TestNG）不计。报告三组采纳率，以及 JUnit5-only vs JUnit4-only 的采纳（0/1）Mann-Whitney U。
@@ -25,7 +23,7 @@
 
 用法：
   python adoption_factors.py                                # 当前底表（paths.MERGED_DATA），写 adoption_factors.csv
-  python adoption_factors.py --merged merged_data_218.csv   # 指定底表，只打印，用于核对旧数字
+  python adoption_factors.py --merged <other.csv>           # 指定其它底表，只打印
 其它脚本（build_rq1_results.py）通过 compute() 取结构化结果。
 """
 

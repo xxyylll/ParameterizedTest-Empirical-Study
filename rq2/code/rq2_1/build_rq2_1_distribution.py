@@ -3,7 +3,7 @@
 
 与旧的 `source_types_summary.csv` / `parameter_source_statistics.csv` 的区别：
   1. 数据源是 `parser_result_ssk/`（全部项目同一时间 clone），不是时间不一致的 `parser_result/`
-  2. 项目框架与 RQ1 一致（218 − 42 retired − 2 data integrity + Parquet = 175）
+  2. 项目框架与 RQ1 一致（175 个项目）
   3. **JUnit4 的 @Parameters 单独统计** —— 旧表只算了 JUnit5，漏掉了近一半的 PT
 
 输出 rq2/rq2_1_source_distribution_ssk.csv

@@ -1,36 +1,26 @@
 #!/usr/bin/env python3
-"""从 ssk 快照重建 RQ1 的项目级底表：merged_data_219_ssk.csv（218 + Parquet）。
+"""从 ssk 快照构建 RQ1 的项目级底表 merged_data_219_ssk.csv（219 行，筛选在分析时由 rq1_bins 做）。
 
-为什么要重建：
-  旧底表 merged_data_218.csv 的计数来自 2025-10-15 跑的一批 parser 输出，那批输出后来被
-  部分重跑覆盖，磁盘上已经不存在（parser_result/ 里 Accumulo 是 10-28、Hudi 是 12-04 的版本）。
-  拿现存的两批去比，12 个项目里旧批只吻合 2 个、ssk 只吻合 3 个 —— 旧底表已无法复现。
-  ssk 快照（SSD 上 apache-projects/，HEAD 在 2025-10-16 ~ 10-21）是 RQ2 / RQ3 用的同一次 clone，
-  parser 输出也还在（parser_result_ssk/），所以 RQ1 统一切到它。
-  切换本身几乎不动头条数字：174 个项目里 61 个计数有变，但无一采纳状态翻转，
-  CAR 60.9%、采纳者 106、PAI 中位 2.21% 均不变。
-
-新增 Parquet：
-  它在 263 → 218 那一步被漏掉了（当时其余被漏的 Flume / Fluo / Fluo Recipes / Fluo YARN
-  本就该排除：dormant / 停更 / retired）。category 取自 projects.apache.org（big-data）。
+输入：
+  project_metadata.csv（同目录）   项目清单与不随快照变化的元数据：首次提交时间、ASF category。
+                                   ssk_key 列为空时按 project_name_map.json 找 parser 输出；
+                                   Commons-HttpClient 与 HttpComponents-Client 是同一仓库，没有单独的 clone，
+                                   指向后者（它在分析时作为重复项排除，见 rq1_bins.DATA_INTEGRITY_EXCL）。
+  PT_PARSER_SSK                    轻量 parser 的逐项目 JSON
+  PT_SSD/apache-projects           源码快照（files_java 与 date）
 
 各列的来源：
   total_tests, pt_total, junit4_pt, junit5_pt, pt_share,
   junit4_total, junit5_total, junit4_param_share, junit5_param_share
-      ssk 的 parser 输出，计算逻辑直接调用 pt_summary.py（与旧底表同一份代码）
+      parser 输出，计算逻辑在 pt_summary.py
+  files_java
+      快照 HEAD 上 `git ls-tree -r --name-only HEAD | grep -F '.java' | wc -l`；Size 分组用它
   files_java_suffix
       同一棵树上严格以 .java 结尾的文件数（仅供核对，分组不用它）
-  files_java
-      SSD 快照 HEAD 上 `git ls-tree -r --name-only HEAD | grep -F '.java' | wc -l`
-      —— 与 trigger.sh 生成旧底表时是同一条命令，只是换成 ssk 的那次 clone
   date
-      ssk 快照里该项目 HEAD 的提交时间（旧底表里这一列是运行时刻）
-  first_commit_iso, first_commit, age
-      沿用旧底表（仓库历史的起点不随快照变）；Parquet 取自全量 clone
-  categories
-      沿用旧底表；Parquet 见上
-
-用法：python build_merged_ssk.py      （输出到本目录）
+      快照里该项目 HEAD 的提交时间
+  first_commit_iso, first_commit, age, categories
+      取自 project_metadata.csv；age = 2026 − 首次提交年份
 """
 
 # 向上找到 仓库根（paths.py 所在处）并加入 sys.path —— 不依赖本文件在目录树里的深度
@@ -52,15 +42,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
 from paths import FINAL, PARSER_SSK, APACHE_PROJECTS, require   # noqa: E402
 
-OLD = os.path.join(RESULTS_DIR, 'merged_data_218.csv')
+META = os.path.join(HERE, 'project_metadata.csv')
 OUT = os.path.join(RESULTS_DIR, 'merged_data_219_ssk.csv')
 NAME_MAP = os.path.join(FINAL, 'project_name_map.json')
 YEAR_NOW = 2026
 
-# 新增项目：显示名 → (ssk 键, 首次提交, categories)
-ADDED = {
-    'Parquet': ('parquet-mr', '2012-08-31T15:17:05-07:00', 'big-data'),
-}
+FIELDS = ['project', 'date', 'total_tests', 'pt_total', 'junit4_pt', 'junit5_pt', 'pt_share',
+          'junit4_total', 'junit5_total', 'junit4_param_share', 'junit5_param_share', 'files_java',
+          'first_commit_iso', 'uses_pt', 'categories', 'first_commit', 'age', 'files_java_suffix']
 
 
 def load_pt_summary():
@@ -107,29 +96,21 @@ def main():
     ps = load_pt_summary()
     inv = {v: k for k, v in json.load(open(NAME_MAP)).items()}
 
-    old = list(csv.DictReader(open(OLD)))
-    fields = list(old[0].keys()) + ['files_java_suffix']
+    meta = list(csv.DictReader(open(META, newline='', encoding='utf-8')))
 
     rows, problems = [], []
-    todo = [(r['project'], r) for r in old] + [(p, None) for p in ADDED]
-    for project, base in todo:
-        if project in ADDED:
-            key, first_iso, cats = ADDED[project]
-        else:
-            key, first_iso, cats = ssk_key(project, inv), base['first_commit_iso'], base['categories']
+    for m in meta:
+        project, first_iso, cats = m['project'], m['first_commit_iso'], m['categories']
+        key = m['ssk_key'] or ssk_key(project, inv)
         if not key:
-            # 底表保持完整：原样沿用旧行。目前只有 Commons-HttpClient，它在 DATA_INTEGRITY_EXCL 里，
-            # 本就不进 RQ1 的分析集合，所以不影响任何结果。
-            problems.append(f'{project}: 没有 ssk parser 输出，原样沿用旧底表的行')
-            rows.append({**base, 'files_java_suffix': ''})
-            continue
+            raise SystemExit(f'{project}: 找不到 parser 输出（{PARSER_SSK}）')
         recs = ps.load_json_records(os.path.join(PARSER_SSK, f'{key}_output.json'))[0]
         total, pt, j4pt, j5pt, share = ps.compute_stats(recs)
         j4t, j5t, j4s, j5s = ps.compute_flavor_breakdown(recs)
         fj, fj_suffix = files_java(key)
         if fj is None:
-            problems.append(f'{project}: SSD 上没有可读的源码快照，files_java 沿用旧值')
-            fj = base['files_java'] if base else ''
+            problems.append(f'{project}: 没有可读的源码快照，files_java 留空')
+            fj = ''
         year = int(first_iso[:4]) if first_iso else ''
         rows.append({
             'project': project, 'date': snapshot_date(key),
@@ -143,7 +124,7 @@ def main():
         })
 
     with open(OUT, 'w', newline='') as f:
-        w = csv.DictWriter(f, fieldnames=fields)
+        w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         w.writerows(rows)
     print(f'wrote {os.path.relpath(OUT, FINAL)}: {len(rows)} 行')

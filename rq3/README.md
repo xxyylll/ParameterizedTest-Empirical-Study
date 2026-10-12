@@ -49,11 +49,11 @@ helper CCTR 的 N 分量各 +1），不影响任何结果。
 
 | 子分析 | 内容 | FINDINGS |
 |---|---|---|
-| `methodsource/` | MethodSource 的结构与收益；`rq32_*` 基于 379 条人工核验样本（`../rq2/results/rq2_2/pt_methodsource_structure_validated379.csv`），`rq32_full_*` 基于全量 5,508 条（`rq22_methodsource_all.csv`） | `RQ3_2_FINDINGS.md`、`RQ3_2_FULL_POPULATION.md` |
+| `methodsource/` | MethodSource 的结构与收益。**论文口径是全量**：`rq32_full_*`（5,416 条可用标签，`rq22_methodsource_all.csv`）；`rq32_*` 是同一分析在 379 条人工核验样本上的结果，样本同时用于检验自动标签 | `RQ3_2_FULL_POPULATION.md`（全量）、`RQ3_2_FINDINGS.md`（样本） |
 | `cross_source/` | 跨 source 对比 | `RQ3_3_FINDINGS.md` |
 | `enumsource/` | EnumSource 的表示方式与利用方式 | `ENUMSOURCE_FINDINGS.md` |
 | `amortization/` | helper 复用的摊销效应（读 `cross_source/` 的产物，须排在其后） | `AMORTIZATION_FINDINGS.md` |
 
 `code/rq3_2/make_result_appendix.py` 用最新产物重写 5 份 FINDINGS 文末 `APPENDIX` 块，`run_rq3.sh` 最后一步自动调用。
-`code/rq3_2/pt_stats.py` 是四者共用的统计工具。四个子目录原先命名为 rq3_2 ~ rq3_5，但都属于 RQ3.2；
-FINDINGS 文档里沿用的旧编号（如 `RQ3_3_FINDINGS.md`）指的就是这里的子分析。
+`code/rq3_2/pt_stats.py` 是四者共用的统计工具。FINDINGS 文档里写的「RQ3.2」「RQ3.3」
+分别指 methodsource 与 cross_source 两个子分析，四个子分析都属于论文的 RQ3.2。

@@ -90,7 +90,7 @@ RQ3_1_RESULTS = os.path.join(FINAL, 'rq3', 'results', 'rq3_1')
 RQ3_2_CODE = os.path.join(FINAL, 'rq3', 'code', 'rq3_2')
 RQ3_2_RESULTS = os.path.join(FINAL, 'rq3', 'results', 'rq3_2')
 
-MERGED_DATA = os.path.join(RQ1_RESULTS, 'merged_data_219_ssk.csv')   # 218 + Parquet，计数取自 ssk 快照；见 rq1/code/build_merged_ssk.py
+MERGED_DATA = os.path.join(RQ1_RESULTS, 'merged_data_219_ssk.csv')   # 219 行项目级底表，筛选后 175 个；见 rq1/code/build_merged_ssk.py
 PDAR_SUMMARY = os.path.join(RQ1_RESULTS, 'pdar_summary_ssk.csv')
 PT_PROJECTS_LIST = os.path.join(RQ1_CODE, 'pdar', 'pt_projects_ssk.txt')
 PDAR_V4_RESULT = os.path.join(RQ1_RESULTS, 'pdar', 'result_v4')

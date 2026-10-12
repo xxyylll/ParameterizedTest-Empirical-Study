@@ -14,8 +14,8 @@
 #                               见 rq2_2/pipeline/run_rq22.sh 头部说明
 #   RQ2.2 分布图                 只读仓库里的交付表
 #
-# IRR 材料（rq2_2/irr/）不在这里重跑：draw_irr_sample.py 要读人工标注表（PT_MANUAL，不随包分发），
-# 种子固定、结果可复现；build_packets.py 生成的审阅包在分发给评审人时按人名重命名过。
+# IRR：compute_irr.py 从样本与评审人答卷算 κ，在这里重跑。抽样（draw_irr_sample.py）要读人工标注表
+# （PT_MANUAL，不随包分发），种子固定、结果可复现，不在这里重跑。
 
 set -e
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -42,6 +42,9 @@ cd rq2_2
 run plot_construction_distribution.py
 run plot_dependency_distribution.py
 run plot_nsets_distribution.py
+
+step "3. RQ2.2 IRR"
+(cd irr && run compute_irr.py)
 
 echo
 echo "完成。结果见 $(cd ../../results && pwd)"

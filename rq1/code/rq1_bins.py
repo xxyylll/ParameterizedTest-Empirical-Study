@@ -11,7 +11,7 @@
   [0,625) / [625,1806) / [1806,inf) → <625 / 625–1805 / >=1806
   只有 Ranger 正好是 1806 个文件，归入 Large。
 
-语料：218 − 42 retired − 2 data integrity = 174，再补回 Parquet = 175；其中采纳 PT 的 107 个。
+语料：175 个项目（底表 219 行去掉 retired 与 2 个数据完整性问题），其中采纳 PT 的 107 个。
 底表是 merged_data_219_ssk.csv（ssk 快照，见 build_merged_ssk.py）。
 """
 
