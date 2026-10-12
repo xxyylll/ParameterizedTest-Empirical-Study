@@ -10,7 +10,8 @@ Java projects of the Apache Software Foundation. It covers three research questi
 | **RQ3** | Do parameterized tests differ from ordinary tests in size, complexity and duplication (RQ3.1), and how do parameter-source design choices shape where that complexity lives (RQ3.2)? | 46 projects |
 
 Each RQ has its own directory with a `code/` folder (scripts) and a `results/` folder (every table and
-figure those scripts produce). Every script runs from a plain clone of this repository, and
+figure those scripts produce). The large raw data (parser output, AAA traces, clone-detection output, PDAR
+commit tables) is archived on Zenodo: [10.5281/zenodo.23308216](https://doi.org/10.5281/zenodo.23308216) (§8). Every script runs from a plain clone of this repository, and
 no script depends on absolute paths from the authors' machines.
 
 ---
@@ -363,7 +364,7 @@ External data is only needed to **rebuild intermediate tables from raw sources**
 alternatively, set the environment variables below, either in the shell or in a `.env` file at the repository
 root (template: `.env.example`). When a path is missing, the scripts say which variable to set.
 
-The raw data is archived at **DOI: _to be added_** (Zenodo). Download the archives and lay them out under
+The raw data is archived on Zenodo: **[10.5281/zenodo.23308216](https://doi.org/10.5281/zenodo.23308216)**. Download the archives and lay them out under
 `data/` as below; then no environment variable is needed.
 
 | Archive | Extract to | Variable | Content | Needed for |
