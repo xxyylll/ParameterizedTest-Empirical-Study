@@ -40,7 +40,7 @@ no script depends on absolute paths from the authors' machines.
 ├── requirements-recompute.txt   extra dependency (tree-sitter), needed only to rebuild the RQ3 metric tables
 ├── project_name_map.json        repository directory name ↔ project display name
 ├── corpus/                      project lists (see §3)
-├── tools/                       lightweight parser jar + SHA-256 (see §7)
+├── tools/                       lightweight parser jar + SHA-256 (§7); clone_snapshot.sh (§8)
 ├── rq1/  code/  results/        RQ1   adoption                                 (§4)
 ├── rq2/  code/  results/        RQ2   parameter-source distribution/structure  (§5)
 └── rq3/  code/  results/        RQ3   complexity of PTs vs non-PTs             (§6)
@@ -248,6 +248,7 @@ Per-rater values and the shared-item agreement are in `rq2/results/rq2_2/irr/`.
 | `rq2_2/pipeline/run_rq22.sh` (11 Python steps + 9 Java analyzers) | `rq2_2/`: the 9 delivered tables (`rq22_*_all.csv`, `pt_methodsource_structure.csv`, `pt_methodsource_helper_depth.csv`, …) |
 | — (hand-validated, not generated) | `rq2_2/pt_methodsource_structure_validated379.csv` |
 | `rq2_2/plot_{construction,dependency,nsets}_distribution.py` | `rq2_2/*_distribution.{png,pdf,csv}`, `nsets_summary.csv` |
+| — (manual coding) | `rq2_2/manual_coding/` (the authors' manual usage-intent coding of the stratified PT sample) |
 | `rq2_2/irr/draw_irr_sample.py`, `build_packets.py` | `rq2_2/irr/sample_items.csv` (150 items with the authors' labels), review packets for the three raters |
 | `rq2_2/irr/compute_irr.py` | `rq2_2/irr/irr_kappa.csv`, `irr_shared15.csv`, `irr_unclear.csv` (from `rater_answers.xlsx`) |
 
@@ -364,16 +365,21 @@ External data is only needed to **rebuild intermediate tables from raw sources**
 alternatively, set the environment variables below, either in the shell or in a `.env` file at the repository
 root (template: `.env.example`). When a path is missing, the scripts say which variable to set.
 
-| Variable (default under `data/`) | Content | Size | Needed for |
-|---|---|---:|---|
-| `PT_PARSER_SSK` (`parser_result_ssk/`) | lightweight-parser JSON per project (243) | ~1.5 GB | RQ1 base table and Table 1, RQ2.1, RQ2.2 pipeline |
-| `PT_SSD` (`ssd/`) | source snapshots `apache-projects/` (with AAA traces) and CCFinderSW output | ~55 GB | RQ2.2 pipeline, RQ3 metric tables |
-| `PT_METRICS` (`metrics/`) | RQ3 metric tables | ~400 MB | optional; the bundled `.gz` files are used otherwise |
-| `PT_PDAR_RESULT` (`pdar_stage1/`) | PDAR stage-1 per-commit table | 189 MB | recomputing the PDAR summary |
-| `PT_MANUAL` (`ssd/rq2.2_manual/`) | RQ2.2 manual coding table (1,497 rows) | 0.6 MB | drawing the IRR sample |
-| `PT_AAA_JAR`, `PT_JAVA` | deep-parser jar, JDK 21 | — | Java analyzers of the RQ2.2 pipeline |
+The raw data is archived at **DOI: _to be added_** (Zenodo). Download the archives and lay them out under
+`data/` as below; then no environment variable is needed.
 
-These large data sets are archived separately (GitHub limits files to 100 MB).
+| Archive | Extract to | Variable | Content | Needed for |
+|---|---|---|---|---|
+| `parser_result_ssk.tar.gz` (63 MB) | `data/` | `PT_PARSER_SSK` | lightweight-parser JSON for all 243 cloned projects | RQ1 base table and Table 1, RQ2.1, RQ2.2 pipeline |
+| `aaa_traces.tar.gz` (339 MB) | `data/ssd/` | `PT_SSD` | deep-parser AAA traces (`apache-projects/<repo>/AAA/`) for the 47 depth candidates | RQ2.2 pipeline, RQ3 metric tables |
+| `ccfinder_output.tar.gz` (149 MB) | `data/ssd/` | `PT_SSD` | CCFinderSW output per project (`dup_result_ssk/`) | RQ3 duplication metrics |
+| `pdar_stage1.tar.gz` (59 MB) | `data/` | `PT_PDAR_RESULT` (`data/pdar_stage1/`) | PDAR stage-1 per-commit tables (116 projects) | PDAR summary |
+
+The source code itself is not archived: `tools/clone_snapshot.sh data/ssd/apache-projects [list]` fetches
+every repository at the exact commit analysed (`corpus/snapshot_commits.csv`); extracting
+`aaa_traces.tar.gz` into `data/ssd/` then adds each repository's `AAA/` directory. The RQ3 metric tables
+(`PT_METRICS`) and the manual coding are already in this repository. The RQ2.2 Java analyzers also need the
+deep-parser jar (`PT_AAA_JAR`, see §7) and JDK 21 (`PT_JAVA`).
 
 Full recomputation order:
 

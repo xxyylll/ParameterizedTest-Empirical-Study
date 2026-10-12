@@ -14,7 +14,7 @@
   PT_SSD          外置盘根目录            默认 <repo>/data/ssd
   PT_PARSER_SSK   轻量 parser 的逐项目 JSON   默认 <repo>/data/parser_result_ssk
   PT_METRICS      RQ3 的指标中间表目录        默认 <repo>/data/metrics（缺省时 run_rq3.sh 用随包的 .gz）
-  PT_MANUAL       人工标注表目录             默认 $PT_SSD/rq2.2_manual
+  PT_MANUAL       RQ2.2 人工标注表目录        默认 rq2/results/rq2_2/manual_coding（随仓库分发）
   PT_PDAR_WORK    PDAR 的全量克隆工作区        默认 $PT_SSD/pdar_projects
   PT_PDAR_RESULT  PDAR v4 第一阶段的逐提交表（result_v3） 默认 <repo>/data/pdar_stage1
   PT_RQ22_WORK    RQ2.2 流水线的中间产物目录       默认 <repo>/data/rq22_work
@@ -54,7 +54,7 @@ _env = os.environ.get
 SSD = _env('PT_SSD', os.path.join(DATA, 'ssd'))
 PARSER_SSK = _env('PT_PARSER_SSK', os.path.join(DATA, 'parser_result_ssk'))
 METRICS_DIR = _env('PT_METRICS', os.path.join(DATA, 'metrics'))
-MANUAL_DIR = _env('PT_MANUAL', os.path.join(SSD, 'rq2.2_manual'))
+MANUAL_DIR = _env('PT_MANUAL', os.path.join(FINAL, 'rq2', 'results', 'rq2_2', 'manual_coding'))
 
 # PDAR 需要**全量**克隆（git log --all / diff-tree 在 --depth 1 的浅克隆上只有 1 个提交）。
 # apache-projects 里的是浅克隆，不能用于 PDAR；工作区按 clone → 分析 → 删除 的方式复用。
