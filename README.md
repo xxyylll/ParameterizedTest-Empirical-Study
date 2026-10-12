@@ -81,8 +81,10 @@ depth costs much more per project. This is a design decision, not missing data.
 | … of which adopt PTs | 107 | RQ1 intensity (PAI, PDAR) | — | — |
 | Depth | **46** | RQ2.2, RQ3 | full AAA call traces (Eclipse JDT) + CCFinderSW clone detection | hours (camel ≈ 40 h) |
 
-All layers come from **one snapshot**: a single clone of every repository (HEADs between 2025-10-16 and
-2025-10-21). Counts in all RQs therefore refer to the same code.
+All layers come from **one snapshot**: a single clone of every repository (made 2025-10-16 to 2025-10-21).
+Counts in all RQs therefore refer to the same code. `corpus/snapshot_commits.csv` lists, for each of the 243
+cloned repositories, its URL and the exact HEAD commit analysed, so the snapshot can be re-created with
+`git clone <url> && git checkout <commit>`.
 
 **From 263 candidates to 175** (`corpus/apache_java_projects.txt` → `corpus/corpus_175.csv`):
 
