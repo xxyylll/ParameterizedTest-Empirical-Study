@@ -6,4 +6,3 @@ type_complexity,3,2,6,9
 value_complexity,4,3,11,12
 behavior_carrying,10,8,25,30
 enum_structure,5,5,15,15
-enum_usage_intent,5,3,11,15

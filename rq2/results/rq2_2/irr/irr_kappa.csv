@@ -27,10 +27,6 @@ unclear_as_disagreement,Gengwu,enum_structure,15,1.0,1.0
 unclear_as_disagreement,Hanbin,enum_structure,13,1.0,1.0
 unclear_as_disagreement,Renming,enum_structure,11,0.818,0.56
 unclear_as_disagreement,pooled,enum_structure,39,0.949,0.898
-unclear_as_disagreement,Gengwu,enum_usage_intent,15,0.933,0.857
-unclear_as_disagreement,Hanbin,enum_usage_intent,13,0.846,0.683
-unclear_as_disagreement,Renming,enum_usage_intent,12,0.583,0.406
-unclear_as_disagreement,pooled,enum_usage_intent,40,0.8,0.641
 unclear_excluded,Gengwu,equivalence_class,60,0.967,0.88
 unclear_excluded,Hanbin,equivalence_class,60,0.983,0.946
 unclear_excluded,Renming,equivalence_class,50,0.82,0.494
@@ -59,7 +55,3 @@ unclear_excluded,Gengwu,enum_structure,15,1.0,1.0
 unclear_excluded,Hanbin,enum_structure,13,1.0,1.0
 unclear_excluded,Renming,enum_structure,11,0.818,0.56
 unclear_excluded,pooled,enum_structure,39,0.949,0.898
-unclear_excluded,Gengwu,enum_usage_intent,15,0.933,0.857
-unclear_excluded,Hanbin,enum_usage_intent,13,0.846,0.683
-unclear_excluded,Renming,enum_usage_intent,7,1.0,1.0
-unclear_excluded,pooled,enum_usage_intent,35,0.914,0.825

@@ -1,13 +1,12 @@
 by,group,n_unclear,n_labels,share
-rater,Gengwu,7,221,0.032
-rater,Hanbin,3,208,0.014
-rater,Renming,47,253,0.186
+rater,Gengwu,7,206,0.034
+rater,Hanbin,3,195,0.015
+rater,Renming,42,241,0.174
 dim,behavior_carrying,0,110,0.0
 dim,enum_structure,0,39,0.0
-dim,enum_usage_intent,5,40,0.125
 dim,equivalence_class,10,180,0.056
 dim,methodsource_intent,10,69,0.145
 dim,semantic_role,5,141,0.035
 dim,type_complexity,11,52,0.212
 dim,value_complexity,16,51,0.314
-all,all,57,682,0.084
+all,all,52,642,0.081

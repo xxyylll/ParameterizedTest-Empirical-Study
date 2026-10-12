@@ -35,6 +35,7 @@ no script depends on absolute paths from the authors' machines.
 ```
 .
 ├── README.md                    this file
+├── CODEBOOK.md                  RQ2.2 codebook (categories, decision rules, label names in the data)
 ├── paths.py                     single place where every external path is resolved (env vars, see §8)
 ├── .env.example                 template for those env vars (copy to .env)
 ├── requirements.txt             Python dependencies (pandas must be < 3.0, see §9)
@@ -196,8 +197,9 @@ Of the 248 custom-annotation PTs, 246 come from a single project (directory-stud
 
 ### RQ2.2 — Construction, dependency and structure (46 projects, 8,370 PTs)
 
-Every JUnit 5 PT in the depth corpus is characterised along three dimensions.
-The decision rules are in `rq2/code/rq2_2/CRITERIA_construction_dependency.md`.
+Every JUnit 5 PT in the depth corpus is characterised along three dimensions. All categories, decision rules
+and examples are defined in the **[codebook](CODEBOOK.md)**; its appendix maps each category to the column and
+value that represents it in the data files, which keep the labels used during coding.
 
 | Dimension | Values |
 |---|---|
@@ -224,7 +226,7 @@ For 82.9% of MethodSource PTs, the number of parameter sets can be determined st
 **Inter-rater reliability of the manual usage-intent coding.** Three external raters each coded 60 of 150
 stratified items (15 shared, 45 unique per rater) with the rater guide (`rq2/code/rq2_2/irr/rater_guide.md`).
 Each rater is compared with the authors' labels (Cohen's κ, all three raters pooled). An answer of `unclear`
-(8.4% of all rater labels) is either counted as a disagreement or excluded:
+(8.1% of all rater labels) is either counted as a disagreement or excluded:
 
 | Dimension | n | κ (unclear = disagreement) | κ (unclear excluded) |
 |---|---:|---:|---:|
@@ -235,9 +237,9 @@ Each rater is compared with the authors' labels (Cohen's κ, all three raters po
 | value complexity | 40 | 0.38 | 0.71 |
 | behaviour carrying | 110 | 0.57 | 0.57 |
 | enum structure | 39 | 0.90 | 0.90 |
-| enum usage intent | 40 | 0.64 | 0.83 |
 
-Per-rater values and the shared-item agreement are in `rq2/results/rq2_2/irr/`.
+The enum domain is derived from the dependency label rather than coded by hand, so it is not part of the
+reliability study. Per-rater values and the shared-item agreement are in `rq2/results/rq2_2/irr/`.
 
 ### Code → results
 

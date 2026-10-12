@@ -9,7 +9,8 @@
 设计（见 draw_irr_sample.py）：每条都有作者标签，主结果是「评审人 vs 作者」的 Cohen's κ，
 按维度分别计算；三人共看的 15 条只报原始一致率。
 
-每个维度只在作者标了的条目上比较（例如 enum 两个维度只看 EnumSource）。评审人留空或填 n/a 的不计。
+维度与论文 Appendix B 一致（CODEBOOK.md §0.3），每个维度只在作者标了的条目上比较（例如 enum_structure 只看
+EnumSource）。评审人留空或填 n/a 的不计。答卷里的 enum_usage_intent 列不是 codebook 的维度，不参与计算。
 评审人填 `unclear` 的两种口径都报：
   unclear_as_disagreement   计入，视为与作者不一致（保守）
   unclear_excluded          排除后再算
@@ -40,7 +41,7 @@ SAMPLE = os.path.join(RESULTS_DIR, 'sample_items.csv')
 ANSWERS = os.path.join(RESULTS_DIR, 'rater_answers.xlsx')
 RATERS = {'Gengwu': 'R1', 'Hanbin': 'R2', 'Renming': 'R3'}
 DIMS = ['equivalence_class', 'semantic_role', 'methodsource_intent', 'type_complexity',
-        'value_complexity', 'behavior_carrying', 'enum_structure', 'enum_usage_intent']
+        'value_complexity', 'behavior_carrying', 'enum_structure']
 MODES = ('unclear_as_disagreement', 'unclear_excluded')
 
 
@@ -69,8 +70,6 @@ def author_labels(a):
     out['behavior_carrying'] = out['behavior_carrying'].where(ms | en)
     out['enum_structure'] = a['Enum representation'].map(low).map(
         {'data-carring': 'data-carrying', 'label': 'label'})
-    out['enum_usage_intent'] = a['How this test exploits it'].map(low).map(
-        {'shared-contract use': 'shared-contract', 'semantic-specific use': 'semantic-specific'})
     return out
 
 
