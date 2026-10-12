@@ -24,7 +24,7 @@
 用法：
   python adoption_factors.py                                # 当前底表（paths.MERGED_DATA），写 adoption_factors.csv
   python adoption_factors.py --merged <other.csv>           # 指定其它底表，只打印
-其它脚本（build_rq1_results.py）通过 compute() 取结构化结果。
+其它脚本（如 rq1_descriptives.py）通过 compute() 取结构化结果。
 """
 
 # 向上找到 仓库根（paths.py 所在处）并加入 sys.path —— 不依赖本文件在目录树里的深度
@@ -208,13 +208,13 @@ def to_rows(R):
     s, j, L = R['size_adoption'], R['junit'], R['logit']
     rows = [
         ('size x adoption', 'chi-square', s['chi2'], s['p'],
-         f"adoption% {[round(g['rate'], 1) for g in s['groups']]}; df={s['df']}; CramerV={s['V']:.3f}"),
+         f"adoption% {[round(float(g['rate']), 1) for g in s['groups']]}; df={s['df']}; CramerV={s['V']:.3f}"),
         *[(f"{name} x adoption ({'all groups' if sc == 'all' else 'excluding ' + ', '.join(R[key][sc]['excluded'])})",
            'chi-square', R[key][sc]['chi2'], R[key][sc]['p'],
            f"n={R[key][sc]['n']}; df={R[key][sc]['df']}; CramerV={R[key][sc]['V']:.3f}")
           for key, name in (('age_adoption', 'age'), ('domain_adoption', 'domain')) for sc in ('all', 'excl')],
         ('size x PAI', 'Kruskal-Wallis', R['size_pai']['H'], R['size_pai']['p'],
-         f"median PAI {[round(x, 3) for x in R['size_pai']['medians']]}"),
+         f"median PAI {[round(float(x), 3) for x in R['size_pai']['medians']]}"),
     ]
     jp = R['junit_pt']
     t = jp['mwu']

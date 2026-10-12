@@ -1,0 +1,41 @@
+metric,value
+projects,175
+adopters (>= 1 PT),107
+CAR %,61.1429
+deep adopters (PAI >= 5%),35
+deep adoption %,20
+PAI % (all projects) median,0.2817
+PAI % (all projects) mean,3.2403
+PAI % (all projects) Q1,0
+PAI % (all projects) Q3,3.7913
+PAI % (all projects) min,0
+PAI % (all projects) max,60.0295
+PAI % (adopters) median,2.2207
+PAI % (adopters) mean,5.2995
+PAI % (adopters) Q1,0.6711
+PAI % (adopters) Q3,6.3647
+PAI % (adopters) min,0.0199
+PAI % (adopters) max,60.0295
+PDAR % (adopters) median,15.6200
+PDAR % (adopters) mean,18.8964
+PDAR % (adopters) Q1,7.3550
+PDAR % (adopters) Q3,27.3050
+PDAR % (adopters) min,0.0500
+PDAR % (adopters) max,70
+"PDAR % (adopters, PT methods only) median",14.7700
+"PDAR % (adopters, PT methods only) mean",18.6336
+"PDAR % (adopters, PT methods only) Q1",7.3550
+"PDAR % (adopters, PT methods only) Q3",26.7150
+"PDAR % (adopters, PT methods only) min",0.0500
+"PDAR % (adopters, PT methods only) max",70
+PTs,17511
+JUnit 4 PTs,8627
+JUnit 4 PT share %,49.2662
+projects with JUnit 4 PTs,42
+JUnit 5 PTs,8884
+JUnit 5 PT share %,50.7338
+projects with JUnit 5 PTs,77
+files_java: projects where substring and suffix counts differ,25
+files_java: total difference (files),1313
+files_java: total difference %,0.3067
+files_java: projects changing Size group under suffix count,0

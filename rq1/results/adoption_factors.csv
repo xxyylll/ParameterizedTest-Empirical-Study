@@ -1,5 +1,5 @@
 factor,test,statistic,p,detail
-size x adoption,chi-square,14.4954,0.0007118,"adoption% [np.float64(44.1), np.float64(60.0), np.float64(77.3)]; df=2; CramerV=0.288"
+size x adoption,chi-square,14.4954,0.0007118,"adoption% [44.1, 60.0, 77.3]; df=2; CramerV=0.288"
 age x adoption (all groups),chi-square,1.7223,0.632,n=175; df=3; CramerV=0.099
 age x adoption (excluding >=2018),chi-square,1.7176,0.4237,n=165; df=2; CramerV=0.102
 domain x adoption (all groups),chi-square,4.6034,0.2032,n=175; df=3; CramerV=0.162

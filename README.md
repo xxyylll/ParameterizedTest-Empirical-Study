@@ -57,7 +57,7 @@ python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python paths.py                     # shows which external data sources are present (none are needed to check results)
 
-cd rq1/code && ./run_rq1.sh && cd ../..     # RQ1: all analyses and figures; regenerates rq1/results/RQ1_RESULTS.md
+cd rq1/code && ./run_rq1.sh && cd ../..     # RQ1: all analyses and figures
 cd rq2/code && ./run_rq2.sh && cd ../..     # RQ2: RQ2.1 distribution (if parser output is present) and RQ2.2 figures
 cd rq3/code && ./run_rq3.sh && cd ../..     # RQ3: every RQ3.1 and RQ3.2 analysis and figure
 ```
@@ -105,9 +105,6 @@ corpus). The final list is `corpus/rq3_corpus_46.txt`.
 
 ## 4. RQ1 — Adoption
 
-A summary of every RQ1 number is generated into [`rq1/results/RQ1_RESULTS.md`](rq1/results/RQ1_RESULTS.md)
-by `rq1/code/build_rq1_results.py`.
-
 ### Metrics
 
 | Metric | Definition |
@@ -151,6 +148,7 @@ sample of 200 test methods (100 PTs, half JUnit 4 and half JUnit 5; 100 non-PTs;
 | `rq1/code/` | `rq1/results/` |
 |---|---|
 | `rq1_bins.py` | — the **only** definition of corpus filtering, Size/Age bins and the Domain mapping |
+| `rq1_descriptives.py` | `adoption_descriptives.csv` (CAR, deep adoption, PAI / PDAR quantiles, PT totals), `pai_pdar_distribution.csv` (Fig. 2 bins), `pdar_correlations.csv` |
 | `build_merged_ssk.py` (+ `project_metadata.csv`) | `merged_data_219_ssk.csv` (project-level base table; filtered to the 175 by `rq1_bins.py`) |
 | `dataset_stats.py` | `dataset_stats.csv` (Table 1) |
 | `adoption_factors.py`, `category_logit.py` | `adoption_factors.csv`, `category_logit_results.csv` |

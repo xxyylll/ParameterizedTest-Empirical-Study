@@ -1,9 +1,9 @@
 #!/bin/bash
 #
-# 一键重跑 RQ1：底表 → PDAR 汇总 → 全部分析 → 全部图 → RQ1_RESULTS.md
+# 一键重跑 RQ1：底表 → PDAR 汇总 → 全部分析 → 全部图
 #
 # 用法：
-#   cd rq1
+#   cd rq1/code
 #   ./run_rq1.sh                 # 用 PYTHON 环境变量指定解释器，缺省 python3
 #   PYTHON=/path/to/python ./run_rq1.sh
 #
@@ -12,11 +12,11 @@
 # 需要外部数据的三步在数据缺失时跳过，沿用仓库里已提交的产物：
 #   [1] 重建底表 merged_data_219_ssk.csv   需要 PT_PARSER_SSK（parser 输出）与 PT_SSD（ssk 源码快照）
 #   [3] Table 1 的 Test files 一列          需要 PT_PARSER_SSK
-#   [4] PDAR v4 汇总 pdar_summary_ssk.csv   需要 PT_PDAR_RESULT（第一阶段逐提交表 result_v3/）
+#   [4] PDAR 汇总 pdar_summary_ssk.csv      需要 PT_PDAR_RESULT（第一阶段逐提交表）
 # 其余步骤只依赖仓库内的文件，任一步失败即停止。
 #
 # PDAR 的逐项目两阶段检测（需要逐个 clone 仓库，约 45 分钟）不在这里跑，见 README 第 4 节；
-# 这里只做汇总。RQ2.1 也读同一份语料，若改动了语料，记得另跑 ../rq2_1/build_rq2_1_distribution.py。
+# 这里只做汇总。RQ2.1 也读同一份语料，若改动了语料，记得另跑 ../../rq2/code/run_rq2.sh。
 
 set -e
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -66,8 +66,8 @@ step 8 "图：PAI / PDAR 三联图"
 step 9 "图：分组采纳率"
 "$PY" adoption_by_groups_figure.py
 
-step 10 "生成 RQ1_RESULTS.md"
-"$PY" build_rq1_results.py
+step 10 "描述统计、PAI / PDAR 分布与 PDAR 相关"
+"$PY" rq1_descriptives.py
 
 echo
-echo "完成。结果汇总见 $HERE/RQ1_RESULTS.md"
+echo "完成。结果见 $(cd ../results && pwd)"

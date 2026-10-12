@@ -1,0 +1,20 @@
+distribution,bin,projects
+PAI,<1%,41
+PAI,1-5%,31
+PAI,5-10%,20
+PAI,10-20%,10
+PAI,>=20%,5
+"PAI (all projects, non-adopters at 0)",<1%,109
+"PAI (all projects, non-adopters at 0)",1-5%,31
+"PAI (all projects, non-adopters at 0)",5-10%,20
+"PAI (all projects, non-adopters at 0)",10-20%,10
+"PAI (all projects, non-adopters at 0)",>=20%,5
+PDAR,"[0,5)",12
+PDAR,"[5,10)",25
+PDAR,"[10,15)",15
+PDAR,"[15,20)",10
+PDAR,"[20,25)",13
+PDAR,"[25,30)",12
+PDAR,"[30,40)",12
+PDAR,"[40,50)",4
+PDAR,"[50,100]",4
