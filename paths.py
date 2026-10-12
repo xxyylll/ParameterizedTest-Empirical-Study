@@ -60,7 +60,7 @@ MANUAL_DIR = _env('PT_MANUAL', os.path.join(SSD, 'rq2.2_manual'))
 # apache-projects 里的是浅克隆，不能用于 PDAR；工作区按 clone → 分析 → 删除 的方式复用。
 PDAR_WORK = _env('PT_PDAR_WORK', os.path.join(SSD, 'pdar_projects'))
 # PDAR v4 第一阶段（pdar_v4_commit_table.py）的逐项目提交表；第二阶段只读它。
-# 189 MB，不随仓库分发（见 rq1/pdar/PDAR_METHOD.md）。
+# 189 MB，不随仓库分发（见 README 第 4 节）。
 PDAR_RESULT = _env('PT_PDAR_RESULT', os.path.join(DATA, 'pdar_stage1'))
 # PDAR_V4_RESULT 等结果目录在下面按 RQ 统一定义
 
@@ -94,8 +94,6 @@ MERGED_DATA = os.path.join(RQ1_RESULTS, 'merged_data_219_ssk.csv')   # 219 行�
 PDAR_SUMMARY = os.path.join(RQ1_RESULTS, 'pdar_summary_ssk.csv')
 PT_PROJECTS_LIST = os.path.join(RQ1_CODE, 'pdar', 'pt_projects_ssk.txt')
 PDAR_V4_RESULT = os.path.join(RQ1_RESULTS, 'pdar', 'result_v4')
-PDAR_V4_PICKAXE = os.path.join(RQ1_RESULTS, 'pdar', 'result_v4_pickaxe')
-PDAR_V3_PUBLISHED = os.path.join(RQ1_RESULTS, 'pdar', 'pdar_v3_published.csv')
 
 def require(path, what):
     """路径不存在时给出能照着修的报错，而不是裸的 FileNotFoundError。"""

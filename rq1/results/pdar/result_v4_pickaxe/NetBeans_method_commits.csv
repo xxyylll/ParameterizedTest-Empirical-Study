@@ -1,6 +1,0 @@
-commit_hash,l1m_pt,l1m_prov,l2,parse_err,core_diff,pickaxe_new,pclass,attr,fullscan_mismatch
-fc2d62b57170cb4703fe11bb18522d57a6066aa8,0,0,,0,1,1,0,,
-9b217756a02da23bbfe544688dd4c5308dc524b6,0,0,,0,1,1,0,,
-e406bae7fd57467916926a728336c34b5e323f26,0,0,,0,1,1,0,,
-017c64dd5d4c16c0d97358855c570e443976cbac,0,0,0,0,1,1,0,pt_mention_not_method,
-bf0477c7b7811b7cf068c557adce7f2c8957aa20,0,0,0,0,0,0,0,pt_mention_not_method,

@@ -83,9 +83,7 @@ cd ../enumsource
 run build_enumsource_dataset.py && run analyze_enumsource.py && run plot_enumsource.py
 cd ../amortization                              # 读 cross_source 的产物，必须排在它之后
 run build_amortization_dataset.py && run analyze_amortization.py && run plot_amortization.py
-cd ..
-run make_result_appendix.py                     # 用最新产物重写 5 份 FINDINGS 文末的附录
-cd ..
+cd ../..
 
 echo
 echo "完成。结果见 $(cd ../results && pwd)"

@@ -37,7 +37,7 @@ from adoption_by_groups_figure import adoption_stats  # noqa: E402
 
 OUT = os.path.join(RESULTS_DIR, 'RQ1_RESULTS.md')
 
-# Fig. 2 两张直方图的分箱，均为左闭右开（与 PDAR_METHOD.md 5.2 一致）
+# Fig. 2 两张直方图的分箱，均为左闭右开
 PAI_BINS = [0, 1, 5, 10, 20, float('inf')]
 PAI_LABELS = ['<1%', '1–5%', '5–10%', '10–20%', '≥20%']
 PDAR_BINS = [0, 5, 10, 15, 20, 25, 30, 40, 50, 100.0001]
@@ -146,7 +146,7 @@ def main():
 
     # ---------------- 1. Table 1
     w('## 1. 语料（Table 1）\n')
-    w(f'{n} 个项目，语料构成见 `../../corpus/README.md`。\n')
+    w(f'{n} 个项目，语料构成见仓库根 README 第 3 节。\n')
     w('| Metric | Mean | Median | Min | Max |\n|---|---:|---:|---:|---:|')
     for r in t1.itertuples():
         w(f'| {r.metric} | {r.mean} | {r.median} | {r.min} | {r.max} |')
@@ -177,7 +177,7 @@ def main():
     w(f'| PT 总数 | {int(df.pt_total.sum()):,}（JUnit 4 {int(df.junit4_pt.sum()):,} = {df.junit4_pt.sum() / df.pt_total.sum() * 100:.1f}%，'
       f'{R["junit_pt"]["projects_with_junit4_pt"]} 个项目；JUnit 5 {int(df.junit5_pt.sum()):,} = {df.junit5_pt.sum() / df.pt_total.sum() * 100:.1f}%，'
       f'{R["junit_pt"]["projects_with_junit5_pt"]} 个项目） |\n')
-    w('PAI = 项目内 PT 数 / 测试方法总数。PDAR = 改过 PT 的开发者 / 改过测试代码的开发者，只在采纳者上计算（v4 口径）。\n')
+    w('PAI = 项目内 PT 数 / 测试方法总数。PDAR = 改过 PT 的开发者 / 改过测试代码的开发者，只在采纳者上计算。\n')
 
     # ---------------- 2.1 分布（Fig. 2）
     def hist(x, bins, labels):
@@ -193,7 +193,7 @@ def main():
       '（' + '、'.join(f'{r.project} {r.pai:.2f}%' for r in edge.itertuples()) + '）。'))
 
     h_pd = hist(pdar.pdar, PDAR_BINS, PDAR_LABELS)
-    w('| PDAR（v4） | ' + ' | '.join(PDAR_LABELS) + ' | 合计 |\n|---|' + '---:|' * (len(PDAR_LABELS) + 1))
+    w('| PDAR | ' + ' | '.join(PDAR_LABELS) + ' | 合计 |\n|---|' + '---:|' * (len(PDAR_LABELS) + 1))
     w(f'| 采纳者 | ' + ' | '.join(str(v) for v in h_pd) + f' | {h_pd.sum()} |')
     edge = pdar[pdar.pdar.isin(PDAR_BINS)]
     w(f'\n恰好落在 PDAR 分箱边界上的：' + ('无。' if not len(edge) else
@@ -301,10 +301,9 @@ def main():
 
     # ---------------- 6. PDAR
     w('## 6. PDAR\n')
-    w(f'v4 口径（改动行 ∩ 参数化测试区间），{len(pdar)} 个采纳者。方法、验证与 v3 → v4 的对比见 `../code/pdar/PDAR_METHOD.md`。\n')
+    w(f'改动行 ∩ 参数化测试区间判定，{len(pdar)} 个采纳者。\n')
     w('| 口径 | 中位 | 均值 | Q1 | Q3 | 最小 | 最大 |\n|---|---:|---:|---:|---:|---:|---:|')
-    for col, label in (('pdar', '**v4 主口径（含同文件数据源）**'), ('pdar_pt_only', 'v4，只算 PT 方法'),
-                       ('pdar_with_l3', 'v4 + L3（对照）')):
+    for col, label in (('pdar', '**主口径（PT 方法及其同文件数据源）**'), ('pdar_pt_only', '只算 PT 方法')):
         s = pdar[col]
         w(f'| {label} | {s.median():.2f} | {s.mean():.2f} | {q(s, .25):.2f} | {q(s, .75):.2f} | {s.min():.2f} | {s.max():.2f} |')
     m = ad.merge(pdar[['project', 'pdar', 'test_developers']], on='project')

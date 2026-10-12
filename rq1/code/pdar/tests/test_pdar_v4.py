@@ -6,7 +6,7 @@
 检验了新判定本身、与已发表口径的衔接（merge / 根提交 / Layer 2 / pickaxe），以及
 旧 Layer 1 的重放与归因。
 
-    python -m unittest discover -s rq1/pdar/tests -v
+    python -m unittest discover -s rq1/code/pdar/tests -v
 """
 
 import csv

@@ -15,7 +15,7 @@
 #   [4] PDAR v4 汇总 pdar_summary_ssk.csv   需要 PT_PDAR_RESULT（第一阶段逐提交表 result_v3/）
 # 其余步骤只依赖仓库内的文件，任一步失败即停止。
 #
-# PDAR 的逐项目两阶段检测（需要逐个 clone 仓库，约 45 分钟）不在这里跑，见 pdar/PDAR_METHOD.md 第 7 节；
+# PDAR 的逐项目两阶段检测（需要逐个 clone 仓库，约 45 分钟）不在这里跑，见 README 第 4 节；
 # 这里只做汇总。RQ2.1 也读同一份语料，若改动了语料，记得另跑 ../rq2_1/build_rq2_1_distribution.py。
 
 set -e

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """PDAR v4 第二阶段：方法级 Layer 1 ——「改动行 ∩ PT 方法行区间」。
 
-方法定义、验证与结果见 PDAR_METHOD.md；本文件只记实现层面的要点。
+方法定义见 README 第 4 节；本文件只记实现层面的要点。
 
 ### 分工
 
