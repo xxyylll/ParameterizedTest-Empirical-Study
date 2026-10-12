@@ -202,7 +202,7 @@ v4 口径（改动行 ∩ 参数化测试区间），107 个采纳者。方法�
 
 - **快照**：计数与 `files_java` 取自 ssk 快照（与 RQ2 / RQ3 同一次 clone）。PDAR 的逐提交表取自 2026-06 的全量 clone。
 - **PDAR 只在采纳者上计算**：未采纳项目的 PDAR 恒为 0，计入只会把中位数拉向 0。
-- **parser 人工核验样本**（`parser_validation/`）的抽样框是除 Parquet 外的 174 个项目（Parquet 的 PT 全部是 JUnit 4）。
+- **parser 人工核验样本**（`parser_validation/`）：200 条（PT 100 + 非 PT 100），人工标签尚未填写；抽样说明见 `draw_parser_validation.py` 文件头。
 - **Domain** 用四大类互斥映射，15 个项目靠手工补录（`rq1_bins.DOMAIN_MANUAL`）；不补的话采纳者里只有 98 个能自动归类。
 
 ## 9. 复现
